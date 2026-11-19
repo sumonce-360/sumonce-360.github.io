@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grammar in 30 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f4ee; --paper:#fffdf8; --ink:#1f2328; --muted:#6b6f76; --line:#e6e0d4;
+  --accent:#1f6f5c; --accent-soft:#e3f0ec; --warn:#b5462f; --warn-soft:#f8e7e2; --gold:#c98a1b;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#16181b; --paper:#1e2125; --ink:#ece9e3; --muted:#9aa0a6; --line:#2e3238;
+    --accent:#5cc4a6; --accent-soft:#1f3631; --warn:#f08a70; --warn-soft:#3a2620; --gold:#e3ad4b;}
+}
+*{box-sizing:border-box}
+.home{display:inline-block;margin-bottom:10px;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none}.home:hover{text-decoration:underline}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+header{padding:28px 20px 18px;max-width:1100px;margin:0 auto}
+h1{font-family:Fraunces,Georgia,serif;font-size:clamp(28px,4vw,40px);margin:0 0 4px;letter-spacing:-.5px}
+.sub{color:var(--muted);margin:0}
+.progress{margin-top:16px;display:flex;align-items:center;gap:12px}
+.bar{flex:1;height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+.layout{max-width:1100px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:240px 1fr;gap:24px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}}
+nav{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px}
+@media(max-width:800px){nav{position:static;max-height:none}}
+nav h4{margin:12px 8px 4px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+nav a{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:14px}
+nav a:hover{background:var(--accent-soft)}
+nav a.active{background:var(--accent);color:#fff}
+nav a .dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:11px}
+nav a.done .dot{background:var(--accent);border-color:var(--accent);color:#fff}
+nav a.active .dot{border-color:#fff}
+main{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,36px)}
+.kicker{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+h2{font-family:Fraunces,Georgia,serif;font-size:clamp(24px,3vw,32px);margin:4px 0 6px}
+h3{font-family:Fraunces,Georgia,serif;font-size:20px;margin:28px 0 10px;display:flex;align-items:center;gap:8px}
+.target{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:8px;margin:14px 0}
+.phrase{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.phrase:last-child{border-bottom:0}
+.phrase .t{flex:1}
+.phrase .n{font-size:13px;color:var(--muted)}
+button{font:inherit;cursor:pointer}
+.play{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--accent);display:grid;place-items:center}
+.play:hover{background:var(--accent);color:#fff}
+.play svg{width:14px;height:14px}
+.dlg{background:var(--bg);border-radius:12px;padding:6px 14px}
+.dlg .phrase b{color:var(--accent);margin-right:4px}
+.mist{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.mist{grid-template-columns:1fr}}
+.wrong,.right{padding:10px 14px;border-radius:10px}
+.wrong{background:var(--warn-soft)} .wrong::before{content:"✗ ";color:var(--warn);font-weight:700}
+.right{background:var(--accent-soft)} .right::before{content:"✓ ";color:var(--accent);font-weight:700}
+.task{border:2px dashed var(--gold);border-radius:12px;padding:14px 16px}
+.task ul{margin:6px 0 0;padding-left:20px}
+.sound{background:var(--bg);border-radius:12px;padding:12px 16px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.btn{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-weight:500}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.settings{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:10px}
+.routine ol{padding-left:20px;margin:6px 0}
+.routine li{margin:4px 0}
+.timer{display:flex;align-items:center;gap:10px;margin-top:10px}
+.timer .clock{font-variant-numeric:tabular-nums;font-weight:600;font-size:20px;min-width:64px}
+.note{font-size:14px;color:var(--muted)}
+.check{width:20px;height:20px;accent-color:var(--accent)}
+.checks label{display:flex;gap:10px;align-items:center;padding:4px 0}
+.rule{background:var(--bg);border-radius:12px;padding:14px 18px}
+.rule table{border-collapse:collapse;width:100%;margin-top:6px;font-size:15px}
+.rule td,.rule th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.rule th{font-size:13px;color:var(--muted);font-weight:600}
+.q{padding:12px 0;border-bottom:1px dashed var(--line)}
+.q .s{margin-bottom:8px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{padding:6px 14px;border-radius:99px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.opt.ok{background:var(--accent);border-color:var(--accent);color:#fff}
+.opt.no{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.blank{display:inline-block;min-width:48px;border-bottom:2px solid var(--gold);text-align:center;font-weight:600}
+.score{font-weight:600;margin-top:10px}
+.mist{margin-bottom:10px}
+</style>
+</head>
+<body>
+<header>
+  <a class="home" href="../">← All books</a>
+  <h1>Grammar in 30 Days</h1>
+  <p class="sub">One grammar point a day, about 20 minutes. Learn the rule, say the examples aloud, take the quiz, then use it when you speak.</p>
+  <div class="progress"><div class="bar"><i id="bar"></i></div><span id="ptext" class="note">0 days done</span></div>
+  <div class="settings">
+    <label>Voice speed <input type="range" id="rate" min="0.6" max="1.1" step="0.05" value="0.85"></label>
+    <span id="rateval">0.85×</span>
+    <label>Voice <select id="voice"></select></label>
+  </div>
+</header>
+<div class="layout">
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+
+<script>
+const ROUTINE = [
+  "<b>Learn the rule (4 min):</b> Read the rule box and say the table examples aloud.",
+  "<b>Listen &amp; shadow (5 min):</b> Press ▶ on each example. Repeat it 3 times, copying the rhythm.",
+  "<b>Dialogue (3 min):</b> Play it, then read both parts aloud.",
+  "<b>Fix mistakes (2 min):</b> Say each correct sentence 5 times.",
+  "<b>Quiz (2 min):</b> Choose the right answer, then say the full sentence aloud.",
+  "<b>Speak (4 min):</b> Do the task with the timer, using today's grammar in every sentence. Record it and listen for mistakes."
+];
+
+const DAYS = [
+// WEEK 1 — PRESENT & PAST
+{w:1,title:"Present simple",target:"Talk about habits, facts and routines correctly.",
+ rule:`Use the present simple for <b>habits, facts and things that are always true</b>.<br>With <b>he / she / it</b>, add <b>-s / -es</b> to the verb. For questions and negatives, use <b>do / does</b> + the base verb.
+ <table><tr><th>Positive</th><th>Negative</th><th>Question</th></tr>
+ <tr><td>I work. / She works.</td><td>I don't work. / She doesn't work.</td><td>Do you work? / Does she work?</td></tr></table>
+ Signal words: <i>always, usually, often, sometimes, never, every day</i>.`,
+ ex:[["I work in a lab every day.","Habit."],["My supervisor checks my results every week.","he/she → checks."],["Water boils at a hundred degrees.","Fact."],["She doesn't like spicy food.","Negative: doesn't + base verb."],["Does your brother live in Dhaka?","Question: does + base verb."],["I never drink coffee at night.","Frequency word before the verb."]],
+ dialog:[["A","What does your roommate do?"],["B","He studies chemistry. He works in the lab next to mine."],["A","Does he cook?"],["B","No, he doesn't. I usually cook for both of us."],["A","Lucky him! Do you enjoy cooking?"],["B","Yes, I do. It reminds me of home."]],
+ mist:[["He work in a bank.","He works in a bank."],["Does she likes tea?","Does she like tea?"]],
+ quiz:[["My father ___ in a school.",["teach","teaches","teaching"],1],["She ___ eat meat.",["don't","doesn't","isn't"],1],["___ you speak Malay?",["Do","Does","Are"],0],["The sun ___ in the east.",["rise","rises","is rise"],1],["He ___ goes to the gym.",["usually","usual","is usually"],0]],
+ task:["Talk for 2 minutes about a family member's routine. Use he/she and remember the -s!"],mins:2},
+
+{w:1,title:"Present continuous",target:"Talk about what is happening now and temporary situations.",
+ rule:`Use <b>am / is / are + verb-ing</b> for actions <b>happening now</b> or <b>temporary situations</b>.
+ <table><tr><th>Present simple</th><th>Present continuous</th></tr>
+ <tr><td>I work in Kuantan. (permanent)</td><td>I'm working from home this week. (temporary)</td></tr>
+ <tr><td>It rains a lot here. (fact)</td><td>It's raining now. (right now)</td></tr></table>
+ <b>Note:</b> state verbs like <i>know, like, want, need, believe, understand</i> are usually <b>not</b> used in the continuous form.`,
+ ex:[["I'm studying English right now.","Happening now."],["She's writing her thesis this semester.","Temporary period."],["They aren't working today.","Negative."],["Are you listening to me?","Question."],["It's getting hot.","A changing situation."],["I know the answer.","State verb — not 'I am knowing'."]],
+ dialog:[["A","Hi! What are you doing?"],["B","I'm practising my English with a book."],["A","Nice. Are you still working at the company?"],["B","Yes, but this month I'm working part-time."],["A","I see. Do you like it?"],["B","Yes, I like it a lot."]],
+ mist:[["I am knowing him for a long time.","I've known him for a long time."],["Look! It rains.","Look! It's raining."]],
+ quiz:[["Be quiet! The baby ___.",["sleeps","is sleeping","sleep"],1],["I ___ what you mean.",["understand","am understanding","understanding"],0],["She ___ in the lab today.",["is working","works","work"],0],["Water ___ at 0 °C.",["freezes","is freezing","freeze"],0],["What ___ you doing?",["are","do","is"],0]],
+ task:["Look around you and describe what is happening right now for 1 minute. Then talk for 1 minute about what you're doing this month."],mins:2},
+
+{w:1,title:"Past simple",target:"Tell stories about finished past events.",
+ rule:`Use the past simple for <b>finished actions in the past</b>, usually with a time (yesterday, last week, in 2019).<br>Regular verbs add <b>-ed</b>: work → worked. Irregular verbs change: go → went, see → saw, have → had.<br>For questions and negatives, use <b>did</b> + the base verb.
+ <table><tr><th>Positive</th><th>Negative</th><th>Question</th></tr><tr><td>I went.</td><td>I didn't go.</td><td>Did you go?</td></tr></table>`,
+ ex:[["I graduated in 2019.","Regular verb."],["We went to Langkawi last year.","go → went."],["I didn't see him yesterday.","didn't + base verb."],["Did you finish the report?","did + base verb."],["She bought a new phone.","buy → bought."],["The test took five hours.","take → took."]],
+ dialog:[["A","What did you do last weekend?"],["B","I visited a friend in Kuala Lumpur."],["A","How did you go?"],["B","I took the bus. It took four hours."],["A","Did you have fun?"],["B","Yes, we ate a lot and saw the Petronas Towers."]],
+ mist:[["Yesterday I go to the market.","Yesterday I went to the market."],["Did you went there?","Did you go there?"]],
+ quiz:[["I ___ my keys yesterday.",["lose","lost","losed"],1],["She ___ come to class last week.",["didn't","doesn't","not"],0],["Did he ___ the email?",["send","sent","sends"],0],["We ___ a great movie last night.",["see","saw","seen"],1],["They ___ to Malaysia in 2025.",["move","moved","moving"],1]],
+ task:["Tell the story of your journey to Malaysia for 2 minutes. Every verb must be in the past simple."],mins:2},
+
+{w:1,title:"Past continuous",target:"Describe background actions in a story.",
+ rule:`Use <b>was / were + verb-ing</b> for an action <b>in progress</b> at a past time. Often used with the past simple: the long action (past continuous) is interrupted by a short action (past simple).
+ <table><tr><th>Long action</th><th>Short action</th></tr><tr><td>I was walking home</td><td>when it started to rain.</td></tr><tr><td>While she was cooking,</td><td>the phone rang.</td></tr></table>`,
+ ex:[["At eight last night, I was watching cricket.","In progress at a time."],["I was walking to the lab when I saw him.","Long + short action."],["While I was cooking, my mother called.","while + past continuous."],["They weren't listening.","Negative."],["What were you doing at midnight?","Question."],["It was raining all morning.","Background description."]],
+ dialog:[["A","Why didn't you answer my call?"],["B","Sorry, I was driving."],["A","And this morning?"],["B","I was sleeping! I was working until 3 am."],["A","What were you working on?"],["B","My thesis. The computer crashed while I was saving it!"]],
+ mist:[["When I was sleeping, the phone was ringing.","While I was sleeping, the phone rang."],["I was go to the shop.","I was going to the shop."]],
+ quiz:[["I ___ TV when the power went off.",["watched","was watching","am watching"],1],["While they ___, it started to rain.",["were playing","played","was playing"],0],["She ___ when I called her.",["was sleeping","slept","sleeps"],0],["What ___ you doing at 9 pm?",["were","was","did"],0],["He fell while he ___ the bike.",["was riding","rode","rides"],0]],
+ task:["Tell a 2-minute story about something unexpected that happened to you. Use 'I was … when …' and 'While …' at least 4 times."],mins:2},
+
+{w:1,title:"Present perfect",target:"Talk about experiences and results that connect to now.",
+ rule:`Form: <b>have / has + past participle</b> (worked, been, seen, done).<br>Use it for: <b>life experiences</b> (I've been to Japan), <b>recent actions with a result now</b> (I've lost my keys), and <b>situations that continue until now</b> (I've lived here for a year).<br>Signal words: <i>ever, never, already, yet, just, for, since</i>.`,
+ ex:[["I've been to Thailand twice.","Experience."],["Have you ever eaten durian?","ever = in your life."],["I've just finished my experiment.","just = very recently."],["She hasn't replied yet.","yet in negatives and questions."],["I've already submitted the form.","already = earlier than expected."],["We've lived here since 2025.","Continues until now."]],
+ dialog:[["A","Have you ever been to Penang?"],["B","Yes, I've been there twice."],["A","Have you finished your chapter yet?"],["B","Not yet. I've written about half."],["A","Has your supervisor seen it?"],["B","He's just read the first part. He liked it!"]],
+ mist:[["I have went there.","I have gone there. / I went there."],["Did you ever eat durian?","Have you ever eaten durian?"]],
+ quiz:[["I ___ never been to Japan.",["have","has","am"],0],["She has ___ her homework.",["did","done","do"],1],["Have you ___ seen snow?",["ever","yet","already"],0],["He hasn't called me ___.",["yet","already","just"],0],["They ___ just arrived.",["have","has","had"],0]],
+ task:["Talk for 2 minutes about your life experiences: places you've visited, foods you've tried, things you've never done."],mins:2},
+
+{w:1,title:"Present perfect vs past simple",target:"Choose the right tense for past actions.",
+ rule:`<table><tr><th>Past simple</th><th>Present perfect</th></tr>
+ <tr><td>A <b>finished time</b> is said or known</td><td><b>No specific time</b>, or time not finished</td></tr>
+ <tr><td>I went to Japan <b>in 2023</b>.</td><td>I've been to Japan.</td></tr>
+ <tr><td>I lost my keys <b>yesterday</b>.</td><td>I've lost my keys. (I still can't find them.)</td></tr>
+ <tr><td>I lived there <b>for</b> 5 years. (not now)</td><td>I've lived here <b>for</b> 5 years. (still here)</td></tr></table>
+ <b>Never</b> use the present perfect with <i>yesterday, last week, in 2020, ago</i>.`,
+ ex:[["I've visited Malaysia three times.","No time → present perfect."],["I visited Malaysia in 2023.","Finished time → past simple."],["Have you seen my phone?","Result now."],["I saw your phone on the table an hour ago.","ago → past simple."],["I've worked here since January.","Still working."],["I worked in Dhaka for four years.","Not there now."]],
+ dialog:[["A","Have you ever presented at a conference?"],["B","Yes, I have. I presented at one in Penang last year."],["A","How did it go?"],["B","It went well. I was nervous, though."],["A","Have you published any papers?"],["B","Not yet, but I've submitted one."]],
+ mist:[["I have seen him yesterday.","I saw him yesterday."],["I live here since 2025.","I've lived here since 2025."]],
+ quiz:[["I ___ him last Monday.",["have met","met","meet"],1],["She ___ in Japan for two years, but now she lives here.",["has lived","lived","lives"],1],["___ you ever tried sushi?",["Did","Have","Do"],1],["We ___ this house in 2020.",["bought","have bought","buy"],0],["I ___ here since last year.",["have studied","studied","study"],0]],
+ task:["Talk for 2 minutes about your career: what you did in the past (with dates) and what you've done so far in Malaysia."],mins:2},
+
+{w:1,review:true,title:"Week 1 review: tenses",target:"Mix all the tenses from this week naturally.",
+ rule:`<table><tr><th>Tense</th><th>Use</th><th>Example</th></tr>
+ <tr><td>Present simple</td><td>habits, facts</td><td>I work every day.</td></tr>
+ <tr><td>Present continuous</td><td>now, temporary</td><td>I'm working now.</td></tr>
+ <tr><td>Past simple</td><td>finished past</td><td>I worked yesterday.</td></tr>
+ <tr><td>Past continuous</td><td>in progress in the past</td><td>I was working when …</td></tr>
+ <tr><td>Present perfect</td><td>experience, result, until now</td><td>I've worked here for a year.</td></tr></table>`,
+ task:["Record 3 minutes about your life: your routine now (present simple), this month (present continuous), your past (past simple and continuous), and your experiences (present perfect)."],mins:3},
+
+// WEEK 2 — FUTURE, MODALS, QUESTIONS
+{w:2,title:"Future: will, going to, present continuous",target:"Talk about the future in the right way.",
+ rule:`<table><tr><th>Form</th><th>Use</th><th>Example</th></tr>
+ <tr><td><b>will</b></td><td>quick decisions, promises, predictions</td><td>I'll help you. It will rain.</td></tr>
+ <tr><td><b>going to</b></td><td>plans already decided; predictions from evidence</td><td>I'm going to do a PhD. Look at the clouds — it's going to rain.</td></tr>
+ <tr><td><b>present continuous</b></td><td>fixed arrangements with a time</td><td>I'm meeting my supervisor at 10.</td></tr></table>`,
+ ex:[["The phone's ringing. I'll answer it.","Quick decision."],["I promise I'll call you tonight.","Promise."],["I'm going to visit Bangladesh in December.","Plan."],["I'm flying to Dhaka on Friday.","Arrangement with a time."],["I think AI will change engineering.","Opinion about the future."],["Careful! You're going to fall!","Evidence now."]],
+ dialog:[["A","What are you doing this weekend?"],["B","I'm meeting some friends on Saturday."],["A","And after your master's?"],["B","I'm going to apply for a PhD."],["A","I'm sure you'll get one."],["B","Thanks! I'll let you know."]],
+ mist:[["I will going to Dhaka.","I'm going to Dhaka. / I'll go to Dhaka."],["Tomorrow I go to the doctor. (arrangement)","Tomorrow I'm going to the doctor."]],
+ quiz:[["I'm thirsty. — I ___ get you some water.",["will","am going to","am"],0],["We ___ to get married next year. It's planned.",["are going","will","go"],0],["I ___ my dentist at 3 pm tomorrow.",["am seeing","see","will to see"],0],["Look at that car! It ___ crash!",["is going to","will be","goes to"],0],["I think she ___ win the match.",["will","is","going"],0]],
+ task:["Talk for 2 minutes about your future: arrangements this week, plans for next year, and predictions about your field in 10 years."],mins:2},
+
+{w:2,title:"Can, could, be able to",target:"Talk about ability and make polite requests.",
+ rule:`<b>can</b> = ability now / permission (I can swim. Can I go?). <b>could</b> = ability in the past, or a more polite request (Could you help me?). <b>be able to</b> = ability in other tenses (I'll be able to drive next year. I've been able to …).<br>After can/could, use the <b>base verb</b>: can swim (not can swims / can to swim).`,
+ ex:[["I can speak three languages.","Ability now."],["I could swim when I was five.","Ability in the past."],["Could you send me the file, please?","Polite request."],["Can I use your charger?","Asking permission."],["I'll be able to drive next month.","Future ability."],["I couldn't sleep last night.","Past negative."]],
+ dialog:[["A","Can you speak Malay?"],["B","A little. I could speak more when I lived in KL."],["A","Could you help me with my CV?"],["B","Of course. I can do it tonight."],["A","Great. Will you be able to finish by tomorrow?"],["B","Yes, no problem."]],
+ mist:[["I can to speak English.","I can speak English."],["I will can do it.","I will be able to do it."]],
+ quiz:[["She ___ play the piano very well.",["can","cans","can to"],0],["___ you pass the salt, please?",["Could","Can to","Able"],0],["I ___ find my keys yesterday.",["couldn't","can't","not could"],0],["Next year, I'll ___ speak fluently.",["be able to","can","could"],0],["He can ___ fast.",["run","runs","to run"],0]],
+ task:["Talk for 2 minutes: things you can do, things you could do as a child, and things you will be able to do after your master's."],mins:2},
+
+{w:2,title:"Must, have to, should",target:"Talk about rules, duties and advice.",
+ rule:`<b>must / have to</b> = it's necessary (rules). <b>should</b> = it's a good idea (advice).<br><b>mustn't</b> = it's not allowed. <b>don't have to</b> = it's not necessary (you can if you want).
+ <table><tr><th>mustn't</th><th>don't have to</th></tr><tr><td>You mustn't smoke here. (forbidden)</td><td>You don't have to come. (optional)</td></tr></table>`,
+ ex:[["I have to submit my thesis by June.","Necessary."],["You must wear safety glasses in the lab.","Rule."],["You mustn't touch the furnace.","Not allowed."],["You don't have to pay. It's free.","Not necessary."],["You should practise every day.","Advice."],["I had to work late yesterday.","Past of must/have to."]],
+ dialog:[["A","Do I have to register for the workshop?"],["B","Yes, you must register online."],["A","Do I have to pay?"],["B","No, you don't have to. It's free for students."],["A","Should I bring my laptop?"],["B","Yes, you should. And you mustn't be late — it starts on time."]],
+ mist:[["You must to come.","You must come."],["You mustn't come if you're busy. (meaning: optional)","You don't have to come if you're busy."]],
+ quiz:[["You ___ smoke in the hospital.",["mustn't","don't have to","shouldn't to"],0],["It's Sunday. I ___ work today.",["don't have to","mustn't","must"],0],["You look tired. You ___ rest.",["should","must to","have"],0],["I ___ wake up early yesterday.",["had to","must","have to"],0],["She ___ to wear a uniform at work.",["has","must","should"],0]],
+ task:["Talk for 2 minutes about the rules in your lab or workplace, and give advice to a new student."],mins:2},
+
+{w:2,title:"Asking questions",target:"Ask questions with the correct word order.",
+ rule:`Question word order: <b>(Question word) + auxiliary + subject + main verb</b>.
+ <table><tr><th>Question word</th><th>Auxiliary</th><th>Subject</th><th>Verb</th></tr>
+ <tr><td>Where</td><td>do</td><td>you</td><td>live?</td></tr>
+ <tr><td>What</td><td>did</td><td>she</td><td>say?</td></tr>
+ <tr><td>How long</td><td>have</td><td>you</td><td>been here?</td></tr></table>
+ <b>Indirect questions</b> (more polite) use normal order: <i>Could you tell me where the office <b>is</b>?</i>`,
+ ex:[["Where do you work?","do + subject + verb."],["What time does the bus leave?","does + base verb."],["Why did you choose this topic?","did + base verb."],["How long have you been in Malaysia?","have + subject."],["Do you know where the library is?","Indirect — no 'is' before subject."],["Could you tell me what time it starts?","Indirect, polite."]],
+ dialog:[["A","Where are you from?"],["B","Bangladesh. Why do you ask?"],["A","Just curious. How long have you lived here?"],["B","About a year."],["A","Do you know where the international office is?"],["B","Yes, it's in the main building."]],
+ mist:[["Where you are going?","Where are you going?"],["Can you tell me where is the bank?","Can you tell me where the bank is?"]],
+ quiz:[["Where ___ she live?",["does","do","is"],0],["What ___ you do yesterday?",["did","do","have"],0],["Do you know what time ___?",["it is","is it","it's is"],0],["How long ___ you been waiting?",["have","did","are"],0],["Why ___ he so angry?",["is","does","he is"],0]],
+ task:["Imagine you are interviewing a new classmate. Ask 10 different questions (2 minutes). Use different question words and tenses."],mins:2},
+
+{w:2,title:"Question tags and short answers",target:"Sound natural in conversation.",
+ rule:`<b>Short answers</b> repeat the auxiliary: Do you like it? — Yes, I <b>do</b>. / No, I <b>don't</b>.<br><b>Question tags</b> check information: positive sentence → negative tag; negative sentence → positive tag.
+ <table><tr><th>Sentence</th><th>Tag</th></tr><tr><td>You're from Bangladesh,</td><td>aren't you?</td></tr><tr><td>She doesn't eat meat,</td><td>does she?</td></tr><tr><td>They went home,</td><td>didn't they?</td></tr><tr><td>I'm late,</td><td>aren't I?</td></tr></table>`,
+ ex:[["Are you a student? — Yes, I am.","Short answer."],["Did you see it? — No, I didn't.","Short answer."],["It's hot today, isn't it?","Positive → negative tag."],["You haven't finished, have you?","Negative → positive tag."],["He can drive, can't he?","Same auxiliary."],["You work here, don't you?","Present simple → do."]],
+ dialog:[["A","You're Sumon, aren't you?"],["B","Yes, I am. Have we met?"],["A","I think so. You were at the seminar, weren't you?"],["B","Yes, I was! You asked a question, didn't you?"],["A","That's right. It was a good talk, wasn't it?"],["B","Yes, it was."]],
+ mist:[["Do you like tea? — Yes, I like.","Yes, I do."],["You are coming, isn't it?","You're coming, aren't you?"]],
+ quiz:[["She's a doctor, ___?",["isn't she","is she","doesn't she"],0],["You didn't call me, ___?",["did you","didn't you","do you"],0],["Can you swim? — Yes, I ___.",["can","do","am"],0],["They live here, ___?",["don't they","aren't they","isn't it"],0],["Have you eaten? — No, I ___.",["haven't","didn't","don't"],0]],
+ task:["Talk with yourself for 2 minutes, checking facts about a friend using question tags: 'He's from …, isn't he?' and answer with short answers."],mins:2},
+
+{w:2,title:"Subject–verb agreement; there is / there are",target:"Make the verb match the subject.",
+ rule:`Singular subject → singular verb; plural subject → plural verb.<br><b>Careful with:</b> <i>everyone, each, nobody</i> → singular (Everyone <b>is</b> here). <i>The number of</i> → singular; <i>a number of</i> → plural. <i>Data</i> → often plural in academic writing.<br><b>There is</b> + singular / uncountable; <b>there are</b> + plural.`,
+ ex:[["My brother lives in Dhaka.","Singular."],["My brothers live in Dhaka.","Plural."],["Everyone is ready.","everyone → is."],["There is a problem with the machine.","Singular."],["There are three samples on the table.","Plural."],["One of my friends is a doctor.","'One' is the subject → is."]],
+ dialog:[["A","Is there a printer in the lab?"],["B","Yes, there is. There are two, actually."],["A","Does everyone use them?"],["B","Everyone uses the big one. The small one is broken."],["A","Are there any spare papers?"],["B","There are some in the cupboard."]],
+ mist:[["There is many people here.","There are many people here."],["One of my friend are a doctor.","One of my friends is a doctor."]],
+ quiz:[["Everybody ___ tired.",["is","are","be"],0],["There ___ two banks near here.",["are","is","be"],0],["One of the students ___ absent.",["is","are","were"],0],["The number of students ___ increasing.",["is","are","be"],0],["There ___ some milk in the fridge.",["is","are","have"],0]],
+ task:["Describe your faculty or city for 2 minutes using there is / there are and everyone / each / one of …"],mins:2},
+
+{w:2,review:true,title:"Week 2 review",target:"Use future forms, modals and questions confidently.",
+ rule:`<table><tr><th>Point</th><th>Example</th></tr>
+ <tr><td>Future</td><td>I'll help. / I'm going to study. / I'm meeting him at 3.</td></tr>
+ <tr><td>Ability</td><td>I can / could / will be able to …</td></tr>
+ <tr><td>Rules &amp; advice</td><td>must, have to, mustn't, don't have to, should</td></tr>
+ <tr><td>Questions</td><td>Where do you …? / Do you know where it is?</td></tr>
+ <tr><td>Tags</td><td>You're busy, aren't you?</td></tr>
+ <tr><td>Agreement</td><td>Everyone is … / There are …</td></tr></table>`,
+ task:["Record 3 minutes: interview yourself about your future plans. Ask questions, answer them, and include rules and advice you'd give a new student."],mins:3},
+
+// WEEK 3 — SENTENCE BUILDING
+{w:3,title:"Articles: a, an, the",target:"Use articles correctly (a big problem for Bangla speakers).",
+ rule:`<b>a / an</b> = one of many, first mention (a book, an engineer). <i>an</i> before a vowel <b>sound</b>: an hour, a university.<br><b>the</b> = a specific thing we both know, second mention, or only one (the sun, the lab I work in).<br><b>No article</b> for general plural or uncountable nouns: <i>Engineers are busy. Water is important.</i>`,
+ ex:[["I'm an engineer.","Jobs need a/an."],["I bought a phone. The phone is great.","First → a; second → the."],["The sun is very hot today.","Only one."],["It took an hour.","'hour' starts with a vowel sound."],["She studies at a university in Malaysia.","'university' starts with a 'yu' sound."],["Steel is used in buildings.","General → no article."]],
+ dialog:[["A","What do you do?"],["B","I'm a structural engineer and a student."],["A","Where do you study?"],["B","At a university in Kuantan. The campus is near the sea."],["A","Do you like the city?"],["B","Yes. The people are friendly, and life is calm."]],
+ mist:[["I am engineer.","I am an engineer."],["The life is beautiful.","Life is beautiful."]],
+ quiz:[["She is ___ honest person.",["an","a","the"],0],["I saw ___ dog. ___ dog was black.",["a … The","the … A","a … A"],0],["___ moon is bright tonight.",["The","A","An"],0],["He studies at ___ university.",["a","an","the an"],0],["I love ___ music.",["(nothing)","the","a"],0]],
+ task:["Describe your room, your city and your job for 2 minutes. Be careful with every a, an and the."],mins:2},
+
+{w:3,title:"Countable and uncountable",target:"Use much, many, a few, a little, some and any correctly.",
+ rule:`<b>Countable</b> nouns have plurals (books, samples). <b>Uncountable</b> nouns don't (water, information, advice, equipment, furniture, research, homework).
+ <table><tr><th>Countable</th><th>Uncountable</th></tr><tr><td>many, a few, few, a number of</td><td>much, a little, little, an amount of</td></tr><tr><td>How many samples?</td><td>How much time?</td></tr></table>
+ <b>some</b> in positive sentences and offers; <b>any</b> in negatives and questions. <i>a lot of</i> works for both.`,
+ ex:[["How many samples did you test?","Countable."],["How much time do we have?","Uncountable."],["Can you give me some advice?","Not 'advices'."],["I have a few friends here.","Some (positive)."],["There's a little milk left.","Small amount."],["We don't have any information yet.","Not 'informations'."]],
+ dialog:[["A","How much equipment does your lab have?"],["B","A lot of equipment, but only a few creep machines."],["A","How many students use them?"],["B","Many! So we need some patience."],["A","Any advice for new students?"],["B","Book early. There's very little free time on them."]],
+ mist:[["Can you give me some informations?","Can you give me some information?"],["How much samples do you have?","How many samples do you have?"]],
+ quiz:[["How ___ money do you need?",["much","many","few"],0],["I have ___ questions.",["a few","a little","much"],0],["She gave me some good ___.",["advice","advices","an advice"],0],["Is there ___ sugar?",["any","many","a few"],0],["There isn't ___ traffic today.",["much","many","few"],0]],
+ task:["Talk for 2 minutes about what's in your kitchen and your lab: how much, how many, a few, a little."],mins:2},
+
+{w:3,title:"Comparatives and superlatives",target:"Compare people, places and things.",
+ rule:`<table><tr><th>Adjective</th><th>Comparative</th><th>Superlative</th></tr>
+ <tr><td>short: cheap</td><td>cheaper than</td><td>the cheapest</td></tr>
+ <tr><td>ending in -y: easy</td><td>easier than</td><td>the easiest</td></tr>
+ <tr><td>long: expensive</td><td>more expensive than</td><td>the most expensive</td></tr>
+ <tr><td>irregular: good / bad / far</td><td>better / worse / further</td><td>the best / the worst / the furthest</td></tr></table>
+ Equal: <b>as … as</b> (as tall as). Never use <i>more</i> + <i>-er</i> together.`,
+ ex:[["Kuantan is quieter than Dhaka.","Short adjective."],["P92 is stronger than P91.","-er than."],["This is the most difficult chapter.","Long adjective."],["My English is better than last year.","good → better."],["That was the worst day of my life.","bad → the worst."],["He's as tall as his father.","Equal."]],
+ dialog:[["A","Which is cheaper, KL or Kuantan?"],["B","Kuantan is much cheaper than KL."],["A","Is it better to live there?"],["B","For students, yes. It's the most peaceful city I know."],["A","Is the weather hotter than in Dhaka?"],["B","About the same — but it's not as humid as Dhaka in July."]],
+ mist:[["This is more better.","This is better."],["He is the most tallest.","He is the tallest."]],
+ quiz:[["This bag is ___ than that one.",["heavier","more heavy","heavyer"],0],["It's the ___ film I've ever seen.",["best","better","most good"],0],["Gold is ___ than silver.",["more expensive","expensiver","most expensive"],0],["She is as smart ___ her sister.",["as","than","like"],0],["This is the ___ day of the year.",["hottest","hotter","most hot"],0]],
+ task:["Compare 3 cities, 3 foods or 3 phones for 2 minutes. Use comparatives, superlatives and as … as."],mins:2},
+
+{w:3,title:"Pronouns and possessives",target:"Use I/me/my/mine/myself correctly.",
+ rule:`<table><tr><th>Subject</th><th>Object</th><th>Possessive adj.</th><th>Possessive pron.</th><th>Reflexive</th></tr>
+ <tr><td>I</td><td>me</td><td>my</td><td>mine</td><td>myself</td></tr>
+ <tr><td>he</td><td>him</td><td>his</td><td>his</td><td>himself</td></tr>
+ <tr><td>she</td><td>her</td><td>her</td><td>hers</td><td>herself</td></tr>
+ <tr><td>we</td><td>us</td><td>our</td><td>ours</td><td>ourselves</td></tr>
+ <tr><td>they</td><td>them</td><td>their</td><td>theirs</td><td>themselves</td></tr></table>
+ Don't mix up <b>he/she</b> — in Bangla, সে is used for both!`,
+ ex:[["My sister lives in Dhaka. She is a teacher.","She, not he."],["Can you help me?","Object → me."],["This laptop is mine.","Possessive pronoun."],["Is this your bag or hers?","hers."],["I taught myself to code.","Reflexive."],["My friend and I went to the beach.","Subject → I, not me."]],
+ dialog:[["A","Is this your charger?"],["B","No, it's not mine. I think it's Amir's."],["A","Where is he?"],["B","He's in the lab with his supervisor."],["A","Can you give it to him?"],["B","Sure. I'll take it myself."]],
+ mist:[["My mother, he is a teacher.","My mother is a teacher. She …"],["Me and my friend went.","My friend and I went."]],
+ quiz:[["My sister lost ___ phone.",["her","his","she"],0],["This book is ___.",["mine","my","me"],0],["Please call ___ tomorrow.",["me","I","my"],0],["They built the house ___.",["themselves","theirself","themself"],0],["___ and I are classmates.",["Rafi","Me","Him"],0]],
+ task:["Talk for 2 minutes about your family. Pay special attention to he/she and his/her for every person."],mins:2},
+
+{w:3,title:"Gerund or infinitive?",target:"Choose verb-ing or to + verb after other verbs.",
+ rule:`Some verbs take <b>-ing</b>: <i>enjoy, avoid, finish, mind, suggest, keep, consider, practise</i>.<br>Some take <b>to + verb</b>: <i>want, need, decide, plan, hope, agree, promise, learn, expect</i>.<br>After <b>prepositions</b>, always use -ing: <i>interested in learning, good at cooking, before leaving</i>.<br>Some take both: <i>like, love, start, begin</i>.`,
+ ex:[["I enjoy reading novels.","enjoy + -ing."],["I want to learn French.","want + to."],["I've finished writing the report.","finish + -ing."],["She decided to quit her job.","decide + to."],["I'm interested in joining the club.","Preposition + -ing."],["Do you mind waiting a minute?","mind + -ing."]],
+ dialog:[["A","What do you want to do this weekend?"],["B","I'm planning to visit the beach."],["A","Do you enjoy swimming?"],["B","Yes, but I need to practise more."],["A","I suggest going early. It gets crowded."],["B","Good idea. I'll avoid going at noon."]],
+ mist:[["I enjoy to watch movies.","I enjoy watching movies."],["I want going home.","I want to go home."]],
+ quiz:[["I enjoy ___ cricket.",["playing","to play","play"],0],["She wants ___ a doctor.",["to become","becoming","become"],0],["He's good at ___ problems.",["solving","to solve","solve"],0],["We decided ___ by bus.",["to go","going","go"],0],["Would you mind ___ the window?",["opening","to open","open"],0]],
+ task:["Talk for 2 minutes about your hobbies and goals: what you enjoy doing, want to do, plan to do and avoid doing."],mins:2},
+
+{w:3,title:"Conditionals: zero and first",target:"Talk about real situations and results.",
+ rule:`<table><tr><th>Type</th><th>Form</th><th>Use</th></tr>
+ <tr><td><b>Zero</b></td><td>If + present, present</td><td>Facts, always true: If you heat ice, it melts.</td></tr>
+ <tr><td><b>First</b></td><td>If + present, will + verb</td><td>Real future possibility: If it rains, I'll stay home.</td></tr></table>
+ <b>Never</b> use <i>will</i> in the if-part: If it <s>will rain</s> rains … Also: <b>unless</b> = if not.`,
+ ex:[["If you heat steel, it expands.","Zero — fact."],["If I finish early, I'll call you.","First — real future."],["If it rains, we'll cancel the trip.","Present in if-part."],["I won't go unless you come.","unless = if not."],["What will you do if you fail?","Question."],["If the temperature increases, creep life decreases.","Zero — scientific fact."]],
+ dialog:[["A","What will you do if you get the scholarship?"],["B","If I get it, I'll start my PhD next year."],["A","And if you don't?"],["B","I'll look for a job unless something else comes up."],["A","If you need help with the application, tell me."],["B","Thanks! I will."]],
+ mist:[["If it will rain, I will stay home.","If it rains, I will stay home."],["If I will see him, I tell him.","If I see him, I'll tell him."]],
+ quiz:[["If you ___ water to 100 °C, it boils.",["heat","will heat","heated"],0],["If she studies, she ___ pass.",["will","would","is"],0],["If it ___ tomorrow, we'll stay inside.",["rains","will rain","rained"],0],["I won't go ___ you go too.",["unless","if","when not"],0],["What ___ you do if you miss the bus?",["will","do","would"],0]],
+ task:["Talk for 2 minutes about your plans: 'If I finish my thesis on time, I'll … If I get a job, I'll …' Make at least 8 sentences."],mins:2},
+
+{w:3,review:true,title:"Week 3 review",target:"Build correct sentences with articles, nouns, pronouns and conditionals.",
+ rule:`<table><tr><th>Point</th><th>Remember</th></tr>
+ <tr><td>Articles</td><td>a/an for one, the for specific, nothing for general</td></tr>
+ <tr><td>Countable / uncountable</td><td>many/few vs much/little; no 'advices', 'informations'</td></tr>
+ <tr><td>Comparisons</td><td>-er / more …, the -est / the most …, never 'more better'</td></tr>
+ <tr><td>Pronouns</td><td>he vs she, my friend and I</td></tr>
+ <tr><td>-ing vs to</td><td>enjoy doing, want to do, after prepositions → -ing</td></tr>
+ <tr><td>Conditionals</td><td>If + present, will … (no will after if)</td></tr></table>`,
+ task:["Record 3 minutes: compare two places you have lived, describe the people there, and say what you'll do if you go back."],mins:3},
+
+// WEEK 4 — ADVANCED
+{w:4,title:"Conditionals: second and third",target:"Talk about imaginary situations and past regrets.",
+ rule:`<table><tr><th>Type</th><th>Form</th><th>Use</th></tr>
+ <tr><td><b>Second</b></td><td>If + past, would + verb</td><td>Imaginary now/future: If I were rich, I'd travel.</td></tr>
+ <tr><td><b>Third</b></td><td>If + had + past participle, would have + past participle</td><td>Imaginary past (regret): If I had studied, I would have passed.</td></tr></table>
+ Use <b>were</b> for all subjects in the second conditional: If I <b>were</b> you …`,
+ ex:[["If I had more time, I'd learn to swim.","Second — imaginary now."],["If I were you, I'd talk to him.","Advice."],["What would you do if you won a million?","Imaginary question."],["If I had left earlier, I wouldn't have missed the bus.","Third — past regret."],["If she had told me, I would have helped.","Third."],["I would have called you if I'd known.","I'd known = I had known."]],
+ dialog:[["A","If you could live anywhere, where would you live?"],["B","If I had the choice, I'd live near the sea."],["A","Any regrets about your studies?"],["B","If I had started English practice earlier, I would have been more confident."],["A","Well, you're doing it now!"],["B","True. If I were you, I'd start too!"]],
+ mist:[["If I would have money, I would buy a car.","If I had money, I would buy a car."],["If I knew, I would have told you. (past)","If I had known, I would have told you."]],
+ quiz:[["If I ___ a bird, I would fly.",["were","am","will be"],0],["If she ___ harder, she would have passed.",["had studied","studied","would study"],0],["What would you do if you ___ the lottery?",["won","win","had won"],0],["If I had seen him, I ___ him.",["would have told","would tell","will tell"],0],["If I ___ you, I'd apologise.",["were","was being","am"],0]],
+ task:["Talk for 2 minutes: what would you do if you had a year free? Then 1 minute about one thing you would have done differently in the past."],mins:3},
+
+{w:4,title:"Passive voice",target:"Use the passive for processes and technical writing.",
+ rule:`Form: <b>be + past participle</b>. Use it when the action is more important than who does it (common in science and engineering).
+ <table><tr><th>Tense</th><th>Active</th><th>Passive</th></tr>
+ <tr><td>Present</td><td>We test the samples.</td><td>The samples are tested.</td></tr>
+ <tr><td>Past</td><td>They built the bridge in 2010.</td><td>The bridge was built in 2010.</td></tr>
+ <tr><td>Present perfect</td><td>Someone has stolen my bike.</td><td>My bike has been stolen.</td></tr>
+ <tr><td>Future / modal</td><td>We will publish the results.</td><td>The results will be published.</td></tr></table>
+ Add <b>by</b> to say who: <i>The paper was written by Dr. Nasrul.</i>`,
+ ex:[["The samples were heated to 600 degrees.","Past passive."],["P91 is used in power plants.","Present passive."],["The data was collected over six months.","Past passive."],["My bike has been stolen!","Present perfect passive."],["The results will be published next year.","Future passive."],["This bridge was designed by a Japanese company.","with 'by'."]],
+ dialog:[["A","How was the test done?"],["B","The samples were machined first, then they were loaded into the furnace."],["A","How is the strain measured?"],["B","It's measured by an extensometer."],["A","When will the results be shared?"],["B","They'll be presented at the next meeting."]],
+ mist:[["The test was conduct in 2025.","The test was conducted in 2025."],["The results are show in Figure 3.","The results are shown in Figure 3."]],
+ quiz:[["English ___ all over the world.",["is spoken","speaks","is speak"],0],["The house ___ in 1990.",["was built","built","is build"],0],["The report ___ by Friday.",["will be finished","will finish","is finish"],0],["My wallet ___ stolen!",["has been","has","was be"],0],["The samples ___ at high temperature.",["were tested","tested","were test"],0]],
+ task:["Explain how something is made or done for 2 minutes (a test in your lab, a dish, a building). Use the passive in most sentences."],mins:2},
+
+{w:4,title:"Reported speech",target:"Tell others what someone said.",
+ rule:`When reporting, the tense usually moves <b>one step back</b>:
+ <table><tr><th>Direct</th><th>Reported</th></tr>
+ <tr><td>"I <b>am</b> tired."</td><td>He said (that) he <b>was</b> tired.</td></tr>
+ <tr><td>"I <b>finished</b> it."</td><td>She said she <b>had finished</b> it.</td></tr>
+ <tr><td>"I <b>will</b> call."</td><td>He said he <b>would</b> call.</td></tr>
+ <tr><td>"<b>Can</b> you help?"</td><td>She asked if I <b>could</b> help.</td></tr>
+ <tr><td>"Where <b>do</b> you live?"</td><td>He asked where I <b>lived</b>.</td></tr></table>
+ <b>say</b> something, <b>tell</b> someone: He told <b>me</b> that … / He said that …`,
+ ex:[["My supervisor said the results looked good.","look → looked."],["She told me she was busy.","tell + person."],["He said he would send the email.","will → would."],["They asked if I could join them.","Yes/no question → if."],["She asked me where I worked.","Normal word order."],["He told me to wait.","Command → told + to."]],
+ dialog:[["A","What did Dr. Nasrul say in the meeting?"],["B","He said my chapter was nearly ready."],["A","Great! Did he ask anything?"],["B","He asked if I had checked the references."],["A","And?"],["B","I told him I would finish them by Friday."]],
+ mist:[["He said me that he is busy.","He told me that he was busy."],["She asked me where do I live.","She asked me where I lived."]],
+ quiz:[["She ___ me that she was tired.",["told","said","asked"],0],["He said he ___ come tomorrow.",["would","will","can"],0],["They asked if I ___ help.",["could","can to","may to"],0],["She asked me where I ___.",["worked","did work","do work"],0],["He ___ that he was hungry.",["said","told","asked"],0]],
+ task:["Report a recent conversation for 2 minutes: what someone said, asked and told you to do."],mins:2},
+
+{w:4,title:"Relative clauses",target:"Join ideas with who, which, that, where, whose.",
+ rule:`<b>who</b> = people. <b>which</b> = things. <b>that</b> = people or things (in defining clauses). <b>where</b> = places. <b>whose</b> = possession.
+ <table><tr><th>Example</th></tr>
+ <tr><td>The man <b>who</b> lives next door is a doctor.</td></tr>
+ <tr><td>The steel <b>which/that</b> I study is used in power plants.</td></tr>
+ <tr><td>This is the lab <b>where</b> I work.</td></tr>
+ <tr><td>I have a friend <b>whose</b> father is a pilot.</td></tr></table>
+ With commas (extra information), use who/which — <b>not that</b>: <i>Kuantan, which is on the coast, is quiet.</i>`,
+ ex:[["The professor who teaches us is from Japan.","People → who."],["The model that I use is simple.","Things → that."],["This is the city where I was born.","Place → where."],["She's the student whose paper won the award.","Possession → whose."],["Kuantan, which is in Pahang, has nice beaches.","Extra information with commas."],["The book I bought is great.","'that' can be dropped when it's the object."]],
+ dialog:[["A","Who's the man who's talking to your supervisor?"],["B","He's a professor who works in Japan."],["A","Is he the one whose paper you cited?"],["B","Yes! The model which I use was developed by his team."],["A","Wow. Where's he from?"],["B","Osaka, the city where the conference was held last year."]],
+ mist:[["The man which I met was kind.","The man who I met was kind."],["This is the place which I live.","This is the place where I live."]],
+ quiz:[["The woman ___ called you is my aunt.",["who","which","where"],0],["This is the phone ___ I bought yesterday.",["that","who","where"],0],["That's the hotel ___ we stayed.",["where","which","who"],0],["I met a man ___ son is a pilot.",["whose","who","who's"],0],["Dhaka, ___ is the capital, is very crowded.",["which","that","where"],0]],
+ task:["Describe 5 people and 5 places in your life for 2 minutes using who, which, that, where and whose."],mins:2},
+
+{w:4,title:"Perfect continuous and past perfect",target:"Talk about duration and earlier past.",
+ rule:`<b>Present perfect continuous</b> (have been + -ing): an action that started in the past and is still going, focusing on duration. <i>I've been studying English for 3 months.</i><br><b>Past perfect</b> (had + past participle): an action that happened <b>before</b> another past action. <i>When I arrived, the class had already started.</i>`,
+ ex:[["I've been working on my thesis since March.","Still working."],["How long have you been waiting?","Duration until now."],["She's been crying. Her eyes are red.","Recent activity with a result."],["When I got to the station, the train had left.","Earlier past."],["I had never seen snow before I went to Japan.","Before another past time."],["He said he had finished the work.","Reported speech."]],
+ dialog:[["A","You look tired. What have you been doing?"],["B","I've been running tests all day."],["A","How long have you been working on this?"],["B","Since 8 am! And when I checked, the machine had stopped twice."],["A","Had anyone used it before you?"],["B","Yes, someone had changed the settings."]],
+ mist:[["I am studying here since two years.","I have been studying here for two years."],["When I reached, the class already started.","When I arrived, the class had already started."]],
+ quiz:[["I ___ for you for an hour!",["have been waiting","am waiting","waited"],0],["When we arrived, the film ___ started.",["had already","has already","already"],0],["She ___ English since 2020.",["has been learning","is learning","learns"],0],["I ___ never flown before that trip.",["had","have","was"],0],["How long ___ you been living here?",["have","had","are"],0]],
+ task:["Talk for 2 minutes: what have you been doing recently (I've been …)? Then tell a story where something had already happened before you arrived."],mins:2},
+
+{w:4,title:"Used to, would, be used to",target:"Talk about past habits and things you're familiar with.",
+ rule:`<b>used to + verb</b> = a past habit or state that isn't true now. <i>I used to live in Dhaka.</i><br><b>would + verb</b> = repeated past actions (not states). <i>Every evening, we would play cricket.</i><br><b>be used to + -ing / noun</b> = be familiar with. <i>I'm used to the heat now.</i><br><b>get used to</b> = become familiar. <i>I'm getting used to the food.</i>`,
+ ex:[["I used to play cricket every day.","Past habit."],["I didn't use to like coffee.","Negative: didn't use to."],["We would go to my grandmother's house every Eid.","Repeated past action."],["I'm used to waking up early.","Familiar with."],["I'm getting used to driving on the left.","Becoming familiar."],["Did you use to live in a village?","Question."]],
+ dialog:[["A","Did you use to live in a village?"],["B","Yes, I used to live near a river."],["A","What did you do as a child?"],["B","We would swim every afternoon and play football."],["A","Are you used to city life now?"],["B","I'm getting used to it, but I miss the quiet."]],
+ mist:[["I am used to wake up early.","I am used to waking up early."],["I use to play football. (past)","I used to play football."]],
+ quiz:[["I ___ smoke, but I quit.",["used to","am used to","use to"],0],["She's used to ___ long hours.",["working","work","worked"],0],["Every summer, we ___ visit our grandparents.",["would","are used to","use"],0],["Did you ___ have long hair?",["use to","used to","using to"],0],["I'm getting used to the ___.",["weather","be weather","weathering"],0]],
+ task:["Talk for 2 minutes about your childhood (used to, would) and the things you're now used to or getting used to in Malaysia."],mins:2},
+
+{w:4,review:true,title:"Week 4 review",target:"Use advanced structures fluently.",
+ rule:`<table><tr><th>Point</th><th>Example</th></tr>
+ <tr><td>2nd conditional</td><td>If I were rich, I'd travel.</td></tr>
+ <tr><td>3rd conditional</td><td>If I had known, I would have come.</td></tr>
+ <tr><td>Passive</td><td>The samples were tested at 600 °C.</td></tr>
+ <tr><td>Reported speech</td><td>He said he was busy. She asked if I could help.</td></tr>
+ <tr><td>Relative clauses</td><td>The lab where I work … The man who …</td></tr>
+ <tr><td>Perfect forms</td><td>I've been working … The class had started.</td></tr>
+ <tr><td>Used to</td><td>I used to … / I'm used to -ing</td></tr></table>`,
+ task:["Record 3 minutes: describe your research process (passive), report what your supervisor said, and imagine what you would do with unlimited funding."],mins:3},
+
+{w:4,title:"Common grammar traps for Bangla speakers",target:"Fix the mistakes that come from translating Bangla.",
+ rule:`<table><tr><th>✗ Avoid</th><th>✓ Say</th><th>Why</th></tr>
+ <tr><td>He is a good man, isn't it?</td><td>…, isn't he?</td><td>Tag matches the subject</td></tr>
+ <tr><td>I am having two brothers.</td><td>I have two brothers.</td><td>'have' (own) is a state verb</td></tr>
+ <tr><td>Myself Sumon.</td><td>I'm Sumon. / My name is Sumon.</td><td>'myself' is reflexive only</td></tr>
+ <tr><td>I didn't went.</td><td>I didn't go.</td><td>did + base verb</td></tr>
+ <tr><td>He is coming yesterday.</td><td>He came yesterday.</td><td>Past time → past tense</td></tr>
+ <tr><td>Although … but …</td><td>Although …, …</td><td>Use only one</td></tr>
+ <tr><td>Each students</td><td>Each student</td><td>each + singular</td></tr></table>`,
+ ex:[["My name is Sumon.","Not 'Myself Sumon'."],["I have a brother and a sister.","Not 'I am having'."],["Although it was raining, we went out.","No 'but' after although."],["Each student has a desk.","each + singular."],["He came yesterday.","Past time → past simple."],["I didn't go to class.","didn't + base verb."]],
+ dialog:[["A","Can you introduce yourself?"],["B","Sure. My name is Sumon. I have two sisters."],["A","Did your family visit Malaysia?"],["B","No, they didn't come yet. I mean, they haven't come yet."],["A","Haha, good correction!"],["B","Although it's hard, I'm improving every day."]],
+ mist:[["Myself Sumon, I am from Bangladesh.","I'm Sumon, and I'm from Bangladesh."],["Although I was tired, but I worked.","Although I was tired, I worked."]],
+ quiz:[["___ name is Sumon.",["My","Myself","Me"],0],["I ___ two brothers.",["have","am having","having"],0],["Although it was late, ___ continued.",["we","but we","so we"],0],["___ student must bring an ID.",["Each","Each of","All"],0],["She ___ to Dhaka last month.",["went","is going","has gone"],0]],
+ task:["Introduce yourself for 2 minutes in perfect grammar. Record it and check for every trap in today's table."],mins:2},
+
+{w:4,review:true,all:true,title:"Final challenge",target:"Speak for 5 minutes using all the grammar in this book.",
+ rule:`You've studied <b>tenses</b>, <b>future forms</b>, <b>modals</b>, <b>questions</b>, <b>articles</b>, <b>countable nouns</b>, <b>comparisons</b>, <b>pronouns</b>, <b>-ing vs to</b>, <b>all conditionals</b>, <b>the passive</b>, <b>reported speech</b>, <b>relative clauses</b>, <b>perfect forms</b> and <b>used to</b>. Today's quiz takes questions from the whole book.`,
+ task:["Record 5 minutes: introduce yourself, describe your past, explain your research (passive), report what someone told you, talk about your future (if…), and imagine your dream life (would…).","Compare with your first recordings. Then start the book again from Day 1."],mins:5},
+];
+
+const WEEKS = {1:"Week 1 · Present & past",2:"Week 2 · Future, modals & questions",3:"Week 3 · Building sentences",4:"Week 4 · Advanced"};
+const KEY="grammar30_done";
+let done = {};
+try{ done = JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(done)); }catch(e){} }
+
+/* ---------- speech ---------- */
+let voices=[], rate=0.85;
+const vSel=document.getElementById('voice');
+function loadVoices(){
+  if(!('speechSynthesis' in window)) return;
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  const prev = vSel.value;
+  vSel.innerHTML = voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('') || '<option>Default</option>';
+  const pref = voices.findIndex(v=>/en-(US|GB)/i.test(v.lang) && /Google|Samantha|Natural|Daniel|Aria|Jenny/i.test(v.name));
+  vSel.value = prev || (pref>=0?pref:0);
+}
+if('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+document.getElementById('rate').oninput=e=>{rate=+e.target.value;document.getElementById('rateval').textContent=rate.toFixed(2)+'×';};
+function speak(text){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    const u=new SpeechSynthesisUtterance(text.replace(/\(.*?\)/g,'').replace(/—/g,','));
+    u.rate=rate; u.lang='en-US';
+    const v=voices[+vSel.value]; if(v) u.voice=v;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function say1(t){ try{speechSynthesis.cancel();}catch(e){} speak(t); }
+function playList(lines){ try{speechSynthesis.cancel();}catch(e){} lines.forEach(l=>speak(l)); }
+
+const PLAY='<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>';
+const esc=s=>s.replace(/"/g,'&quot;');
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+
+function fullSentence(q){
+  const ans=q[1][q[2]];
+  if(ans.includes('…')){ const [a,b]=ans.split(' … '); return q[0].replace('___',a).replace('___',b); }
+  return q[0].replace(' ___',ans==='(nothing)'?'':' '+ans).replace('___',ans);
+}
+function poolFor(d){
+  return DAYS.filter(x=>!x.review && (d.all || x.w===d.w)).flatMap(x=>x.quiz);
+}
+
+function renderNav(cur){
+  let h='', lastW=0;
+  DAYS.forEach((d,i)=>{
+    if(d.w!==lastW){ h+=`<h4>${WEEKS[d.w]}</h4>`; lastW=d.w; }
+    h+=`<a href="#day-${i+1}" class="${i===cur?'active':''} ${done[i+1]?'done':''}"><span class="dot">${done[i+1]?'✓':''}</span>Day ${i+1} · ${d.title}</a>`;
+  });
+  document.getElementById('nav').innerHTML=h;
+  const n=Object.values(done).filter(Boolean).length;
+  document.getElementById('bar').style.width=(n/DAYS.length*100)+'%';
+  document.getElementById('ptext').textContent=`${n} / ${DAYS.length} days`;
+}
+
+function renderDay(i){
+  const d=DAYS[i], n=i+1;
+  const quiz = d.review ? shuffle(poolFor(d)).slice(0, d.all?12:10) : d.quiz;
+  let s=1; const H=t=>`<h3>${s++} · ${t}`;
+  let html=`<div class="kicker">Day ${n} of ${DAYS.length} · ${WEEKS[d.w]}</div><h2>${d.title}</h2>
+    <div class="target"><b>🎯 Today's target:</b> ${d.target}</div>
+    ${d.review?'':`<details class="routine"><summary class="note" style="cursor:pointer">How to use today's page (about 20 minutes)</summary><ol>${ROUTINE.map(r=>`<li>${r}</li>`).join('')}</ol></details>`}
+    ${H(d.review?'Summary':'The rule')}</h3><div class="rule">${d.rule}</div>`;
+  if(d.ex){
+    html+=`${H('Example sentences')} <button class="btn" id="playAll" style="margin-left:auto;font-size:13px;padding:6px 12px">▶ Play all</button></h3>
+      <p class="note">Listen, then repeat each sentence aloud 3 times.</p>
+      ${d.ex.map(p=>`<div class="phrase"><button class="play" data-say="${esc(p[0])}" aria-label="Listen">${PLAY}</button><div class="t"><div>${p[0]}</div><div class="n">${p[1]}</div></div></div>`).join('')}
+      ${H('Dialogue')} <button class="btn" id="playDlg" style="margin-left:auto;font-size:13px;padding:6px 12px">▶ Play</button></h3>
+      <div class="dlg">${d.dialog.map(l=>`<div class="phrase"><button class="play" data-say="${esc(l[1])}" aria-label="Listen">${PLAY}</button><div class="t"><b>${l[0]}:</b>${l[1]}</div></div>`).join('')}</div>
+      ${H('Fix common mistakes')}</h3>
+      ${d.mist.map(m=>`<div class="mist"><div class="wrong">${m[0]}</div><div class="right">${m[1]}</div></div>`).join('')}`;
+  }
+  html+=`${H(d.review?`Review quiz (${quiz.length} questions from ${d.all?'the whole book':'this week'})`:'Quick quiz')}</h3>
+    <p class="note">Tap the right answer. When it's correct, you'll hear the full sentence. Say it aloud too.</p>
+    <div id="quiz">${quiz.map((q,k)=>`<div class="q" data-k="${k}"><div class="s">${k+1}. ${q[0].replace(/___/g,'<span class="blank">?</span>')}</div><div class="opts">${shuffle(q[1].map((o,j)=>[o,j])).map(([o,j])=>`<button class="opt" data-j="${j}">${o}</button>`).join('')}</div></div>`).join('')}</div>
+    <div class="score" id="score"></div>
+    ${H('Speak on your own')}</h3>
+    <div class="task"><ul>${d.task.map(t=>`<li>${t}</li>`).join('')}</ul>
+      <div class="timer"><button class="btn primary" id="tbtn">Start ${d.mins}-min timer</button><span class="clock" id="clock">${String(d.mins).padStart(2,'0')}:00</span></div>
+      <p class="note" style="margin:8px 0 0">Tip: record yourself on your phone, then listen back and check your grammar.</p>
+    </div>
+    ${H("Today's checklist")}</h3>
+    <div class="checks">${(d.review?["I read the summary and said each example aloud","I got full marks on the review quiz (new questions each time — try again!)","I spoke for the full timer and recorded it"]:["I understood the rule and said the table aloud","I repeated every example 3 times","I said the correct sentences 5 times","I scored 5/5 on the quiz","I used today's grammar in my speaking task"]).map(c=>`<label><input type="checkbox" class="check">${c}</label>`).join('')}</div>
+    <div class="row">
+      <button class="btn" id="prev" ${i===0?'disabled':''}>← Day ${n-1||''}</button>
+      <button class="btn primary" id="mark">${done[n]?'✓ Completed — undo':'Mark Day '+n+' complete'}</button>
+      <button class="btn" id="next" ${i===DAYS.length-1?'disabled':''}>Day ${n+1<=DAYS.length?n+1:''} →</button>
+    </div>`;
+  document.getElementById('main').innerHTML=html;
+
+  document.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>say1(b.dataset.say));
+  const pa=document.getElementById('playAll'); if(pa) pa.onclick=()=>playList(d.ex.map(p=>p[0]));
+  const pd=document.getElementById('playDlg'); if(pd) pd.onclick=()=>playList(d.dialog.map(l=>l[1]));
+
+  const firstTry={};
+  document.querySelectorAll('.q').forEach(qe=>{
+    const k=+qe.dataset.k, q=quiz[k];
+    qe.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      if(qe.dataset.solved) return;
+      const j=+b.dataset.j;
+      if(!(k in firstTry)) firstTry[k]=(j===q[2]);
+      if(j===q[2]){
+        b.classList.add('ok'); qe.dataset.solved=1;
+        const f=fullSentence(q);
+        qe.querySelector('.s').innerHTML=`${k+1}. ${f}`;
+        say1(f);
+        if(document.querySelectorAll('.q[data-solved]').length===quiz.length){
+          const sc=Object.values(firstTry).filter(Boolean).length;
+          document.getElementById('score').innerHTML=`Score: ${sc} / ${quiz.length} correct on the first try. ${sc===quiz.length?'Excellent! 🎉':'Read the rule again and'} <a href="#" id="retry">${sc===quiz.length?'Try again':'try again'}</a>.`;
+          document.getElementById('retry').onclick=e=>{e.preventDefault();renderDay(i);};
+        }
+      } else b.classList.add('no');
+    });
+  });
+
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('mark').onclick=()=>{done[n]=!done[n];save();renderNav(i);renderDay(i);};
+  setupTimer(d.mins);
+  renderNav(i);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+let tInt=null;
+function setupTimer(m){
+  clearInterval(tInt); let left=m*60, running=false;
+  const b=document.getElementById('tbtn'), c=document.getElementById('clock');
+  const draw=()=>c.textContent=`${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;
+  b.onclick=()=>{
+    if(running){clearInterval(tInt);running=false;b.textContent='Resume';return;}
+    if(left<=0){left=m*60;}
+    running=true;b.textContent='Pause';
+    tInt=setInterval(()=>{left--;draw();if(left<=0){clearInterval(tInt);running=false;b.textContent='Again';c.textContent='Done! 🎉';}},1000);
+  };
+}
+
+function go(i){ if(i<0||i>DAYS.length-1) return; location.hash='day-'+(i+1); }
+function route(){
+  const m=location.hash.match(/day-(\d+)/);
+  let i = m? Math.min(DAYS.length,Math.max(1,+m[1]))-1 : (()=>{ for(let k=1;k<=DAYS.length;k++) if(!done[k]) return k-1; return 0; })();
+  renderDay(i);
+}
+window.addEventListener('hashchange',route);
+route();
+</script>
+</body>
+</html>
