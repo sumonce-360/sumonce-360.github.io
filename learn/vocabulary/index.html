@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vocabulary in 30 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f4ee; --paper:#fffdf8; --ink:#1f2328; --muted:#6b6f76; --line:#e6e0d4;
+  --accent:#1f6f5c; --accent-soft:#e3f0ec; --warn:#b5462f; --warn-soft:#f8e7e2; --gold:#c98a1b;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#16181b; --paper:#1e2125; --ink:#ece9e3; --muted:#9aa0a6; --line:#2e3238;
+    --accent:#5cc4a6; --accent-soft:#1f3631; --warn:#f08a70; --warn-soft:#3a2620; --gold:#e3ad4b;}
+}
+*{box-sizing:border-box}
+.home{display:inline-block;margin-bottom:10px;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none}.home:hover{text-decoration:underline}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+header{padding:28px 20px 18px;max-width:1100px;margin:0 auto}
+h1{font-family:Fraunces,Georgia,serif;font-size:clamp(28px,4vw,40px);margin:0 0 4px;letter-spacing:-.5px}
+.sub{color:var(--muted);margin:0}
+.progress{margin-top:16px;display:flex;align-items:center;gap:12px}
+.bar{flex:1;height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+.layout{max-width:1100px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:240px 1fr;gap:24px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}}
+nav{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px}
+@media(max-width:800px){nav{position:static;max-height:none}}
+nav h4{margin:12px 8px 4px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+nav a{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:14px}
+nav a:hover{background:var(--accent-soft)}
+nav a.active{background:var(--accent);color:#fff}
+nav a .dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:11px}
+nav a.done .dot{background:var(--accent);border-color:var(--accent);color:#fff}
+nav a.active .dot{border-color:#fff}
+main{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,36px)}
+.kicker{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+h2{font-family:Fraunces,Georgia,serif;font-size:clamp(24px,3vw,32px);margin:4px 0 6px}
+h3{font-family:Fraunces,Georgia,serif;font-size:20px;margin:28px 0 10px;display:flex;align-items:center;gap:8px}
+.target{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:8px;margin:14px 0}
+.phrase{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.phrase:last-child{border-bottom:0}
+.phrase .t{flex:1}
+.phrase .n{font-size:13px;color:var(--muted)}
+button{font:inherit;cursor:pointer}
+.play{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--accent);display:grid;place-items:center}
+.play:hover{background:var(--accent);color:#fff}
+.play svg{width:14px;height:14px}
+.dlg{background:var(--bg);border-radius:12px;padding:6px 14px}
+.dlg .phrase b{color:var(--accent);margin-right:4px}
+.mist{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.mist{grid-template-columns:1fr}}
+.wrong,.right{padding:10px 14px;border-radius:10px}
+.wrong{background:var(--warn-soft)} .wrong::before{content:"✗ ";color:var(--warn);font-weight:700}
+.right{background:var(--accent-soft)} .right::before{content:"✓ ";color:var(--accent);font-weight:700}
+.task{border:2px dashed var(--gold);border-radius:12px;padding:14px 16px}
+.task ul{margin:6px 0 0;padding-left:20px}
+.sound{background:var(--bg);border-radius:12px;padding:12px 16px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.btn{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-weight:500}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.settings{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:10px}
+.routine ol{padding-left:20px;margin:6px 0}
+.routine li{margin:4px 0}
+.timer{display:flex;align-items:center;gap:10px;margin-top:10px}
+.timer .clock{font-variant-numeric:tabular-nums;font-weight:600;font-size:20px;min-width:64px}
+.note{font-size:14px;color:var(--muted)}
+.check{width:20px;height:20px;accent-color:var(--accent)}
+.checks label{display:flex;gap:10px;align-items:center;padding:4px 0}
+.words{display:grid;gap:10px}
+.word{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;gap:12px}
+.word .w{font-family:Fraunces,Georgia,serif;font-size:20px;font-weight:700}
+.word .pos{font-size:12px;color:var(--muted);font-style:italic;margin-left:6px;font-family:Inter,sans-serif;font-weight:400}
+.word .bn{color:var(--gold);font-weight:600}
+.word .ex{font-size:15px;margin-top:4px;color:var(--muted)}
+.word .ex b{color:var(--ink)}
+.flash{border:2px solid var(--accent);border-radius:16px;min-height:170px;display:grid;place-items:center;text-align:center;padding:20px;cursor:pointer;user-select:none;background:var(--bg)}
+.flash .fw{font-family:Fraunces,Georgia,serif;font-size:34px;font-weight:700}
+.flash .fm{font-size:17px;margin-top:6px}
+.fnav{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:10px}
+.q{padding:12px 0;border-bottom:1px dashed var(--line)}
+.q .s{margin-bottom:8px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{padding:6px 14px;border-radius:99px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.opt.ok{background:var(--accent);border-color:var(--accent);color:#fff}
+.opt.no{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.blank{display:inline-block;min-width:60px;border-bottom:2px solid var(--gold);text-align:center;font-weight:600}
+.score{font-weight:600;margin-top:10px}
+</style>
+</head>
+<body>
+<header>
+  <a class="home" href="../">← All books</a>
+  <h1>Vocabulary in 30 Days</h1>
+  <p class="sub">10 useful words a day, about 20 minutes. Learn them, hear them, test yourself, then use them when you speak.</p>
+  <div class="progress"><div class="bar"><i id="bar"></i></div><span id="ptext" class="note">0 / 30 days</span></div>
+  <div class="settings">
+    <label>Voice speed <input type="range" id="rate" min="0.6" max="1.1" step="0.05" value="0.85"></label>
+    <span id="rateval">0.85×</span>
+    <label>Voice <select id="voice"></select></label>
+  </div>
+</header>
+<div class="layout">
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+
+<script>
+const ROUTINE = [
+  "<b>Learn (5 min):</b> Read each word, its meaning and the example. Press ▶ and say the word and the example aloud 3 times.",
+  "<b>Flashcards (3 min):</b> Look at the word, say the meaning in your head, then tap to check. Go through all of them twice.",
+  "<b>Dialogue (3 min):</b> Play it, then read both parts aloud.",
+  "<b>Quiz (3 min):</b> Test yourself. If you score less than 5/5, go back to the flashcards.",
+  "<b>Make your own sentences (2 min):</b> Say one sentence about your own life for each word.",
+  "<b>Speak (4 min):</b> Do the speaking task with the timer and try to use at least 6 of today's words. Record it on your phone."
+];
+
+// word|part of speech|simple meaning|Bangla|example
+const DAYS = [
+// WEEK 1 — Everyday life
+{w:1,title:"Daily routine",words:[
+"wake up|phrasal verb|stop sleeping|ঘুম থেকে ওঠা|I usually wake up at six.",
+"commute|verb|travel to work or study every day|যাতায়াত করা|I commute to campus by bus.",
+"grab|verb|take something quickly|তাড়াতাড়ি নেওয়া|Let's grab a coffee before class.",
+"chores|noun|small jobs at home, like cleaning|ঘরের কাজ|I do my chores on Saturday.",
+"nap|noun|a short sleep in the day|দিনে অল্প ঘুম|I took a short nap after lunch.",
+"schedule|noun|a plan of times for activities|সময়সূচি|My schedule is very busy this week.",
+"rush|verb|move or do something very fast|তাড়াহুড়া করা|Don't rush. We have time.",
+"routine|noun|the usual way you do things every day|নিয়মিত কাজের ধারা|Exercise is part of my morning routine.",
+"freshen up|phrasal verb|wash quickly to feel clean|হাত-মুখ ধুয়ে সতেজ হওয়া|Let me freshen up before dinner.",
+"laundry|noun|clothes that need washing|ধোয়ার কাপড়|I need to do my laundry tonight."],
+ dialog:[["A","What's your morning routine like?"],["B","I wake up at six, freshen up, and grab some breakfast."],["A","How long is your commute?"],["B","About twenty minutes by bus. I always rush to catch it!"],["A","Do you nap in the afternoon?"],["B","Sometimes. But I have chores and laundry in the evening."]],
+ task:"Describe your daily routine for 2 minutes, from waking up to going to bed.",mins:2},
+
+{w:1,title:"Feelings and emotions",words:[
+"anxious|adjective|worried and nervous|উদ্বিগ্ন|I feel anxious before exams.",
+"relieved|adjective|happy because a worry has gone|স্বস্তি পাওয়া|I was relieved when the test was over.",
+"frustrated|adjective|annoyed because something isn't working|হতাশ ও বিরক্ত|I get frustrated when my code doesn't run.",
+"grateful|adjective|thankful|কৃতজ্ঞ|I'm grateful for my parents' support.",
+"homesick|adjective|sad because you miss home|বাড়ির জন্য মন খারাপ|I feel homesick during Eid.",
+"confident|adjective|sure about your abilities|আত্মবিশ্বাসী|I want to feel confident when I speak.",
+"embarrassed|adjective|shy or uncomfortable after a mistake|বিব্রত, লজ্জিত|I was embarrassed when I forgot his name.",
+"excited|adjective|very happy about something coming|উত্তেজিত, খুব খুশি|I'm excited about my trip home.",
+"overwhelmed|adjective|feeling there is too much to handle|দিশেহারা|I felt overwhelmed in my first month.",
+"calm|adjective|peaceful, not worried|শান্ত|Stay calm and speak slowly."],
+ dialog:[["A","How are you feeling about the presentation?"],["B","Honestly, a bit anxious."],["A","Don't worry. You've practised a lot."],["B","True. I'm more confident than last month."],["A","And after it's done?"],["B","I'll be so relieved! And grateful for your help."]],
+ task:"Talk for 2 minutes about a time you felt anxious, then relieved. Also say when you feel homesick.",mins:2},
+
+{w:1,title:"Describing personality",words:[
+"hardworking|adjective|works with a lot of effort|পরিশ্রমী|My father is very hardworking.",
+"generous|adjective|happy to give to others|উদার|She's generous with her time.",
+"honest|adjective|always tells the truth|সৎ|I trust him because he's honest.",
+"shy|adjective|nervous with new people|লাজুক|I was shy as a child.",
+"stubborn|adjective|doesn't change his or her mind|জেদি|My brother is stubborn about politics.",
+"patient|adjective|can wait calmly|ধৈর্যশীল|A good teacher is patient.",
+"reliable|adjective|you can trust and depend on|নির্ভরযোগ্য|He's a reliable labmate.",
+"outgoing|adjective|friendly and likes meeting people|মিশুক|My roommate is very outgoing.",
+"humble|adjective|doesn't think he or she is better than others|বিনয়ী|Despite his success, he is humble.",
+"curious|adjective|wants to know and learn things|কৌতূহলী|Scientists are naturally curious."],
+ dialog:[["A","What's your supervisor like?"],["B","He's patient and very reliable."],["A","And your roommate?"],["B","He's outgoing, but a bit stubborn sometimes."],["A","How about you?"],["B","I'm hardworking and curious, but a little shy."]],
+ task:"Describe 3 people you know for 2 minutes: family, a friend, a teacher. Use at least 6 personality words.",mins:2},
+
+{w:1,title:"Food and cooking",words:[
+"delicious|adjective|tastes very good|সুস্বাদু|This biryani is delicious!",
+"spicy|adjective|hot, with chilli|ঝাল|I like spicy food.",
+"bland|adjective|without much taste|পানসে, স্বাদহীন|The soup is a bit bland. Add salt.",
+"recipe|noun|instructions for cooking a dish|রান্নার প্রণালী|My mother gave me her recipe.",
+"ingredient|noun|one of the foods in a dish|উপকরণ|What are the ingredients?",
+"fry|verb|cook in hot oil|ভাজা|I fry the fish in mustard oil.",
+"boil|verb|cook in very hot water|সেদ্ধ করা|Boil the eggs for ten minutes.",
+"leftovers|noun|food not eaten that you keep for later|বেঁচে যাওয়া খাবার|I'll eat the leftovers tomorrow.",
+"appetite|noun|the feeling of wanting to eat|খিদে, রুচি|I lost my appetite when I was sick.",
+"portion|noun|the amount of food for one person|এক জনের পরিমাণ|The portions here are huge."],
+ dialog:[["A","This curry is delicious! What's the recipe?"],["B","It's simple. The main ingredients are chicken, onion and spices."],["A","Is it very spicy?"],["B","Medium. I fry the onions first, then add the chicken."],["A","Can I have another portion?"],["B","Of course! There'll still be leftovers."]],
+ task:"Explain how to cook your favourite dish for 2 minutes. Use ingredient, fry, boil, spicy, delicious, recipe.",mins:2},
+
+{w:1,title:"Home and living",words:[
+"rent|noun|money you pay to live in a place|ভাড়া|The rent is due on the first of the month.",
+"landlord|noun|the owner of a house you rent|বাড়িওয়ালা|I called the landlord about the leak.",
+"furniture|noun|tables, chairs, beds, etc.|আসবাবপত্র|The room comes with basic furniture.",
+"tidy|adjective|clean and in order|গোছানো|Please keep the kitchen tidy.",
+"messy|adjective|untidy, not in order|অগোছালো|My desk is always messy.",
+"repair|verb|fix something broken|মেরামত করা|They came to repair the fan.",
+"appliance|noun|a machine used at home, like a fridge|গৃহস্থালি যন্ত্র|The kitchen has all the appliances.",
+"roommate|noun|a person who shares your room or flat|একসাথে থাকার সঙ্গী|My roommate is from Pakistan.",
+"utility bills|noun|bills for electricity and water|বিদ্যুৎ-পানির বিল|We share the utility bills.",
+"neighbour|noun|a person who lives next to you|প্রতিবেশী|My neighbour is very friendly."],
+ dialog:[["A","How's your new place?"],["B","Good! The rent is cheap and the landlord is nice."],["A","Is there furniture?"],["B","Yes, and all the appliances work."],["A","How's your roommate?"],["B","He's tidy, thank God. I'm the messy one!"]],
+ task:"Describe your room or house for 2 minutes: rent, furniture, neighbours, problems you need to repair.",mins:2},
+
+{w:1,title:"Weather and nature",words:[
+"humid|adjective|hot and wet air|আর্দ্র, ভ্যাপসা|Malaysia is very humid.",
+"drizzle|noun|very light rain|গুঁড়ি গুঁড়ি বৃষ্টি|It's only a drizzle. Let's go.",
+"pour|verb|rain very heavily|মুষলধারে বৃষ্টি হওয়া|It's pouring outside!",
+"forecast|noun|what the weather will be|পূর্বাভাস|The forecast says rain tomorrow.",
+"breeze|noun|a light, gentle wind|মৃদু বাতাস|There's a nice breeze by the sea.",
+"flood|noun|a lot of water covering land|বন্যা|The flood closed the road.",
+"scorching|adjective|extremely hot|প্রচণ্ড গরম|It was scorching at noon.",
+"thunderstorm|noun|a storm with thunder and lightning|বজ্রঝড়|We had a thunderstorm last night.",
+"season|noun|a part of the year, like winter|ঋতু|My favourite season is winter.",
+"chilly|adjective|a bit cold|ঠান্ডা ঠান্ডা|The lab is chilly because of the AC."],
+ dialog:[["A","What's the forecast for today?"],["B","Thunderstorms in the afternoon."],["A","Again? It poured yesterday too."],["B","It's the monsoon season. Floods are common now."],["A","I miss the winter breeze in Bangladesh."],["B","Me too. Here it's humid all year!"]],
+ task:"Compare the weather in Bangladesh and Malaysia for 2 minutes. Talk about seasons, rain and heat.",mins:2},
+
+{w:1,review:true,title:"Week 1 review",task:"Record 3 minutes about your life in Malaysia: routine, feelings, people, food, home and weather. Use at least 15 words from this week.",mins:3},
+
+// WEEK 2 — Out and about
+{w:2,title:"Shopping and money",words:[
+"afford|verb|have enough money to buy|সামর্থ্য থাকা|I can't afford a new laptop.",
+"bargain|noun|something cheap for its value|সস্তায় ভালো জিনিস|These shoes were a bargain.",
+"discount|noun|a lower price|ছাড়|Students get a ten percent discount.",
+"receipt|noun|a paper that shows you paid|রসিদ|Keep the receipt in case you return it.",
+"refund|noun|money given back|টাকা ফেরত|I asked for a refund.",
+"budget|noun|a plan for how much to spend|বাজেট|My monthly budget is tight.",
+"expensive|adjective|costs a lot|দামি|Eating out is expensive.",
+"save|verb|keep money for later|সঞ্চয় করা|I save money every month.",
+"cash|noun|paper money and coins|নগদ টাকা|Do you accept cash?",
+"queue|noun|a line of people waiting|লাইন, সারি|There was a long queue at the counter."],
+ dialog:[["A","Nice bag! Was it expensive?"],["B","No, it was a bargain. Fifty percent discount!"],["A","Lucky! I can't afford anything this month."],["B","Me neither. I'm on a tight budget."],["A","Did you pay by card?"],["B","Cash. And I kept the receipt, just in case."]],
+ task:"Talk for 2 minutes about how you manage money: budget, saving, and your best bargain.",mins:2},
+
+{w:2,title:"Travel and transport",words:[
+"destination|noun|the place you are going to|গন্তব্য|Our final destination is Langkawi.",
+"departure|noun|leaving time|প্রস্থান|Departure is at 8 am.",
+"delay|noun|when something is late|দেরি|There was a two-hour delay.",
+"luggage|noun|bags for travelling|মালপত্র|My luggage was too heavy.",
+"fare|noun|money paid for a journey|ভাড়া|The bus fare is three ringgit.",
+"boarding pass|noun|a card to get on a plane|বোর্ডিং পাস|Show your boarding pass at the gate.",
+"journey|noun|travelling from one place to another|যাত্রা|The journey took five hours.",
+"itinerary|noun|a travel plan|ভ্রমণসূচি|Here is our itinerary for the trip.",
+"book|verb|reserve in advance|আগে থেকে বুক করা|I booked a ticket online.",
+"sightseeing|noun|visiting interesting places|দর্শনীয় স্থান ঘোরা|We went sightseeing in Penang."],
+ dialog:[["A","Did you book your flight home?"],["B","Yes, departure is on the 20th."],["A","How long is the journey?"],["B","About four hours, if there's no delay."],["A","Will you go sightseeing in Dhaka?"],["B","Not much. My itinerary is mostly family visits!"]],
+ task:"Describe your best journey for 2 minutes: destination, how you booked, luggage, delays, sightseeing.",mins:2},
+
+{w:2,title:"Health and body",words:[
+"symptom|noun|a sign of illness|লক্ষণ|What are your symptoms?",
+"prescription|noun|a doctor's note for medicine|ব্যবস্থাপত্র|You need a prescription for this.",
+"recover|verb|get better after illness|সেরে ওঠা|I recovered quickly from the flu.",
+"injury|noun|damage to the body|আঘাত|He has a knee injury.",
+"sore|adjective|painful|ব্যথাযুক্ত|I have a sore throat.",
+"dizzy|adjective|feeling that things are spinning|মাথা ঘোরা|I felt dizzy in the heat.",
+"allergic|adjective|body reacts badly to something|অ্যালার্জি আছে|I'm allergic to prawns.",
+"appointment|noun|a fixed time to meet|সাক্ষাতের নির্ধারিত সময়|I have a doctor's appointment at 3.",
+"fit|adjective|healthy and strong|সুস্থ-সবল|I want to stay fit.",
+"check-up|noun|a general medical test|স্বাস্থ্য পরীক্ষা|I go for a check-up every year."],
+ dialog:[["A","You look pale. Are you okay?"],["B","I feel dizzy and I have a sore throat."],["A","Those sound like flu symptoms."],["B","I have an appointment at the clinic this afternoon."],["A","Get some rest so you recover quickly."],["B","Thanks. I'll ask for a prescription."]],
+ task:"Role-play a visit to the doctor for 2 minutes. Describe symptoms and ask questions.",mins:2},
+
+{w:2,title:"City and places",words:[
+"crowded|adjective|full of people|ভিড়ে ভরা|The market is crowded on weekends.",
+"traffic jam|noun|many cars stuck on the road|যানজট|I was stuck in a traffic jam.",
+"pedestrian|noun|a person walking on the street|পথচারী|This street is for pedestrians only.",
+"neighbourhood|noun|the area where you live|এলাকা, পাড়া|My neighbourhood is quiet.",
+"landmark|noun|a famous building or place|পরিচিত স্থাপনা|The Petronas Towers are a famous landmark.",
+"suburb|noun|an area outside the city centre|শহরতলি|We live in a suburb of Kuantan.",
+"downtown|noun|the centre of a city|শহরের কেন্দ্র|The office is downtown.",
+"convenient|adjective|easy and useful|সুবিধাজনক|The bus stop is very convenient.",
+"facility|noun|a place or service for a purpose|সুবিধা, স্থাপনা|The campus has great sports facilities.",
+"noisy|adjective|loud|কোলাহলপূর্ণ|Dhaka is very noisy."],
+ dialog:[["A","Do you prefer Dhaka or Kuantan?"],["B","Dhaka is home, but it's crowded and noisy."],["A","And the traffic jams!"],["B","Terrible! Here my neighbourhood is quiet and convenient."],["A","Any famous landmarks near you?"],["B","Teluk Cempedak beach. And the campus facilities are great."]],
+ task:"Compare your home city and your current city for 2 minutes using at least 6 of today's words.",mins:2},
+
+{w:2,title:"Communication words",words:[
+"reply|verb|answer a message|উত্তর দেওয়া|Please reply when you can.",
+"mention|verb|say something briefly|উল্লেখ করা|Did he mention the deadline?",
+"remind|verb|help someone remember|মনে করিয়ে দেওয়া|Remind me to call my mother.",
+"persuade|verb|make someone agree|রাজি করানো|I persuaded him to join us.",
+"complain|verb|say you are unhappy about something|অভিযোগ করা|They complained about the noise.",
+"apologise|verb|say sorry|ক্ষমা চাওয়া|I apologised for being late.",
+"suggest|verb|give an idea|প্রস্তাব করা|I suggest we meet tomorrow.",
+"interrupt|verb|stop someone while they speak|কথার মধ্যে বাধা দেওয়া|Sorry to interrupt, but it's urgent.",
+"clarify|verb|make something clear|স্পষ্ট করা|Could you clarify the last point?",
+"gossip|noun|talk about other people's private lives|পরচর্চা|I don't like office gossip."],
+ dialog:[["A","Sorry to interrupt. Can I ask something?"],["B","Sure."],["A","Could you clarify the deadline? You mentioned Friday."],["B","Yes, Friday. Remind everyone, please."],["A","Okay. I suggest we send an email too."],["B","Good idea. Please reply to me after you send it."]],
+ task:"Talk for 2 minutes about a time you had to apologise, complain, or persuade someone.",mins:2},
+
+{w:2,title:"Time and frequency",words:[
+"occasionally|adverb|sometimes, not often|মাঝে মাঝে|I occasionally eat fast food.",
+"rarely|adverb|almost never|কদাচিৎ|I rarely watch TV.",
+"frequently|adverb|often|প্রায়ই|I frequently visit the library.",
+"recently|adverb|not long ago|সম্প্রতি|I recently started learning to drive.",
+"eventually|adverb|in the end, after a long time|শেষ পর্যন্ত|Eventually, the code worked.",
+"meanwhile|adverb|at the same time|এরই মধ্যে|I cooked. Meanwhile, my roommate cleaned.",
+"immediately|adverb|now, without waiting|সঙ্গে সঙ্গে|Call me immediately if there's a problem.",
+"deadline|noun|the last time to finish something|শেষ সময়সীমা|The deadline is next Monday.",
+"temporary|adjective|for a short time only|অস্থায়ী|This is a temporary job.",
+"permanent|adjective|lasting for ever or a long time|স্থায়ী|I want a permanent position."],
+ dialog:[["A","Do you go home often?"],["B","Rarely. Only once a year."],["A","Have you started any new hobby recently?"],["B","Yes, swimming. I occasionally go on weekends."],["A","Is your job here permanent?"],["B","No, it's temporary. Eventually, I want a permanent one."]],
+ task:"Talk for 2 minutes about your habits: what you do frequently, occasionally and rarely. What did you start recently?",mins:2},
+
+{w:2,review:true,title:"Week 2 review",task:"Record 3 minutes: tell the story of a trip, including shopping, transport, a health problem, and the city you visited. Use at least 15 words from this week.",mins:3},
+
+// WEEK 3 — Study and work
+{w:3,title:"Academic words (1)",words:[
+"analyse|verb|study something in detail|বিশ্লেষণ করা|I need to analyse the data.",
+"assess|verb|judge the quality or value|মূল্যায়ন করা|We assess the risk before testing.",
+"evidence|noun|facts that prove something|প্রমাণ|There is strong evidence for this.",
+"significant|adjective|important or large enough to notice|উল্লেখযোগ্য|There was a significant increase.",
+"approach|noun|a way of doing something|পদ্ধতি, দৃষ্টিভঙ্গি|We used a new approach.",
+"concept|noun|an idea|ধারণা|The concept is simple.",
+"establish|verb|set up or prove|প্রতিষ্ঠা করা, নিশ্চিত করা|We need to establish the cause.",
+"indicate|verb|show or suggest|নির্দেশ করা|The results indicate a clear trend.",
+"interpret|verb|explain the meaning of|ব্যাখ্যা করা|How do you interpret this graph?",
+"relevant|adjective|connected to the topic|প্রাসঙ্গিক|Only include relevant papers."],
+ dialog:[["A","What do your results indicate?"],["B","There's a significant drop in life at high temperature."],["A","Is the evidence strong?"],["B","Yes. I analysed data from three different sources."],["A","How did you interpret it?"],["B","My approach was to compare it with existing models."]],
+ task:"Describe a study or report you read for 2 minutes. Use analyse, evidence, significant, indicate, interpret.",mins:2},
+
+{w:3,title:"Academic words (2)",words:[
+"assume|verb|think something is true without proof|ধরে নেওয়া|We assume the load is constant.",
+"consistent|adjective|the same every time|সামঞ্জস্যপূর্ণ|The results are consistent.",
+"derive|verb|get or develop from something|নির্ণয় করা, উদ্ভূত করা|We derive the equation from the data.",
+"estimate|verb|calculate roughly|আনুমানিক হিসাব করা|I estimate it will take two weeks.",
+"factor|noun|one thing that affects a result|উপাদান, প্রভাবক|Temperature is a key factor.",
+"method|noun|a way of doing something|পদ্ধতি|This method is fast and simple.",
+"obtain|verb|get|পাওয়া, অর্জন করা|We obtained the data from NIMS.",
+"previous|adjective|earlier, before|পূর্ববর্তী|Previous studies showed similar results.",
+"require|verb|need|প্রয়োজন হওয়া|This test requires special equipment.",
+"valid|adjective|correct and acceptable|বৈধ, যথার্থ|Is this method valid for low stress?"],
+ dialog:[["A","How did you obtain the constants?"],["B","I derived them from the creep curves."],["A","Is the method valid at low stress?"],["B","We assume so, but it requires more data."],["A","Are the results consistent with previous work?"],["B","Mostly. Stress is the main factor."]],
+ task:"Explain the method of a project you did for 2 minutes. Use assume, method, obtain, require, estimate, previous.",mins:2},
+
+{w:3,title:"Research and science",words:[
+"hypothesis|noun|an idea to be tested|প্রাথমিক অনুমান|Our hypothesis was correct.",
+"data|noun|facts and numbers|উপাত্ত|We collected data for six months.",
+"experiment|noun|a scientific test|পরীক্ষা|The experiment failed twice.",
+"sample|noun|a small part for testing|নমুনা|Each sample was 10 mm long.",
+"accuracy|noun|how correct something is|নির্ভুলতা|The model's accuracy is 95 percent.",
+"limitation|noun|a weakness or limit|সীমাবদ্ধতা|One limitation is the small dataset.",
+"findings|noun|the results of research|গবেষণার ফলাফল|Our findings support the theory.",
+"literature review|noun|a summary of past research|পূর্ববর্তী গবেষণার পর্যালোচনা|I'm writing my literature review.",
+"publish|verb|print in a journal|প্রকাশ করা|I want to publish two papers.",
+"validate|verb|check that something is correct|যাচাই করা|We validated the model with test data."],
+ dialog:[["A","What's your main hypothesis?"],["B","That the Omega model works well for P91."],["A","How did you test it?"],["B","I compared it with experiment data from many samples."],["A","Any limitations?"],["B","Yes, few long-term data. But the findings are promising. I hope to publish soon."]],
+ task:"Explain your research for 2.5 minutes: hypothesis, data, experiments, findings, limitations.",mins:3},
+
+{w:3,title:"Engineering and materials",words:[
+"strength|noun|how much force something can take|শক্তি|P91 has high creep strength.",
+"failure|noun|when something breaks or stops working|বিকল হওয়া, ভেঙে পড়া|The failure happened after 5,000 hours.",
+"load|noun|weight or force on something|ভার|The beam carries a heavy load.",
+"deformation|noun|a change in shape|আকৃতির বিকৃতি|We measured the deformation over time.",
+"durability|noun|how long something lasts|স্থায়িত্ব|Durability is important for pipes.",
+"prototype|noun|a first model for testing|প্রাথমিক নমুনা|We built a prototype last year.",
+"specification|noun|a detailed technical requirement|বিনির্দেশ|Check the material specification.",
+"tolerance|noun|allowed difference from exact size|সহনসীমা|The tolerance is 0.1 mm.",
+"efficiency|noun|good output with little waste|দক্ষতা|Higher temperature improves efficiency.",
+"maintenance|noun|keeping something in good condition|রক্ষণাবেক্ষণ|The plant shuts down for maintenance."],
+ dialog:[["A","Why do power plants use P91?"],["B","It has high strength at high temperature."],["A","What about failure?"],["B","Under load for a long time, it slowly deforms. That's creep."],["A","So you predict durability?"],["B","Exactly. It helps plan maintenance and improve efficiency."]],
+ task:"Explain a machine or structure you know well for 2 minutes. Use strength, load, failure, maintenance, efficiency.",mins:2},
+
+{w:3,title:"Office and meetings",words:[
+"agenda|noun|a list of topics for a meeting|আলোচ্যসূচি|What's on the agenda today?",
+"colleague|noun|a person you work with|সহকর্মী|My colleague helped me.",
+"minutes|noun|written notes of a meeting|সভার কার্যবিবরণী|Who will take the minutes?",
+"postpone|verb|move to a later time|স্থগিত করা|We postponed the meeting to Monday.",
+"attend|verb|be present at|উপস্থিত থাকা|I attended the workshop.",
+"feedback|noun|comments to improve something|মতামত|Thanks for your feedback.",
+"collaborate|verb|work together|একসাথে কাজ করা|We collaborate with a Japanese team.",
+"priority|noun|the most important thing|অগ্রাধিকার|My priority is the thesis.",
+"workload|noun|the amount of work|কাজের চাপ|My workload is heavy this month.",
+"delegate|verb|give a task to someone else|দায়িত্ব অর্পণ করা|A good leader delegates tasks."],
+ dialog:[["A","What's on the agenda?"],["B","Project updates and new tasks."],["A","Can we postpone my update? My workload is crazy."],["B","Sure. But it's a priority for next week."],["A","Thanks. Who's taking the minutes?"],["B","I'll delegate that to Amir."]],
+ task:"Describe your job or lab work for 2 minutes: your colleagues, workload, priorities, and meetings you attend.",mins:2},
+
+{w:3,title:"Polite and formal words",words:[
+"request|noun|a polite ask|অনুরোধ|I have a small request.",
+"inquire|verb|ask for information|জানতে চাওয়া|I'm writing to inquire about the course.",
+"regarding|preposition|about|সম্পর্কে|I'm calling regarding my application.",
+"attached|adjective|added to an email|সংযুক্ত|Please find the report attached.",
+"confirm|verb|say that something is true or fixed|নিশ্চিত করা|Can you confirm the time?",
+"available|adjective|free to use or meet|ফাঁকা, পাওয়া যায়|Are you available on Friday?",
+"assist|verb|help|সাহায্য করা|How can I assist you?",
+"acknowledge|verb|say you received or accept something|প্রাপ্তি স্বীকার করা|Please acknowledge this email.",
+"appreciate|verb|be thankful for|কৃতজ্ঞতা জানানো|I really appreciate your help.",
+"sincerely|adverb|honestly; used to end letters|আন্তরিকভাবে|Yours sincerely, Sumon."],
+ dialog:[["A","Good morning. How can I assist you?"],["B","I'm calling regarding my visa renewal."],["A","Did you send the documents?"],["B","Yes, they're attached to my email from Monday. Could you confirm you received them?"],["A","Yes, I acknowledge them. Are you available tomorrow?"],["B","Yes. I really appreciate your help."]],
+ task:"Speak 3 short formal requests aloud (40 seconds each): to an office, to your supervisor, to a company.",mins:2},
+
+{w:3,review:true,title:"Week 3 review",task:"Record 3 minutes: present your research or job as if at an interview. Use at least 15 words from this week.",mins:3},
+
+// WEEK 4 — Fluency
+{w:4,title:"Strong adjectives",words:[
+"exhausted|adjective|very tired|অত্যন্ত ক্লান্ত|I'm exhausted after the long day.",
+"starving|adjective|very hungry|ভীষণ ক্ষুধার্ত|I'm starving! Let's eat.",
+"freezing|adjective|very cold|প্রচণ্ড ঠান্ডা|The lab is freezing.",
+"enormous|adjective|very big|বিশাল|They live in an enormous house.",
+"tiny|adjective|very small|খুবই ছোট|My room is tiny.",
+"delighted|adjective|very happy|ভীষণ আনন্দিত|I was delighted with the result.",
+"furious|adjective|very angry|ভীষণ রাগান্বিত|He was furious about the delay.",
+"terrified|adjective|very scared|ভীষণ ভীত|I'm terrified of snakes.",
+"fascinating|adjective|very interesting|দারুণ আকর্ষণীয়|The lecture was fascinating.",
+"awful|adjective|very bad|ভয়ানক খারাপ|The traffic was awful."],
+ dialog:[["A","How was your day?"],["B","Awful! I'm exhausted and starving."],["A","What happened?"],["B","The bus was late and my supervisor was furious about a mistake."],["A","Oh no. Anything good?"],["B","Yes, the seminar was fascinating. I was delighted I went."]],
+ task:"Tell the story of your best and worst day for 2 minutes. Replace every 'very + adjective' with a strong adjective.",mins:2},
+
+{w:4,title:"Better words for common words",words:[
+"excellent|adjective|very good (instead of 'good')|চমৎকার|That's an excellent idea.",
+"terrible|adjective|very bad (instead of 'bad')|খুব খারাপ|The food was terrible.",
+"crucial|adjective|extremely important|অত্যন্ত গুরুত্বপূর্ণ|This step is crucial.",
+"rapid|adjective|fast|দ্রুত|There was a rapid increase in strain.",
+"numerous|adjective|many|অসংখ্য|Numerous studies agree.",
+"purchase|verb|buy (formal)|ক্রয় করা|You can purchase tickets online.",
+"extremely|adverb|very (stronger)|অত্যন্ত|It's extremely hot today.",
+"approximately|adverb|about, roughly|প্রায়|It takes approximately two hours.",
+"sufficient|adjective|enough|যথেষ্ট|We don't have sufficient data.",
+"challenging|adjective|difficult in an interesting way|কঠিন, চ্যালেঞ্জিং|The project is challenging."],
+ dialog:[["A","How's the new project?"],["B","It's challenging, but excellent experience."],["A","Do you have sufficient data?"],["B","Approximately two hundred points. Numerous papers helped."],["A","What's the crucial part?"],["B","Getting rapid results before the deadline!"]],
+ task:"Talk for 2 minutes about your studies. Do NOT say good, bad, very, many or big — use today's words instead.",mins:2},
+
+{w:4,title:"Linking words",words:[
+"however|adverb|but (at the start of a sentence)|তবে, যাহোক|It's cheap. However, it's slow.",
+"therefore|adverb|so, for this reason|তাই, সুতরাং|It rained; therefore, we stayed home.",
+"although|conjunction|even though|যদিও|Although I was tired, I finished.",
+"moreover|adverb|also, in addition|তাছাড়া|It's cheap. Moreover, it's fast.",
+"instead|adverb|in place of|এর পরিবর্তে|I didn't take the bus. Instead, I walked.",
+"whereas|conjunction|but in contrast|অন্যদিকে|I like tea, whereas my brother likes coffee.",
+"despite|preposition|even with|সত্ত্বেও|Despite the rain, we went out.",
+"unless|conjunction|if not|যদি না|I won't go unless you come.",
+"otherwise|adverb|if not, then|না হলে|Hurry, otherwise we'll be late.",
+"furthermore|adverb|also (formal)|অধিকন্তু|Furthermore, the model is easy to use."],
+ dialog:[["A","Should I take the train or the bus?"],["B","The train is faster, whereas the bus is cheaper."],["A","Hmm. However, I'm short of money."],["B","Then take the bus. Moreover, it stops near campus."],["A","Okay. Although it's slow, it's fine."],["B","Leave early, otherwise you'll miss it."]],
+ task:"Give your opinion for 2 minutes: 'Is it better to study abroad or at home?' Use at least 6 linking words.",mins:2},
+
+{w:4,title:"Everyday phrasal verbs",words:[
+"get along|phrasal verb|have a good relationship|মিলেমিশে থাকা|I get along well with my roommate.",
+"figure out|phrasal verb|understand or solve|বুঝে বের করা|I can't figure out this problem.",
+"show up|phrasal verb|arrive, appear|হাজির হওয়া|He didn't show up for the meeting.",
+"pick up|phrasal verb|collect someone or something|তুলে নেওয়া, নিয়ে আসা|I'll pick you up at seven.",
+"look after|phrasal verb|take care of|দেখাশোনা করা|Who looks after your parents?",
+"run into|phrasal verb|meet by chance|হঠাৎ দেখা হওয়া|I ran into my teacher at the mall.",
+"catch up|phrasal verb|talk to get the latest news|খবরাখবর নেওয়া|Let's catch up over coffee.",
+"break down|phrasal verb|stop working (machine)|নষ্ট হয়ে যাওয়া|The machine broke down again.",
+"calm down|phrasal verb|become calm|শান্ত হওয়া|Calm down, it's not a big problem.",
+"work out|phrasal verb|exercise; or solve|ব্যায়াম করা; সমাধান হওয়া|I work out three times a week."],
+ dialog:[["A","Guess who I ran into today? Rafiq!"],["B","No way! We should catch up with him."],["A","Yes. Can you pick me up at eight?"],["B","Sure, unless my car breaks down again!"],["A","Haha. How do you get along with your new roommate?"],["B","Great. We work out together every morning."]],
+ task:"Talk for 2 minutes about your last week using at least 6 of today's phrasal verbs.",mins:2},
+
+{w:4,title:"Word partners (collocations)",words:[
+"make a decision|phrase|decide|সিদ্ধান্ত নেওয়া|I need to make a decision soon.",
+"make progress|phrase|improve, move forward|অগ্রগতি করা|I'm making progress in English.",
+"do research|phrase|study a topic deeply|গবেষণা করা|I do research on steel.",
+"do a favour|phrase|help someone|উপকার করা|Can you do me a favour?",
+"take a break|phrase|rest for a short time|বিরতি নেওয়া|Let's take a break.",
+"take notes|phrase|write down key points|নোট নেওয়া|I take notes in every lecture.",
+"have a look|phrase|look at something|একবার দেখা|Can I have a look at your report?",
+"pay attention|phrase|focus, listen carefully|মনোযোগ দেওয়া|Pay attention to the details.",
+"keep in touch|phrase|stay in contact|যোগাযোগ রাখা|Let's keep in touch after graduation.",
+"catch a cold|phrase|become sick with a cold|সর্দি লাগা|I caught a cold in the rain."],
+ dialog:[["A","Can you do me a favour and have a look at my slides?"],["B","Sure. Let's take a break first."],["A","Good idea. I'm not making much progress anyway."],["B","Did you take notes in the meeting?"],["A","Yes, but I need to make a decision on the title."],["B","Okay. Pay attention to the first slide — it's crucial."]],
+ task:"Talk for 2 minutes about how you study or work. Use make, do, take, have, pay and keep collocations.",mins:2},
+
+{w:4,title:"Opinion and argument",words:[
+"argue|verb|give reasons for an opinion|যুক্তি দেওয়া, তর্ক করা|Some people argue that AI is dangerous.",
+"claim|verb|say something is true|দাবি করা|He claims the method is better.",
+"convince|verb|make someone believe|বিশ্বাস করানো|You've convinced me.",
+"point of view|noun|opinion, way of seeing|দৃষ্টিভঙ্গি|From my point of view, it's fair.",
+"advantage|noun|a good point|সুবিধা|The main advantage is speed.",
+"disadvantage|noun|a bad point|অসুবিধা|One disadvantage is the cost.",
+"reasonable|adjective|fair and sensible|যুক্তিসংগত|That's a reasonable price.",
+"biased|adjective|unfairly supporting one side|পক্ষপাতদুষ্ট|The article seems biased.",
+"controversial|adjective|causing strong disagreement|বিতর্কিত|It's a controversial topic.",
+"compromise|noun|an agreement where both sides give a little|আপস|We reached a compromise."],
+ dialog:[["A","Some people argue that online classes are better."],["B","From my point of view, both have advantages."],["A","What's the main disadvantage of online classes?"],["B","Less interaction. You can't convince me otherwise!"],["A","Haha. Maybe a compromise — mixed classes?"],["B","That sounds reasonable."]],
+ task:"Debate with yourself for 2.5 minutes: 'Should students work part-time?' Give advantages, disadvantages and your point of view.",mins:3},
+
+{w:4,review:true,title:"Week 4 review",task:"Record 3 minutes giving your opinion on a topic you care about. Use strong adjectives, linking words, phrasal verbs and collocations — at least 15 words from this week.",mins:3},
+
+{w:4,title:"Common idioms",words:[
+"piece of cake|idiom|very easy|খুব সহজ|The exam was a piece of cake.",
+"break the ice|idiom|start a conversation with new people|জড়তা ভাঙা|He told a joke to break the ice.",
+"under the weather|idiom|a little sick|একটু অসুস্থ|I'm feeling under the weather today.",
+"once in a blue moon|idiom|very rarely|কালেভদ্রে|I eat pizza once in a blue moon.",
+"hit the books|idiom|study hard|মন দিয়ে পড়াশোনা করা|Exams are close. Time to hit the books.",
+"on the same page|idiom|agreeing, understanding the same way|একই ধারণায় থাকা|Let's make sure we're on the same page.",
+"call it a day|idiom|stop working for today|আজকের মতো কাজ শেষ করা|It's late. Let's call it a day.",
+"cost an arm and a leg|idiom|be very expensive|অনেক দামি হওয়া|That phone costs an arm and a leg.",
+"get the hang of|idiom|learn how to do something|আয়ত্তে আনা|I'm getting the hang of English speaking.",
+"the ball is in your court|idiom|it's your turn to decide|এখন সিদ্ধান্ত তোমার|I've made my offer. The ball is in your court."],
+ dialog:[["A","How was the test?"],["B","A piece of cake! I hit the books all week."],["A","Nice. Want to celebrate? Dinner downtown?"],["B","That place costs an arm and a leg!"],["A","Haha, we only go once in a blue moon."],["B","Okay, but first let's call it a day here."]],
+ task:"Tell a 2-minute story that uses at least 5 idioms from today.",mins:2},
+
+{w:4,review:true,all:true,title:"Final challenge",task:"Record 5 minutes about your life, work and opinions. Try to use 40 different words from this book! Listen back to your Day 1 speaking recording and notice how your vocabulary has grown. Then start again from Day 1.",mins:5},
+];
+
+const WEEKS = {1:"Week 1 · Everyday life",2:"Week 2 · Out & about",3:"Week 3 · Study & work",4:"Week 4 · Fluency"};
+DAYS.forEach(d=>{ if(d.words) d.W=d.words.map(s=>{const [w,p,m,b,e]=s.split('|');return {w,p,m,b,e};}); });
+DAYS.forEach(d=>{ if(d.review) d.W = DAYS.filter(x=>x.W && !x.review && (d.all || x.w===d.w)).flatMap(x=>x.W); });
+
+const KEY="vocab30_done";
+let done = {};
+try{ done = JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(done)); }catch(e){} }
+
+/* ---------- speech ---------- */
+let voices=[], rate=0.85;
+const vSel=document.getElementById('voice');
+function loadVoices(){
+  if(!('speechSynthesis' in window)) return;
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  const prev = vSel.value;
+  vSel.innerHTML = voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('') || '<option>Default</option>';
+  const pref = voices.findIndex(v=>/en-(US|GB)/i.test(v.lang) && /Google|Samantha|Natural|Daniel|Aria|Jenny/i.test(v.name));
+  vSel.value = prev || (pref>=0?pref:0);
+}
+if('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+document.getElementById('rate').oninput=e=>{rate=+e.target.value;document.getElementById('rateval').textContent=rate.toFixed(2)+'×';};
+function speak(text){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    const u=new SpeechSynthesisUtterance(text);
+    u.rate=rate; u.lang='en-US';
+    const v=voices[+vSel.value]; if(v) u.voice=v;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function say1(t){ try{speechSynthesis.cancel();}catch(e){} speak(t); }
+function playList(lines){ try{speechSynthesis.cancel();}catch(e){} lines.forEach(l=>speak(l)); }
+
+const PLAY='<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>';
+const esc=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const reEsc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+function findWord(e,w){ let m=e.match(new RegExp('\\b'+reEsc(w)+'\\b','i')); if(m) return m; if(!w.includes(' ')){ const st=w.replace(/(e|y)$/,''); m=e.match(new RegExp('\\b'+reEsc(st)+'\\w{0,4}\\b','i')); } return m; }
+function boldWord(e,w){ const m=findWord(e,w); return m? e.replace(m[0],'<b>'+m[0]+'</b>') : e; }
+
+function makeQuiz(W,n){
+  return shuffle(W).slice(0,n).map((x,k)=>{
+    const others=shuffle(W.filter(y=>y.w!==x.w)).slice(0,3).map(y=>y.w);
+    const opts=shuffle([x.w,...others]);
+    const m=findWord(x.e,x.w);
+    if(m && k%2===0) return {html:x.e.replace(m[0],'<span class="blank">?</span>'), full:x.e, opts, ans:x.w};
+    return {html:`Which word means: <i>${x.m}</i> <span class="note">(${x.b})</span>?`, full:x.w+'. '+x.e, opts, ans:x.w};
+  });
+}
+
+function renderNav(cur){
+  let h='', lastW=0;
+  DAYS.forEach((d,i)=>{
+    if(d.w!==lastW){ h+=`<h4>${WEEKS[d.w]}</h4>`; lastW=d.w; }
+    h+=`<a href="#day-${i+1}" class="${i===cur?'active':''} ${done[i+1]?'done':''}"><span class="dot">${done[i+1]?'✓':''}</span>Day ${i+1} · ${d.title}</a>`;
+  });
+  document.getElementById('nav').innerHTML=h;
+  const n=Object.values(done).filter(Boolean).length;
+  document.getElementById('bar').style.width=(n/30*100)+'%';
+  document.getElementById('ptext').textContent=`${n} / 30 days`;
+}
+
+function renderDay(i){
+  const d=DAYS[i], n=i+1, W=d.W;
+  const qn = d.all?10: d.review?8:5;
+  const quiz=makeQuiz(W,qn);
+  const wordList = d.review ? '' : `
+    <h3>1 · Today's 10 words <button class="btn" id="playAll" style="margin-left:auto;font-size:13px;padding:6px 12px">▶ Play all</button></h3>
+    <p class="note">Press ▶ to hear the word and example. Say both aloud 3 times.</p>
+    <div class="words">${W.map(x=>`<div class="word"><button class="play" data-say="${esc(x.w+'. '+x.e)}" aria-label="Listen">${PLAY}</button><div><div class="w">${x.w}<span class="pos">${x.p}</span></div><div>${x.m} · <span class="bn">${x.b}</span></div><div class="ex">${boldWord(x.e,x.w)}</div></div></div>`).join('')}</div>`;
+  const dlg = d.dialog ? `
+    <h3>3 · Dialogue <button class="btn" id="playDlg" style="margin-left:auto;font-size:13px;padding:6px 12px">▶ Play</button></h3>
+    <div class="dlg">${d.dialog.map(l=>`<div class="phrase"><button class="play" data-say="${esc(l[1])}" aria-label="Listen">${PLAY}</button><div class="t"><b>${l[0]}:</b>${l[1]}</div></div>`).join('')}</div>
+    <p class="note">Read both parts aloud. Can you spot today's words?</p>` : '';
+  const sec = d.review ? {f:1,q:2,s:3,c:4} : {f:2,q:4,s:5,c:6};
+  document.getElementById('main').innerHTML=`
+    <div class="kicker">Day ${n} of 30 · ${WEEKS[d.w]}</div>
+    <h2>${d.title}</h2>
+    <div class="target"><b>🎯 Today's target:</b> ${d.review ? `Review ${W.length} words${d.all?' from the whole book':' from this week'} and use them in speech.` : `Learn 10 new words about ${d.title.toLowerCase()} and use 6 of them when you speak.`}</div>
+    ${d.review?'':`<details class="routine"><summary class="note" style="cursor:pointer">How to use today's page (about 20 minutes)</summary><ol>${ROUTINE.map(r=>`<li>${r}</li>`).join('')}</ol></details>`}
+    ${wordList}
+
+    <h3>${sec.f} · Flashcards</h3>
+    <p class="note">Look at the word. Say its meaning, then tap the card to check.</p>
+    <div class="flash" id="flash"></div>
+    <div class="fnav"><button class="btn" id="fprev">←</button><span class="note" id="fcount"></span><button class="btn" id="fnext">→</button><button class="btn" id="fshuf">Shuffle</button><button class="btn" id="fsay">▶ Hear</button></div>
+
+    ${dlg}
+
+    <h3>${sec.q} · Quiz</h3>
+    <p class="note">Choose the right word. When you get it right, you'll hear it. Say it aloud too.</p>
+    <div id="quiz">${quiz.map((q,k)=>`<div class="q" data-k="${k}"><div class="s">${k+1}. ${q.html}</div><div class="opts">${q.opts.map(o=>`<button class="opt">${o}</button>`).join('')}</div></div>`).join('')}</div>
+    <div class="score" id="score"></div>
+
+    <h3>${sec.s} · Speak on your own</h3>
+    <div class="task"><ul><li>${d.task}</li></ul>
+      <div class="timer"><button class="btn primary" id="tbtn">Start ${d.mins}-min timer</button><span class="clock" id="clock">${String(d.mins).padStart(2,'0')}:00</span></div>
+      <p class="note" style="margin:8px 0 0">Tip: record yourself on your phone. When you listen back, count how many new words you used.</p>
+    </div>
+
+    <h3>${sec.c} · Today's checklist</h3>
+    <div class="checks">
+      ${(d.review?["I went through all flashcards twice","I scored full marks on the quiz (new quiz each time — try again!)","I spoke for the full timer and recorded it"]:["I said every word and example aloud 3 times","I went through the flashcards twice","I made my own sentence for each word","I scored 5/5 on the quiz","I used 6+ new words in my speaking task"]).map(c=>`<label><input type="checkbox" class="check">${c}</label>`).join('')}
+    </div>
+
+    <div class="row">
+      <button class="btn" id="prev" ${i===0?'disabled':''}>← Day ${n-1||''}</button>
+      <button class="btn primary" id="mark">${done[n]?'✓ Completed — undo':'Mark Day '+n+' complete'}</button>
+      <button class="btn" id="next" ${i===29?'disabled':''}>Day ${n+1<=30?n+1:''} →</button>
+    </div>`;
+
+  document.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>say1(b.dataset.say));
+  const pa=document.getElementById('playAll'); if(pa) pa.onclick=()=>playList(W.map(x=>x.w));
+  const pd=document.getElementById('playDlg'); if(pd) pd.onclick=()=>playList(d.dialog.map(l=>l[1]));
+
+  // flashcards
+  let deck=W.slice(), fi=0, flipped=false;
+  const fc=document.getElementById('flash');
+  const drawF=()=>{ const x=deck[fi]; fc.innerHTML = flipped ? `<div><div class="fw">${x.w}</div><div class="fm">${x.m}</div><div class="fm" style="color:var(--gold);font-weight:600">${x.b}</div><div class="note" style="margin-top:6px">${boldWord(x.e,x.w)}</div></div>` : `<div><div class="fw">${x.w}</div><div class="note">${x.p} · tap to see the meaning</div></div>`; document.getElementById('fcount').textContent=`${fi+1} / ${deck.length}`; };
+  fc.onclick=()=>{flipped=!flipped;drawF();};
+  document.getElementById('fnext').onclick=()=>{fi=(fi+1)%deck.length;flipped=false;drawF();};
+  document.getElementById('fprev').onclick=()=>{fi=(fi-1+deck.length)%deck.length;flipped=false;drawF();};
+  document.getElementById('fshuf').onclick=()=>{deck=shuffle(deck);fi=0;flipped=false;drawF();};
+  document.getElementById('fsay').onclick=()=>say1(deck[fi].w+'. '+deck[fi].e);
+  drawF();
+
+  // quiz
+  const firstTry={};
+  document.querySelectorAll('.q').forEach(qe=>{
+    const k=+qe.dataset.k, q=quiz[k];
+    qe.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      if(qe.dataset.solved) return;
+      const right = b.textContent===q.ans;
+      if(!(k in firstTry)) firstTry[k]=right;
+      if(right){
+        b.classList.add('ok'); qe.dataset.solved=1;
+        if(!q.html.startsWith('Which')) qe.querySelector('.s').innerHTML=`${k+1}. ${boldWord(q.full,q.ans)}`;
+        say1(q.full);
+        if(document.querySelectorAll('.q[data-solved]').length===quiz.length){
+          const sc=Object.values(firstTry).filter(Boolean).length;
+          document.getElementById('score').innerHTML=`Score: ${sc} / ${quiz.length} on the first try. ${sc===quiz.length?'Excellent! 🎉 ':'Review the flashcards, then '}<a href="#" id="retry">${sc===quiz.length?'Try a new quiz':'try a new quiz'}</a>.`;
+          document.getElementById('retry').onclick=e=>{e.preventDefault();renderDay(i);};
+        }
+      } else b.classList.add('no');
+    });
+  });
+
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('mark').onclick=()=>{done[n]=!done[n];save();renderNav(i);renderDay(i);};
+  setupTimer(d.mins);
+  renderNav(i);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+let tInt=null;
+function setupTimer(m){
+  clearInterval(tInt); let left=m*60, running=false;
+  const b=document.getElementById('tbtn'), c=document.getElementById('clock');
+  const draw=()=>c.textContent=`${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;
+  b.onclick=()=>{
+    if(running){clearInterval(tInt);running=false;b.textContent='Resume';return;}
+    if(left<=0){left=m*60;}
+    running=true;b.textContent='Pause';
+    tInt=setInterval(()=>{left--;draw();if(left<=0){clearInterval(tInt);running=false;b.textContent='Again';c.textContent='Done! 🎉';}},1000);
+  };
+}
+
+function go(i){ if(i<0||i>29) return; location.hash='day-'+(i+1); }
+function route(){
+  const m=location.hash.match(/day-(\d+)/);
+  let i = m? Math.min(30,Math.max(1,+m[1]))-1 : (()=>{ for(let k=1;k<=30;k++) if(!done[k]) return k-1; return 0; })();
+  renderDay(i);
+}
+window.addEventListener('hashchange',route);
+route();
+</script>
+</body>
+</html>

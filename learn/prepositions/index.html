@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prepositions in 30 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f4ee; --paper:#fffdf8; --ink:#1f2328; --muted:#6b6f76; --line:#e6e0d4;
+  --accent:#1f6f5c; --accent-soft:#e3f0ec; --warn:#b5462f; --warn-soft:#f8e7e2; --gold:#c98a1b;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#16181b; --paper:#1e2125; --ink:#ece9e3; --muted:#9aa0a6; --line:#2e3238;
+    --accent:#5cc4a6; --accent-soft:#1f3631; --warn:#f08a70; --warn-soft:#3a2620; --gold:#e3ad4b;}
+}
+*{box-sizing:border-box}
+.home{display:inline-block;margin-bottom:10px;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none}.home:hover{text-decoration:underline}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+header{padding:28px 20px 18px;max-width:1100px;margin:0 auto}
+h1{font-family:Fraunces,Georgia,serif;font-size:clamp(28px,4vw,40px);margin:0 0 4px;letter-spacing:-.5px}
+.sub{color:var(--muted);margin:0}
+.progress{margin-top:16px;display:flex;align-items:center;gap:12px}
+.bar{flex:1;height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+.layout{max-width:1100px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:240px 1fr;gap:24px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}}
+nav{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px}
+@media(max-width:800px){nav{position:static;max-height:none}}
+nav h4{margin:12px 8px 4px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+nav a{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:14px}
+nav a:hover{background:var(--accent-soft)}
+nav a.active{background:var(--accent);color:#fff}
+nav a .dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:11px}
+nav a.done .dot{background:var(--accent);border-color:var(--accent);color:#fff}
+nav a.active .dot{border-color:#fff}
+main{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,36px)}
+.kicker{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+h2{font-family:Fraunces,Georgia,serif;font-size:clamp(24px,3vw,32px);margin:4px 0 6px}
+h3{font-family:Fraunces,Georgia,serif;font-size:20px;margin:28px 0 10px;display:flex;align-items:center;gap:8px}
+.target{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:8px;margin:14px 0}
+.phrase{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.phrase:last-child{border-bottom:0}
+.phrase .t{flex:1}
+.phrase .n{font-size:13px;color:var(--muted)}
+button{font:inherit;cursor:pointer}
+.play{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--accent);display:grid;place-items:center}
+.play:hover{background:var(--accent);color:#fff}
+.play svg{width:14px;height:14px}
+.dlg{background:var(--bg);border-radius:12px;padding:6px 14px}
+.dlg .phrase b{color:var(--accent);margin-right:4px}
+.mist{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.mist{grid-template-columns:1fr}}
+.wrong,.right{padding:10px 14px;border-radius:10px}
+.wrong{background:var(--warn-soft)} .wrong::before{content:"✗ ";color:var(--warn);font-weight:700}
+.right{background:var(--accent-soft)} .right::before{content:"✓ ";color:var(--accent);font-weight:700}
+.task{border:2px dashed var(--gold);border-radius:12px;padding:14px 16px}
+.task ul{margin:6px 0 0;padding-left:20px}
+.sound{background:var(--bg);border-radius:12px;padding:12px 16px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.btn{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-weight:500}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.settings{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:10px}
+.routine ol{padding-left:20px;margin:6px 0}
+.routine li{margin:4px 0}
+.timer{display:flex;align-items:center;gap:10px;margin-top:10px}
+.timer .clock{font-variant-numeric:tabular-nums;font-weight:600;font-size:20px;min-width:64px}
+.note{font-size:14px;color:var(--muted)}
+.check{width:20px;height:20px;accent-color:var(--accent)}
+.checks label{display:flex;gap:10px;align-items:center;padding:4px 0}
+.rule{background:var(--bg);border-radius:12px;padding:14px 18px}
+.rule table{border-collapse:collapse;width:100%;margin-top:6px;font-size:15px}
+.rule td,.rule th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.rule th{font-size:13px;color:var(--muted);font-weight:600}
+.q{padding:12px 0;border-bottom:1px dashed var(--line)}
+.q .s{margin-bottom:8px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{padding:6px 14px;border-radius:99px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.opt.ok{background:var(--accent);border-color:var(--accent);color:#fff}
+.opt.no{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.blank{display:inline-block;min-width:48px;border-bottom:2px solid var(--gold);text-align:center;font-weight:600}
+.score{font-weight:600;margin-top:10px}
+.mist{margin-bottom:10px}
+</style>
+</head>
+<body>
+<header>
+  <a class="home" href="../">← All books</a>
+  <h1>Prepositions in 30 Days</h1>
+  <p class="sub">One small group of prepositions a day, about 20 minutes. Learn the rule, say the examples aloud, take the quiz, then speak.</p>
+  <div class="progress"><div class="bar"><i id="bar"></i></div><span id="ptext" class="note">0 / 30 days</span></div>
+  <div class="settings">
+    <label>Voice speed <input type="range" id="rate" min="0.6" max="1.1" step="0.05" value="0.85"></label>
+    <span id="rateval">0.85×</span>
+    <label>Voice <select id="voice"></select></label>
+  </div>
+</header>
+<div class="layout">
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+
+<script>
+const ROUTINE = [
+  "<b>Learn the rule (3 min):</b> Read the rule box. Say each example in the table aloud.",
+  "<b>Listen &amp; shadow (5 min):</b> Press ▶ on each sentence. Repeat it 3 times. Stress the important word, not the preposition.",
+  "<b>Dialogue (3 min):</b> Play it, then read both parts aloud.",
+  "<b>Fix mistakes (2 min):</b> Say each correct sentence 5 times.",
+  "<b>Quiz (2 min):</b> Choose the right preposition. Then say each full sentence aloud.",
+  "<b>Speak (4 min):</b> Start the timer and do the task. Use as many of today's prepositions as you can. Record it on your phone."
+];
+
+const DAYS = [
+// WEEK 1 — TIME
+{w:1,title:"AT, ON, IN for time",target:"Choose at, on or in for any time expression.",
+ rule:`Think of it as a pyramid going from small to big: <b>at</b> is for an exact time, <b>on</b> for a day, and <b>in</b> for a longer period.
+ <table><tr><th>at</th><th>on</th><th>in</th></tr>
+ <tr><td>at 7 o'clock<br>at noon / at night<br>at the weekend (UK)</td><td>on Monday<br>on 5 May<br>on my birthday</td><td>in July<br>in 2026<br>in the morning / in winter</td></tr></table>`,
+ ex:[["I wake up at six thirty.","Exact clock time → at."],["My class is on Tuesday.","A day → on."],["I came to Malaysia in 2025.","A year → in."],["I study best in the morning.","Part of the day → in the morning."],["I don't work at night.","Special: at night (not in the night)."],["We have a meeting on Friday afternoon.","A day + part of day → on."]],
+ dialog:[["A","When is your supervisor meeting?"],["B","It's on Thursday at ten."],["A","Every week?"],["B","Yes, and once a month we also meet on Monday morning."],["A","When does the semester end?"],["B","In February, I think."]],
+ mist:[["I was born in 12 March.","I was born on 12 March."],["See you on 5 pm.","See you at 5 pm."]],
+ quiz:[["My flight is ___ Sunday.",["at","on","in"],1],["The shop opens ___ 9 am.",["at","on","in"],0],["It rains a lot ___ November.",["at","on","in"],2],["I feel sleepy ___ the afternoon.",["at","on","in"],2],["I can't sleep ___ night.",["at","on","in"],0]],
+ task:["Talk for 2 minutes about your week: what you do on each day, and at what time.","Say: on Monday … at nine … in the evening …"],mins:2},
+
+{w:1,title:"FOR, SINCE, DURING",target:"Talk about how long something has lasted.",
+ rule:`<b>for</b> + a length of time (for two years). <b>since</b> + a starting point (since 2025). <b>during</b> + an event or period (during the meeting).
+ <table><tr><th>for</th><th>since</th><th>during</th></tr><tr><td>for 3 days<br>for a long time</td><td>since Monday<br>since I was a child</td><td>during the class<br>during Ramadan</td></tr></table>`,
+ ex:[["I've lived here for one year.","Length → for."],["I've lived here since last November.","Starting point → since."],["I've known him since 2020.","Starting year → since."],["Don't use your phone during the exam.","Event → during."],["I waited for twenty minutes.","Length → for."],["It rained heavily during the night.","Period → during."]],
+ dialog:[["A","How long have you studied English?"],["B","For many years, since primary school."],["A","But you feel weak in speaking?"],["B","Yes. During school, we only did grammar and writing."],["A","How long will you practise now?"],["B","Every day for thirty days!"]],
+ mist:[["I am here since two years.","I have been here for two years."],["I slept for the movie.","I slept during the movie."]],
+ quiz:[["I have worked here ___ 2024.",["for","since","during"],1],["She called me ___ the meeting.",["for","since","during"],2],["We talked ___ two hours.",["for","since","during"],0],["He has been sick ___ Monday.",["for","since","during"],1],["I lived in Dhaka ___ ten years.",["for","since","during"],0]],
+ task:["Speak 2 minutes: How long have you lived in Malaysia, studied engineering, known your best friend? What did you do during your last holiday?"],mins:2},
+
+{w:1,title:"BEFORE, AFTER, UNTIL, BY",target:"Talk about deadlines and order of events.",
+ rule:`<b>before / after</b> = earlier / later than something. <b>until</b> = continuing up to a time (I worked until 10). <b>by</b> = no later than a deadline (finish by Friday).`,
+ ex:[["I always pray before breakfast.","Earlier than."],["After lunch, I go back to the lab.","Later than."],["I stayed in the lab until nine pm.","Action continues up to 9."],["Please send the report by Friday.","Deadline — Friday or earlier."],["Wait here until I come back.","Continue waiting."],["I'll be home by six.","Not later than six."]],
+ dialog:[["A","When do you need the results?"],["B","By the end of this month."],["A","Can you work late?"],["B","Yes, I'll stay until eight tonight."],["A","Will you eat first?"],["B","No, I'll eat after I finish."]],
+ mist:[["Submit the form until Monday.","Submit the form by Monday."],["I will wait you until 5.","I will wait for you until 5."]],
+ quiz:[["You must finish the thesis ___ June.",["by","until","after"],0],["I slept ___ 10 am today.",["by","until","before"],1],["Wash your hands ___ eating.",["before","until","by"],0],["___ the class, we went for tea.",["After","Until","By"],0],["The shop is open ___ midnight.",["by","until","before"],1]],
+ task:["Talk for 2 minutes about your deadlines this month. What must you finish by when? How late do you usually work — until what time?"],mins:2},
+
+{w:1,title:"FROM…TO, BETWEEN, WITHIN, AROUND",target:"Give time ranges and approximate times.",
+ rule:`<b>from … to/until</b> = start and end. <b>between … and</b> = inside a range. <b>within</b> = inside a time limit. <b>around / about</b> = approximately.`,
+ ex:[["I work from nine to five.","Start and end."],["Call me between two and four.","Any time in that range."],["You'll get a reply within three days.","Not more than 3 days."],["I'll arrive around seven.","About seven."],["The office is closed from Friday until Sunday.","Range of days."],["The test takes about two hours.","Approximate."]],
+ dialog:[["A","What are the lab hours?"],["B","From eight in the morning to six in the evening."],["A","When is the best time to use the machine?"],["B","Between two and four. It's free then."],["A","How long is one test?"],["B","Around three hours. Results come within a week."]],
+ mist:[["I study from 8 till to 10.","I study from 8 to 10."],["Between Monday to Friday.","Between Monday and Friday."]],
+ quiz:[["The shop is open ___ 9 am to 9 pm.",["from","between","within"],0],["Come ___ 3 and 4 pm.",["from","between","around"],1],["Please reply ___ 24 hours.",["within","between","from"],0],["I'll be there ___ six o'clock.",["around","within","between"],0],["Between Monday ___ Wednesday.",["to","and","until"],1]],
+ task:["Describe your typical weekday using from … to, between, around and within. 2 minutes."],mins:2},
+
+{w:1,title:"AGO, IN (future), and clock times",target:"Say when something happened or will happen.",
+ rule:`<b>ago</b> comes <i>after</i> the time: two years ago. <b>in</b> + time = in the future: in two days. Clock: ten <b>past</b> six (6:10), quarter <b>to</b> eight (7:45).`,
+ ex:[["I came here one year ago.","Past → ago, after the number."],["The class starts in ten minutes.","Future → in."],["It's quarter past three.","3:15."],["It's twenty to nine.","8:40."],["I'll be back in an hour.","Future."],["We met a long time ago.","Past."]],
+ dialog:[["A","When did you start your master's?"],["B","About a year ago."],["A","And when will you finish?"],["B","In about one more year, I hope."],["A","What time is it now?"],["B","It's ten past seven. I'm late!"]],
+ mist:[["I came before two years.","I came two years ago."],["The bus will come after five minutes.","The bus will come in five minutes."]],
+ quiz:[["I visited Penang three months ___.",["ago","before","in"],0],["The meeting starts ___ 5 minutes.",["in","after","ago"],0],["7:50 = ten ___ eight.",["to","past","at"],0],["6:20 = twenty ___ six.",["to","past","after"],1],["See you ___ a week.",["in","after","ago"],0]],
+ task:["Talk for 2 minutes: 3 things that happened ago (a week ago, a year ago…) and 3 things that will happen in the future (in a month…)."],mins:2},
+
+{w:1,title:"Fixed time phrases",target:"Use common time phrases naturally.",
+ rule:`Learn these as whole chunks: <b>at the moment, at present, on time</b> (punctual), <b>in time</b> (early enough), <b>at the end of</b>, <b>in the end</b> (finally), <b>on weekdays, at the same time</b>.`,
+ ex:[["I'm busy at the moment.","= now."],["The train left on time.","Exactly as planned."],["We arrived just in time for the talk.","Early enough."],["Pay at the end of the month.","The last part of a period."],["In the end, we chose the cheaper option.","Finally, after thinking."],["Don't talk at the same time.","Simultaneously."]],
+ dialog:[["A","Are you free at the moment?"],["B","Sorry, I have a meeting. Is it urgent?"],["A","Not really. Did the bus come on time today?"],["B","No, it was late! But I got to class just in time."],["A","Lucky! Shall we meet at the end of the day?"],["B","Sure, around five."]],
+ mist:[["In this moment I am busy.","At the moment I'm busy."],["At the end, he agreed.","In the end, he agreed."]],
+ quiz:[["She is never late. She's always ___ time.",["on","in","at"],0],["I'm studying ___ the moment.",["at","in","on"],0],["___ the end of the film, everyone cried.",["At","In","On"],0],["We got there just ___ time to catch the bus.",["in","on","at"],0],["___ the end, I decided to stay.",["In","At","On"],0]],
+ task:["Tell a 2-minute story about a day when you were late or nearly late. Use: on time, in time, at the moment, in the end."],mins:2},
+
+{w:1,title:"Week 1 review: time",target:"Use all the time prepositions without stopping to think.",
+ rule:`<table><tr><th>Use</th><th>Prepositions</th></tr><tr><td>Point in time</td><td>at 5, on Monday, in July</td></tr><tr><td>Duration</td><td>for 2 hours, since 2024, during the class</td></tr><tr><td>Order / deadline</td><td>before, after, until, by</td></tr><tr><td>Range</td><td>from … to, between … and, within</td></tr><tr><td>Past / future</td><td>2 days ago, in 2 days</td></tr></table>`,
+ ex:[["I've studied here since last year.","Starting point."],["I'll finish by December.","Deadline."],["On weekdays, I work from nine to six.","Day + range."],["I visited home two months ago.","Past."],["My viva is in March.","Month."],["I'll call you in ten minutes.","Future."]],
+ dialog:[["A","How long have you been in UMPSA?"],["B","Since last year. I came in November."],["A","When do you finish?"],["B","Hopefully by the end of next year."],["A","What do you do on weekends?"],["B","I study in the morning and rest in the evening."]],
+ mist:[["I'm here since 2 years.","I've been here for 2 years."],["I will go home after one month.","I will go home in one month."]],
+ quiz:[["My exam is ___ 15 January.",["on","in","at"],0],["I've waited ___ an hour!",["since","for","during"],1],["Finish this ___ tomorrow.",["until","by","since"],1],["I met her five years ___.",["ago","before","since"],0],["The cafe is open ___ 8 am to 10 pm.",["from","between","since"],0]],
+ task:["Record 3 minutes about your life story: when and where you were born, studied, moved, and your plans. Every sentence must have a time preposition."],mins:3},
+
+// WEEK 2 — PLACE & MOVEMENT
+{w:2,title:"AT, ON, IN for place",target:"Choose at, on or in for any place.",
+ rule:`<b>at</b> = a point or a place for an activity (at the bus stop, at work, at university). <b>on</b> = a surface or a line (on the table, on the wall, on the 3rd floor, on Jalan Ampang). <b>in</b> = inside a space or an area (in the room, in Kuantan, in Malaysia).`,
+ ex:[["I'm at the lab.","A place for an activity."],["My keys are on the table.","Surface."],["I live in Kuantan.","City → in."],["My office is on the second floor.","Floor → on."],["Let's meet at the main gate.","A point."],["There's a mistake on page five.","Page → on."]],
+ dialog:[["A","Where are you now?"],["B","I'm at the library, on the third floor."],["A","Is Ahmad with you?"],["B","No, he's in his room, at the hostel."],["A","Where did you leave my book?"],["B","It's on your desk, in the lab."]],
+ mist:[["I am in the bus stop.","I am at the bus stop."],["The picture is in the wall.","The picture is on the wall."]],
+ quiz:[["She lives ___ Malaysia.",["at","on","in"],2],["Wait for me ___ the entrance.",["at","on","in"],0],["The lab is ___ the ground floor.",["at","on","in"],1],["The milk is ___ the fridge.",["at","on","in"],2],["I'm ___ work right now.",["at","on","in"],0]],
+ task:["Describe your faculty building for 2 minutes: where things are. Use at, on, in in every sentence."],mins:2},
+
+{w:2,title:"Next to, near, opposite, between, behind",target:"Describe exactly where things are.",
+ rule:`<b>next to / beside</b> = very close, side by side. <b>near</b> = close, but not touching. <b>opposite</b> = facing, on the other side. <b>between</b> = in the middle of two things. <b>behind / in front of</b> = at the back / at the front.`,
+ ex:[["The cafe is next to the library.","Side by side."],["I live near the campus.","Close."],["The bank is opposite the mosque.","Facing each other."],["The pharmacy is between the bank and the shop.","In the middle."],["My bike is behind the building.","At the back."],["Park in front of the gate.","At the front."]],
+ dialog:[["A","Is there an ATM near here?"],["B","Yes, there's one next to the 7-Eleven."],["A","Where is the 7-Eleven?"],["B","It's opposite the petrol station, between two restaurants."],["A","Is there parking?"],["B","Yes, in front of the shop."]],
+ mist:[["The shop is near to my house.","The shop is near my house."],["He sat besides me.","He sat beside me."]],
+ quiz:[["The letter B is ___ A and C.",["between","opposite","near"],0],["My house faces the school. It's ___ the school.",["opposite","behind","between"],0],["She sat ___ me on the bus.",["next to","between","opposite"],0],["There's a garden ___ the house.",["behind","between","next"],0],["I live ___ the airport. It's noisy!",["near","near to","nearby to"],0]],
+ task:["Describe your room or your lab for 2 minutes. Where is each object? Use every preposition from today."],mins:2},
+
+{w:2,title:"Above, below, over, under",target:"Talk about vertical positions and numbers.",
+ rule:`<b>above / below</b> = higher / lower, often without touching; used for levels and numbers (above 600 °C). <b>over / under</b> = directly higher or lower, or covering (a blanket over the bed). <b>over</b> also means more than (over 100 people).`,
+ ex:[["The temperature was above six hundred degrees.","A level → above."],["The value is below the limit.","Lower than."],["There's a bridge over the river.","Crossing above."],["The cat is under the table.","Directly below."],["Over fifty students attended.","More than."],["Children under twelve enter free.","Less than (age)."]],
+ dialog:[["A","What temperature did you test at?"],["B","Above five hundred and fifty degrees."],["A","And was the stress high?"],["B","No, it was below the yield stress."],["A","How many samples?"],["B","Over twenty. They're kept under the bench."]],
+ mist:[["The temperature is over than 30 degrees.","The temperature is over 30 degrees. / above 30 degrees."],["Put the bag below the table.","Put the bag under the table."]],
+ quiz:[["The plane flew ___ the city.",["over","under","below"],0],["My shoes are ___ the bed.",["under","above","over"],0],["Water freezes ___ 0 °C.",["below","under","over"],0],["There were ___ 500 people at the event.",["over","above of","upper"],0],["The light is ___ the table.",["above","under","below"],0]],
+ task:["Describe a graph or chart from your work for 2 minutes. What is above or below a value? What happens over time?"],mins:2},
+
+{w:2,title:"TO, INTO, ONTO, TOWARDS",target:"Describe movement to a place.",
+ rule:`<b>to</b> = destination (go to the lab). <b>into</b> = moving inside (walk into the room). <b>onto</b> = moving onto a surface (jump onto the bus). <b>towards</b> = in the direction of (but maybe not reaching). <br><b>Note:</b> go <b>home</b>, go <b>there</b>, go <b>abroad</b> — no "to"!`,
+ ex:[["I go to the lab every day.","Destination."],["He walked into the meeting late.","Moving inside."],["She put the sample onto the machine.","Moving onto a surface."],["The dog ran towards me.","Direction."],["I'm going home now.","No 'to' before home."],["Let's go there tomorrow.","No 'to' before there."]],
+ dialog:[["A","Where are you going?"],["B","I'm going to the canteen. Then I'm going home."],["A","Can you put this box into the store room?"],["B","Sure. Where should I put it?"],["A","Onto the top shelf."],["B","No problem."]],
+ mist:[["I am going to home.","I am going home."],["He entered into the room.","He entered the room. / He went into the room."]],
+ quiz:[["I'm flying ___ Dhaka next week.",["to","into","at"],0],["She jumped ___ the pool.",["into","to","at"],0],["Let's go ___ now.",["home","to home","at home"],0],["He walked ___ the door, then stopped.",["towards","into","onto"],0],["Put the book ___ the shelf.",["onto","into","to"],0]],
+ task:["Describe your journey this morning for 2 minutes: where you went, what you went into, which way you walked."],mins:2},
+
+{w:2,title:"OUT OF, OFF, FROM, AWAY FROM",target:"Describe movement away from a place.",
+ rule:`<b>out of</b> = leaving the inside (out of the room). <b>off</b> = leaving a surface or a vehicle (off the bus, off the table). <b>from</b> = starting point (from Dhaka). <b>away from</b> = moving to a distance.`,
+ ex:[["She came out of the lab.","Leaving inside."],["Get off the bus at the next stop.","Leaving a vehicle."],["I'm from Bangladesh.","Origin."],["Take the sample off the machine.","Removing from a surface."],["Stay away from the furnace.","Keep a distance."],["He took his phone out of his bag.","From inside."]],
+ dialog:[["A","Where do I get off?"],["B","Get off at the bus terminal, then walk away from the mall."],["A","How long from there?"],["B","About five minutes. You'll see our faculty."],["A","Thanks. Where are you from, by the way?"],["B","I'm from Bangladesh."]],
+ mist:[["Get down from the bus.","Get off the bus."],["He went out from the room.","He went out of the room."]],
+ quiz:[["Take your shoes ___.",["off","out","from"],0],["He ran ___ the burning building.",["out of","off","from of"],0],["She's ___ India.",["from","out of","off"],0],["Keep children ___ the pool.",["away from","off of","out"],0],["I got ___ the train at KL Sentral.",["off","out","from"],0]],
+ task:["Describe your journey from Bangladesh to Malaysia for 2 minutes: from where, got on/off what, out of which airport."],mins:2},
+
+{w:2,title:"Across, through, along, past, around",target:"Describe routes and paths.",
+ rule:`<b>across</b> = from one side to the other (a flat surface: across the road). <b>through</b> = from one end to the other, inside something (through the tunnel, through the forest). <b>along</b> = following a line (along the river). <b>past</b> = going beside and beyond. <b>around</b> = in a circle, or in different parts.`,
+ ex:[["Walk across the road carefully.","Side to side."],["We drove through a long tunnel.","Inside, end to end."],["I jog along the beach.","Following a line."],["Go past the mosque and turn left.","Beyond it."],["We walked around the lake.","In a circle."],["I travelled around Malaysia.","Many places."]],
+ dialog:[["A","How do I get to Teluk Cempedak beach?"],["B","Go along the main road for two kilometres."],["A","Then?"],["B","Drive past the big mall and through the small town."],["A","Is it far?"],["B","No. You can walk across the bridge to the beach."]],
+ mist:[["We crossed through the road.","We walked across the road. / We crossed the road."],["Walk along the tunnel to the other side.","Walk through the tunnel."]],
+ quiz:[["The train goes ___ the mountain.",["through","across","along"],0],["We swam ___ the river to the other side.",["across","through","past"],0],["There are trees ___ the street.",["along","through","across"],0],["Walk ___ the bank, and the shop is on your right.",["past","through","into"],0],["We travelled ___ Asia for a month.",["around","across of","through of"],0]],
+ task:["Explain for 2 minutes how to go from your hostel to your faculty. Use across, through, along, past and around."],mins:2},
+
+{w:2,title:"Week 2 review: place & movement",target:"Describe places and journeys clearly.",
+ rule:`<table><tr><th>Position</th><td>at, on, in, next to, near, opposite, between, behind, in front of, above, below, over, under</td></tr><tr><th>Movement</th><td>to, into, onto, towards, out of, off, from, away from, across, through, along, past, around</td></tr></table>`,
+ ex:[["I'm at home, in my room.","Two levels of place."],["The library is opposite the canteen.","Facing."],["Walk through the main gate and go along the road.","Route."],["Get off the bus near the clock tower.","Leave a vehicle."],["My hostel is next to the sports hall.","Beside."],["Put it into the box under my desk.","Movement + position."]],
+ dialog:[["A","Where is the new lab?"],["B","It's in Block C, on the second floor."],["A","How do I get there from the library?"],["B","Walk out of the library, go across the car park, and past the cafe."],["A","Then?"],["B","Block C is in front of you, next to the mosque."]],
+ mist:[["I reached to the university.","I reached the university. / I got to the university."],["He is in the bus stop near to the gate.","He is at the bus stop near the gate."]],
+ quiz:[["I'm waiting ___ the bus stop.",["at","in","on"],0],["She walked ___ the room and sat down.",["into","in to","at"],0],["The car went ___ the tunnel.",["through","across","over"],0],["Your phone is ___ the bed, on the floor.",["under","above","into"],0],["Turn left ___ the traffic light.",["at","in","on"],0]],
+ task:["Record 3 minutes: describe your campus as if giving a tour to a new student. Where is everything, and how do you go from one place to another?"],mins:3},
+
+// WEEK 3 — OTHER USES & COMBINATIONS
+{w:3,title:"BY, WITH, ON for how you do things",target:"Say how you travel and what you use.",
+ rule:`<b>by</b> + transport (no "the"): by bus, by car, by plane. But <b>on foot</b>, <b>in my car</b>, <b>on the bus</b>. <b>with</b> + a tool: with a pen, with a knife. <b>by</b> + method: by email, by hand, by mistake.`,
+ ex:[["I go to campus by bus.","Transport → by."],["Sometimes I go on foot.","Walking → on foot."],["Cut it with scissors.","Tool → with."],["Please send it by email.","Method."],["I wrote the notes by hand.","Not by computer."],["I deleted the file by mistake.","Accidentally."]],
+ dialog:[["A","How do you come to the lab?"],["B","Usually by motorbike, but today I came on foot."],["A","Why?"],["B","My bike broke. I fixed it with my brother's tools, but it broke again."],["A","Oh no! How will you send the report?"],["B","By email, tonight."]],
+ mist:[["I came by walk.","I came on foot."],["I write with the computer.","I write on the computer."]],
+ quiz:[["We travelled to Langkawi ___ ferry.",["by","with","on"],0],["She came ___ foot.",["on","by","with"],0],["He opened the box ___ a knife.",["with","by","on"],0],["I paid ___ card.",["by","with the","on"],0],["Oops, I took your pen ___ mistake.",["by","with","on"],0]],
+ task:["Talk for 2 minutes about how you travel, how you send work, and what tools you use in your work."],mins:2},
+
+{w:3,title:"ABOUT, OF, FOR",target:"Use about, of and for in everyday sentences.",
+ rule:`<b>about</b> = topic (talk about, a book about). <b>of</b> = belonging or part (the end of the road, a cup of tea, a picture of me). <b>for</b> = purpose or receiver (a gift for you, a tool for cutting, thanks for helping).`,
+ ex:[["We talked about the results.","Topic."],["This is a photo of my family.","Showing something."],["This gift is for you.","Receiver."],["Thanks for your help.","Reason for thanks."],["The roof of the building is red.","Part of."],["What's this machine for?","Purpose."]],
+ dialog:[["A","What's your thesis about?"],["B","It's about the creep life of steel."],["A","Is that a picture of the machine?"],["B","Yes, it's used for testing at high temperature."],["A","Great. Thanks for explaining."],["B","No problem!"]],
+ mist:[["Thank you for help me.","Thank you for helping me."],["This book is regarding about history.","This book is about history."]],
+ quiz:[["What is this film ___?",["about","of","for"],0],["I bought a bottle ___ water.",["of","for","about"],0],["This room is ___ students only.",["for","of","about"],0],["Thanks ___ coming.",["for","of","about"],0],["She's a friend ___ mine.",["of","for","about"],0]],
+ task:["Speak 2 minutes about a gift you gave or received: what it was for, what it was made of, what you talked about."],mins:2},
+
+{w:3,title:"Verb + preposition (1)",target:"Use the correct preposition after common verbs.",
+ rule:`Some verbs always take a certain preposition. Learn them as one unit:<br><b>listen to · wait for · look at · look for · depend on · agree with · belong to · think about · worry about · ask for</b>`,
+ ex:[["I listen to podcasts every day.","listen to."],["I'm waiting for my friend.","wait for."],["Look at this graph.","look at = see."],["I'm looking for my keys.","look for = search."],["It depends on the temperature.","depend on."],["I agree with you.","agree with someone."]],
+ dialog:[["A","What are you looking for?"],["B","My USB drive. Have you seen it?"],["A","Look at the table. Is it that one?"],["B","Yes! Thanks. Are you waiting for Dr. Nasrul?"],["A","Yes. It depends on him if we can start."],["B","I agree with him on the new plan."]],
+ mist:[["I am waiting you.","I am waiting for you."],["It depends of the weather.","It depends on the weather."]],
+ quiz:[["Please listen ___ me.",["to","at","for"],0],["The result depends ___ many factors.",["on","of","from"],0],["Who does this bag belong ___?",["to","with","of"],0],["I don't agree ___ you.",["with","to","on"],0],["Can I ask ___ some help?",["for","to","about"],0]],
+ task:["Speak 2 minutes about a normal day. Use all 10 verbs from today's rule at least once."],mins:2},
+
+{w:3,title:"Verb + preposition (2)",target:"Use more verb + preposition pairs, including work words.",
+ rule:`<b>apply for</b> (a job) · <b>apply to</b> (a company) · <b>focus on · deal with · succeed in · insist on · rely on · believe in · complain about · consist of · result in · lead to</b>`,
+ ex:[["I applied for a scholarship.","apply for something."],["I want to focus on fluency.","focus on."],["How do you deal with stress?","deal with = handle."],["The steel consists of iron, chromium and molybdenum.","consist of."],["High temperature can result in failure.","result in = cause."],["Hard work leads to success.","lead to."]],
+ dialog:[["A","What are you focusing on this semester?"],["B","I'm focusing on my modelling chapter."],["A","Any problems?"],["B","Yes, I'm dealing with some bad data."],["A","Can you rely on the old data?"],["B","Partly. Errors in data can lead to wrong predictions."]],
+ mist:[["I applied a job.","I applied for a job."],["The team consists from five people.","The team consists of five people."]],
+ quiz:[["She succeeded ___ passing the exam.",["in","on","at"],0],["The book consists ___ ten chapters.",["of","in","from"],0],["Smoking can lead ___ disease.",["to","in","for"],0],["I complained ___ the noise.",["about","on","for"],0],["You can rely ___ me.",["on","to","with"],0]],
+ task:["Talk for 2.5 minutes about your research or work: what it consists of, what you focus on, what problems you deal with, what it can lead to."],mins:3},
+
+{w:3,title:"Adjective + preposition",target:"Use adjectives with the correct preposition.",
+ rule:`<b>good at · bad at · interested in · afraid of · proud of · tired of · responsible for · famous for · similar to · different from · married to · angry with</b> (a person) · <b>angry about</b> (a thing)`,
+ ex:[["I'm good at mathematics.","good at."],["I'm interested in materials science.","interested in."],["She's afraid of dogs.","afraid of."],["My parents are proud of me.","proud of."],["This steel is similar to P92.","similar to."],["English is different from Bangla.","different from."]],
+ dialog:[["A","What are you interested in?"],["B","I'm interested in coding and engineering."],["A","Are you good at programming?"],["B","Not bad. I'm responsible for the software in our lab."],["A","Your parents must be proud of you."],["B","I hope so! But I'm tired of debugging."]],
+ mist:[["I am good in English.","I am good at English."],["He is married with a doctor.","He is married to a doctor."]],
+ quiz:[["She is very good ___ cooking.",["at","in","on"],0],["I'm interested ___ history.",["in","on","about"],0],["Kuantan is famous ___ its beaches.",["for","of","with"],0],["This is different ___ what I expected.",["from","than of","with"],0],["Who is responsible ___ this project?",["for","of","on"],0]],
+ task:["Describe yourself for 2 minutes using at least 8 adjective + preposition pairs: what you're good at, afraid of, proud of, interested in…"],mins:2},
+
+{w:3,title:"Noun + preposition",target:"Use nouns with the correct preposition (very useful for reports).",
+ rule:`<b>reason for · increase in · decrease in · effect on · impact on · solution to · answer to · cause of · relationship between · access to · need for · demand for · example of</b>`,
+ ex:[["What's the reason for the delay?","reason for."],["There was an increase in creep strain.","increase in."],["Temperature has a big effect on creep life.","effect on."],["We found a solution to the problem.","solution to."],["There's a relationship between stress and time.","relationship between."],["Students have access to the lab.","access to."]],
+ dialog:[["A","Why did the sample fail so early?"],["B","The main cause of failure was high stress."],["A","What's the effect of temperature on the life?"],["B","A small increase in temperature reduces the life a lot."],["A","Is there a solution to that?"],["B","Better material design. That's the need for this research."]],
+ mist:[["The reason of the delay is traffic.","The reason for the delay is traffic."],["This has a big effect to the result.","This has a big effect on the result."]],
+ quiz:[["There was a sharp increase ___ prices.",["in","of","on"],0],["What's the solution ___ this problem?",["to","for of","of"],0],["Stress has an impact ___ health.",["on","to","in"],0],["What is the cause ___ the fire?",["of","for","on"],0],["Is there a relationship ___ these two variables?",["between","among of","with of"],0]],
+ task:["Explain one of your results or a news story for 2.5 minutes. Use: cause of, effect on, increase in, reason for, solution to."],mins:3},
+
+{w:3,title:"Week 3 review: combinations",target:"Use verb/adjective/noun + preposition pairs automatically.",
+ rule:`Make your own list! Every time you find a new pair (e.g. <i>apologise for</i>, <i>keen on</i>), write it down with an example sentence and say it aloud 5 times.`,
+ ex:[["I'm interested in learning new things.","adj + prep + verb-ing."],["Sorry for being late.","After a preposition, use verb-ing."],["I'm looking forward to meeting you.","'to' here is a preposition → meeting."],["She's good at explaining things.","good at + -ing."],["Thanks for helping me.","for + -ing."],["I'm thinking about applying for a PhD.","about + -ing."]],
+ dialog:[["A","What are you thinking about?"],["B","I'm thinking about applying for a PhD."],["A","Are you interested in staying here?"],["B","Maybe. It depends on the funding."],["A","Well, good luck. Looking forward to hearing the news."],["B","Thanks for asking!"]],
+ mist:[["I'm looking forward to meet you.","I'm looking forward to meeting you."],["Thanks for help.","Thanks for helping. / Thanks for your help."]],
+ quiz:[["I'm tired ___ waiting.",["of","for","with"],0],["She apologised ___ the mistake.",["for","about of","to"],0],["I'm looking forward ___ the holiday.",["to","for","at"],0],["He is proud ___ his work.",["of","for","about"],0],["There's a need ___ more research.",["for","of","to"],0]],
+ task:["Record 3 minutes: talk about your dream job. Use at least 10 different verb/adjective/noun + preposition pairs."],mins:3},
+
+// WEEK 4 — ADVANCED & TRAPS
+{w:4,title:"Prepositions in technical English",target:"Use prepositions correctly in academic and engineering talk.",
+ rule:`<b>at</b> a temperature/stress/rate · <b>under</b> a load/condition · <b>as a function of</b> · <b>in terms of</b> · <b>with respect to</b> · <b>according to</b> · <b>due to</b> · <b>in contrast to</b> · <b>based on</b> · <b>compared with/to</b>`,
+ ex:[["The test was done at 600 degrees Celsius.","Temperature → at."],["The sample failed under high stress.","Condition → under."],["Strain is plotted as a function of time.","Fixed phrase."],["In terms of accuracy, the model is very good.","In terms of = about this aspect."],["According to the standard, the limit is 100 MPa.","Source."],["The error is due to noise in the data.","Cause."]],
+ dialog:[["A","How did you run the creep tests?"],["B","At constant load, at three different temperatures."],["A","And the model?"],["B","It's based on the Omega method. In terms of accuracy, it's within ten percent."],["A","Compared with other models?"],["B","It performs better at low stress, due to its damage term."]],
+ mist:[["The test was done in 600 °C.","The test was done at 600 °C."],["Based from the results, …","Based on the results, …"]],
+ quiz:[["Creep occurs ___ high temperature.",["at","in","on"],0],["The material was tested ___ cyclic loading.",["under","at","in"],0],["___ the data, the trend is clear.",["Based on","Based from","Base on"],0],["The delay was due ___ bad weather.",["to","of","for"],0],["Life decreases ___ a function of stress.",["as","in","by"],0]],
+ task:["Explain your research method and results for 3 minutes using at least 6 phrases from today."],mins:3},
+
+{w:4,title:"LIKE vs AS",target:"Choose like or as correctly.",
+ rule:`<b>like</b> = similar to (He sings like a professional — he is not one). <b>as</b> = in the role of (He works as an engineer — he is one). Also: <b>as … as</b> for comparison, <b>such as</b> for examples.`,
+ ex:[["I work as a research assistant.","Real role."],["She talks like a teacher.","Similar, but she's not one."],["It looks like rain.","Similar appearance."],["As a student, I get discounts.","Because I am one."],["He's as tall as his father.","Equal comparison."],["I like fruits such as mango and banana.","Examples."]],
+ dialog:[["A","What do you do?"],["B","I work as a content writer and study as a master's student."],["A","Wow, busy! You talk like a manager!"],["B","Haha, no. As a student, I have no time."],["A","Is your English as good as your writing?"],["B","Not yet, but I'm practising every day."]],
+ mist:[["He works like a doctor. (he is a doctor)","He works as a doctor."],["Fruits like as mango.","Fruits such as mango. / Fruits like mango."]],
+ quiz:[["She works ___ a nurse.",["as","like","such as"],0],["You eat ___ a hungry lion!",["like","as","such as"],0],["He's ___ tall ___ me.",["as … as","like … as","so … like"],0],["___ your teacher, I must help you.",["As","Like","Such"],0],["I enjoy sports ___ football and cricket.",["such as","as","as like"],0]],
+ task:["Talk for 2 minutes about your jobs and roles (as …), and compare people you know to others (like …, as … as …)."],mins:2},
+
+{w:4,title:"No preposition needed!",target:"Stop adding prepositions where English doesn't use them.",
+ rule:`These verbs take <b>no preposition</b> before the object: <b>discuss, enter, marry, reach, attend, contact, answer, approach, emphasise, mention, request, lack, resemble, call, tell</b>`,
+ ex:[["We discussed the problem.","Not 'discussed about'."],["He entered the room.","Not 'entered into'."],["She married a doctor.","Not 'married with'."],["We reached Kuantan at night.","Not 'reached to'."],["Please contact me tomorrow.","Not 'contact to me'."],["I attended the conference.","Not 'attended in'."]],
+ dialog:[["A","Did you attend the seminar?"],["B","Yes, we discussed creep models."],["A","Did they mention your work?"],["B","Yes! Then a professor approached me after the talk."],["A","Great! Did you answer his questions?"],["B","Yes, and I'll contact him next week."]],
+ mist:[["Let's discuss about the plan.","Let's discuss the plan."],["Please answer to my email.","Please answer my email. / Please reply to my email."]],
+ quiz:[["We need to discuss ___ the budget.",["(nothing)","about","on"],0],["The train reached ___ KL at 9.",["(nothing)","to","at"],0],["Please contact ___ the office.",["(nothing)","to","with"],0],["He married ___ his classmate.",["(nothing)","with","to"],0],["But: Please reply ___ my email.",["to","(nothing)","on"],0]],
+ task:["Talk for 2 minutes about a meeting or class you attended recently. Use: attend, discuss, mention, approach, contact, answer — with no extra prepositions!"],mins:2},
+
+{w:4,title:"Phrasal verbs with UP and OUT",target:"Use common phrasal verbs in speech.",
+ rule:`The small word changes the meaning: <b>find out</b> (discover) · <b>carry out</b> (do, e.g. an experiment) · <b>figure out</b> (understand) · <b>run out of</b> (have none left) · <b>give up</b> (stop trying) · <b>set up</b> (prepare) · <b>look up</b> (search info) · <b>turn up</b> (arrive)`,
+ ex:[["We carried out five creep tests.","carry out = do."],["I need to find out the reason.","find out = discover."],["I can't figure out this error.","figure out = understand."],["We ran out of samples.","run out of = none left."],["Never give up.","give up = stop trying."],["Let me look it up online.","look up = search."]],
+ dialog:[["A","Did you set up the machine?"],["B","Yes, but we ran out of thermocouple wire."],["A","Can you find out where to buy it?"],["B","I'll look it up online."],["A","Good. Don't give up!"],["B","I won't. I'll figure it out."]],
+ mist:[["I will do the experiment out.","I will carry out the experiment."],["We finished the milk. (meaning 'none left')","We ran out of milk."]],
+ quiz:[["We'll carry ___ the survey next month.",["out","up","on"],0],["I gave ___ sugar last year.",["up","out","off"],0],["We've run ___ of coffee.",["out","up","off"],0],["Can you look ___ this word?",["up","out","on"],0],["Did you find ___ the answer?",["out","up","off"],0]],
+ task:["Tell the story of a problem you solved for 2 minutes. Use: set up, run out of, find out, figure out, look up, give up."],mins:2},
+
+{w:4,title:"Phrasal verbs with ON, OFF, IN",target:"Use more everyday phrasal verbs.",
+ rule:`<b>turn on / turn off</b> (machine) · <b>put off</b> (delay) · <b>go on</b> (continue) · <b>take off</b> (remove; plane leaves) · <b>fill in</b> (a form) · <b>hand in</b> (submit) · <b>come across</b> (find by chance) · <b>get on with</b> (have a good relationship)`,
+ ex:[["Turn off the furnace before you leave.","Stop a machine."],["We put off the meeting until Monday.","Delay."],["Please go on. I'm listening.","Continue."],["Fill in this form, please.","Complete a form."],["I handed in my thesis proposal.","Submit."],["I came across an interesting paper.","Found by chance."]],
+ dialog:[["A","Did you hand in the form?"],["B","Not yet. I need to fill in two more parts."],["A","The deadline was put off, so don't worry."],["B","Great! By the way, I came across a good paper on P91."],["A","Send it to me. Go on, what does it say?"],["B","It says creep life drops fast above 600 degrees."]],
+ mist:[["Please close the light.","Please turn off the light."],["I will submit in my report.","I will hand in my report. / I will submit my report."]],
+ quiz:[["Don't forget to turn ___ the AC.",["off","out","up"],0],["Please fill ___ your name here.",["in","on","out of"],0],["The match was put ___ because of rain.",["off","on","in"],0],["The plane took ___ at 8.",["off","on","up"],0],["I came ___ an old photo yesterday.",["across","on","off"],0]],
+ task:["Describe your morning routine for 2 minutes using: turn on/off, put off, fill in, hand in, go on, come across."],mins:2},
+
+{w:4,title:"Fixed expressions",target:"Use common preposition phrases naturally.",
+ rule:`<b>by mistake · on purpose · in charge of · on behalf of · in advance · at least · at first · in fact · on average · out of order · in a hurry · by chance · in my opinion · on the other hand</b>`,
+ ex:[["I deleted it by mistake.","Accidentally."],["She did it on purpose.","Intentionally."],["Who's in charge of the lab?","Responsible."],["Please book in advance.","Before."],["On average, a test takes 500 hours.","Typical value."],["The lift is out of order.","Broken."]],
+ dialog:[["A","Who's in charge of booking the machine?"],["B","I am. Please book at least two days in advance."],["A","At first, I thought it was free to use."],["B","In fact, it's in high demand. On average, it's busy 20 hours a day."],["A","Oh, and the printer is out of order."],["B","Thanks. I'll report it on behalf of the team."]],
+ mist:[["I did it in mistake.","I did it by mistake."],["In my point of view, …","In my opinion, … / From my point of view, …"]],
+ quiz:[["Sorry, I took your bag ___ mistake.",["by","in","on"],0],["He broke it ___ purpose.",["on","by","in"],0],["___ average, I sleep 7 hours.",["On","In","At"],0],["Please pay ___ advance.",["in","on","by"],0],["The ATM is ___ of order.",["out","in","off"],0]],
+ task:["Speak for 2 minutes about your responsibilities at work or in the lab. Use 6 fixed expressions from today."],mins:2},
+
+{w:4,title:"Prepositions at the end of questions",target:"Ask natural questions that end with a preposition.",
+ rule:`In spoken English, the preposition often goes to the <b>end</b>: <b>Who are you talking to? Where are you from? What are you looking at? What is it made of? Who is this for? What are you worried about?</b>`,
+ ex:[["Where are you from?","Not 'From where are you?'."],["Who are you waiting for?","wait for → for at the end."],["What are you looking at?","look at."],["What is this steel made of?","made of."],["Who did you go with?","go with."],["What are you thinking about?","think about."]],
+ dialog:[["A","Who are you talking to?"],["B","My sister. She's asking what I'm working on."],["A","What did you tell her?"],["B","That I'm testing steel. Then she asked what it's used for!"],["A","Haha. What are you worried about?"],["B","Just my deadline. Which conference should I apply to?"]],
+ mist:[["From where are you?","Where are you from?"],["Whom with you went?","Who did you go with?"]],
+ quiz:[["Who is this present ___?",["for","to","at"],0],["What are you laughing ___?",["at","on","of"],0],["Which company do you work ___?",["for","at of","in to"],0],["What is this cake made ___?",["of","from of","by"],0],["Who are you listening ___?",["to","at","for"],0]],
+ task:["Imagine you meet a new student. Ask 10 questions in 2 minutes, each ending with a preposition. Then answer them yourself."],mins:2},
+
+{w:4,title:"Common traps for Bangla speakers",target:"Fix the most common preposition mistakes for good.",
+ rule:`Bangla often uses a different word order or adds extra words. Watch these:
+ <table><tr><th>✗ Avoid</th><th>✓ Say</th></tr>
+ <tr><td>return back</td><td>return / go back</td></tr>
+ <tr><td>senior/junior than me</td><td>senior/junior to me</td></tr>
+ <tr><td>explain me</td><td>explain to me</td></tr>
+ <tr><td>angry on him</td><td>angry with him</td></tr>
+ <tr><td>go to home / reach to</td><td>go home / reach</td></tr>
+ <tr><td>since 3 days</td><td>for 3 days</td></tr>
+ <tr><td>in Monday / in night</td><td>on Monday / at night</td></tr></table>`,
+ ex:[["Can you explain it to me?","explain + thing + to + person."],["He's senior to me.","Not 'than'."],["I'll go back home next month.","Not 'return back'."],["Don't be angry with me.","Person → with."],["I've been ill for three days.","Length → for."],["I prefer tea to coffee.","prefer A to B."]],
+ dialog:[["A","When will you go back to Bangladesh?"],["B","In December, for three weeks."],["A","Is your brother older?"],["B","Yes, he's five years senior to me."],["A","Can you explain the plan to me?"],["B","Sure. I'll reach Dhaka on the 20th at night."]],
+ mist:[["Please explain me the problem.","Please explain the problem to me."],["I prefer tea than coffee.","I prefer tea to coffee."]],
+ quiz:[["He is junior ___ me.",["to","than","from"],0],["Can you explain this ___ me?",["to","(nothing)","for"],0],["I'm angry ___ my roommate.",["with","on","to"],0],["I'll arrive ___ Monday ___ night.",["on … at","in … in","at … on"],0],["I prefer walking ___ driving.",["to","than","from"],0]],
+ task:["Say all 7 correct forms from today's table in your own sentences. Then talk for 2 minutes about your family, using 'senior to', 'go back', 'prefer … to'."],mins:3},
+
+{w:4,title:"Final challenge",target:"Use 30+ different prepositions in 5 minutes of speech.",
+ rule:`Review the whole book: <b>time</b> (at/on/in, for/since, by/until), <b>place</b> (at/on/in, next to, opposite), <b>movement</b> (into, through, across), <b>combinations</b> (depend on, interested in, effect on), <b>phrasal verbs</b> (carry out, put off), and <b>no-preposition verbs</b> (discuss, reach).`,
+ ex:[["I came to Malaysia in 2025 and I've lived here for a year.","Time."],["I live near the campus, opposite a mosque.","Place."],["I'm interested in creep and good at coding.","Adjective + prep."],["We carried out the tests at 600 degrees.","Phrasal + technical."],["We discussed the results with my supervisor.","No prep after discuss."],["I'm looking forward to finishing my degree.","to + -ing."]],
+ dialog:[["A","How was your 30-day preposition challenge?"],["B","At first, it was hard, but I didn't give up."],["A","What helped most?"],["B","Saying the sentences aloud every day, especially in the morning."],["A","What's next?"],["B","I'm going to go back to Day 1 and do it again, faster!"]],
+ mist:[["I am good in English since 30 days.","My English has improved over the past 30 days."],["I discussed about prepositions with my friend.","I discussed prepositions with my friend."]],
+ quiz:[["I've studied here ___ last year.",["since","for","from"],0],["The test was ___ 650 °C.",["at","in","on"],0],["It depends ___ the result.",["on","of","from"],0],["Let's discuss ___ it tomorrow.",["(nothing)","about","on"],0],["I'm looking forward ___ seeing you.",["to","for","at"],0]],
+ task:["Record 5 minutes: your life, your home, your journey to Malaysia, your research, and your future plans. Count your prepositions when you listen back — aim for 30 different ones!","Then start this book again from Day 1."],mins:5},
+];
+
+const WEEKS = {1:"Week 1 · Time",2:"Week 2 · Place & movement",3:"Week 3 · Combinations",4:"Week 4 · Advanced & traps"};
+const KEY="prep30_done";
+let done = {};
+try{ done = JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(done)); }catch(e){} }
+
+/* ---------- speech ---------- */
+let voices=[], rate=0.85;
+const vSel=document.getElementById('voice');
+function loadVoices(){
+  if(!('speechSynthesis' in window)) return;
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  const prev = vSel.value;
+  vSel.innerHTML = voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('') || '<option>Default</option>';
+  const pref = voices.findIndex(v=>/en-(US|GB)/i.test(v.lang) && /Google|Samantha|Natural|Daniel|Aria|Jenny/i.test(v.name));
+  vSel.value = prev || (pref>=0?pref:0);
+}
+if('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+document.getElementById('rate').oninput=e=>{rate=+e.target.value;document.getElementById('rateval').textContent=rate.toFixed(2)+'×';};
+function speak(text){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    const u=new SpeechSynthesisUtterance(text.replace(/\(.*?\)/g,''));
+    u.rate=rate; u.lang='en-US';
+    const v=voices[+vSel.value]; if(v) u.voice=v;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function playList(lines){ try{speechSynthesis.cancel();}catch(e){} lines.forEach(l=>speak(l)); }
+
+const PLAY='<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>';
+const esc=s=>s.replace(/"/g,'&quot;');
+const fill=(s,w)=>s.replace('___',w).replace(' (nothing)','').replace(/(\S+) … (\S+)/,'$1 $2');
+
+function renderNav(cur){
+  let h='', lastW=0;
+  DAYS.forEach((d,i)=>{
+    if(d.w!==lastW){ h+=`<h4>${WEEKS[d.w]}</h4>`; lastW=d.w; }
+    h+=`<a href="#day-${i+1}" class="${i===cur?'active':''} ${done[i+1]?'done':''}"><span class="dot">${done[i+1]?'✓':''}</span>Day ${i+1} · ${d.title}</a>`;
+  });
+  document.getElementById('nav').innerHTML=h;
+  const n=Object.values(done).filter(Boolean).length;
+  document.getElementById('bar').style.width=(n/30*100)+'%';
+  document.getElementById('ptext').textContent=`${n} / 30 days`;
+}
+
+function fullSentence(q){
+  const ans=q[1][q[2]];
+  if(ans.includes('…')){ const [a,b]=ans.split(' … '); let s=q[0].replace('___',a).replace('___',b); return s; }
+  return q[0].replace(' ___',ans==='(nothing)'?'':' '+ans).replace('___',ans).replace(/^But: /,'');
+}
+
+function renderDay(i){
+  const d=DAYS[i], n=i+1;
+  const ex=d.ex.map(p=>`<div class="phrase"><button class="play" data-say="${esc(p[0])}" aria-label="Listen">${PLAY}</button><div class="t"><div>${p[0]}</div><div class="n">${p[1]}</div></div></div>`).join('');
+  const dl=d.dialog.map(l=>`<div class="phrase"><button class="play" data-say="${esc(l[1])}" aria-label="Listen">${PLAY}</button><div class="t"><b>${l[0]}:</b>${l[1]}</div></div>`).join('');
+  const mi=d.mist.map(m=>`<div class="mist"><div class="wrong">${m[0]}</div><div class="right">${m[1]}</div></div>`).join('');
+  const qz=d.quiz.map((q,k)=>`<div class="q" data-k="${k}"><div class="s">${k+1}. ${q[0].replace(/___/g,'<span class="blank">?</span>')}</div><div class="opts">${q[1].map((o,j)=>`<button class="opt" data-j="${j}">${o}</button>`).join('')}</div></div>`).join('');
+  document.getElementById('main').innerHTML=`
+    <div class="kicker">Day ${n} of 30 · ${WEEKS[d.w]}</div>
+    <h2>${d.title}</h2>
+    <div class="target"><b>🎯 Today's target:</b> ${d.target}</div>
+    <details class="routine"><summary class="note" style="cursor:pointer">How to use today's page (about 20 minutes)</summary><ol>${ROUTINE.map(r=>`<li>${r}</li>`).join('')}</ol></details>
+
+    <h3>1 · The rule</h3>
+    <div class="rule">${d.rule}</div>
+
+    <h3>2 · Example sentences <button class="btn" id="playAll" style="margin-left:auto;font-size:13px;padding:6px 12px">▶ Play all</button></h3>
+    <p class="note">Listen, then repeat each sentence aloud 3 times.</p>
+    ${ex}
+
+    <h3>3 · Dialogue <button class="btn" id="playDlg" style="margin-left:auto;font-size:13px;padding:6px 12px">▶ Play</button></h3>
+    <div class="dlg">${dl}</div>
+
+    <h3>4 · Fix common mistakes</h3>
+    ${mi}
+
+    <h3>5 · Quick quiz</h3>
+    <p class="note">Tap the right answer. When it's correct, you'll hear the full sentence. Say it aloud too.</p>
+    <div id="quiz">${qz}</div>
+    <div class="score" id="score"></div>
+
+    <h3>6 · Speak on your own</h3>
+    <div class="task"><ul>${d.task.map(t=>`<li>${t}</li>`).join('')}</ul>
+      <div class="timer"><button class="btn primary" id="tbtn">Start ${d.mins}-min timer</button><span class="clock" id="clock">${String(d.mins).padStart(2,'0')}:00</span></div>
+      <p class="note" style="margin:8px 0 0">Tip: record yourself on your phone, then listen and check your prepositions.</p>
+    </div>
+
+    <h3>7 · Today's checklist</h3>
+    <div class="checks">
+      ${["I understood the rule and said the table aloud","I repeated every example 3 times","I said the correct sentences 5 times","I scored 5/5 on the quiz (retry if not!)","I spoke for the full timer and recorded it"].map(c=>`<label><input type="checkbox" class="check">${c}</label>`).join('')}
+    </div>
+
+    <div class="row">
+      <button class="btn" id="prev" ${i===0?'disabled':''}>← Day ${n-1||''}</button>
+      <button class="btn primary" id="mark">${done[n]?'✓ Completed — undo':'Mark Day '+n+' complete'}</button>
+      <button class="btn" id="next" ${i===29?'disabled':''}>Day ${n+1<=30?n+1:''} →</button>
+    </div>`;
+
+  document.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>{try{speechSynthesis.cancel();}catch(e){} speak(b.dataset.say);});
+  document.getElementById('playAll').onclick=()=>playList(d.ex.map(p=>p[0]));
+  document.getElementById('playDlg').onclick=()=>playList(d.dialog.map(l=>l[1]));
+
+  const firstTry={};
+  document.querySelectorAll('.q').forEach(qe=>{
+    const k=+qe.dataset.k, q=d.quiz[k];
+    qe.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      const j=+b.dataset.j;
+      if(qe.dataset.solved) return;
+      if(!(k in firstTry)) firstTry[k]=(j===q[2]);
+      if(j===q[2]){
+        b.classList.add('ok'); qe.dataset.solved=1;
+        qe.querySelector('.s').innerHTML=`${k+1}. ${fullSentence(q)}`;
+        try{speechSynthesis.cancel();}catch(e){} speak(fullSentence(q));
+        const solved=document.querySelectorAll('.q[data-solved]').length;
+        if(solved===d.quiz.length){
+          const sc=Object.values(firstTry).filter(Boolean).length;
+          document.getElementById('score').innerHTML=`Score: ${sc} / ${d.quiz.length} correct on the first try. ${sc===d.quiz.length?'Excellent! 🎉':'Read the rule again and <a href="#" id="retry">try again</a>.'}`;
+          const r=document.getElementById('retry'); if(r) r.onclick=e=>{e.preventDefault();renderDay(i);};
+        }
+      } else b.classList.add('no');
+    });
+  });
+
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('mark').onclick=()=>{done[n]=!done[n];save();renderNav(i);renderDay(i);};
+  setupTimer(d.mins);
+  renderNav(i);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+let tInt=null;
+function setupTimer(m){
+  clearInterval(tInt); let left=m*60, running=false;
+  const b=document.getElementById('tbtn'), c=document.getElementById('clock');
+  const draw=()=>c.textContent=`${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;
+  b.onclick=()=>{
+    if(running){clearInterval(tInt);running=false;b.textContent='Resume';return;}
+    if(left<=0){left=m*60;}
+    running=true;b.textContent='Pause';
+    tInt=setInterval(()=>{left--;draw();if(left<=0){clearInterval(tInt);running=false;b.textContent='Again';c.textContent='Done! 🎉';}},1000);
+  };
+}
+
+function go(i){ if(i<0||i>29) return; location.hash='day-'+(i+1); }
+function route(){
+  const m=location.hash.match(/day-(\d+)/);
+  let i = m? Math.min(30,Math.max(1,+m[1]))-1 : (()=>{ for(let k=1;k<=30;k++) if(!done[k]) return k-1; return 0; })();
+  renderDay(i);
+}
+window.addEventListener('hashchange',route);
+route();
+</script>
+</body>
+</html>

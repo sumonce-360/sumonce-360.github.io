@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Language books | Md. Sumon Hossain</title>
+<meta name="description" content="Sumon's daily language workbooks: speaking English, vocabulary, prepositions, and HSK1 Chinese.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Noto+Sans+SC:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E8ECE9; --sheet:#F6F8F7; --ink:#172A3A; --steel:#4A6274; --rule:#B9C3C0; --heat:#D4A017;
+  --display:"Archivo",system-ui,sans-serif; --text:"Source Serif 4",Georgia,serif;
+  --pad:clamp(1.25rem,5vw,4rem);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:1.0625rem/1.6 var(--text);-webkit-font-smoothing:antialiased}
+a{color:var(--ink)}
+:focus-visible{outline:3px solid var(--heat);outline-offset:3px}
+.wrap{max-width:62rem;margin:0 auto;padding:0 var(--pad)}
+.top{display:flex;justify-content:space-between;align-items:baseline;padding:1.25rem 0;font-family:var(--display);font-size:.95rem}
+.top a{text-decoration:none;font-weight:700}
+.top a:hover{text-decoration:underline;text-decoration-color:var(--heat)}
+h1{font-family:var(--display);font-weight:900;font-variation-settings:"wdth" 118;font-size:clamp(2.6rem,7vw,5rem);line-height:.95;letter-spacing:-.02em;margin:2.5rem 0 1rem}
+.lede{font-size:1.2rem;max-width:40ch;margin:0 0 2.5rem}
+h2{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 110;font-size:1.6rem;margin:3rem 0 1rem;display:flex;align-items:baseline;gap:.75rem}
+h2 small{font-weight:500;font-size:1rem;color:var(--steel);font-variation-settings:"wdth" 90}
+.books{display:grid;gap:1rem}
+.book{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 2rem;align-items:center;background:var(--sheet);border:1.5px solid var(--ink);padding:1.25rem 1.5rem}
+.book h3{font-family:var(--display);font-weight:800;font-size:1.35rem;margin:0;font-variation-settings:"wdth" 100}
+.book h3 .zh{font-family:"Noto Sans SC",sans-serif;font-weight:500;color:var(--steel);margin-right:.35rem}
+.book p{margin:.25rem 0 .75rem;color:var(--steel);max-width:52ch}
+.meter{display:flex;align-items:center;gap:.75rem;font-family:var(--display);font-size:.9rem;color:var(--steel)}
+.meter .track{flex:1;max-width:22rem;height:8px;background:var(--rule)}
+.meter .fill{display:block;height:100%;width:0;background:var(--heat)}
+.go{display:inline-block;padding:.75rem 1.25rem;background:var(--ink);color:var(--sheet);font-family:var(--display);font-weight:700;text-decoration:none;white-space:nowrap}
+.go:hover{background:var(--steel)}
+.plan{margin-top:3rem;border-top:1.5px solid var(--ink);padding-top:1.5rem}
+.plan ol{padding-left:1.25rem;max-width:62ch}
+.plan li{margin:.4rem 0}
+.fine{font-size:.88rem;color:var(--steel);margin:3rem 0 2rem}
+@media (max-width:640px){.book{grid-template-columns:1fr}.go{justify-self:start}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="top" aria-label="Site"><a href="/">← Sumon Hossain</a><span>Language books</span></nav>
+
+  <h1>Language books</h1>
+  <p class="lede">Four daily workbooks. One short lesson a day, said out loud, with progress saved on this device.</p>
+
+  <h2>English <small>three 30-day courses</small></h2>
+  <div class="books">
+    <article class="book" data-key="speak30_done" data-total="30" data-unit="days">
+      <div>
+        <h3>Speak English in 30 Days</h3>
+        <p>Key phrases, a dialogue, one common mistake, a sound drill and a timed speaking task. About 20 minutes a day.</p>
+        <div class="meter"><span class="track"><span class="fill"></span></span><span class="txt">Not started</span></div>
+      </div>
+      <a class="go" href="speak-english/">Start</a>
+    </article>
+
+    <article class="book" data-key="vocab30_done" data-total="30" data-unit="days">
+      <div>
+        <h3>Vocabulary in 30 Days</h3>
+        <p>10 words a day with Bangla meanings, flashcards, a quiz and a speaking task. About 20 minutes a day.</p>
+        <div class="meter"><span class="track"><span class="fill"></span></span><span class="txt">Not started</span></div>
+      </div>
+      <a class="go" href="vocabulary/">Start</a>
+    </article>
+
+    <article class="book" data-key="prep30_done" data-total="30" data-unit="days">
+      <div>
+        <h3>Prepositions in 30 Days</h3>
+        <p>Time, place, verb and noun combinations, and the traps Bangla speakers fall into. Rule, examples, quiz, then speak.</p>
+        <div class="meter"><span class="track"><span class="fill"></span></span><span class="txt">Not started</span></div>
+      </div>
+      <a class="go" href="prepositions/">Start</a>
+    </article>
+  </div>
+
+  <h2>Chinese <small>HSK1 in 6 weeks</small></h2>
+  <div class="books">
+    <article class="book" data-key="hsk1-tasks" data-total="22" data-unit="review tasks" data-hsk>
+      <div>
+        <h3><span class="zh">汉语</span>My Daily HSK1 Book</h3>
+        <p>Pinyin and tones first, then 5 words and one idea a day. Sunday reviews, a reading day, and practice tests in week 6.</p>
+        <div class="meter"><span class="track"><span class="fill"></span></span><span class="txt">Not started</span></div>
+      </div>
+      <a class="go" href="hsk1/">Open</a>
+    </article>
+  </div>
+
+  <section class="plan" aria-labelledby="planTitle">
+    <h2 id="planTitle">A simple order to follow</h2>
+    <ol>
+      <li>Start with <b>Speak English</b>. It builds the habit of talking out loud, which the other two books rely on.</li>
+      <li>When you finish it, do <b>Vocabulary</b>, then <b>Prepositions</b>. Each one gives you more to say in the speaking tasks.</li>
+      <li>Run <b>HSK1</b> alongside whichever English book you're on. It's a different language and a different part of the day, so the two don't compete.</li>
+      <li>Missed a day? Carry on from where you stopped. Don't do two days at once.</li>
+    </ol>
+  </section>
+
+  <p class="fine">Progress is saved in this browser only. If you switch phone or computer, it starts again there.</p>
+</div>
+
+<script>
+document.querySelectorAll('.book').forEach(function(b){
+  var data={}, n=0, total=+b.dataset.total;
+  try{ data=JSON.parse(localStorage.getItem(b.dataset.key)||'{}'); }catch(e){}
+  n=Object.values(data).filter(Boolean).length;
+  var go=b.querySelector('.go'), txt=b.querySelector('.txt');
+  b.querySelector('.fill').style.width=Math.min(100,n/total*100)+'%';
+  if(b.dataset.hsk!==undefined){
+    if(n){ txt.textContent=n+' of '+total+' review tasks ticked'; go.textContent='Continue'; }
+    return;
+  }
+  if(!n) return;
+  txt.textContent=n+' of '+total+' days done';
+  var next=1; while(next<=total && data[next]) next++;
+  if(next>total){ go.textContent='Finished. Do it again'; go.href=go.getAttribute('href')+'#day-1'; }
+  else { go.textContent='Continue: Day '+next; go.href=go.getAttribute('href')+'#day-'+next; }
+});
+</script>
+</body>
+</html>

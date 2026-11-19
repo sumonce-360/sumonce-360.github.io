@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speak English in 30 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f4ee; --paper:#fffdf8; --ink:#1f2328; --muted:#6b6f76; --line:#e6e0d4;
+  --accent:#1f6f5c; --accent-soft:#e3f0ec; --warn:#b5462f; --warn-soft:#f8e7e2; --gold:#c98a1b;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#16181b; --paper:#1e2125; --ink:#ece9e3; --muted:#9aa0a6; --line:#2e3238;
+    --accent:#5cc4a6; --accent-soft:#1f3631; --warn:#f08a70; --warn-soft:#3a2620; --gold:#e3ad4b;}
+}
+*{box-sizing:border-box}
+.home{display:inline-block;margin-bottom:10px;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none}.home:hover{text-decoration:underline}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+header{padding:28px 20px 18px;max-width:1100px;margin:0 auto}
+h1{font-family:Fraunces,Georgia,serif;font-size:clamp(28px,4vw,40px);margin:0 0 4px;letter-spacing:-.5px}
+.sub{color:var(--muted);margin:0}
+.progress{margin-top:16px;display:flex;align-items:center;gap:12px}
+.bar{flex:1;height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+.layout{max-width:1100px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:240px 1fr;gap:24px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}}
+nav{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px}
+@media(max-width:800px){nav{position:static;max-height:none}}
+nav h4{margin:12px 8px 4px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+nav a{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:14px}
+nav a:hover{background:var(--accent-soft)}
+nav a.active{background:var(--accent);color:#fff}
+nav a .dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:11px}
+nav a.done .dot{background:var(--accent);border-color:var(--accent);color:#fff}
+nav a.active .dot{border-color:#fff}
+main{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,36px)}
+.kicker{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+h2{font-family:Fraunces,Georgia,serif;font-size:clamp(24px,3vw,32px);margin:4px 0 6px}
+h3{font-family:Fraunces,Georgia,serif;font-size:20px;margin:28px 0 10px;display:flex;align-items:center;gap:8px}
+.target{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:8px;margin:14px 0}
+.phrase{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.phrase:last-child{border-bottom:0}
+.phrase .t{flex:1}
+.phrase .n{font-size:13px;color:var(--muted)}
+button{font:inherit;cursor:pointer}
+.play{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--accent);display:grid;place-items:center}
+.play:hover{background:var(--accent);color:#fff}
+.play svg{width:14px;height:14px}
+.dlg{background:var(--bg);border-radius:12px;padding:6px 14px}
+.dlg .phrase b{color:var(--accent);margin-right:4px}
+.mist{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.mist{grid-template-columns:1fr}}
+.wrong,.right{padding:10px 14px;border-radius:10px}
+.wrong{background:var(--warn-soft)} .wrong::before{content:"✗ ";color:var(--warn);font-weight:700}
+.right{background:var(--accent-soft)} .right::before{content:"✓ ";color:var(--accent);font-weight:700}
+.task{border:2px dashed var(--gold);border-radius:12px;padding:14px 16px}
+.task ul{margin:6px 0 0;padding-left:20px}
+.sound{background:var(--bg);border-radius:12px;padding:12px 16px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.btn{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-weight:500}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.settings{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:10px}
+.routine ol{padding-left:20px;margin:6px 0}
+.routine li{margin:4px 0}
+.timer{display:flex;align-items:center;gap:10px;margin-top:10px}
+.timer .clock{font-variant-numeric:tabular-nums;font-weight:600;font-size:20px;min-width:64px}
+.note{font-size:14px;color:var(--muted)}
+.check{width:20px;height:20px;accent-color:var(--accent)}
+.checks label{display:flex;gap:10px;align-items:center;padding:4px 0}
+</style>
+</head>
+<body>
+<header>
+  <a class="home" href="../">← All books</a>
+  <h1>Speak English in 30 Days</h1>
+  <p class="sub">One small target a day, about 20 minutes. Listen, repeat aloud, then speak on your own.</p>
+  <div class="progress"><div class="bar"><i id="bar"></i></div><span id="ptext" class="note">0 / 30 days</span></div>
+  <div class="settings">
+    <label>Voice speed <input type="range" id="rate" min="0.6" max="1.1" step="0.05" value="0.85"></label>
+    <span id="rateval">0.85×</span>
+    <label>Voice <select id="voice"></select></label>
+  </div>
+</header>
+<div class="layout">
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+
+<script>
+const ROUTINE = [
+  "<b>Warm-up (2 min):</b> Read the target and say each phrase once, slowly.",
+  "<b>Listen &amp; shadow (6 min):</b> Press ▶ on each phrase. Repeat right after the voice, copying its rhythm. Do it 3 times each.",
+  "<b>Dialogue (4 min):</b> Play the dialogue. Then read both parts aloud. Then read only B's part while covering it.",
+  "<b>Fix a mistake (2 min):</b> Say the correct sentence 5 times out loud.",
+  "<b>Sound drill (2 min):</b> Practise the sound tip slowly, then at normal speed.",
+  "<b>Speak freely (4 min):</b> Start the timer and talk about the task. Record yourself on your phone and listen back."
+];
+
+const DAYS = [
+// WEEK 1 — About me
+{w:1,title:"Introducing yourself",target:"Say who you are in 4–5 clear sentences without stopping.",
+ phrases:[["Hi, I'm Sumon. Nice to meet you.","Simple and friendly. Smile when you say it."],["I'm from Bangladesh, but I live in Malaysia now.","Use 'but' to join two ideas."],["I'm doing my master's at UMPSA.","Say 'master's', not 'masters degree study'."],["I work on steel and how it behaves at high temperature.","A simple way to explain research to anyone."],["In my free time, I like to …","Finish it with your own hobby."],["What about you? What do you do?","Always return the question."]],
+ dialog:[["A","Hi, I don't think we've met. I'm Aisha."],["B","Hi Aisha, I'm Sumon. Nice to meet you."],["A","Nice to meet you too. Are you a student here?"],["B","Yes, I'm doing my master's in mechanical engineering."],["A","Oh, interesting! Where are you from?"],["B","I'm from Bangladesh. I've been here for about a year."]],
+ mistake:["My name is Sumon and I am from Bangladesh and I am student.","I'm Sumon. I'm from Bangladesh, and I'm a student."],
+ sound:{t:"Contractions: I'm, I've, I'll",d:"Native speakers say <b>I'm</b>, not 'I am', in normal talk. Practise: I'm — I'm from — I'm from Bangladesh."},
+ task:["Introduce yourself for 1 minute.","Say: your name, country, where you live, what you study or do, one hobby."],mins:1},
+
+{w:1,title:"Your daily routine",target:"Describe a normal day using the present simple.",
+ phrases:[["I usually wake up at six thirty.","'Usually' goes before the main verb."],["After breakfast, I go to the lab.","Say 'go to the lab', not 'go to lab'."],["I spend most of the day on my computer.","'Spend time on something'."],["I have lunch around one.","We 'have' meals, not 'take' them."],["In the evening, I relax or call my family.","'Call my family' — no 'to'."],["I go to bed at about eleven.","'Go to bed' — no 'the'."]],
+ dialog:[["A","What does a normal day look like for you?"],["B","I usually get up early and go to the lab by nine."],["A","Do you work all day?"],["B","Mostly, yes. I take a short break for lunch."],["A","And after work?"],["B","I cook dinner and sometimes watch a movie."]],
+ mistake:["Every day I am going to the lab at nine.","Every day I go to the lab at nine."],
+ sound:{t:"Ending -s sound",d:"He <b>works</b>, she <b>goes</b>, it <b>takes</b>. Don't drop the final s! Practise: He works. She goes. It takes time."},
+ task:["Describe your typical weekday for 1 minute.","Then describe your weekend. What is different?"],mins:2},
+
+{w:1,title:"Family and home",target:"Talk about the people close to you.",
+ phrases:[["I have one brother and two sisters.","'I have', not 'I have got' — both are fine."],["My parents live in …","Add your home town."],["I'm the youngest in my family.","Also: the eldest / the middle one."],["We're very close.","Means: we have a strong relationship."],["I miss my mother's cooking.","'Miss' = feel sad because someone or something is far."],["I call them every weekend.","Shows a regular habit."]],
+ dialog:[["A","Do you have a big family?"],["B","Not very big. I have one brother and my parents."],["A","Do they live in Malaysia too?"],["B","No, they're in Bangladesh. I miss them a lot."],["A","How often do you talk to them?"],["B","Almost every day, on video call."]],
+ mistake:["My brother he is working in Dhaka.","My brother works in Dhaka."],
+ sound:{t:"TH sound /ð/: the, they, mother",d:"Put your tongue lightly between your teeth and push air with voice. Not 'de' or 'da'. Practise: the — they — mother — brother."},
+ task:["Talk about your family for 1.5 minutes.","Who are they? What do they do? What do you miss about home?"],mins:2},
+
+{w:1,title:"Likes and dislikes",target:"Give opinions with a reason.",
+ phrases:[["I really enjoy playing cricket.","enjoy + verb-ing."],["I'm not a big fan of spicy food.","A soft way to say you don't like something."],["I can't stand traffic jams.","Strong dislike."],["I'm into photography these days.","Casual: 'I'm into' = I like."],["The reason is that …","Use it to give a reason."],["It depends on my mood.","A useful natural answer."]],
+ dialog:[["A","What do you like doing on weekends?"],["B","I'm really into cooking these days."],["A","Nice! What do you cook?"],["B","Mostly Bangladeshi food. It reminds me of home."],["A","Do you like Malaysian food too?"],["B","Yes, I love nasi lemak, but I can't eat it every day!"]],
+ mistake:["I am liking cricket very much.","I really like cricket."],
+ sound:{t:"V vs W",d:"<b>V</b>: top teeth touch the bottom lip (very, video). <b>W</b>: round lips, no teeth (we, work). Practise: very well — we visit — wet vest."},
+ task:["Talk for 1.5 minutes: 3 things you like and 2 things you don't like.","Give a reason for each using 'because' or 'the reason is'."],mins:2},
+
+{w:1,title:"Talking about the past",target:"Tell a short story about yesterday or last weekend.",
+ phrases:[["Yesterday, I went to the market.","Past of 'go' is 'went'."],["I met an old friend there.","meet → met."],["We had coffee and talked for an hour.","have → had."],["It was a really nice day.","'It was' for describing."],["After that, I came back home.","'After that' joins events."],["I didn't do much, honestly.","Negative: didn't + base verb."]],
+ dialog:[["A","How was your weekend?"],["B","It was good. I went to KL on Saturday."],["A","Oh nice. What did you do there?"],["B","I visited a friend, and we went to a mall."],["A","Did you buy anything?"],["B","Just a pair of shoes. They were on sale."]],
+ mistake:["Yesterday I go to market and buyed vegetables.","Yesterday I went to the market and bought vegetables."],
+ sound:{t:"-ed endings: /t/ /d/ /ɪd/",d:"walk<b>ed</b> = walkt, play<b>ed</b> = playd, want<b>ed</b> = want-id. Practise: I walked, I played, I wanted."},
+ task:["Tell the story of your last weekend in 2 minutes.","Use: first, then, after that, finally."],mins:2},
+
+{w:1,title:"Plans for the future",target:"Talk about plans with 'going to' and 'will'.",
+ phrases:[["I'm going to finish my thesis next year.","'going to' = a plan you have already decided."],["I'll probably go home in December.","'will' for less certain ideas."],["I'm planning to learn driving.","'planning to' + verb."],["I hope to get a good job.","'hope to' + verb."],["If everything goes well, …","A natural way to start."],["I haven't decided yet.","Useful honest answer."]],
+ dialog:[["A","What are your plans after your master's?"],["B","I'm thinking about doing a PhD."],["A","Here in Malaysia?"],["B","Maybe. I haven't decided yet."],["A","And this weekend?"],["B","I'm going to stay home and rest. I'm tired!"]],
+ mistake:["Next year I will going to Japan.","Next year I'm going to go to Japan. / Next year I'll go to Japan."],
+ sound:{t:"'Gonna' in fast speech",d:"In casual speech, 'going to' often sounds like <b>gonna</b>. Listen for it. Practise slowly first: I'm going to → I'm gonna."},
+ task:["Speak for 2 minutes: plans for next week, next year, and in 5 years."],mins:2},
+
+{w:1,title:"Week 1 review",target:"Talk for 3 minutes about yourself without stopping.",
+ phrases:[["Let me tell you a little about myself.","A good opening line."],["Well, …","Use 'well' to get time to think."],["Let me think …","Better than a long silence."],["What I mean is …","Use it to explain again."],["Anyway, …","Use it to change the topic."],["That's pretty much it.","A natural ending."]],
+ dialog:[["A","So tell me about yourself."],["B","Well, I'm Sumon. I'm from Bangladesh and I'm doing my master's here."],["A","What do you do outside of study?"],["B","Let me think … I like cooking and watching cricket."],["A","Any plans for the future?"],["B","I hope to do a PhD. That's pretty much it!"]],
+ mistake:["Ummm … ummm … ummm …","Well … Let me think … (use filler phrases, not silence)"],
+ sound:{t:"Speaking speed",d:"Don't rush. Clear and slow is better than fast and unclear. Pause at commas and full stops."},
+ task:["Record a 3-minute talk: who you are, your routine, family, likes, last weekend, future plans.","Listen back and write down 2 mistakes. Say those sentences correctly 5 times."],mins:3},
+
+// WEEK 2 — Everyday situations
+{w:2,title:"Ordering food",target:"Order at a restaurant or café politely.",
+ phrases:[["Could I have a teh tarik, please?","'Could I have …' is polite."],["I'd like the chicken rice, please.","'I'd like' = I would like."],["Is it spicy?","Ask about the food."],["Can I get it without onions?","Ask for a change."],["Could we have the bill, please?","Ask to pay."],["Can I pay by card?","Ask about payment."]],
+ dialog:[["A","Hi, are you ready to order?"],["B","Yes. Could I have the fried rice, please?"],["A","Sure. Anything to drink?"],["B","I'd like an iced lemon tea, less sugar."],["A","Okay. Anything else?"],["B","No, that's all. Thank you."]],
+ mistake:["Give me one rice.","Could I have one rice, please?"],
+ sound:{t:"Polite intonation",d:"Your voice should go <b>up</b> a little at the end of polite questions: Could I have the bill, please? ↗"},
+ task:["Act out ordering for yourself and a friend in 1.5 minutes.","Include a question about the food and a special request."],mins:2},
+
+{w:2,title:"Shopping",target:"Ask about size, price and returns.",
+ phrases:[["How much is this?","Basic price question."],["Do you have this in a bigger size?","Ask for a different size."],["Can I try it on?","For clothes."],["It's a bit expensive. Is there any discount?","Polite bargaining."],["I'll take it.","Means: I will buy it."],["Can I return it if it doesn't fit?","Ask about returns."]],
+ dialog:[["A","Can I help you?"],["B","Yes, do you have this shirt in medium?"],["A","Let me check … Yes, here you go."],["B","Thanks. Can I try it on?"],["A","Sure, the fitting room is over there."],["B","It fits well. I'll take it."]],
+ mistake:["How much this cost?","How much does this cost? / How much is this?"],
+ sound:{t:"Linking sounds",d:"Join words that end in a consonant to words starting with a vowel: Can_I → 'ca-nai'. try_it_on → 'try-i-ton'."},
+ task:["Describe the last thing you bought for 1.5 minutes.","Where, how much, why you bought it, and are you happy with it?"],mins:2},
+
+{w:2,title:"Asking for directions",target:"Ask for and give simple directions.",
+ phrases:[["Excuse me, how do I get to the library?","Start with 'Excuse me'."],["Is it far from here?","Ask about distance."],["Go straight and turn left at the traffic light.","Giving directions."],["It's next to the cafeteria.","Location words: next to, opposite, behind."],["It's about a five-minute walk.","Time to get there."],["Sorry, could you say that again?","When you don't understand."]],
+ dialog:[["A","Excuse me, where is the Faculty of Mechanical Engineering?"],["B","Go straight down this road, then turn right."],["A","Is it far?"],["B","Not really. About ten minutes on foot."],["A","Sorry, could you say that again more slowly?"],["B","Sure. Straight, then right. It's opposite the mosque."]],
+ mistake:["Where is the library? (with no greeting)","Excuse me, could you tell me where the library is?"],
+ sound:{t:"Stress in numbers",d:"thir<b>TEEN</b> vs <b>THIR</b>ty, fif<b>TEEN</b> vs <b>FIF</b>ty. Practise: thirteen — thirty, fifteen — fifty."},
+ task:["Explain for 2 minutes how to go from your room to your lab or office.","Use: go straight, turn left/right, next to, opposite."],mins:2},
+
+{w:2,title:"Phone calls",target:"Make a short, clear phone call.",
+ phrases:[["Hello, this is Sumon speaking.","On the phone, say 'this is', not 'I am'."],["Could I speak to Dr. Nasrul, please?","Ask for someone."],["I'm calling about …","State the reason."],["Sorry, the line is not clear.","Bad connection."],["Could you hold on a moment?","Ask someone to wait."],["Thanks for your time. Bye.","Polite ending."]],
+ dialog:[["A","Hello, Faculty office."],["B","Hello, this is Sumon. I'm a master's student."],["A","Yes, how can I help?"],["B","I'm calling about my registration form."],["A","Could you hold on a moment? … Okay, it's ready."],["B","Great, I'll come and collect it. Thanks for your help."]],
+ mistake:["Hello, I am Sumon. Who is this?","Hello, this is Sumon. May I know who I'm speaking to?"],
+ sound:{t:"Spelling names",d:"Practise the alphabet letters that confuse: A /eɪ/, E /iː/, I /aɪ/, G /dʒiː/, J /dʒeɪ/. Spell your name aloud: S-U-M-O-N."},
+ task:["Practise 2 calls (1 min each): booking a doctor's appointment, and asking an office about a document."],mins:2},
+
+{w:2,title:"At the doctor or pharmacy",target:"Explain how you feel and understand advice.",
+ phrases:[["I'm not feeling well.","General opener."],["I've had a headache since yesterday.","'since' + a point in time."],["I have a sore throat and a slight fever.","Describing symptoms."],["How often should I take this?","Ask about medicine."],["Do I need a prescription?","Ask about rules."],["Should I come back if it gets worse?","Ask about next steps."]],
+ dialog:[["A","What seems to be the problem?"],["B","I've had a bad cough for three days."],["A","Do you have a fever?"],["B","A little, at night."],["A","Take this syrup twice a day after meals."],["B","Okay. Should I come back if it doesn't get better?"]],
+ mistake:["I am having fever since two days.","I've had a fever for two days."],
+ sound:{t:"'since' vs 'for'",d:"<b>since</b> + start point (since Monday). <b>for</b> + length of time (for two days). Say 5 sentences with each."},
+ task:["Role-play for 1.5 minutes: you visit a clinic with a cold. Explain your symptoms and ask about the medicine."],mins:2},
+
+{w:2,title:"Small talk",target:"Keep a casual chat going for 2 minutes.",
+ phrases:[["How's it going?","Casual 'How are you?'."],["Not bad, thanks. You?","Natural short answer."],["It's so hot today, isn't it?","Weather is safe small talk."],["Are you busy these days?","Easy question."],["Oh really? How come?","Show interest and ask for more."],["Anyway, I'd better go. See you!","Polite way to finish."]],
+ dialog:[["A","Hey Sumon, how's it going?"],["B","Not bad, thanks. Busy with experiments. You?"],["A","Same here. Deadline next week."],["B","Oh really? Which conference?"],["A","The one in Penang. Fingers crossed!"],["B","Good luck! Anyway, I'd better go. See you later."]],
+ mistake:["Yes. (and silence)","Yes, I am. What about you? (answer + return a question)"],
+ sound:{t:"Question tags",d:"It's hot, <b>isn't it?</b> You're busy, <b>aren't you?</b> Voice goes down when you expect agreement."},
+ task:["Imagine meeting a labmate in the corridor. Have a 2-minute small talk conversation alone, playing both people."],mins:2},
+
+{w:2,title:"Week 2 review",target:"Handle 3 real-life situations in a row.",
+ phrases:[["Sorry, I didn't catch that.","When you miss something."],["Do you mean …?","Check you understood."],["Just to confirm, …","Repeat important details."],["That makes sense.","Show you understood."],["No worries.","Casual 'no problem'."],["I appreciate it.","Stronger thank you."]],
+ dialog:[["A","The office closes at four thirty today."],["B","Sorry, I didn't catch that. Four thirty?"],["A","Yes, because of the holiday tomorrow."],["B","Ah, that makes sense. Thanks."],["A","No worries."],["B","I appreciate it."]],
+ mistake:["What? What? Again?","Sorry, could you repeat that, please?"],
+ sound:{t:"Shadow a real video",d:"Pick a 1-minute YouTube clip of someone speaking simply. Pause after each sentence and copy it exactly — same speed, same rhythm."},
+ task:["Record yourself (3 min): order food, ask for directions, then make a phone call to book a table.","Listen back. Was your voice polite? Did you pause too long?"],mins:3},
+
+// WEEK 3 — Study & work
+{w:3,title:"Talking about your research",target:"Explain your research to a non-expert in 1 minute.",
+ phrases:[["My research is about how steel fails at high temperature.","Simple first sentence."],["Power plants use this steel for pipes.","Give a real-world use."],["Over time, the steel slowly stretches. This is called creep.","Explain one key word."],["I'm trying to predict how long it will last.","Your goal in simple words."],["This helps make power plants safer.","Why it matters."],["Basically, …","Use 'basically' to simplify."]],
+ dialog:[["A","So what's your research about?"],["B","Basically, I study how a special steel behaves at very high temperature."],["A","Why is that important?"],["B","It's used in power plants. If it fails, it's dangerous and expensive."],["A","So you predict when it'll fail?"],["B","Exactly. I'm working on a model to predict its life."]],
+ mistake:["My research is on creep life prediction of Grade P91 steel using Omega model and …","Start simple: 'I study how steel fails at high temperature.' Then add details if they ask."],
+ sound:{t:"Word stress in technical words",d:"tem<b>PER</b>ature → <b>TEM</b>perature, pre<b>DIC</b>tion, <b>MA</b>terial → ma<b>TE</b>rial, ana<b>LY</b>sis → a<b>NAL</b>ysis. Listen with ▶ and copy."},
+ task:["Explain your research in 1 minute to: (1) a child, (2) a friend, (3) an engineer.","Notice how your words change."],mins:3},
+
+{w:3,title:"Meeting your supervisor",target:"Report progress clearly and ask for help.",
+ phrases:[["Last week, I finished the data analysis.","Report what you did."],["I'm currently working on …","What you're doing now."],["I'm having some trouble with …","Explain a problem."],["Could you give me some advice on this?","Ask for help."],["My plan for next week is to …","Your next steps."],["Is that okay with you?","Check agreement."]],
+ dialog:[["A","How's the work going, Sumon?"],["B","Good. I finished fitting the creep curves last week."],["A","Any problems?"],["B","Yes, the model doesn't fit well at low stress. Could you give me some advice?"],["A","Try checking your data at long times."],["B","Okay, I'll do that and update you next week."]],
+ mistake:["Sir, the result is not coming.","The results don't look right. I'm not sure why yet."],
+ sound:{t:"Sentence stress",d:"Stress the important words: I <b>FINISHED</b> the <b>ANALYSIS</b> last <b>WEEK</b>. Small words (the, a, to) are quick and soft."},
+ task:["Give a 2-minute progress update: what you did, what you're doing, one problem, next steps."],mins:2},
+
+{w:3,title:"Agreeing and disagreeing",target:"Disagree politely in a discussion.",
+ phrases:[["I agree with you.","Not 'I am agree'."],["That's a good point.","Show respect for an idea."],["I see what you mean, but …","Soft disagreement."],["I'm not sure about that.","Polite doubt."],["Have you considered …?","Suggest another idea."],["Maybe we can try both.","Find a middle way."]],
+ dialog:[["A","I think we should run the test at 650 degrees."],["B","That's a good point, but the furnace limit is 600."],["A","Hmm, I didn't know that."],["B","Have you considered using a smaller sample?"],["A","That could work."],["B","Maybe we can try both and compare."]],
+ mistake:["I am agree with you.","I agree with you."],
+ sound:{t:"'but' — pause before it",d:"Make a tiny pause before <b>but</b> so people hear the change: I see what you mean … but …"},
+ task:["Choose a topic (e.g. 'Online classes are better than classroom'). Speak 2 minutes: agree with one point, disagree with another."],mins:2},
+
+{w:3,title:"Giving a short presentation",target:"Open, structure and close a 2-minute talk.",
+ phrases:[["Good morning, everyone. Today I'd like to talk about …","Strong opening."],["First, I'll explain … Then, I'll show …","Give the plan."],["As you can see in this graph, …","Pointing to a slide."],["Let me move on to …","Change section."],["To sum up, …","Start your conclusion."],["Thank you. I'm happy to take any questions.","Ending."]],
+ dialog:[["A","Good morning. Today I'd like to present my creep test results."],["B","(audience listens)"],["A","As you can see in this graph, the strain increases quickly at the end."],["B","(audience listens)"],["A","To sum up, the model predicts the life within ten percent."],["B","Thank you. Could you explain the last graph again?"]],
+ mistake:["So … this is my slide … this is graph …","As you can see in this graph, the strain increases with time."],
+ sound:{t:"Chunking",d:"Speak in chunks of 3–6 words with tiny pauses: Today | I'd like to talk | about my results. It sounds confident."},
+ task:["Give a 2-minute talk about any topic (your research, your city, a hobby).","Use: opening, plan, 2 points, summary, questions."],mins:2},
+
+{w:3,title:"Answering questions",target:"Answer when you're unsure, without panic.",
+ phrases:[["That's a great question.","Gives you time to think."],["If I understand correctly, you're asking …","Check the question."],["I'm not 100% sure, but I think …","Honest and confident."],["I haven't looked at that yet, but it's a good idea.","When you don't know."],["Let me get back to you on that.","Answer later."],["Does that answer your question?","Check at the end."]],
+ dialog:[["A","Why didn't you test at higher stress?"],["B","That's a great question. The machine has a load limit."],["A","Could the results change at higher stress?"],["B","I'm not 100% sure, but I think the trend would be similar."],["A","Okay, interesting."],["B","I'll check the literature and get back to you. Does that answer your question?"]],
+ mistake:["I don't know. (stop)","I'm not sure, but I'll find out and let you know."],
+ sound:{t:"Falling tone = confidence",d:"End statements with your voice going <b>down</b> ↘. Rising tone on statements sounds unsure."},
+ task:["Write 5 hard questions about your work or life. Answer each aloud in 30 seconds."],mins:3},
+
+{w:3,title:"Job interview basics",target:"Answer common interview questions smoothly.",
+ phrases:[["I have a background in mechanical engineering.","Talk about your field."],["One of my strengths is …","Talk about strengths."],["I'm working on improving my …","Honest weakness."],["In my previous project, I …","Give an example."],["I'm interested in this role because …","Show motivation."],["Could you tell me more about the team?","Ask your own question."]],
+ dialog:[["A","Tell me about yourself."],["B","I'm a mechanical engineer with a master's in materials research."],["A","What's your biggest strength?"],["B","I'm good at solving problems with data and programming."],["A","And a weakness?"],["B","I'm working on my public speaking. I practise every day."]],
+ mistake:["My weakness is I am perfectionist.","I'm working on my presentation skills. I practise daily now."],
+ sound:{t:"Clear consonants at the end",d:"Don't drop end sounds: wor<b>k</b>, projec<b>t</b>, tea<b>m</b>, stren<b>gth</b>. Say them clearly."},
+ task:["Answer 4 questions, 1 minute each: Tell me about yourself. Your strengths. A challenge you solved. Why this job?"],mins:4},
+
+{w:3,title:"Week 3 review",target:"Explain your work and handle questions for 4 minutes.",
+ phrases:[["Let me give you a quick overview.","Start a summary."],["The main idea is …","Key point."],["For example, …","Give an example."],["In other words, …","Explain again simply."],["The biggest challenge was …","Talk about problems."],["Overall, I'm happy with the results.","Conclude."]],
+ dialog:[["A","Can you give me a quick overview of your project?"],["B","Sure. The main idea is to predict how long steel lasts."],["A","What's been the hardest part?"],["B","The biggest challenge was getting long-term data."],["A","How did you solve it?"],["B","I used published data. In other words, I didn't need new tests."]],
+ mistake:["Actually … actually … actually …","Use different linkers: so, also, for example, in other words."],
+ sound:{t:"Record and compare",d:"Record yourself saying the dialogue, then play the ▶ voice. Where is your rhythm different?"},
+ task:["4-minute recording: explain your work (1 min), give a progress update (1 min), answer 2 questions (2 min)."],mins:4},
+
+// WEEK 4 — Fluency & confidence
+{w:4,title:"Describing people and places",target:"Use adjectives to paint a picture.",
+ phrases:[["She's tall, with short black hair.","Describe looks."],["He's really friendly and easy to talk to.","Describe personality."],["My home town is small but very green.","Describe a place."],["It's crowded during the day but quiet at night.","Contrast."],["The best thing about it is …","Highlight."],["It reminds me of …","Make a connection."]],
+ dialog:[["A","What's your home town like?"],["B","It's a small town near a river. Very green."],["A","Sounds peaceful."],["B","It is. But the roads are crowded in the morning."],["A","What do you miss most?"],["B","The food and the rainy season. It reminds me of my childhood."]],
+ mistake:["My town is very much beautiful.","My town is really beautiful."],
+ sound:{t:"Schwa /ə/ — the most common sound",d:"Weak vowels sound like 'uh': a<b>bout</b> = uh-bout, <b>ba</b>nana = buh-NA-nuh, compu<b>ter</b> = cum-PYU-tuh."},
+ task:["Describe your best friend (1 min) and your home town (1 min)."],mins:2},
+
+{w:4,title:"Comparing things",target:"Compare two options and choose one.",
+ phrases:[["Malaysia is hotter than I expected.","-er than."],["Living here is more expensive than in Dhaka.","more … than."],["It's the best place I've ever lived.","Superlative."],["It's not as busy as Dhaka.","not as … as."],["On the one hand … on the other hand …","Show both sides."],["All in all, I prefer …","Give your final choice."]],
+ dialog:[["A","Which do you prefer, Malaysia or Bangladesh?"],["B","That's hard! The food in Bangladesh is better for me."],["A","And Malaysia?"],["B","It's cleaner and more organised."],["A","So which one?"],["B","All in all, I prefer living here for now, but home is home."]],
+ mistake:["Malaysia is more hotter than Bangladesh.","Malaysia is hotter than Bangladesh."],
+ sound:{t:"'than' is weak",d:"In fast speech 'than' sounds like /ðən/: hotter-thun, bigger-thun. Practise: better than, bigger than."},
+ task:["Compare for 2 minutes: bus vs car, or city life vs village life. Finish with your choice."],mins:2},
+
+{w:4,title:"Telling a story",target:"Tell an interesting story with feelings.",
+ phrases:[["Something funny happened to me last month.","Hook the listener."],["I was waiting for the bus when …","Past continuous + past simple."],["Suddenly, …","Add surprise."],["I couldn't believe it!","Show feelings."],["In the end, …","Finish the story."],["Looking back, it was a good lesson.","Reflect."]],
+ dialog:[["A","Anything interesting happen this week?"],["B","Yes! I was walking to the lab when it suddenly started raining heavily."],["A","Oh no. Did you have an umbrella?"],["B","No! I ran into a shop and met my old roommate there."],["A","What a coincidence!"],["B","I know! In the end, we had tea and waited for the rain to stop."]],
+ mistake:["I was walk to the lab and it is raining.","I was walking to the lab when it started raining."],
+ sound:{t:"Show emotion with your voice",d:"Make your voice go higher for surprise (<i>Suddenly!</i>) and slower for serious parts. Flat voice = boring story."},
+ task:["Tell a real story from your life in 2 minutes: a funny, scary, or surprising moment."],mins:2},
+
+{w:4,title:"Giving advice",target:"Suggest ideas politely.",
+ phrases:[["You should try …","Simple advice."],["If I were you, I'd …","Common advice pattern."],["Why don't you …?","Friendly suggestion."],["It might be a good idea to …","Soft advice."],["Have you thought about …?","Question-style advice."],["Don't worry too much about it.","Comfort."]],
+ dialog:[["A","I'm really nervous about my presentation."],["B","Why don't you practise it with me first?"],["A","Good idea. Anything else?"],["B","If I were you, I'd record it and listen back."],["A","I hate hearing my own voice!"],["B","Everyone does. Don't worry too much about it."]],
+ mistake:["If I am you, I will go.","If I were you, I'd go."],
+ sound:{t:"I'd = I would",d:"Say I'd as one quick sound /aɪd/: I'd go, I'd try, I'd ask. Practise: If I were you, I'd ask."},
+ task:["A friend wants to improve their English. Give them 2 minutes of advice using 5 different advice phrases."],mins:2},
+
+{w:4,title:"Talking about opinions on news",target:"Share a clear opinion with reasons and examples.",
+ phrases:[["In my opinion, …","Start your view."],["I strongly believe that …","Strong view."],["One reason is … Another reason is …","Give reasons."],["For instance, …","Example."],["Some people think … but I feel …","Show both sides."],["That's why I think …","Conclude."]],
+ dialog:[["A","What do you think about electric cars?"],["B","In my opinion, they're good for cities."],["A","Why?"],["B","One reason is less pollution. Another is lower fuel cost."],["A","But they're expensive."],["B","True. Some people think that, but prices are coming down."]],
+ mistake:["According to me, …","In my opinion, … / I think …"],
+ sound:{t:"Pausing for effect",d:"Pause briefly after your main point. It helps people remember it: <i>That's why I think … (pause) … they're the future.</i>"},
+ task:["Pick a topic: social media, AI, or working from home. Speak 2.5 minutes with opinion, 2 reasons, an example, and a conclusion."],mins:3},
+
+{w:4,title:"Handling mistakes and misunderstandings",target:"Correct yourself and recover smoothly.",
+ phrases:[["Sorry, I mean …","Self-correct."],["Let me say that again.","Restart."],["What I'm trying to say is …","Rephrase."],["I think there's been a misunderstanding.","Polite clarification."],["Could you explain what you mean by …?","Ask about a word."],["How do you say … in English?","Ask for a word."]],
+ dialog:[["A","So you'll send the report on Monday?"],["B","Sorry, I think there's been a misunderstanding. I said Friday."],["A","Oh, sorry about that."],["B","No problem. What I'm trying to say is it'll be ready Friday morning."],["A","Got it. Friday morning."],["B","Exactly. Thanks."]],
+ mistake:["(stop talking when you make a mistake)","Sorry, I mean … (correct it and keep going)"],
+ sound:{t:"Confidence over perfection",d:"Native speakers make mistakes too. Keep talking. Fluency grows when you don't stop."},
+ task:["Speak for 2 minutes about your favourite food. Every time you make a mistake, say 'sorry, I mean…' and continue — don't stop!"],mins:2},
+
+{w:4,title:"Thinking in English",target:"Describe what you see and do in English, in your head and aloud.",
+ phrases:[["Right now, I'm …","Narrate the present."],["I need to remember to …","Talk to yourself."],["Let's see …","Thinking phrase."],["I wonder if …","Curiosity."],["That reminds me, …","Connect ideas."],["Okay, next I'll …","Plan out loud."]],
+ dialog:[["A","(you, to yourself) Okay, let's see. What do I need today?"],["B","I need to buy milk and eggs."],["A","That reminds me, I have to call home tonight."],["B","I wonder if the shop is still open."],["A","Okay, next I'll check my email."],["B","Right now, I'm feeling pretty good!"]],
+ mistake:["Think in Bangla, then translate.","Use simple English directly, even if the sentence is short."],
+ sound:{t:"Self-talk habit",d:"For 5 minutes today, describe everything you do aloud: <i>I'm opening the door. I'm making tea. The water is boiling.</i>"},
+ task:["Walk around your room for 2 minutes and describe everything you see and do, aloud, in English."],mins:2},
+
+{w:4,title:"Free conversation",target:"Have a 5-minute conversation on any topic.",
+ phrases:[["Can I ask you something?","Start a topic."],["That's interesting. Tell me more.","Keep them talking."],["Speaking of …","Change topic smoothly."],["I've never thought about it that way.","React."],["What do you think?","Invite opinion."],["It was really nice talking to you.","Close warmly."]],
+ dialog:[["A","Can I ask you something? Why did you choose engineering?"],["B","I liked maths and machines since I was young."],["A","That's interesting. Tell me more."],["B","My father fixed motorbikes. I used to help him."],["A","I've never thought about it that way."],["B","Speaking of motorbikes, do you ride one?"]],
+ mistake:["Only answering, never asking.","Answer + ask: 'Yes, I do. What about you?'"],
+ sound:{t:"Find a real partner",d:"Talk 5 minutes with a labmate, friend, or a language exchange app. Or use Claude's voice mode to practise conversation."},
+ task:["Have a 5-minute conversation with someone (or with Claude in voice mode). Ask at least 5 questions."],mins:5},
+
+{w:4,title:"Final challenge",target:"Speak for 5 minutes. Compare with Day 1.",
+ phrases:[["Thirty days ago, I couldn't …","Reflect on progress."],["Now I feel more confident when …","Show change."],["The hardest part was …","Honest reflection."],["What helped me most was …","What worked."],["From now on, I'm going to …","Future habit."],["I'm proud of myself.","Say it — you earned it!"]],
+ dialog:[["A","So how was your 30-day challenge?"],["B","Honestly, it was hard at first, but I kept going."],["A","What changed?"],["B","Now I feel more confident in meetings and on the phone."],["A","What's next?"],["B","From now on, I'm going to practise 15 minutes every day."]],
+ mistake:["I am not good in English.","I'm getting better at English every day."],
+ sound:{t:"Listen to Day 1 recording",d:"Play your Day 1 recording, then today's. Notice your speed, pauses, and confidence. Write down 3 improvements."},
+ task:["Record a 5-minute talk: introduce yourself, explain your work, tell a story, give your opinion on something.","Compare with Day 1. Then repeat this book from Day 1 — it'll be easier and faster the second time."],mins:5},
+];
+
+const WEEKS = {1:"Week 1 · About me",2:"Week 2 · Everyday life",3:"Week 3 · Study & work",4:"Week 4 · Fluency"};
+const KEY="speak30_done";
+let done = {};
+try{ done = JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(done)); }catch(e){} }
+
+/* ---------- speech ---------- */
+let voices=[], rate=0.85;
+const vSel=document.getElementById('voice');
+function loadVoices(){
+  if(!('speechSynthesis' in window)) return;
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  const prev = vSel.value;
+  vSel.innerHTML = voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('') || '<option>Default</option>';
+  const pref = voices.findIndex(v=>/en-(US|GB)/i.test(v.lang) && /Google|Samantha|Natural|Daniel|Aria|Jenny/i.test(v.name));
+  vSel.value = prev || (pref>=0?pref:0);
+}
+if('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+document.getElementById('rate').oninput=e=>{rate=+e.target.value;document.getElementById('rateval').textContent=rate.toFixed(2)+'×';};
+function speak(text, onend){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    const u=new SpeechSynthesisUtterance(text.replace(/\(.*?\)/g,''));
+    u.rate=rate; u.lang='en-US';
+    const v=voices[+vSel.value]; if(v) u.voice=v;
+    if(onend) u.onend=onend;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function playList(lines){ try{speechSynthesis.cancel();}catch(e){} lines.forEach(l=>speak(l)); }
+
+const PLAY='<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>';
+const esc=s=>s.replace(/"/g,'&quot;');
+
+/* ---------- render ---------- */
+function renderNav(cur){
+  let h='', lastW=0;
+  DAYS.forEach((d,i)=>{
+    if(d.w!==lastW){ h+=`<h4>${WEEKS[d.w]}</h4>`; lastW=d.w; }
+    h+=`<a href="#day-${i+1}" class="${i===cur?'active':''} ${done[i+1]?'done':''}"><span class="dot">${done[i+1]?'✓':''}</span>Day ${i+1} · ${d.title}</a>`;
+  });
+  document.getElementById('nav').innerHTML=h;
+  const n=Object.values(done).filter(Boolean).length;
+  document.getElementById('bar').style.width=(n/30*100)+'%';
+  document.getElementById('ptext').textContent=`${n} / 30 days`;
+}
+
+function renderDay(i){
+  const d=DAYS[i], n=i+1;
+  const ph=d.phrases.map(p=>`<div class="phrase"><button class="play" data-say="${esc(p[0])}" aria-label="Listen">${PLAY}</button><div class="t"><div>${p[0]}</div><div class="n">${p[1]}</div></div></div>`).join('');
+  const dl=d.dialog.map(l=>`<div class="phrase"><button class="play" data-say="${esc(l[1])}" aria-label="Listen">${PLAY}</button><div class="t"><b>${l[0]}:</b>${l[1]}</div></div>`).join('');
+  document.getElementById('main').innerHTML=`
+    <div class="kicker">Day ${n} of 30 · ${WEEKS[d.w]}</div>
+    <h2>${d.title}</h2>
+    <div class="target"><b>🎯 Today's target:</b> ${d.target}</div>
+
+    <details class="routine"><summary class="note" style="cursor:pointer">How to use today's page (about 20 minutes)</summary><ol>${ROUTINE.map(r=>`<li>${r}</li>`).join('')}</ol></details>
+
+    <h3>1 · Key phrases <button class="btn" id="playAll" style="margin-left:auto;font-size:13px;padding:6px 12px">▶ Play all</button></h3>
+    <p class="note">Listen, then repeat aloud 3 times. Copy the rhythm, not just the words.</p>
+    ${ph}
+
+    <h3>2 · Dialogue <button class="btn" id="playDlg" style="margin-left:auto;font-size:13px;padding:6px 12px">▶ Play</button></h3>
+    <div class="dlg">${dl}</div>
+    <p class="note">Read both parts. Then cover B and say B's lines from memory.</p>
+
+    <h3>3 · Fix a common mistake</h3>
+    <div class="mist"><div class="wrong">${d.mistake[0]}</div><div class="right">${d.mistake[1]}</div></div>
+
+    <h3>4 · Sound drill</h3>
+    <div class="sound"><b>${d.sound.t}</b><br>${d.sound.d}</div>
+
+    <h3>5 · Speak on your own</h3>
+    <div class="task"><ul>${d.task.map(t=>`<li>${t}</li>`).join('')}</ul>
+      <div class="timer"><button class="btn primary" id="tbtn">Start ${d.mins}-min timer</button><span class="clock" id="clock">${String(d.mins).padStart(2,'0')}:00</span></div>
+      <p class="note" style="margin:8px 0 0">Tip: record yourself on your phone while the timer runs, then listen back.</p>
+    </div>
+
+    <h3>6 · Today's checklist</h3>
+    <div class="checks">
+      ${["I repeated every phrase aloud","I practised the dialogue","I said the correct sentence 5 times","I spoke for the full timer and recorded it"].map((c,k)=>`<label><input type="checkbox" class="check ck">${c}</label>`).join('')}
+    </div>
+
+    <div class="row">
+      <button class="btn" id="prev" ${i===0?'disabled':''}>← Day ${n-1||''}</button>
+      <button class="btn primary" id="mark">${done[n]?'✓ Completed — undo':'Mark Day '+n+' complete'}</button>
+      <button class="btn" id="next" ${i===29?'disabled':''}>Day ${n+1<=30?n+1:''} →</button>
+    </div>`;
+
+  document.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>{try{speechSynthesis.cancel();}catch(e){} speak(b.dataset.say);});
+  document.getElementById('playAll').onclick=()=>playList(d.phrases.map(p=>p[0]));
+  document.getElementById('playDlg').onclick=()=>playList(d.dialog.map(l=>l[1]));
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('mark').onclick=()=>{done[n]=!done[n];save();renderNav(i);renderDay(i);};
+  setupTimer(d.mins);
+  renderNav(i);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+let tInt=null;
+function setupTimer(m){
+  clearInterval(tInt); let left=m*60, running=false;
+  const b=document.getElementById('tbtn'), c=document.getElementById('clock');
+  const draw=()=>c.textContent=`${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;
+  b.onclick=()=>{
+    if(running){clearInterval(tInt);running=false;b.textContent='Resume';return;}
+    if(left<=0){left=m*60;}
+    running=true;b.textContent='Pause';
+    tInt=setInterval(()=>{left--;draw();if(left<=0){clearInterval(tInt);running=false;b.textContent='Again';c.textContent='Done! 🎉';}},1000);
+  };
+}
+
+function go(i){ if(i<0||i>29) return; location.hash='day-'+(i+1); }
+function route(){
+  const m=location.hash.match(/day-(\d+)/);
+  let i = m? Math.min(30,Math.max(1,+m[1]))-1 : (()=>{ for(let k=1;k<=30;k++) if(!done[k]) return k-1; return 0; })();
+  renderDay(i);
+}
+window.addEventListener('hashchange',route);
+route();
+</script>
+</body>
+</html>
