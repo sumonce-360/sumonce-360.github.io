@@ -268,8 +268,13 @@ footer{padding:clamp(3.5rem,8vw,6.5rem) var(--pad) var(--pad)}
     <div><span class="lbl">Based in</span>Kuantan, Pahang, Malaysia</div>
     <div><span class="lbl">Member</span>Institution of Engineers, Bangladesh (IEB)</div>
   </div>
-  <p class="fine">© 2026 Md. Sumon Hossain</p>
+  <p class="fine">© 2026 Md. Sumon Hossain. All rights reserved. Do not copy or reuse this site's content or design without permission.</p>
 </footer>
 
+<script>/* © Md. Sumon Hossain. All rights reserved. */
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('dragstart',function(e){if(e.target.tagName==='IMG')e.preventDefault();});
+document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u'||k==='p'))e.preventDefault();if((e.ctrlKey||e.metaKey)&&e.shiftKey&&(k==='i'||k==='j'||k==='c'))e.preventDefault();if(k==='f12')e.preventDefault();});
+</script>
 </body>
 </html>

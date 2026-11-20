@@ -113,6 +113,7 @@ h2 small{font-weight:500;font-size:1rem;color:var(--steel);font-variation-settin
   </section>
 
   <p class="fine">Progress is saved in this browser only. If you switch phone or computer, it starts again there.</p>
+  <p class="fine" style="margin-top:-2rem">© 2026 Md. Sumon Hossain. All rights reserved. Do not copy, download or reuse these books without permission.</p>
 </div>
 
 <script>
@@ -132,6 +133,11 @@ document.querySelectorAll('.book').forEach(function(b){
   if(next>total){ go.textContent='Finished. Do it again'; go.href=go.getAttribute('href')+'#day-1'; }
   else { go.textContent='Continue: Day '+next; go.href=go.getAttribute('href')+'#day-'+next; }
 });
+</script>
+<script>/* © Md. Sumon Hossain. All rights reserved. */
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('dragstart',function(e){if(e.target.tagName==='IMG')e.preventDefault();});
+document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u'||k==='p'))e.preventDefault();if((e.ctrlKey||e.metaKey)&&e.shiftKey&&(k==='i'||k==='j'||k==='c'))e.preventDefault();if(k==='f12')e.preventDefault();});
 </script>
 </body>
 </html>
