@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Daily HSK2 Book | Sumon's language books</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f8f7; --paper:#fffffe; --ink:#18221f; --muted:#5b6b66; --line:#dbe3e0;
+  --accent:#0f7a5c; --accent-soft:#e2f2ec; --warn:#b5462f; --warn-soft:#f8e7e2; --gold:#b7791f;
+  --zh:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0f1513; --paper:#161e1b; --ink:#e6eeeb; --muted:#9aaba5; --line:#2a3632;
+    --accent:#4fd1a5; --accent-soft:#173a2f; --warn:#f08a70; --warn-soft:#3a2620; --gold:#e0a84a;}
+}
+*{box-sizing:border-box}
+.home{display:inline-block;margin-bottom:10px;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none}.home:hover{text-decoration:underline}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}
+header{padding:28px 20px 18px;max-width:1100px;margin:0 auto}
+h1{font-family:Fraunces,Georgia,serif;font-size:clamp(28px,4vw,40px);margin:0 0 4px;letter-spacing:-.5px}
+h1 .cn{font-family:var(--zh);color:var(--accent);margin-right:10px}
+.sub{color:var(--muted);margin:0}
+.progress{margin-top:16px;display:flex;align-items:center;gap:12px}
+.bar{flex:1;height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+.settings{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:10px}
+.warnbox{margin-top:12px;padding:10px 14px;border:1px solid var(--gold);border-radius:10px;font-size:14px}
+.layout{max-width:1100px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:250px 1fr;gap:24px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}}
+nav{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px}
+@media(max-width:800px){nav{position:static;max-height:340px}}
+nav h4{margin:12px 8px 4px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+nav a{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:14px}
+nav a:hover{background:var(--accent-soft)}
+nav a.active{background:var(--accent);color:#fff}
+nav a .dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:11px}
+nav a.done .dot{background:var(--accent);border-color:var(--accent);color:#fff}
+nav a.active .dot{border-color:#fff}
+main{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,36px);min-width:0}
+.kicker{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+h2{font-family:Fraunces,Georgia,serif;font-size:clamp(24px,3vw,32px);margin:4px 0 6px}
+h3{font-family:Fraunces,Georgia,serif;font-size:20px;margin:28px 0 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.target{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:8px;margin:14px 0}
+button{font:inherit;cursor:pointer}
+.zh{font-family:var(--zh)}
+button.zh{font:inherit;font-family:var(--zh);color:var(--accent);background:none;border:0;padding:0 2px;margin:0 -1px;border-bottom:1.5px dotted var(--accent);border-radius:3px;line-height:inherit}
+button.zh:hover{background:var(--accent-soft)}
+button.zh.on{background:var(--accent);color:var(--paper)}
+.rule{background:var(--bg);border-radius:12px;padding:14px 18px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:6px 0}
+td,th{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.word{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.word .c{font-family:var(--zh);font-size:28px;font-weight:500;line-height:1.2}
+.word .p{color:var(--gold);font-weight:600}
+.word .m{font-size:14px;color:var(--muted)}
+.play{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--accent);display:grid;place-items:center}
+.play:hover{background:var(--accent);color:#fff}
+.play svg{width:14px;height:14px}
+.phrase{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.phrase:last-child{border-bottom:0}
+.phrase .t{flex:1}
+.phrase .cn{font-family:var(--zh);font-size:20px}
+.phrase .n{font-size:14px;color:var(--muted)}
+.flash{border:2px solid var(--accent);border-radius:16px;min-height:180px;display:grid;place-items:center;text-align:center;padding:20px;cursor:pointer;user-select:none;background:var(--bg)}
+.flash .fw{font-family:var(--zh);font-size:54px;font-weight:500;line-height:1.2}
+.flash .fm{font-size:18px;margin-top:6px}
+.fnav{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:10px;flex-wrap:wrap}
+.btn{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-weight:500}
+.btn.sm{font-size:13px;padding:6px 12px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.prac{counter-reset:p;padding:0;margin:0;list-style:none}
+.prac li{padding:10px 0;border-bottom:1px dashed var(--line);display:grid;gap:6px}
+.prac li:last-child{border-bottom:0}
+.prac .ans{display:none;background:var(--accent-soft);border-radius:8px;padding:6px 12px;font-family:var(--zh);font-size:18px}
+.prac li.show .ans{display:block}
+.reveal{justify-self:start;font-size:13px;padding:4px 12px;border-radius:99px;border:1px solid var(--line);background:var(--bg);color:var(--muted)}
+.q{padding:12px 0;border-bottom:1px dashed var(--line)}
+.q .s{margin-bottom:8px}
+.q .big{font-family:var(--zh);font-size:30px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{padding:6px 14px;border-radius:99px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.opt.cnopt{font-family:var(--zh);font-size:20px}
+.opt.ok{background:var(--accent);border-color:var(--accent);color:#fff}
+.opt.no{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.score{font-weight:600;margin-top:10px}
+.task{border:2px dashed var(--gold);border-radius:12px;padding:14px 16px}
+.task ul{margin:6px 0 0;padding-left:20px}
+.timer{display:flex;align-items:center;gap:10px;margin-top:10px}
+.timer .clock{font-variant-numeric:tabular-nums;font-weight:600;font-size:20px;min-width:64px}
+.note{font-size:14px;color:var(--muted)}
+.checks label{display:flex;gap:10px;align-items:flex-start;padding:5px 0}
+.check{width:20px;height:20px;accent-color:var(--accent);flex:none;margin-top:3px}
+.story{font-family:var(--zh);font-size:20px;line-height:2;background:var(--bg);border-radius:12px;padding:16px 18px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.routine ol{padding-left:20px;margin:6px 0}
+ul.plain{padding-left:20px}
+.dlg{background:var(--bg);border-radius:12px;padding:6px 14px}
+.dlg .cn{font-family:var(--zh);font-size:19px}
+.spk{color:var(--accent);margin-right:4px}
+</style>
+</head>
+<body>
+<header>
+  <a class="home" href="../">← All books</a>
+  <h1><span class="cn">汉语</span>My Daily HSK2 Book</h1>
+  <p class="sub">17 lessons from your HSK2 course, two days each: words and grammar first, then the story. Tap any green Chinese to hear it, then say it out loud.</p>
+  <div class="progress"><div class="bar"><i id="bar"></i></div><span id="ptext" class="note">0 / 49 days</span></div>
+  <div class="settings">
+    <label>Voice speed <input type="range" id="rate" min="0.4" max="1" step="0.05" value="0.8"></label>
+    <span id="rateval">0.80×</span>
+    <label>Voice <select id="voice"></select></label>
+  </div>
+  <div class="warnbox" id="novoice" hidden><b>No Chinese voice found on this device.</b> On Windows, open Settings → Time &amp; language → Speech and add Chinese (Simplified). On a Mac, add a Chinese voice under System Settings → Accessibility → Spoken Content. iPhones and Android phones usually have one built in.</div>
+</header>
+<div class="layout">
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+
+<script>
+// L = story lesson number (course lesson = 20 + L). part A = words + idea, part B = words + story
+const LESSONS = [
+// ---------- WEEK 1 ----------
+{L:1,part:'A',title:"Colours and coffee",
+ words:["颜色|yánsè|colour","红|hóng|red","黑|hēi|black; dark","白|bái|white","咖啡|kāfēi|coffee"],
+ how:`Colours work like any describing word: 苹果很红 (the apple is red). Add 色 to name the colour: 红色 (red), 黑色 (black), 白色 (white). To say "a red one", add 的: 红色的.<br>In everyday speech, 好 before an adjective means "so / really": 这个苹果好红！ = This apple is so red!<br>To ask about colour: 这是什么颜色？`,
+ say:["咖啡是黑色的。|Kāfēi shì hēisè de.|Coffee is black.","这个苹果好红！|Zhège píngguǒ hǎo hóng!|This apple is so red!","你喜欢什么颜色？|Nǐ xǐhuan shénme yánsè?|What colour do you like?"],
+ prac:[["Ask: What colour is milk?","牛奶是什么颜色？"],["Say: I like red.","我喜欢红色。"],["Say: This coffee is very black.","这个咖啡很黑。"]],
+ speak:"Point at 8 things around you and say their colours: “这是白色的…”. Then say your favourite colour and why."},
+{L:1,part:'B',title:"Story: coffee or milk?",
+ words:["牛奶|niúnǎi|milk","西瓜|xīguā|watermelon","外|wài|outside (外面 = outside)","帮助|bāngzhù|to help","可以|kěyǐ|can, may (allowed / OK)"],
+ how:`<b>可以</b> asks or gives permission: 苹果可以吗？ (Is an apple OK?) 我可以进来吗？ (May I come in?)<br><b>Adjective + 一点</b> = a bit more…: 好一点 (a bit better), 多一点牛奶 (a bit more milk).<br><b>外面 / 里面</b> = outside / inside: 西瓜里面很红 (the watermelon is red inside).`},
+{L:2,part:'A',title:"Sports you like",
+ words:["运动|yùndòng|sport; to exercise","游泳|yóuyǒng|to swim","跳舞|tiàowǔ|to dance","踢足球|tī zúqiú|to play football (kick)","打篮球|dǎ lánqiú|to play basketball (hit)"],
+ how:`Chinese uses different verbs for different sports: 踢 (kick) 足球, 打 (hit) 篮球.<br><b>Question word + 都</b> means "every / any": 我什么运动都喜欢 = I like every sport.<br><b>一个 … 都不</b> means "not a single one": 我一个运动都不喜欢 = I don't like a single sport.`,
+ say:["你喜欢什么运动？|Nǐ xǐhuan shénme yùndòng?|What sport do you like?","我什么运动都喜欢。|Wǒ shénme yùndòng dōu xǐhuan.|I like every sport.","我一个运动都不喜欢。|Wǒ yí ge yùndòng dōu bù xǐhuan.|I don't like a single sport."],
+ prac:[["Say: I like swimming.","我喜欢游泳。"],["Say: They are playing basketball.","他们在打篮球。"],["Say: I don't eat any fruit at all (not a single fruit).","我一个水果都不吃。"]],
+ speak:"Say which sports you like, don't like, and can do (会游泳?). Use 什么…都 and 一个…都不 once each."},
+{L:2,part:'B',title:"Story: at the sports park",
+ words:["最|zuì|most","别|bié|don't (do it)","小时|xiǎoshí|hour","左边|zuǒbian|left side","右边|yòubian|right side"],
+ how:`<b>最</b> + adjective or verb = the most: 我最喜欢足球 (I like football most). 最不喜欢 = like least.<br><b>别</b> + verb = don't…!: 别说了！ (Stop talking about it!)<br><b>How long</b> goes after the verb: 我踢了三个小时足球 = I played football for three hours.`},
+{L:3,part:'A',title:"Near and far",
+ words:["远|yuǎn|far","近|jìn|near","从|cóng|from","到|dào|to; to arrive","长|cháng|long"],
+ how:`To ask how long a trip takes: <b>从 A 到 B 要多长时间？</b> 从这里到北京要多长时间？ (How long from here to Beijing?) Answer: 要四个小时.<br>远 and 近 are describing words, so use 很: 北京很远.`,
+ say:["从这里到北京要多长时间？|Cóng zhèlǐ dào Běijīng yào duō cháng shíjiān?|How long does it take from here to Beijing?","要四个小时。|Yào sì ge xiǎoshí.|It takes four hours.","学校很近。|Xuéxiào hěn jìn.|The school is near."],
+ prac:[["Say: My home is far.","我家很远。"],["Ask: How long from your home to school?","从你家到学校要多长时间？"],["Say: I arrived in Beijing.","我到北京了。"]],
+ speak:"Say how long it takes from your home to 4 places (school, shop, airport, your home country). Which are near, which are far?"},
+{L:3,part:'B',title:"Story: let's rest",
+ words:["休息|xiūxi|to rest","一起|yìqǐ|together","知道|zhīdào|to know (a fact)","件|jiàn|counting word for clothes and matters","吧|ba|let's… / OK? (soft suggestion)","要|yào|to want; to need; to take (time)"],
+ how:`Put <b>吧</b> at the end to make a soft suggestion: 我们一起去吧！ = Let's go together!<br><b>件</b> counts clothes on the top half and things/matters: 一件衣服 (a piece of clothing), 一件事情 (a matter).<br><b>知道</b> is for facts; 认识 (HSK1) is for knowing a person.`},
+{review:true,w:1,title:"Review Week 1",lessons:[1,2,3],
+ tasks:["Go through this week's flashcards and take the quiz.","Read the three stories (Lessons 1–3) out loud again. Tap each line to hear it first.","Say 5 sentences about yourself using 最, 别, 吧, 从…到…, 一点.","Translate the sentences below, then check."],
+ prac:[["Let's go swimming together!","我们一起去游泳吧！"],["My favourite colour is white.","我最喜欢白色。"],["How long from the airport to the hotel? (宾馆 = hotel)","从机场到宾馆要多长时间？"],["Don't drink coffee!","别喝咖啡！"]]},
+
+// ---------- WEEK 2 ----------
+{L:4,part:'A',title:"Why? Because…",
+ words:["为什么|wèishénme|why","因为|yīnwèi|because","所以|suǒyǐ|so, therefore","问|wèn|to ask","问题|wèntí|question; problem"],
+ how:`In Chinese you usually use <b>both</b> 因为 and 所以 in one sentence (in English you use only one!): 因为我累，所以我不去 = Because I'm tired, (so) I'm not going.<br>问题 means both a question and a problem: 我有一个问题 / 我的手机有问题.`,
+ say:["你为什么不高兴？|Nǐ wèishénme bù gāoxìng?|Why are you unhappy?","因为今天下雨，所以我不去。|Yīnwèi jīntiān xià yǔ, suǒyǐ wǒ bú qù.|Because it's raining today, I'm not going.","我可以问你一个问题吗？|Wǒ kěyǐ wèn nǐ yí ge wèntí ma?|Can I ask you a question?"],
+ prac:[["Ask: Why don't you eat?","你为什么不吃？"],["Say: Because I'm busy, I don't have time. (忙 = busy)","因为我很忙，所以我没有时间。"],["Say: I have a problem.","我有一个问题。"]],
+ speak:"Make 6 “because … so …” sentences about your life: why you study Chinese, why you live where you live, why you're tired today…"},
+{L:4,part:'B',title:"Story: my phone has a problem",
+ words:["手机|shǒujī|mobile phone","时间|shíjiān|time (an amount of time)","去年|qùnián|last year"],
+ how:`Years are like days: <b>去年</b> (last year), <b>今年</b> (this year), <b>明年</b> (next year).<br>有时间 / 没有时间 = have time / have no time. Compare: 时间 is an amount of time, 时候 (HSK1) is a point in time.<br><b>不好意思</b> = sorry / excuse me (softer than 对不起).`},
+{L:5,part:'A',title:"Weather and feelings",
+ words:["晴|qíng|sunny, clear","阴|yīn|cloudy, overcast","雪|xuě|snow","穿|chuān|to wear, put on","觉得|juéde|to feel; to think"],
+ how:`Weather words: 晴天 (a sunny day), 阴天 (a cloudy day), 下雪 (to snow), 下雨 (to rain).<br><b>觉得</b> gives your opinion or feeling: 我觉得很冷 (I feel cold). 我觉得他是对的 (I think he's right).<br>Use 了 for a change: 下雪了！ = It's snowing (now)!`,
+ say:["今天是晴天。|Jīntiān shì qíngtiān.|It's sunny today.","北京下雪了。|Běijīng xià xuě le.|It's snowing in Beijing.","我觉得今天很冷，你要多穿衣服。|Wǒ juéde jīntiān hěn lěng, nǐ yào duō chuān yīfu.|I think it's cold today; you should wear more clothes."],
+ prac:[["Say: Tomorrow will be cloudy.","明天是阴天。 / 明天会是阴天。"],["Ask: What do you think? (use 觉得)","你觉得怎么样？"],["Say: I want to wear white clothes.","我想穿白色的衣服。"]],
+ speak:"Give a weather report for 3 cities (your city, Beijing, Dhaka). Say what people should wear, using 觉得 and 穿."},
+{L:5,part:'B',title:"Story: are you sick?",
+ words:["身体|shēntǐ|body; health","生病|shēngbìng|to get sick","药|yào|medicine","旅游|lǚyóu|to travel (for fun)"],
+ how:`<b>最好</b> + verb = you'd better…: 你最好在家里休息 (You'd better rest at home). 最好不要… = you'd better not…<br>To ask about health: 你身体怎么样？ To ask "what's wrong?": 你怎么了？<br>Note: 药 (medicine) is yào, 4th tone — like 要 (want), but a different character.`},
+{L:6,part:'A',title:"Morning, evening, meaning",
+ words:["早上|zǎoshang|early morning","晚上|wǎnshang|evening, night","意思|yìsi|meaning","也|yě|also, too","非常|fēicháng|very, extremely"],
+ how:`To ask what something means: <b>…是什么意思？</b> 今早是什么意思？<br><b>也</b> always goes <b>before the verb</b>, never at the end: 我也喜欢 (I like it too), not 我喜欢也.<br><b>非常</b> is stronger than 很: 非常好 = excellent. Short forms: 今早 = this morning, 今晚 = tonight.`,
+ say:["这个字是什么意思？|Zhège zì shì shénme yìsi?|What does this character mean?","我也非常喜欢。|Wǒ yě fēicháng xǐhuan.|I like it very much too.","今天晚上你有时间吗？|Jīntiān wǎnshang nǐ yǒu shíjiān ma?|Do you have time this evening?"],
+ prac:[["Say: I'm a student too.","我也是学生。"],["Ask: What does 今晚 mean?","今晚是什么意思？"],["Say: The weather is extremely good this morning.","今天早上天气非常好。"]],
+ speak:"Describe what you do in the morning and in the evening. Use 也 three times and 非常 twice."},
+{L:6,part:'B',title:"Story: tonight at 7:30",audio:"26.mp3",
+ words:["事情|shìqing|thing, matter (to do)","洗|xǐ|to wash","完|wán|to finish (after a verb)","手表|shǒubiǎo|wristwatch"],
+ how:`<b>Verb + 完</b> = finish doing it: 洗完 (finish washing), 吃完 (finish eating), 看完 (finish reading). 洗完衣服后 = after washing the clothes.<br>Clock time: <b>点</b> + <b>分</b>: 六点三十五分 = 6:35. 七点半 = 7:30.<br>见面 = to meet up: 我们几点见面？`},
+
+// ---------- WEEK 3 ----------
+{L:7,part:'A',title:"Finding the way",worksheet:"hsk2-7.pdf",
+ words:["走|zǒu|to walk; to leave","往|wǎng|towards","旁边|pángbiān|next to, beside","找|zhǎo|to look for","第一|dìyī|first"],
+ how:`Directions: <b>往 + direction + 走</b>: 往前走 (go straight), 往左走 (go left), 往右走 (go right).<br>To ask the way: <b>到 + place + 怎么走？</b> 到学校怎么走？<br><b>第 + number</b> = ordinal: 第一 (first), 第二 (second), 第一天 (the first day).<br>Place + 旁边 = next to the place: 商店旁边.`,
+ say:["到学校怎么走？|Dào xuéxiào zěnme zǒu?|How do I get to the school?","往前走，饭店在商店旁边。|Wǎng qián zǒu, fàndiàn zài shāngdiàn pángbiān.|Go straight; the restaurant is next to the shop.","你在找什么东西？|Nǐ zài zhǎo shénme dōngxi?|What are you looking for?"],
+ prac:[["Say: Go left.","往左走。"],["Ask: How do I get to the hospital?","到医院怎么走？"],["Say: This is my first day.","这是我的第一天。"]],
+ speak:"Give directions from your home to 3 places using 往前走, 往左/右走 and 旁边."},
+{L:7,part:'B',title:"Story: tourists need help",
+ words:["告诉|gàosu|to tell","让|ràng|to let; to make (someone do)","给|gěi|to give; for, to"],
+ how:`<b>给 + person + thing</b> = give someone something: 请给我你的手机. <b>给 + person + verb</b> = do it for/to someone: 给我打电话 (call me).<br><b>让</b> + person + verb = let someone do it: 让我看看 (let me have a look). 我妈妈不让我… = My mum doesn't let me…<br>告诉 + person + information: 请告诉我你的名字.`},
+{L:8,part:'A',title:"Prices: cheap or expensive?",
+ words:["百|bǎi|hundred","千|qiān|thousand","贵|guì|expensive","便宜|piányi|cheap","卖|mài|to sell"],
+ how:`Big numbers: 一百 (100), 三百五十 (350), 一千 (1,000), 两千 (2,000). <b>一百多块</b> = more than 100 yuan.<br>Careful with tones: <b>买 mǎi</b> (buy, 3rd tone) vs <b>卖 mài</b> (sell, 4th tone).<br>Describing words again take 很 or 太…了: 太贵了！ = Too expensive!`,
+ say:["这个手机多少钱？|Zhège shǒujī duōshao qián?|How much is this phone?","两千块，太贵了！|Liǎng qiān kuài, tài guì le!|2,000 yuan — too expensive!","有没有便宜一点的？|Yǒu méiyǒu piányi yìdiǎn de?|Is there a cheaper one?"],
+ prac:[["Say 650 in Chinese.","六百五十"],["Say: This shop sells fruit.","这个商店卖水果。"],["Say: Things here are very cheap.","这里的东西很便宜。"]],
+ speak:"Role-play bargaining in a shop: ask prices of 4 things, say “too expensive”, and ask for something cheaper."},
+{L:8,part:'B',title:"Story: no birthday gifts!",video:"Lesson 28 - don't buy me any birthday gifts!",
+ words:["生日|shēngrì|birthday","日|rì|day; date (written)","次|cì|time(s) (how often)"],
+ how:`<b>次</b> counts how many times: 一次 (once), 两次 (twice), 上次 (last time), 下次 (next time). 一次都没用 = haven't used it even once.<br>Dates: in speech say 号, in writing 日: 五月二十四号 / 五月二十四日.<br>别人 = other people: 我不想别人给我买东西.`},
+{L:9,part:'A',title:"Going to work",worksheet:"hsk2-9.pdf",
+ words:["起床|qǐchuáng|to get up","上班|shàngbān|to go to work","公司|gōngsī|company","公共汽车|gōnggòng qìchē|bus","跑步|pǎobù|to run, jog"],
+ how:`Daily routine words: 起床 (get up), 上班 (start work), 下班 (finish work), 上课 / 下课 (start / finish class).<br>Remember: time comes <b>before</b> the verb: 我七点起床，八点上班.<br>坐公共汽车 = take the bus (公车 for short).`,
+ say:["你明天几点起床？|Nǐ míngtiān jǐ diǎn qǐchuáng?|What time are you getting up tomorrow?","我早上去跑步。|Wǒ zǎoshang qù pǎobù.|I go running in the morning.","我坐公共汽车去公司。|Wǒ zuò gōnggòng qìchē qù gōngsī.|I take the bus to the company."],
+ prac:[["Ask: What time do you go to work?","你几点上班？"],["Say: My company is next to my home.","我的公司在我家旁边。"],["Say: I get up at 6.","我六点起床。"]],
+ speak:"Describe your weekday from 起床 to 下班 with a time for each step."},
+{L:9,part:'B',title:"Story: sleepy at work",
+ words:["正在|zhèngzài|in the middle of (doing)","准备|zhǔnbèi|to prepare; to plan to","比|bǐ|compared with (A 比 B …)"],
+ how:`<b>A 比 B + adjective</b> = A is more … than B: 公共汽车比出租车便宜 (The bus is cheaper than a taxi). Add <b>得多</b> for "much more": 便宜得多. Don't use 很 with 比!<br><b>正在 + verb</b> = right in the middle of doing: 我正在吃饭.`},
+
+{review:true,w:2,title:"Review Week 2",lessons:[4,5,6],
+ tasks:["Go through this week's flashcards and take the quiz.","Re-read the stories for Lessons 4–6 out loud.","Say 3 “因为…所以…” sentences and 3 sentences with 觉得.","Translate the sentences below, then check."],
+ prac:[["Why are you sick? Because you didn't wear enough clothes.","你为什么生病了？因为你穿的衣服不多。"],["What does this mean?","这是什么意思？"],["I finished washing the clothes.","我洗完衣服了。"],["You'd better take medicine.","你最好吃药。"]]},
+];
+
+LESSONS.push(
+// ---------- L10–L12 ----------
+{L:10,part:'A',title:"Busy and tired",
+ words:["忙|máng|busy","累|lèi|tired","快乐|kuàilè|happy, joyful","说话|shuōhuà|to talk, speak","唱歌|chànggē|to sing (a song)"],
+ how:`Some verbs come with their own object built in: <b>说话</b> (speak-words), <b>唱歌</b> (sing-song), <b>跑步</b> (run-steps), <b>睡觉</b> (sleep). So 我唱歌 = I sing — no extra word needed.<br>快乐 is a deeper happiness; it's used in wishes: <b>生日快乐！</b> (Happy birthday!), 新年快乐！ (Happy New Year!)`,
+ say:["我今天很累，不想说话。|Wǒ jīntiān hěn lèi, bù xiǎng shuōhuà.|I'm tired today and don't want to talk.","你最近忙吗？|Nǐ zuìjìn máng ma?|Have you been busy lately?","生日快乐！|Shēngrì kuàilè!|Happy birthday!"],
+ prac:[["Say: She likes singing very much.","她非常喜欢唱歌。"],["Ask: Why don't you talk?","你为什么不说话？"],["Say: I'm busy from Monday to Saturday.","我星期一到星期六很忙。"]],
+ speak:"Talk about your busiest day of the week: why you're busy and tired, and what makes you happy (快乐) at the weekend."},
+{L:10,part:'B',title:"Story: what's 996?",audio:"30.mp3",video:"Lesson 30 - what's 996",
+ words:["虽然…但是…|suīrán … dànshì …|although … (but) …","男|nán|male, man","女|nǚ|female, woman"],
+ how:`Like 因为…所以…, Chinese uses <b>both</b> halves: 虽然钱多，但是工作太多 = Although the money is good, there's too much work. (In English you drop "but"; in Chinese you keep it.)<br>男 / 女 + 朋友: 男朋友 (boyfriend), 女朋友 (girlfriend). 男人 / 女人 = man / woman.`},
+{L:11,part:'A',title:"Brothers and sisters",
+ words:["哥哥|gēge|older brother","姐姐|jiějie|older sister","弟弟|dìdi|younger brother","妹妹|mèimei|younger sister","姓|xìng|family name is…; to be surnamed","两|liǎng|two (of something)"],
+ how:`Chinese has separate words for older and younger siblings.<br><b>姓</b> gives only the family name: 我姓王. 叫 gives the full or given name: 我叫王明. Polite question: 您贵姓？ (What's your family name?)<br>Age difference with 比: 我妹妹比我小两岁 = My sister is two years younger than me.`,
+ say:["你有没有哥哥？|Nǐ yǒu méiyǒu gēge?|Do you have an older brother?","我有两个姐姐和一个弟弟。|Wǒ yǒu liǎng ge jiějie hé yí ge dìdi.|I have two older sisters and a younger brother.","我妹妹比我小两岁。|Wǒ mèimei bǐ wǒ xiǎo liǎng suì.|My younger sister is two years younger than me."],
+ prac:[["Say: My family name is Hossain. (use 姓)","我姓 Hossain。"],["Say: My older brother is 3 years older than me.","我哥哥比我大三岁。"],["Ask: How many younger sisters do you have?","你有几个妹妹？"]],
+ speak:"Describe your brothers and sisters: how many, older or younger, how old, and where they live."},
+{L:11,part:'B',title:"Story: family far away",
+ words:["离|lí|distance from (A 离 B 远/近)","每|měi|every","快|kuài|fast","慢|màn|slow"],
+ how:`<b>A 离 B + 远/近</b> = A is far from / near B: 天津离北京不远 (Tianjin isn't far from Beijing). Note: 离 shows distance; 从 shows a starting point.<br><b>每 … 都</b> = every …: 我每个月都去看他 (I visit him every month). 每天 = every day.<br>快 can also mean "soon": 我快到了 (I'm almost there).`},
+{L:12,part:'A',title:"Stations, airports, hotels",worksheet:"hsk2-12.pdf",
+ words:["火车站|huǒchēzhàn|train station","机场|jīchǎng|airport","宾馆|bīnguǎn|hotel","新|xīn|new","对|duì|right, correct; to, towards"],
+ how:`站 = station / stop: 火车站, 公共汽车站. 场 = an open field or place: 机场 (airport), 足球场 (football field).<br><b>对</b> = correct: 你是对的 (You're right). <b>对 … 来说</b> = for someone: 这对我来说是一个大问题 (For me this is a big problem). 妈妈对我很好 = Mum is good to me.`,
+ say:["不好意思，怎么去机场？|Bù hǎo yìsi, zěnme qù jīchǎng?|Excuse me, how do I get to the airport?","火车比公共汽车快得多。|Huǒchē bǐ gōnggòng qìchē kuài de duō.|The train is much faster than the bus.","这个宾馆太贵了。|Zhège bīnguǎn tài guì le.|This hotel is too expensive."],
+ prac:[["Say: This is new.","这是新的。"],["Say: You are right.","你是对的。"],["Say: For me, Chinese is not difficult. (难 nán = difficult)","对我来说，汉语不难。"]],
+ speak:"Plan a trip: say how you'll get from the airport or train station to your hotel, and why (cheap, fast, new…)."},
+{L:12,part:'B',title:"Story: from the airport to the hotel",
+ words:["可能|kěnéng|maybe, possibly","错|cuò|wrong; mistake","懂|dǒng|to understand"],
+ how:`<b>Verb + result</b>: add a word after a verb to show the result. 听懂 (listen + understand), 看懂 (read and understand), 做错 (do wrong), 写错 (write wrongly). Negative: 听不懂 (can't understand by listening).<br>不错 = not bad, pretty good: 这个饭店不错.<br>可能 goes before the verb: 他可能是美国人 (He may be American).`},
+
+// ---------- L13–L15 ----------
+{L:13,part:'A',title:"School and exams",
+ words:["考试|kǎoshì|exam; to take an exam","课|kè|lesson, class","教室|jiàoshì|classroom","铅笔|qiānbǐ|pencil","开始|kāishǐ|to begin, start"],
+ how:`School phrases: 上课 (start class), 下课 (end of class), 一节课 (one lesson).<br><b>什么时候开始？</b> = When does it start? 考试十点开始.<br>开始 + verb = start doing: 我开始学汉语了 (I've started learning Chinese).`,
+ say:["考试什么时候开始？|Kǎoshì shénme shíhou kāishǐ?|When does the exam start?","我们在教室上课。|Wǒmen zài jiàoshì shàng kè.|We have class in the classroom.","你准备好铅笔了吗？|Nǐ zhǔnbèi hǎo qiānbǐ le ma?|Have you got your pencils ready?"],
+ prac:[["Say: The class starts at 8.","八点开始上课。 / 课八点开始。"],["Say: I have an exam tomorrow.","我明天有考试。"],["Ask: Where is the classroom?","教室在哪儿？"]],
+ speak:"Talk about your study day: when classes start, what exams you have, and what you bring to class."},
+{L:13,part:'B',title:"Story: the exam tomorrow",
+ words:["得|de|links a verb to how well it's done","已经|yǐjīng|already","还|hái|still; also; even more","介绍|jièshào|to introduce"],
+ how:`<b>Verb + 得 + description</b> says how well something is done: 他考得非常好 (He did very well in the exam). 你说得很快 (You speak fast). 她唱歌唱得不好 (She sings badly).<br><b>已经 … 了</b> = already: 我已经学好了.<br><b>还</b> = still / also: 你还要学习 (You still need to study). 还有 = there's also.<br>介绍一下我自己 = Let me introduce myself.`},
+{L:14,part:'A',title:"Ordering food",
+ words:["鱼|yú|fish","羊肉|yángròu|lamb, mutton","鸡蛋|jīdàn|egg","面条|miàntiáo|noodles"],
+ how:`Meats are animal + 肉: 羊肉 (lamb), 鸡肉 (chicken), 牛肉 (beef), 鱼肉 (fish).<br><b>Yes/no question without 吗</b>: say the verb, then 不/没 + the verb: 你们有没有面条？ (Do you have noodles?) 你是不是学生？ 你喝不喝茶？`,
+ say:["你们有没有鱼？|Nǐmen yǒu méiyǒu yú?|Do you have fish?","我想吃羊肉和米饭。|Wǒ xiǎng chī yángròu hé mǐfàn.|I'd like lamb and rice.","我要鸡蛋面条。|Wǒ yào jīdàn miàntiáo.|I'd like egg noodles."],
+ prac:[["Ask (without 吗): Do you eat fish?","你吃不吃鱼？"],["Ask (without 吗): Is it expensive?","贵不贵？"],["Say: I don't eat meat.","我不吃肉。"]],
+ speak:"Order a full meal for two people: ask what they have (有没有…), choose food and drinks."},
+{L:14,part:'B',title:"Story: at the restaurant",
+ words:["服务员|fúwùyuán|waiter, waitress","真|zhēn|really, truly","进|jìn|to enter, come in"],
+ how:`<b>请进！</b> = Please come in! 进去 / 进来 = go in / come in.<br><b>真 + adjective</b> = really: 真好吃 (really tasty). 真的吗？ = Really?<br>Call staff with 服务员！ To order: 我要… / 请给我…<br>Remember 比 + 得: 你吃得比我多 (You eat more than me).`},
+{L:15,part:'A',title:"Husband, wife and children",
+ words:["丈夫|zhàngfu|husband","妻子|qīzi|wife","孩子|háizi|child","您|nín|you (polite)"],
+ how:`<b>您</b> is the polite "you" for older people, teachers and customers: 您好！ 您贵姓？ There's no plural 您们 in normal speech — say 大家 or 你们.<br>家人 = family members. 老公 / 老婆 are casual words for husband / wife.`,
+ say:["您好，请进！|Nín hǎo, qǐng jìn!|Hello, please come in!","我丈夫在医院工作。|Wǒ zhàngfu zài yīyuàn gōngzuò.|My husband works at a hospital.","你们有孩子吗？|Nǐmen yǒu háizi ma?|Do you have children?"],
+ prac:[["Greet your teacher politely.","老师，您好！"],["Say: His wife is a doctor.","他的妻子是医生。"],["Ask: How many children do they have?","他们有几个孩子？"]],
+ speak:"Describe a married couple you know: what the husband and wife do, and their children. Then greet 3 older people politely with 您."},
+{L:15,part:'B',title:"Story: buying a house",
+ words:["房子|fángzi|house","房间|fángjiān|room","出|chū|to go out (出国 = go abroad)","就|jiù|then; right away; just","送|sòng|to give (as a gift); to take someone somewhere"],
+ how:`<b>… 后，就 …</b> = after …, then …: 我们有好工作后，就可以有孩子 (Once we have good jobs, we can have a child).<br><b>送</b>: 送你一本书 (give you a book as a gift); 送孩子去学校 (take the child to school).<br>出 + place: 出国 (go abroad), 出门 (go out), 出去 (go out).`},
+
+// ---------- L16–L17 ----------
+{L:16,part:'A',title:"Reading the newspaper",
+ words:["报纸|bàozhǐ|newspaper","眼睛|yǎnjing|eye","路|lù|road, way","等|děng|to wait","笑|xiào|to laugh, smile"],
+ how:`<b>等 + time</b>: 请等五分钟 (Please wait five minutes). 等一下！ = Wait a moment!<br>开玩笑 = to joke: 别开玩笑！ (Stop joking!) 笑话 = a joke.<br>走路 = to walk (on the road): 我走路去学校.`,
+ say:["请等一下。|Qǐng děng yíxià.|Please wait a moment.","看报纸对眼睛不好。|Kàn bàozhǐ duì yǎnjing bù hǎo.|Reading newspapers is bad for your eyes.","你为什么笑？|Nǐ wèishénme xiào?|Why are you laughing?"],
+ prac:[["Say: I walk to school.","我走路去学校。"],["Say: Wait for me!","等我！"],["Say: Don't joke!","别开玩笑！"]],
+ speak:"Tell a short story about waiting for someone: where you waited, how long, and what made you laugh."},
+{L:16,part:'B',title:"Story: let's go out and play",audio:"36.mp3",
+ words:["希望|xīwàng|to hope; hope","玩|wán|to play; to have fun"],
+ how:`<b>快要 … 了</b> = about to …: 我快要看完了 (I'm about to finish reading). 火车快要到了 (The train is about to arrive).<br><b>希望</b> + sentence: 我希望有一天能在北京买房子 (I hope one day we can buy a house in Beijing).<br>玩儿 (wánr) is the Beijing way to say 玩. 好玩儿 = fun.`},
+{L:17,part:'A',title:"Black Friday",
+ words:["大家|dàjiā|everyone","门|mén|door, gate","票|piào|ticket","高|gāo|tall, high","它|tā|it (for things and animals)"],
+ how:`开门 / 关门 = open / close (a door or a shop): 商店早一点开门.<br>它 / 它们 = it / they for things and animals. It sounds the same as 他 / 她 (tā)!<br>Comparing height: 你比我高得多 (You're much taller than me).`,
+ say:["大家好！|Dàjiā hǎo!|Hello, everyone!","商店几点开门？|Shāngdiàn jǐ diǎn kāi mén?|What time does the shop open?","我要买两张票。|Wǒ yào mǎi liǎng zhāng piào.|I want to buy two tickets."],
+ prac:[["Say: The shop is closed (closes) at 10.","商店十点关门。"],["Say: My brother is taller than me.","我哥哥比我高。"],["Ask: Where can I buy tickets?","在哪儿买票？"]],
+ speak:"Describe a busy shopping day: when shops open and close, how you get there, and what tickets you need."},
+{L:17,part:'B',title:"Story: running for the bus",
+ words:["过|guo|have done (experience)","着|zhe|-ing (an ongoing state)","一下|yíxià|a bit, briefly (softens a request)"],
+ how:`<b>Verb + 过</b> = have ever done: 我听说过 (I've heard of it). 你去过中国吗？ (Have you ever been to China?) Negative: 没去过.<br><b>Verb + 着</b> = in a state of: 门开着 (The door is open). 他笑着说 (He said with a smile).<br><b>Verb + 一下</b> softens a request: 帮我买一下票 (Could you buy the ticket for me?). 看一下 (have a quick look).`},
+);
+
+const START_HTML = `
+ <h3>How to use this book</h3>
+ <p>This book follows your HSK2 course: the <b>17 stories</b> in <i>hsk2stories.pdf</i> (course Lessons 21–37), the worksheets, the audio files and the lesson videos in your HSK2 folder. Each lesson takes <b>two days</b>:</p>
+ <ul class="plain"><li><b>Part A:</b> about 5 new words + one new grammar idea, with examples, practice and a quiz.</li>
+ <li><b>Part B:</b> the rest of the lesson's words + the <b>story</b> from your PDF. Tap any line to hear it, then answer the questions.</li></ul>
+ <p>Monday to Saturday are lesson days and Sunday is a review day. Week 6 adds a listening day and a reading day, and Week 7 is for mock tests. That's 49 days, about 25–30 minutes a day.</p>
+ <h3>What's new in HSK2</h3>
+ <p>HSK2 adds about 150 words to your 150 HSK1 words, so you'll know about 300. You'll also learn these new sentence patterns:</p>
+ <div class="tw"><table><tr><th>Pattern</th><th>Example</th><th>Day</th></tr>
+ <tr><td>Question word + 都</td><td>我什么运动都喜欢。</td><td>3</td></tr>
+ <tr><td>从 A 到 B 要多长时间</td><td>从这里到北京要多长时间？</td><td>5</td></tr>
+ <tr><td>因为 … 所以 …</td><td>因为我累，所以我不去。</td><td>8</td></tr>
+ <tr><td>Verb + 完</td><td>我洗完衣服了。</td><td>13</td></tr>
+ <tr><td>A 比 B + adjective (+ 得多)</td><td>火车比公共汽车快得多。</td><td>20</td></tr>
+ <tr><td>虽然 … 但是 …</td><td>虽然钱多，但是工作太多。</td><td>23</td></tr>
+ <tr><td>A 离 B 远 / 近</td><td>天津离北京不远。</td><td>25</td></tr>
+ <tr><td>Verb + result (听懂, 做错)</td><td>我听不懂。</td><td>27</td></tr>
+ <tr><td>Verb + 得 + how well</td><td>他考得非常好。</td><td>30</td></tr>
+ <tr><td>有没有 / 是不是 questions</td><td>你们有没有面条？</td><td>31</td></tr>
+ <tr><td>快要 … 了</td><td>我快要看完了。</td><td>37</td></tr>
+ <tr><td>Verb + 过 / 着</td><td>我去过中国。门开着。</td><td>39</td></tr></table></div>
+ <h3>Your daily routine</h3>
+ <ol><li><b>Warm up (3 min):</b> Say yesterday's words out loud.</li>
+ <li><b>Words (7 min):</b> Tap ▶ on each word, say it 5 times, then use the flashcards.</li>
+ <li><b>Idea or story (8 min):</b> Read "How it works", or read the story twice: once listening, once reading aloud.</li>
+ <li><b>Practice (7 min):</b> Answer out loud, check, then take the quiz.</li>
+ <li><b>Finish (3 min):</b> Write each new character 3 times, do the speaking task, mark the day complete.</li></ol>
+ <div class="target"><b>Tip:</b> If you haven't finished HSK1 yet, do that book first. HSK2 uses all the HSK1 words.</div>`;
+
+const REVIEW_EXTRA = [
+{review:true,w:3,title:"Review Week 3",lessons:[7,8,9],
+ tasks:["Go through this week's flashcards and take the quiz.","Re-read the stories for Lessons 7–9 out loud.","Open your worksheets hsk2-7.pdf and hsk2-9.pdf and read every example sentence aloud.","Translate the sentences below, then check."],
+ prac:[["How do I get to the station? Go straight.","到车站怎么走？往前走。"],["Please give me your phone.","请给我你的手机。"],["The bus is much cheaper than a taxi.","公共汽车比出租车便宜得多。"],["I've been to that restaurant twice.","我去过那个饭店两次。 / 我去了那个饭店两次。"]]},
+{review:true,w:4,title:"Review Week 4",lessons:[10,11,12],
+ tasks:["Go through this week's flashcards and take the quiz.","Re-read the stories for Lessons 10–12 out loud.","Listen to 30.mp3 and re-watch the “What's 996” video.","Translate the sentences below, then check."],
+ prac:[["Although I'm tired, I'm happy.","虽然我很累，但是我很快乐。"],["My home is near the airport.","我家离机场很近。"],["I didn't understand (by listening).","我没听懂。"],["I go to see my parents every month.","我每个月都去看我爸爸妈妈。"]]},
+{review:true,w:5,title:"Review Week 5",lessons:[13,14,15],
+ tasks:["Go through this week's flashcards and take the quiz.","Re-read the stories for Lessons 13–15 out loud.","Introduce yourself in Chinese for 1 minute, like the son in Lesson 13's exam.","Translate the sentences below, then check."],
+ prac:[["He speaks Chinese very well.","他汉语说得非常好。"],["I have already eaten.","我已经吃饭了。"],["Do you have lamb? (no 吗)","你们有没有羊肉？"],["After we buy a house, we'll have a child.","我们买房子后，就要孩子。"]]},
+{review:true,w:6,title:"Listening day",listen:true,
+ tasks:["Play 26.mp3 once without reading. Write down every word you recognise.","Play 30.mp3 and 36.mp3 the same way.","Play all three again and repeat each sentence after the speaker.","Re-watch the Lesson 28 and Lesson 30 videos. You should now understand most of them."]},
+{review:true,w:6,title:"Reading marathon",reading:true,
+ tasks:["Re-read all 17 stories out loud (each Part B day has one). Use the links below.","For each story, answer one question from memory.","Write down 10 words you still find hard and add them to your flashcard practice."]},
+{review:true,w:6,title:"Review Week 6",lessons:[16,17],
+ tasks:["Go through this week's flashcards and take the quiz.","Re-read the stories for Lessons 16–17 out loud.","Tell a friend (or your phone) about your last weekend using 过, 着, 比 and 虽然…但是….","Translate the sentences below, then check."],
+ prac:[["Have you ever been to Beijing?","你去过北京吗？"],["The door is open.","门开着。"],["The train is about to arrive.","火车快要到了。"],["I hope you're happy.","我希望你快乐。"]]},
+];
+
+const TEST_DAYS = [
+{review:true,test:true,w:7,title:"Mock test 1",cards:false,
+ tasks:["Take one full HSK2 mock test (Listening + Reading, about 55 minutes). Don't check the answers yet.","HSK2 has 60 questions in 2 parts. You need 120 out of 200 points to pass."]},
+{review:true,test:true,w:7,title:"Mark your test",
+ tasks:["Mark yesterday's test.","For every wrong answer, find the lesson in this book and re-study that day.","Take the whole-book quiz below."]},
+{review:true,test:true,w:7,title:"Listening practice",
+ tasks:["Play 26.mp3, 30.mp3 and 36.mp3 again and repeat every sentence.","Take the quiz below and tap each answer to hear it."]},
+{review:true,test:true,w:7,title:"Mock test 2",cards:false,
+ tasks:["Take a second mock test.","Mark it and compare your score with Mock test 1."]},
+{review:true,test:true,w:7,title:"Word review",
+ tasks:["Go through the flashcards for the whole book. Shuffle them.","Re-study only the words you still don't know.","Take the whole-book quiz twice."]},
+{review:true,test:true,w:7,title:"Final self-test",
+ tasks:["Translate the 10 sentences below into Chinese. If you get 8 or more right, you're ready for HSK2.","Then rest!"],
+ prac:[["Why are you tired? Because I'm very busy.","你为什么累？因为我很忙。"],["Although this hotel is expensive, it's very new.","虽然这个宾馆很贵，但是很新。"],["My home is far from the company.","我家离公司很远。"],["The train is much faster than the bus.","火车比公共汽车快得多。"],["How long does it take from the airport to the hotel?","从机场到宾馆要多长时间？"],["She sings very well.","她唱歌唱得很好。"],["I have already finished my homework. (作业 zuòyè)","我已经做完作业了。"],["Have you ever eaten lamb?","你吃过羊肉吗？"],["Please wait a moment.","请等一下。"],["I hope it will be sunny tomorrow.","我希望明天是晴天。"]]},
+{review:true,test:true,final:true,w:7,title:"Light review: you're ready",
+ tasks:["Read the 6 HSK2 rules (below) out loud.","Do one relaxed run of the whole-book quiz.","Sleep early. 加油! (jiāyóu = you can do it!)"],
+ rules:`<ol><li>Use <b>both</b> halves: 因为…所以…, 虽然…但是….</li><li>With 比, don't use 很: 他比我高 (not 他比我很高). Add 得多 for "much".</li><li>也 and 都 go <b>before the verb</b>.</li><li>How well: verb + <b>得</b> + adjective: 说得很好.</li><li>How long goes <b>after</b> the verb: 我学了两年汉语.</li><li>Experience = verb + <b>过</b>; not done = 没 + verb + 过: 我没去过.</li></ol>`},
+];
+
+// ---------- build DAYS ----------
+const DAYS = [{start:true,w:0,title:"Start here: welcome to HSK2",html:START_HTML}];
+(function(){
+  const lessonParts = LESSONS.filter(x=>!x.review);
+  const reviews = LESSONS.filter(x=>x.review).concat(REVIEW_EXTRA);
+  const reviewFor = w => reviews.filter(r=>r.w===w);
+  const groups = [[1,2,3],[4,5,6],[7,8,9],[10,11,12],[13,14,15],[16,17]];
+  groups.forEach((g,gi)=>{
+    lessonParts.filter(p=>g.includes(p.L)).forEach(p=>{ p.w=gi+1; DAYS.push(p); });
+    reviewFor(gi+1).forEach(r=>DAYS.push(r));
+  });
+  TEST_DAYS.forEach(t=>DAYS.push(t));
+})();
+
+const STORIES={"1": {"lines": [["A", "你好，我们去看电影，怎么样？"], ["B", "我不想，我想睡觉。"], ["A", "现在很早，你怎么想睡觉？你喝一点咖啡，咖啡会帮助你"], ["B", "我不喜欢喝咖啡"], ["A", "你喜欢喝什么？"], ["B", "我喜欢喝牛奶"], ["A", "牛奶不会帮助你。你喝咖啡和牛奶，怎么样？"], ["B", "好的，现在这个咖啡的颜色好一点，不是很黑，好喝一点，我要多一点牛奶"], ["A", "现在这个咖啡都是白色的。太多牛奶"], ["B", "现在太好喝了"], ["A", "现在你想去看电影吗？"], ["B", "我现在想吃东西"], ["A", "你想吃什么东西？"], ["B", "我想吃一些水果"], ["A", "苹果可以吗？你看，这个苹果好红，很好吃"], ["B", "我不想吃苹果，我想吃西瓜"], ["A", "我们家里没有西瓜"], ["B", "好的，我去商店买西瓜"], ["B", "我回来了，买了三个西瓜。你看，西瓜里面很红，很好吃，你想吃一个吗？"], ["A", "我不想吃。你看，天都黑了，我现在不想去外面。。。"]], "qa": [["B 喜欢喝咖啡吗？", "不喜欢。 (No.)"], ["B 喜欢喝什么？", "牛奶。 (Milk.)"], ["他们家里有什么水果？", "苹果。家里没有西瓜。 (Apples. No watermelon.)"], ["B 去商店买什么？", "西瓜。 (Watermelon.)"], ["他们去看电影了吗？", "没有。 (No, they didn't.)"], ["苹果是什么颜色？", "红色。 (Red.)"], ["咖啡是什么颜色？", "黑色。加了牛奶以后是白色。 (Black; white after adding milk.)"], ["牛奶是什么颜色？", "白色。 (White.)"]]}, "2": {"lines": [["A", "朋友，你最喜欢什么运动？"], ["B", "睡觉是一个运动吗？"], ["A", "不是"], ["B", "吃饭呢？"], ["A", "不是"], ["B", "那我一个运动都不喜欢。你呢？"], ["A", "我什么运动都喜欢。我上个星期六踢了三个小时足球。"], ["B", "我很喜欢足球"], ["A", "你不是说你一个运动都不喜欢吗？"], ["B", "我不是说我喜欢踢足球。我是说，我吃饭的时候喜欢看别人踢足球。"], ["A", "那很好，我今天8点去踢足球。你想去看看吗？"], ["B", "那里可以吃一些好吃的东西吗？"], ["A", "可以，有很多水果"], ["B", "那很好！"], ["A", "这里有很多人在运动"], ["B", "是的，你看后面，那里可以游泳，你不喜欢游泳，是不是？"], ["A", "不喜欢。你吃饭后不能游泳"], ["B", "好的。你看左边，那里的人在打篮球，你不喜欢打篮球吗？"], ["A", "别说了，我最不喜欢的运动是篮球。在右边，这些老人，他们在做什么？"], ["B", "他们在跳舞。在中国老人很喜欢在外面跳舞。你想和他们跳舞吗？"], ["A", "我不想。你看，在前面有什么？"], ["B", "有一个饭店"], ["A", "很好，那我去饭店吃饭，你去踢足球吗？"], ["B", "是的, 再见。"]], "qa": [["B 喜欢什么运动？", "B 一个运动都不喜欢，但是喜欢看别人踢足球。 (None, but likes watching football.)"], ["B 最不喜欢什么运动？", "A 最不喜欢篮球。 (In the story it's A who says basketball.)"], ["老人在做什么？", "他们在跳舞。 (Dancing.)"], ["他们去做什么？", "A 去饭店吃饭，B 去踢足球。 (A eats at a restaurant, B plays football.)"], ["那里可以吃什么？", "水果。 (Fruit.)"]]}, "3": {"lines": [["A", "你今天想做什么？"], ["B", "我今天想休息"], ["A", "休息吗？我们一起去外面吧"], ["B", "我不想。我们最好在家里休息。"], ["A", "我们不是上个星期六也在家里休息吗？"], ["B", "星期六和星期天"], ["A", "我不想再在家里休息"], ["B", "那你想去哪儿？"], ["A", "我想去北京"], ["B", "北京吗？，北京很远，那里太冷了，我的衣服太少了"], ["A", "你这件衣服可以，今天在北京不是很冷。北京不是很远"], ["B", "从这里到北京要多长时间呢？"], ["A", "4个小时"], ["B", "很远"], ["A", "那我不知道我们今天要做什么"], ["B", "我知道。我们休息吧"]], "qa": [["B 今天想做什么？", "休息。 (Rest.)"], ["A 今天想做什么？", "去北京。 (Go to Beijing.)"], ["上个星期天他们做了什么？", "在家里休息。 (Rested at home.)"], ["北京热不热？", "不热，很冷。 (No, it's cold.)"], ["从他们家到北京要多长时间？", "4个小时。 (4 hours.)"]]}, "4": {"lines": [["A", "你怎么了？"], ["B", "我今天不太高兴"], ["A", "你今天为什么不高兴？"], ["B", "因为我今天不想学习中文"], ["A", "你为什么不想学习中文？"], ["B", "因为我的手机有问题。我喜欢用我的手机学习中文。今天我的手机有一些问题，我不能用我的手机学习。"], ["A", "因为你的手机有一些小问题所以你不学习中文吗？"], ["B", "是的，这是一个问题吗？"], ["A", "不是，你有很多时间学习中文。你去年学了很多，今年学很多，明年也会学很多。明天你的手机会好一点，你明天可以学习中文，今天要休息"], ["B", "谢谢，那我们今天去外面吃饭吧"], ["A", "不好意思，我今天没有时间"], ["B", "你今天为什么没有时间呢？"], ["A", "因为我今天要学习中文，你一个人去吧"]], "qa": [["B 今天高兴吗？为什么？", "不太高兴，因为他不想学习中文。 (Not really — he doesn't want to study Chinese.)"], ["B 为什么今天不想学习中文?", "因为他的手机有问题。 (His phone has a problem.)"], ["B 喜欢怎么学习中文？", "用手机学习。 (With his phone.)"], ["B 想去外面做什么？", "吃饭。 (Eat out.)"], ["A 为什么没有时间？", "因为 A 要学习中文。 (A has to study Chinese.)"]]}, "5": {"lines": [["A", "你睡了好长时间。你今天身体怎么样？"], ["B", "我觉得不太好，外面，里面都很冷。"], ["A", "我觉得，因为你昨天穿的衣服不多，所以你今天身体不好。我觉得你生病了，你要穿多一点衣服，喝热水。"], ["B", "为什么喝热水呢？"], ["A", "你不知道吗？中国人生病的时候都喝热水"], ["B", "我没生病。"], ["A", "我觉得你病了"], ["B", "我现在觉得好一点。我今天想去旅游。我们一起去北京旅游吧。"], ["A", "你今天最好不要去北京旅游。北京很冷。这里有时候阴天，有时候晴天，天气不错。北京今天下雪了，很冷。你今天最好在家里休息，多穿一点衣服，吃一些药。"], ["B", "我们家里有药吗？"], ["A", "没有。你要去药店买药。现在你可以喝热水。你会觉得好一点。"]], "qa": [["B 今天怎么样?", "B 觉得不太好，很冷。 (Not well, feels cold.)"], ["A 觉得 B 为什么觉得不好？", "因为 B 昨天穿的衣服不多。 (B didn't wear enough clothes yesterday.)"], ["中国人生病的时候喜欢做什么？", "喝热水。 (Drink hot water.)"], ["B 今天想做什么？", "去北京旅游。 (Travel to Beijing.)"], ["A 为什么不想去北京旅游？", "因为北京今天下雪了，很冷。 (It snowed in Beijing; it's cold.)"], ["今天天气怎么样?", "有时候阴天，有时候晴天，天气不错。 (Sometimes cloudy, sometimes sunny — not bad.)"], ["哪里可以买药？", "药店。 (A pharmacy.)"]]}, "6": {"lines": [["A", "今早你做什么？"], ["B", "今早是什么意思？"], ["A", "今早的意思是今天早上。今天早上太长了，所以很多中国人说：“今早”。今天晚上他们说：“今晚”。"], ["B", "我知道了。你问了我什么问题呢？"], ["A", "你今天早上做什么事情？"], ["B", "今天早上我要去学校学中文。"], ["A", "好的，晚上呢？你晚上有时间吗？"], ["B", "有，我晚上有时间。你想做什么事情呢？"], ["A", "我不知道。我不想在家里。我们一起去外面运动吧。我们可以踢足球。今天晚上天气会很好。"], ["B", "好的，非常好。因为今天晚上天气好，所以我要洗衣服。洗完衣服后我们可以去外面运动。"], ["A", "我们几点见面？"], ["B", "非常好。我今天也要做很多事情，我不知道什么时候有时间。现在几点了？"], ["A", "我不知道"], ["B", "你怎么不知道呢？你手上有什么？是不是手表？"], ["A", "对，不好意思。现在6点35分。"], ["B", "好的，那我们晚上7点见，可以吗？"], ["A", "你的意思是，7点在这里见面吗？"], ["B", "不是在这里，在外面吧"], ["A", "太早了，可以晚一点吗？"], ["B", "7点30分，可以吗？"], ["A", "可以。那，晚上见"], ["B", "晚上见"]], "qa": [["今晚是什么意思？", "今天晚上。 (This evening.)"], ["中国人为什么说：“今早”和“今晚”？", "因为“今天早上”和“今天晚上”太长了。 (The full words are too long.)"], ["B 今天早上要做什么？", "去学校学中文。 (Go to school to study Chinese.)"], ["B 什么时候有时间？", "晚上。 (In the evening.)"], ["A 手上有什么？", "手表。 (A watch.)"], ["现在几点了？", "6点35分。 (6:35.)"], ["他们几点见面？", "晚上7点30分。 (7:30 pm.)"]]}, "7": {"lines": [["A", "你好，不好意思，你可以帮助我们吗？"], ["B", "可以，你们想知道什么？"], ["A", "我们是美国人，来这里旅游，我们的中文不太好。你可以告诉我们，这里有一些饭店吗？"], ["B", "让我看看我的手机。好的，你们看，我们在这里，饭店在那里，在商店旁边。"], ["A", "到商店怎么走呢？"], ["B", "你们要往前走。走25分钟后要到这个商店。你们可以坐出租车，会快一点。"], ["A", "我们不知道怎么叫出租车。"], ["B", "你们有手机吗？"], ["A", "有"], ["B", "好的，请给我你的手机，我会告诉你们怎么叫出租车。你们要用这个app"], ["A", "这个app都是中文的，有很多汉字我们不认识"], ["B", "好的，让我帮你们叫出租车。好的，叫好了，我用了手机给他们钱，请给我15块钱"], ["A", "非常好，谢谢先生，给你15块钱"], ["B", "不客气，这是我的电话号。你们有问题的时候可以给我打电话，我会帮助你们"], ["A", "谢谢。我们明天要回国，我觉得我们不会给你打电话"]], "qa": [["A 是哪国人？", "美国人。 (American.)"], ["A 在中国做什么?", "旅游。 (Travelling.)"], ["A 想找什么？", "饭店。 (Restaurants.)"], ["饭店在哪儿？", "在商店旁边。 (Next to the shop.)"], ["到饭店怎么走？", "往前走，走25分钟。 (Walk straight ahead for 25 minutes.)"], ["饭店远不远？", "有一点远，要走25分钟。 (A bit far — 25 minutes on foot.)"], ["他们怎么去饭店？", "坐出租车。 (By taxi.)"], ["他们明天要做什么？", "回国。 (Go back to their country.)"]]}, "8": {"lines": [["A", "你好，我觉得你今天很高兴。为什么呢？"], ["B", "因为今天是我的生日。你是第一个知道的人，请不要告诉别人。我不想别人给我买东西。"], ["A", "你为什么不想别人给你买东西呢？"], ["B", "我家里有太多我不要的东西。我要卖我的东西，不要别人买东西给我。最近什么东西都很贵。一些小的，不好的东西一百多块钱。非常好的东西一千多块钱，这太贵了。"], ["A", "我觉得我们可以给你买一些小的，便宜的东西。这会让你很高兴，是不是？"], ["B", "我不想要，便宜的东西没有用。上个生日我的一个朋友给我买了一些便宜的东西。我一次都没用这些东西。"], ["A", "那我们请你去吃饭，怎么样？上次我们一起吃饭你很高兴，是不是？"], ["B", "吃饭好一点，是的，我非常喜欢吃饭。"], ["A", "那很好。让我告诉别人今天是你的生日。我们会想一想要去哪儿吃饭。"], ["B", "不要去一些很贵的饭店，因为我觉得非常不好意思。"], ["A", "今天是你的生日，不要觉得不好意思。我们要找到最好吃的饭店。"]], "qa": [["B 为什么高兴？", "因为今天是他的生日。 (It's his birthday.)"], ["B 为什么不想别人知道今天是他的生日？", "因为他不想别人给他买东西。 (He doesn't want gifts.)"], ["B 为什么不想别人给他买东西？", "他家里有太多不要的东西；东西都很贵；便宜的东西没有用。 (Too much stuff at home; things are expensive; cheap things are useless.)"], ["最近东西都便宜吗？", "不便宜，都很贵。 (No, everything is expensive.)"], ["B 喜欢做什么？", "吃饭。 (Eating.)"], ["B 为什么要觉得不好意思？", "因为他不想去很贵的饭店。 (He'd feel bad if they went somewhere expensive.)"], ["他们要找怎么样的饭店？", "最好吃的饭店。 (The tastiest restaurant.)"]]}, "9": {"lines": [["A", "你正在做什么？"], ["B", "我正在休息，我觉得我睡觉太少了。"], ["A", "为什么呢?"], ["B", "我工作的时候都想睡觉。"], ["A", "我没有这个问题。我觉得你起床后要做一些运动。"], ["B", "你早上去上班前喜欢做什么运动？"], ["A", "我上班前喜欢去跑步，你呢？"], ["B", "我早上不运动，我8点上班，我7点20分起床准备早饭。"], ["A", "你的公司在你家旁边吗？你怎么去公司？"], ["B", "不，我坐出租车去上班，坐出租车要10分钟左右。"], ["A", "你很有钱。出租车很贵。你为什么不坐公共汽车呢？公共汽车比出租车便宜得多。"], ["B", "我的公司很好，他们给我叫出租车。从家到公司他们给我叫出租车，回家的时候他们也给我叫出租车。我公司里也有吃的和喝的。"], ["A", "你的公司很好，你不要在那里睡觉。我的公司什么都不给我。"], ["B", "好的，我明天早上要和你一起去跑步，可以吗？"], ["A", "可以。我早上6点起床，6点05分去外面跑步。"], ["B", "太早了，我不想6点起床。7点10分可以吗？"]], "qa": [["B 有什么问题？", "他工作的时候都想睡觉。 (He always feels sleepy at work.)"], ["B 正在做什么？", "休息。 (Resting.)"], ["A 上班前喜欢做什么？", "跑步。 (Running.)"], ["B 几点起床？几点上班？", "7点20分起床，8点上班。 (Gets up 7:20, starts work 8:00.)"], ["B 怎么去上班？", "坐出租车。 (By taxi.)"], ["A 觉得 B 的公司怎么样?", "很好。 (Very good.)"], ["B 为什么不想6点起床？", "因为太早了。 (Too early.)"]]}, "10": {"lines": [["A", "你今天怎么样？你为什么不说话?"], ["B", "我今天很累。我不想说话。"], ["A", "你为什么累？"], ["B", "我的工作是996."], ["A", "996是什么意思？"], ["B", "你不知道吗？996的意思是，9点上班，9点下班，一个星期上6天班。"], ["A", "一个星期工作72个小时，太多了。我一个星期工作40个小时。你比我忙得多。"], ["B", "是的，我非常忙。我的工作虽然钱多，但是工作太多。我回家后我的女朋友想和我一起去吃饭，但是我不想，太累了，我想睡觉。我觉得她觉得我是一个不好的男朋友。星期一到星期六我没有时间。我想让她快乐，但是和我在一起，我不知道，我觉得我不能让她快乐"], ["A", "星期天呢？你们怎么样？"], ["B", "星期天我们虽然在一起，但是我也很累。她喜欢运动，唱歌，但是我不想和她一起做这些事情，我想吃饭和休息。"], ["A", "唱歌不是休息吗？"], ["B", "我女朋友唱歌非常不好，所以这不是休息。"], ["A", "你要和她好好说话，告诉她为什么是这样"], ["B", "她知道。虽然她说没关系，但是我觉得这是一个大的问题。"]], "qa": [["996是什么意思？", "9点上班，9点下班，一个星期上6天班。 (9 am to 9 pm, 6 days a week.)"], ["B 为什么累？", "因为他的工作是996，工作太多。 (He works 996 — too much work.)"], ["B 和他的女朋友的关系怎么样？", "不太好，他觉得她不快乐。 (Not great; he thinks she isn't happy.)"], ["B 为什么不想和他女朋友去外面吃饭？", "因为他太累了，想睡觉。 (Too tired; wants to sleep.)"], ["B 为什么觉得他女朋友不高兴？", "因为他没有时间，也不和她一起做事情。 (He has no time and doesn't do things with her.)"], ["B 的女朋友会唱歌吗？", "她唱歌，但是唱得非常不好。 (She sings, but very badly.)"], ["B 的女朋友星期天想做什么？", "运动、唱歌。 (Exercise and sing.)"], ["B 星期天想做什么？", "吃饭和休息。 (Eat and rest.)"]]}, "11": {"lines": [["A", "你有没有哥哥弟弟？姐妹呢？"], ["B", "有，我有一个妹妹，两个姐姐，一个哥哥，我没有弟弟。我有很多家人。"], ["A", "他们多大了？"], ["B", "我妹妹比我小2岁，她18岁。我一个姐姐22岁，一个姐姐23岁。我哥哥比我们大，他25岁。"], ["A", "你们都住在一起吗？"], ["B", "不是，我们家太小了。我的妹妹和我住在一起。我的两个姐姐都住在上海。我哥哥住在天津。"], ["A", "你姐姐离你很远。天津在哪儿？"], ["B", "你不知道天津吗？天津离北京不远。你可以很快到天津，要一个小时左右。我每个月都去那里看我哥哥。"], ["A", "我坐公共汽车，也是一个小时吗？"], ["B", "不是，公共汽车很慢，坐公共汽车去天津要3个小时左右。"], ["A", "好的，在中国，你们家人都有一个姓吗？"], ["B", "我姐妹，哥哥和爸爸都姓王，但是我妈妈姓高。"], ["A", "在美国我妈妈有我爸爸的姓。"], ["B", "在中国不是这样。"]], "qa": [["B 有几个妹妹？她有弟弟吗？", "一个妹妹，没有弟弟。 (One younger sister, no younger brother.)"], ["B 哥哥多大了？", "25岁。 (25.)"], ["B 哥哥住在哪儿？", "天津。 (Tianjin.)"], ["天津离北京远吗？", "不远，一个小时左右。 (Not far — about an hour.)"], ["坐公共汽车去天津要多长时间？", "3个小时左右。 (About 3 hours.)"], ["B 姓和她妈妈姓一样吗？", "不一样。B 姓王，妈妈姓高。 (No — B is Wang, mum is Gao.)"]]}, "12": {"lines": [["A", "你好，朋友，我下个月要去北京旅游，你住在北京，是不是？"], ["B", "你好。是的，我现在住在北京。你来的时候我请你吃饭。"], ["A", "好的，谢谢。我有一个问题，你可以帮我吗？"], ["B", "可以，你有什么问题？"], ["A", "我5月24号要到北京。我要住在一个宾馆，但是这对我来说是一个很大的问题，我不知道怎么到这个宾馆，你可以告诉我怎么去宾馆吗？"], ["B", "好的，你从哪个火车站要去宾馆？"], ["A", "不是从火车站，是从机场。我要坐飞机"], ["B", "好的，是北京机场吗？"], ["A", "是北京机场。"], ["B", "非常不好意思，我不知道。我在北京也是新来的。我也不太懂中文。在机场也有一个公共汽车站，我上次在机场的时候坐了公共汽车，但这个公共汽车可能是错的。我觉得你最好坐出租车。"], ["B", "好的，没问题。我会坐出租车"], ["A", "你最好不要坐机场的出租车。机场的出租车太贵了。你最好在机场叫出租车，这可能会便宜一点。"], ["B", "谢谢你，对，机场的出租车很贵。上次我给了他们100块钱。"]], "qa": [["B 住在哪儿？", "北京。 (Beijing.)"], ["A 什么时候要到北京？", "5月24号。 (24 May.)"], ["A 从哪个火车站要去宾馆？", "不是火车站，是从北京机场。 (Not a station — from Beijing airport.)"], ["A 坐什么去北京？", "坐飞机。 (By plane.)"], ["B 的中文怎么样？", "不太好，B 不太懂中文。 (Not very good.)"], ["B 会坐什么去宾馆？", "出租车。 (A taxi.)"], ["机场出租车怎么样？", "太贵了。 (Too expensive.)"]]}, "13": {"lines": [["A", "儿子，你今天考试怎么样？"], ["B", "我今天考得非常好，老师说了，我是一个很好的学生"], ["A", "是什么考试呢？"], ["B", "是中文口语考试"], ["A", "你考试的时候要做什么？"], ["B", "我考试的时候要介绍我自己，说我喜欢做什么和我为什么学习中文"], ["A", "你明天还要考试，对吗？你要好好学习。"], ["B", "但是，爸爸，我上课的时候都已经学好了。"], ["A", "你还有很多东西要学习。考试什么时候开始？"], ["B", "考试早上10点开始。"], ["A", "很好，那你今天晚上都要学习，明天早上你要早一点起床。"], ["B", "我不想太早起床，考试的时候我会很累。"], ["A", "累比没有准备好好。你准备好铅笔了吗？"], ["B", "是的，我有两个黑色的铅笔。"], ["A", "你要有三个铅笔，两个太少了"], ["B", "但是，爸爸，我已经有两个铅笔，教室里面也有很多黑色的铅笔"], ["A", "好的，那你要准备好三个黑色的铅笔，明天要早一点起床，所以你可以多学习一点。你明天8点要去学校。"], ["B", "但是，爸爸，考试10点开始。学校离这里近。我可以9点20分去学校。8点太早了"], ["A", "太早了比太晚了好。你现在不要说话，要好好学习"], ["B", "但是，爸爸。。。"]], "qa": [["A 和 B 的关系是什么？", "爸爸和儿子。 (Father and son.)"], ["B 今天考什么考试？", "中文口语考试。 (A spoken Chinese exam.)"], ["B 考试的时候要做什么？", "介绍自己，说喜欢做什么和为什么学习中文。 (Introduce himself, his hobbies and why he studies Chinese.)"], ["明天考试什么时候开始？", "早上10点。 (10 am.)"], ["B 为什么不想很早起床？", "因为考试的时候他会很累。 (He'd be tired in the exam.)"], ["B 铅笔是什么颜色？", "黑色。 (Black.)"], ["B 什么时候想去学校？", "9点20分。 (9:20.)"]]}, "14": {"lines": [["A", "我很高兴，听说这个饭馆的菜很好吃"], ["B", "我也很高兴。我们进去吧"], ["C", "你们好，请进。你们几个人？"], ["A", "两个人"], ["C", "好的。请坐在这个椅子上。你们想吃什么？"], ["B", "你们这里有什么肉？"], ["C", "我们有羊肉，鸡肉和鱼肉。"], ["B", "好的，我想吃羊肉和米饭，你呢？"], ["A", "我不喜欢吃肉。你们这里还有什么？"], ["C", "我们还有鸡蛋，我们的鸡蛋真好吃，鸡蛋可以吗？"], ["A", "好的，可以，请给我鸡蛋"], ["C", "鸡蛋和米饭吗?"], ["A", "你们这里有没有面条？"], ["C", "有"], ["A", "那我要鸡蛋和面条。"], ["C", "好的，要给你羊肉和米饭，给你鸡蛋和面条。要一起给你们吗？"], ["B", "是的，谢谢。"], ["A", "你点了一些喝的吗？"], ["B", "没有。服务员！不好意思，我们也要一些喝的。我想喝水，你呢？"], ["A", "我想喝茶。"], ["A", "你的羊肉怎么样？"], ["B", "很好吃，你的面条呢？"], ["A", "虽然很好吃，但是菜太少了"], ["B", "真的吗？"], ["A", "真的。我虽然个子小，但是我可以吃很多"], ["B", "你吃得比我多。"]], "qa": [["他们为什么高兴？", "因为听说这个饭馆的菜很好吃。 (They heard the food is good.)"], ["B 想吃什么？", "羊肉和米饭。 (Lamb and rice.)"], ["A 想吃什么？", "鸡蛋和面条。 (Eggs and noodles.)"], ["A 不喜欢吃什么?", "肉。 (Meat.)"], ["他们想喝什么？", "B 喝水，A 喝茶。 (B water, A tea.)"], ["他们觉得这个饭馆的菜怎么样？", "很好吃，但是菜太少了。 (Tasty, but small portions.)"]]}, "15": {"lines": [["A", "女儿，你们为什么没有孩子？你们在一起已经很长时间了。"], ["B", "丈夫，我也想要孩子"], ["C", "妻子，我也想要孩子，但是我们现在没有钱"], ["B", "我工作，你工作，我们住在小的，便宜的房间，我们怎么没有钱呢？"], ["C", "我一个星期工作10个小时，你工作还比我少，我们怎么可能有钱呢？我们要找好工作。我们两个人有好工作后我们就可以有个孩子。"], ["A", "我可以给你们钱，对我来说这不是一个问题。你们可以用我的钱买房子。你们买房子后可以送你们的孩子去学校。在中国没有房子的人不能送他们的孩子去学校，这对中国人来说是一个很大的问题。"], ["C", "妈妈，您不要给我们钱。明年我要找一个很好的工作，两年后我们就会用我们的钱买房子。但是我不想在中国买房子。太贵了。我想出国买房子。可能去美国"], ["A", "在美国房子也很贵，是不是？"], ["C", "是的，但是，我觉得，美国的房子虽然很贵，但是比中国的房子大得多。"]], "qa": [["B 和 C 的关系是什么？", "妻子和丈夫。 (Wife and husband.)"], ["他们为什么没有钱？", "因为他们工作很少。 (They work very few hours.)"], ["B 现在住在哪儿？", "在一个小的、便宜的房间。 (In a small, cheap room.)"], ["什么对中国人是很大的问题？", "没有房子不能送孩子去学校。 (Without a house you can't send your child to school.)"], ["他们什么时候想买房子？", "两年后。 (In two years.)"], ["在中国房子便宜吗？", "不便宜，太贵了。 (No, too expensive.)"], ["美国房子大不大？", "很大，比中国的房子大得多。 (Big — much bigger than in China.)"]]}, "16": {"lines": [["A", "丈夫，你今天为什么累？"], ["B", "我不累"], ["A", "那你为什么什么都不做？"], ["B", "我不是什么都不做。我在看报纸"], ["A", "你不要很长时间看报纸，对你的眼睛不好。"], ["B", "为什么呢？报纸不是电脑。看报纸不会让我的眼睛不好"], ["A", "但是我们家里很黑。你去外面看报纸吧，今天是晴天。"], ["B", "好的，你是对的。但是我快要看完报纸，请等5分钟我就看完了"], ["A", "今天报纸里写的是什么？"], ["B", "人们说，北京房子很贵。我希望有一天我们能在北京买房子，我就会很高兴。"], ["A", "你现在也可以高兴。我们出去玩儿吧。"], ["B", "我们可以去哪儿？"], ["A", "就在路上走路，说说话，开玩笑。"], ["B", "真的很好玩儿。但是，我们在家里也可以说话，开玩笑。"], ["A", "那你开玩笑吧"], ["B", "我一个笑话都不知道，你说吧"], ["A", "我也不知道"], ["B", "好的，和你说话我真的很高兴，但是现在就让我看报纸。"]], "qa": [["丈夫在做什么？", "看报纸。 (Reading the newspaper.)"], ["报纸里写的是什么？", "北京房子很贵。 (Beijing houses are expensive.)"], ["妻子为什么觉得看报纸对眼睛不好？", "因为家里很黑。 (The house is dark.)"], ["什么会让丈夫高兴？", "在北京买房子。 (Buying a house in Beijing.)"], ["妻子想做什么？", "出去玩儿，在路上走路，说话，开玩笑。 (Go out, walk, chat and joke.)"], ["他们开玩笑怎么样？", "他们一个笑话都不知道。 (They don't know a single joke!)"]]}, "17": {"lines": [["A", "大家都去哪儿了？今天怎么了？"], ["B", "你不知道吗？今天是黑色星期五。大家都去商店了。"], ["A", "现在很早，商店不关门吗？"], ["B", "不关门，它们今天早一点开门，晚一点关门。"], ["A", "好的，那我们去商店买东西吧"], ["B", "商店太远了，我们坐公共汽车吧。我们现在去公共汽车站。"], ["A", "我听说过，这里没有公共汽车站，对吗？"], ["B", "不是，公共汽车站离这里不远，就要往前走。我们走吧。"], ["A", "好的，我们快一点，我们的公共汽车快要到了。"], ["B", "好的，你有公共汽车票吗？"], ["A", "我没有。怎么买票呢？"], ["B", "你可以用你的手机买，你有买票 app吗？"], ["A", "我没有，你可以帮我买一下票吗？"], ["B", "好的，没问题，让我帮你买一个票。好的，买好了"], ["A", "你看，我们的公共汽车到了，你跑快一点吧！"], ["", "公共汽车里"], ["A", "你好慢。你比我高得多，你怎么比我慢呢？"], ["B", "我要开始运动多一点。对，我今天要买运动衣。"]], "qa": [["大家都去哪儿？为什么？", "去商店，因为今天是黑色星期五。 (To the shops — it's Black Friday.)"], ["现在商店开门吗？", "开门，今天早一点开门。 (Yes, they open early today.)"], ["他们想怎么去商店？", "坐公共汽车。 (By bus.)"], ["你可以用什么买公共汽车票？", "手机。 (Your phone.)"], ["B 为什么跑步很慢？", "因为他运动太少。 (He doesn't exercise enough.)"], ["B 想买什么？", "运动衣。 (Sportswear.)"]]}};
+
+const WEEKS = {0:"Before you start",1:"Week 1 · Lessons 1–3",2:"Week 2 · Lessons 4–6",3:"Week 3 · Lessons 7–9",4:"Week 4 · Lessons 10–12",5:"Week 5 · Lessons 13–15",6:"Week 6 · Lessons 16–17 + practice",7:"Week 7 · Practice tests"};
+const DOW = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+const TOTAL = DAYS.length-1;
+const ROUTINE_A = [
+  "<b>Warm up (3 min):</b> Say yesterday's words out loud.",
+  "<b>Learn the words (7 min):</b> Tap ▶ and say each word 5 times. Then go through the flashcards.",
+  "<b>Learn the idea (5 min):</b> Read “How it works” and say each example out loud.",
+  "<b>Practice (7 min):</b> Answer out loud first, then tap “Show answer”. Then take the quiz.",
+  "<b>Finish (3 min):</b> Write each new character 3 times, do the speaking task, mark the day complete."];
+const ROUTINE_B = [
+  "<b>Warm up (3 min):</b> Say yesterday's words out loud.",
+  "<b>Learn the words (5 min):</b> Tap ▶ on each new word and say it 5 times.",
+  "<b>Story (10 min):</b> Press “Play the whole story” and just listen. Then read it out loud line by line, tapping any line you can't say.",
+  "<b>Questions (5 min):</b> Answer each question out loud in Chinese, then check.",
+  "<b>Finish (3 min):</b> Retell the story and mark the day complete."];
+
+DAYS.forEach(d=>{ if(d.words) d.W=d.words.map(s=>{const [c,p,m]=s.split('|');return {c,p,m};}); if(d.say) d.S=d.say.map(s=>{const [c,p,e]=s.split('|');return {c,p,e};}); });
+let num=0; DAYS.forEach(d=>{ if(!d.start){ num++; d.n=num; } });
+function wordsUpTo(d){ return DAYS.filter(x=>x.W && x.n<=d.n).flatMap(x=>x.W); }
+function poolFor(d){
+  if(d.W) return d.W;
+  if(d.test || d.listen || d.reading) return DAYS.filter(x=>x.W).flatMap(x=>x.W);
+  return DAYS.filter(x=>x.W && d.lessons.includes(x.L)).flatMap(x=>x.W);
+}
+function storyDay(L){ return DAYS.find(x=>x.L===L && x.part==='B'); }
+
+/* ======================= STATE ======================= */
+const KEY="hsk2book_done";
+let done={}; try{ done=JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(done)); }catch(e){} }
+
+/* ======================= SPEECH ======================= */
+let voices=[], rate=0.8; const synth=window.speechSynthesis;
+const vSel=document.getElementById('voice');
+function loadVoices(){
+  if(!synth) return;
+  const all=synth.getVoices();
+  let zh=all.filter(v=>/^zh[-_](CN|Hans)/i.test(v.lang)||/^cmn/i.test(v.lang));
+  if(!zh.length) zh=all.filter(v=>/^zh/i.test(v.lang));
+  voices=zh;
+  const prev=vSel.value;
+  vSel.innerHTML = zh.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('') || '<option>Default</option>';
+  const pref=zh.findIndex(v=>/google|tingting|xiaoxiao|yunxi|huihui|natural/i.test(v.name));
+  vSel.value = prev || (pref>=0?pref:0);
+  if(all.length) document.getElementById('novoice').hidden = zh.length>0;
+}
+if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; setTimeout(()=>{loadVoices(); if(!synth.getVoices().length) document.getElementById('novoice').hidden=false;},2000); }
+else document.getElementById('novoice').hidden=false;
+document.getElementById('rate').oninput=e=>{rate=+e.target.value;document.getElementById('rateval').textContent=rate.toFixed(2)+'×';};
+let cur=null;
+function speak(text, btn, queue){
+  try{
+    if(!synth) return;
+    if(!queue) synth.cancel();
+    const u=new SpeechSynthesisUtterance(text.replace(/[A-Za-z\[\]]+/g,' '));
+    u.lang='zh-CN'; u.rate=rate; const v=voices[+vSel.value]; if(v) u.voice=v;
+    if(btn){ if(cur) cur.classList.remove('on'); cur=btn; btn.classList.add('on'); u.onend=u.onerror=()=>btn.classList.remove('on'); }
+    synth.speak(u);
+  }catch(e){}
+}
+function playList(list){ try{synth.cancel();}catch(e){} list.forEach(t=>speak(t,null,true)); }
+document.addEventListener('click',e=>{ const b=e.target.closest('button.zh'); if(b) speak(b.dataset.say,b); });
+
+/* ======================= HELPERS ======================= */
+const PLAY='<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>';
+const esc=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+const CJK=/[㐀-鿿0-9][㐀-鿿　-〿！-｠…0-9]*/g;
+function zh(html){ return html.split(/(<[^>]+>)/).map(p=>p.startsWith('<')?p:p.replace(CJK,m=>/[㐀-鿿]/.test(m)?`<button type="button" class="zh" data-say="${esc(m)}">${m}</button>`:m)).join(''); }
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const tables=h=>h.replace(/<table/g,'<div class="tw"><table').replace(/<\/table>/g,'</table></div>');
+function makeQuiz(pool, distract, n){
+  return shuffle(pool).slice(0,n).map((x,k)=>{
+    const others=shuffle(distract.filter(y=>y.c!==x.c && y.m!==x.m)).slice(0,3);
+    if(k%2===0) return {type:'c2m', x, opts:shuffle([x,...others]).map(y=>y.m), ans:x.m};
+    return {type:'m2c', x, opts:shuffle([x,...others]).map(y=>y.c), ans:x.c};
+  });
+}
+
+/* ======================= RENDER ======================= */
+function renderNav(ci){
+  let h='', lastW=-1;
+  DAYS.forEach((d,i)=>{
+    if(d.w!==lastW){ h+=`<h4>${WEEKS[d.w]}</h4>`; lastW=d.w; }
+    const lab = d.start ? 'Start here' : `Day ${d.n} · ${d.L?`L${d.L}${d.part}: `:''}${d.title}`;
+    h+=`<a href="#${d.start?'start':'day-'+d.n}" class="${i===ci?'active':''} ${done[d.n]?'done':''}"><span class="dot">${done[d.n]?'✓':''}</span><span>${lab}</span></a>`;
+  });
+  document.getElementById('nav').innerHTML=h;
+  const c=Object.values(done).filter(Boolean).length;
+  document.getElementById('bar').style.width=(c/TOTAL*100)+'%';
+  document.getElementById('ptext').textContent=`${c} / ${TOTAL} days`;
+}
+let tInt=null;
+function setupTimer(m){
+  clearInterval(tInt); const b=document.getElementById('tbtn'); if(!b) return;
+  let left=m*60, running=false; const c=document.getElementById('clock');
+  const draw=()=>c.textContent=`${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;
+  b.onclick=()=>{
+    if(running){clearInterval(tInt);running=false;b.textContent='Resume';return;}
+    if(left<=0) left=m*60;
+    running=true;b.textContent='Pause';
+    tInt=setInterval(()=>{left--;draw();if(left<=0){clearInterval(tInt);running=false;b.textContent='Again';c.textContent='Done! 🎉';}},1000);
+  };
+}
+
+function renderDay(i){
+  const d=DAYS[i];
+  let s=1; const H=(t,extra='')=>`<h3>${s++} · ${t}${extra}</h3>`;
+  let h='';
+  if(d.start){
+    h=`<div class="kicker">${WEEKS[0]}</div><h2>${d.title}</h2>${zh(d.html)}
+      <div class="row"><span></span><button class="btn primary" id="next">Start Day 1 →</button></div>`;
+    document.getElementById('main').innerHTML=tables(h);
+    document.getElementById('next').onclick=()=>go(1);
+    renderNav(i); window.scrollTo({top:0,behavior:'smooth'}); return;
+  }
+  const dow=DOW[(d.n-1)%7];
+  h+=`<div class="kicker">Day ${d.n} (${dow}) · ${WEEKS[d.w]}</div><h2>${d.L?`Lesson ${d.L}${d.part==='A'?' · Part A':' · Part B'}: `:''}${zh(d.title)}</h2>`;
+  if(d.L){
+    const media=[`Course Lesson ${20+d.L}`,`hsk2stories.pdf · Lesson ${d.L}`];
+    if(d.worksheet) media.push(`Worksheet: ${d.worksheet}`);
+    if(d.audio) media.push(`Audio: ${d.audio}`);
+    if(d.video) media.push(`Video: ${d.video}`);
+    h+=`<p class="note">📁 ${media.join(' · ')}</p>`;
+    const S=STORIES[d.L];
+    h+=`<div class="target"><b>🎯 Today:</b> ${d.part==='A'?`learn ${d.W.length} new words and one new idea.`:`learn ${d.W.length} more words and read the Lesson ${d.L} story out loud.`}</div>
+      <details class="routine"><summary class="note" style="cursor:pointer">Your routine for today (about 25 minutes)</summary><ol>${(d.part==='A'?ROUTINE_A:ROUTINE_B).map(r=>`<li>${r}</li>`).join('')}</ol></details>
+      ${H(d.part==='A'?"Today's words":"More words for this lesson",` <button class="btn sm" id="playAll" style="margin-left:auto">▶ Play all</button>`)}
+      <div class="words">${d.W.map(x=>`<div class="word"><button class="play" data-sayw="${esc(x.c)}" aria-label="Listen">${PLAY}</button><div><div class="c">${x.c}</div><div class="p">${x.p}</div><div class="m">${x.m}</div></div></div>`).join('')}</div>
+      ${H('How it works')}<div class="rule">${zh(d.how)}</div>`;
+    if(d.part==='A'){
+      h+=`${H('Say it out loud',` <button class="btn sm" id="playSay" style="margin-left:auto">▶ Play all</button>`)}
+        ${d.S.map(x=>`<div class="phrase"><button class="play" data-sayw="${esc(x.c)}" aria-label="Listen">${PLAY}</button><div class="t"><div class="cn">${zh(x.c)}</div><div class="n">${x.p} · ${x.e}</div></div></div>`).join('')}`;
+    } else {
+      h+=`${H(`The story (Lesson ${d.L})`,` <button class="btn sm" id="playStory" style="margin-left:auto">▶ Play the whole story</button>`)}
+        <p class="note">Listen once, then read it out loud. Tap ▶ for a line, or tap any word.</p>
+        <div class="dlg">${S.lines.map(l=>`<div class="phrase"><button class="play" data-sayw="${esc(l[1])}" aria-label="Listen">${PLAY}</button><div class="t">${l[0]?`<b class="spk">${l[0]}:</b> `:''}<span class="cn">${zh(l[1])}</span></div></div>`).join('')}</div>`;
+      d.prac = S.qa;
+    }
+  } else {
+    h+=`<div class="target"><b>🎯 Today:</b> ${d.test?'practise like the real exam.':d.listen?'train your ears with your course audio.':d.reading?'read all 17 stories again.':'no new words. Review and lock in what you learned.'}</div>`;
+    if(d.rules) h+=`${H('The 6 HSK2 rules')}<div class="rule">${zh(d.rules)}</div>`;
+    h+=`${H("Today's tasks")}<div class="checks">${d.tasks.map(t=>`<label><input type="checkbox" class="check">${zh(t)}</label>`).join('')}</div>`;
+    if(d.reading) h+=`<div class="rule" style="margin-top:12px">${Array.from({length:17},(_,k)=>{const sd=storyDay(k+1);return `<a href="#day-${sd.n}" style="display:inline-block;margin:4px 10px 4px 0">Lesson ${k+1}: ${sd.title.replace('Story: ','')}</a>`}).join('')}</div>`;
+  }
+  if(d.prac) h+=`${H(d.part==='B'?'Story questions':d.review?'Check yourself':'Practice')}<p class="note">Answer out loud${d.part==='B'?' in Chinese':' or on paper'} first, then tap “Show answer”.</p>
+    <ol class="prac">${d.prac.map((p,k)=>`<li><div>${k+1}. ${zh(p[0])}</div><button class="reveal">Show answer</button><div class="ans">${zh(p[1])}</div></li>`).join('')}</ol>
+    <button class="btn sm" id="showAll">Show all answers</button>`;
+
+  const pool=poolFor(d);
+  if(pool.length && d.cards!==false){
+    h+=`${H('Flashcards')}<p class="note">${d.W?'':`${pool.length} words from ${d.lessons?'Lessons '+d.lessons.join(', '):'the whole book'}. `}Look at the character, say the pinyin and meaning, then tap the card to check.</p>
+      <div class="flash" id="flash"></div>
+      <div class="fnav"><button class="btn" id="fprev">←</button><span class="note" id="fcount"></span><button class="btn" id="fnext">→</button><button class="btn" id="fshuf">Shuffle</button><button class="btn" id="fsay">▶ Hear</button></div>`;
+    const qn = d.final||d.test||d.listen||d.reading ? 15 : d.review ? 10 : Math.min(5,pool.length);
+    const distract = d.W ? wordsUpTo(d) : pool;
+    const quiz = makeQuiz(pool, distract.length>=4?distract:pool.concat(wordsUpTo(DAYS[DAYS.length-1])), Math.min(qn,pool.length));
+    d._quiz=quiz;
+    h+=`${H(d.W?'Quick quiz':`Quiz (${quiz.length} questions)`)}<p class="note">Choose the right answer. You'll hear the word when you get it right. New questions every time.</p>
+      <div id="quiz">${quiz.map((q,k)=>`<div class="q" data-k="${k}"><div class="s">${k+1}. ${q.type==='c2m'?`What does <span class="big">${q.x.c}</span> mean?`:`Which one means “<b>${q.x.m}</b>”?`}</div><div class="opts">${q.opts.map(o=>`<button class="opt ${q.type==='m2c'?'cnopt':''}">${o}</button>`).join('')}</div></div>`).join('')}</div>
+      <div class="score" id="score"></div>`;
+  } else d._quiz=null;
+  if(d.L){
+    const sp = d.part==='A' ? d.speak : `Read the story twice: once as A, once as B. Then close your eyes and retell it in 4–5 Chinese sentences, using at least 3 of today's words.`;
+    h+=`${H('Speak on your own')}<div class="task"><ul><li>${zh(sp)}</li></ul>
+      <div class="timer"><button class="btn primary" id="tbtn">Start 3-min timer</button><span class="clock" id="clock">03:00</span></div>
+      <p class="note" style="margin:8px 0 0">Tip: record yourself and compare your tones with the ▶ voice.</p></div>
+      ${H("Today's checklist")}<div class="checks">${(d.part==='A'?["I said each new word 5 times out loud","I went through the flashcards twice","I said every example out loud","I did the practice and scored full marks on the quiz","I wrote each new character 3 times"]:["I learned the new words","I listened to the whole story once","I read the story out loud (both parts)","I answered every question in Chinese","I retold the story with the timer"]).map(c=>`<label><input type="checkbox" class="check">${c}</label>`).join('')}</div>`;
+  }
+  h+=`<div class="row">
+      <button class="btn" id="prev">← ${d.n===1?'Start here':'Day '+(d.n-1)}</button>
+      <button class="btn primary" id="mark">${done[d.n]?'✓ Completed — undo':'Mark Day '+d.n+' complete'}</button>
+      <button class="btn" id="next" ${d.n===TOTAL?'disabled':''}>Day ${d.n<TOTAL?d.n+1:''} →</button></div>`;
+  document.getElementById('main').innerHTML=tables(h);
+
+  document.querySelectorAll('[data-sayw]').forEach(b=>b.onclick=()=>speak(b.dataset.sayw));
+  const pa=document.getElementById('playAll'); if(pa) pa.onclick=()=>playList(d.W.map(x=>x.c));
+  const ps=document.getElementById('playSay'); if(ps) ps.onclick=()=>playList(d.S.map(x=>x.c));
+  const pst=document.getElementById('playStory'); if(pst) pst.onclick=()=>playList(STORIES[d.L].lines.map(l=>l[1]));
+  document.querySelectorAll('.prac li').forEach(li=>li.querySelector('.reveal').onclick=()=>{li.classList.toggle('show'); li.querySelector('.reveal').textContent=li.classList.contains('show')?'Hide answer':'Show answer';});
+  const sa=document.getElementById('showAll'); if(sa) sa.onclick=()=>document.querySelectorAll('.prac li').forEach(li=>{li.classList.add('show');li.querySelector('.reveal').textContent='Hide answer';});
+
+  const fc=document.getElementById('flash');
+  if(fc){
+    let deck=pool.slice(), fi=0, flipped=false;
+    const drawF=()=>{ const x=deck[fi]; fc.innerHTML = flipped ? `<div><div class="fw">${x.c}</div><div class="fm" style="color:var(--gold);font-weight:600">${x.p}</div><div class="fm">${x.m}</div></div>` : `<div><div class="fw">${x.c}</div><div class="note">tap to see pinyin and meaning</div></div>`; document.getElementById('fcount').textContent=`${fi+1} / ${deck.length}`; };
+    fc.onclick=()=>{flipped=!flipped;drawF(); if(flipped) speak(deck[fi].c);};
+    document.getElementById('fnext').onclick=()=>{fi=(fi+1)%deck.length;flipped=false;drawF();};
+    document.getElementById('fprev').onclick=()=>{fi=(fi-1+deck.length)%deck.length;flipped=false;drawF();};
+    document.getElementById('fshuf').onclick=()=>{deck=shuffle(deck);fi=0;flipped=false;drawF();};
+    document.getElementById('fsay').onclick=()=>speak(deck[fi].c);
+    drawF();
+  }
+  if(d._quiz){
+    const quiz=d._quiz, first={};
+    document.querySelectorAll('.q').forEach(qe=>{
+      const k=+qe.dataset.k, q=quiz[k];
+      qe.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+        if(qe.dataset.solved) return;
+        const right=b.textContent===q.ans;
+        if(!(k in first)) first[k]=right;
+        if(right){
+          b.classList.add('ok'); qe.dataset.solved=1;
+          qe.querySelector('.s').innerHTML+=` <span class="note">→ <span class="zh">${q.x.c}</span> ${q.x.p} = ${q.x.m}</span>`;
+          speak(q.x.c.replace(/…/g,''));
+          if(document.querySelectorAll('.q[data-solved]').length===quiz.length){
+            const sc=Object.values(first).filter(Boolean).length;
+            document.getElementById('score').innerHTML=`Score: ${sc} / ${quiz.length} on the first try. ${sc===quiz.length?'太好了! 🎉':'Go through the flashcards again, then'} <a href="#" id="retry">${sc===quiz.length?'Try a new quiz':'try a new quiz'}</a>.`;
+            document.getElementById('retry').onclick=e=>{e.preventDefault();renderDay(i);};
+          }
+        } else b.classList.add('no');
+      });
+    });
+  }
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('mark').onclick=()=>{done[d.n]=!done[d.n];save();renderNav(i);renderDay(i);};
+  setupTimer(3);
+  renderNav(i);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function go(i){ if(i<0||i>=DAYS.length) return; location.hash = DAYS[i].start?'start':'day-'+DAYS[i].n; }
+function route(){
+  const m=location.hash.match(/day-(\d+)/);
+  let i;
+  if(m) i=Math.min(TOTAL,Math.max(1,+m[1]));
+  else if(location.hash==='#start') i=0;
+  else { i=0; if(Object.values(done).some(Boolean)){ for(let k=1;k<=TOTAL;k++){ if(!done[k]){ i=k; break; } } } }
+  renderDay(i);
+}
+window.addEventListener('hashchange',route);
+route();
+
+</script>
+<p style="max-width:1100px;margin:24px auto 32px;padding:0 20px;font:13px/1.5 system-ui,sans-serif;color:#6b6f76;text-align:center">© 2026 Md. Sumon Hossain. All rights reserved. Do not copy, download or reuse this content without permission.</p>
+<script>/* © Md. Sumon Hossain. All rights reserved. */
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('dragstart',function(e){if(e.target.tagName==='IMG')e.preventDefault();});
+document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u'||k==='p'))e.preventDefault();if((e.ctrlKey||e.metaKey)&&e.shiftKey&&(k==='i'||k==='j'||k==='c'))e.preventDefault();if(k==='f12')e.preventDefault();});
+</script>
+</body>
+</html>

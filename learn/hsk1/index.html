@@ -1,1770 +1,642 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My Daily HSK1 Book | Sumon's language books</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* Layout: one reading column like a workbook page, sticky toolbar with day picker and speed */
 :root{
-  --bg:#f6f8f7; --paper:#ffffff; --ink:#18221f; --muted:#5b6b66; --line:#dbe3e0;
-  --jade:#0f7a5c; --jade-soft:#e2f2ec; --gold:#b7791f;
-  --display:"Bricolage Grotesque","Inter",system-ui,sans-serif;
-  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --zh:"Noto Sans SC","PingFang SC","Microsoft YaHei","WenQuanYi Zen Hei",sans-serif;
+  --bg:#f6f8f7; --paper:#fffffe; --ink:#18221f; --muted:#5b6b66; --line:#dbe3e0;
+  --accent:#0f7a5c; --accent-soft:#e2f2ec; --warn:#b5462f; --warn-soft:#f8e7e2; --gold:#b7791f;
+  --zh:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0f1513; --paper:#161e1b; --ink:#e6eeeb; --muted:#9aaba5; --line:#2a3632;
-  --jade:#4fd1a5; --jade-soft:#173a2f; --gold:#e0a84a; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0f1513; --paper:#161e1b; --ink:#e6eeeb; --muted:#9aaba5; --line:#2a3632;
-  --jade:#4fd1a5; --jade-soft:#173a2f; --gold:#e0a84a; color-scheme:dark}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-body{background:var(--bg);color:var(--ink);font:16px/1.65 var(--body);
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));
-  background:var(--paper);border-bottom:1px solid var(--line)}
-.bar-in{max-width:760px;margin:0 auto;padding:10px max(16px,env(safe-area-inset-left,0px));display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap}
-.bar h1{font:700 18px/1.2 var(--display);margin:0;flex:1 1 auto;min-width:0}
-.bar h1 span{font-family:var(--zh);color:var(--jade);margin-right:6px}
-select,.seg button{font:500 14px var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.seg button{border:0;border-radius:0;cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--jade);color:var(--paper)}
-main{max-width:760px;margin:0 auto}
-.intro{margin:28px 0 8px;padding:16px 18px;background:var(--jade-soft);border-radius:12px}
-.intro p{margin:0}
-.warn{margin:12px 0;padding:12px 16px;border:1px solid var(--gold);border-radius:12px;color:var(--ink)}
-h2{font:700 clamp(24px,4vw,30px)/1.2 var(--display);margin:56px 0 8px;text-wrap:balance;scroll-margin-top:80px}
-h3{font:600 20px/1.3 var(--display);margin:36px 0 10px;padding-top:20px;border-top:1px solid var(--line);text-wrap:balance;scroll-margin-top:80px}
-h2+p{color:var(--muted)}
-p,ul,ol{margin:10px 0}
-li{margin:4px 0}
-a{color:var(--jade)}
-blockquote{margin:14px 0;padding:14px 18px;background:var(--paper);border:1px solid var(--line);border-radius:12px;font-size:18px}
-blockquote p{margin:0}
-.tw{overflow-x:auto;margin:12px 0}
-table{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font:600 12px var(--body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-td:first-child .zh{font-size:22px}
-button.zh{font:inherit;font-family:var(--zh);color:var(--jade);background:none;border:0;padding:0 2px;margin:0 -2px;cursor:pointer;
-  border-bottom:1.5px dotted var(--jade);border-radius:3px;line-height:inherit}
-button.zh:hover{background:var(--jade-soft)}
-button.zh:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
-button.zh.on{background:var(--jade);color:var(--paper)}
-details.ans{margin:10px 0;border:1px dashed var(--line);border-radius:10px;padding:8px 14px;background:var(--paper)}
-details.ans summary{cursor:pointer;font-weight:600;color:var(--muted)}
-details.ans p,details.ans ol{margin:8px 0 2px}
-li.task{list-style:none;display:flex;gap:10px;align-items:flex-start;margin-left:-1.4em;cursor:pointer}
-li.task .box{flex:none;width:18px;height:18px;margin-top:4px;border:2px solid var(--jade);border-radius:5px}
-li.task.done .box{background:var(--jade)}
-li.task.done{color:var(--muted)}
-.done-tag{font:600 12px var(--body);color:var(--jade);margin-left:8px;letter-spacing:.04em;text-transform:uppercase}
-.home{font:600 14px var(--body);color:var(--jade);text-decoration:none;white-space:nowrap}.home:hover{text-decoration:underline}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0f1513; --paper:#161e1b; --ink:#e6eeeb; --muted:#9aaba5; --line:#2a3632;
+    --accent:#4fd1a5; --accent-soft:#173a2f; --warn:#f08a70; --warn-soft:#3a2620; --gold:#e0a84a;}
+}
+*{box-sizing:border-box}
+.home{display:inline-block;margin-bottom:10px;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none}.home:hover{text-decoration:underline}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}
+header{padding:28px 20px 18px;max-width:1100px;margin:0 auto}
+h1{font-family:Fraunces,Georgia,serif;font-size:clamp(28px,4vw,40px);margin:0 0 4px;letter-spacing:-.5px}
+h1 .cn{font-family:var(--zh);color:var(--accent);margin-right:10px}
+.sub{color:var(--muted);margin:0}
+.progress{margin-top:16px;display:flex;align-items:center;gap:12px}
+.bar{flex:1;height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+.settings{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:10px}
+.warnbox{margin-top:12px;padding:10px 14px;border:1px solid var(--gold);border-radius:10px;font-size:14px}
+.layout{max-width:1100px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:250px 1fr;gap:24px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}}
+nav{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px}
+@media(max-width:800px){nav{position:static;max-height:340px}}
+nav h4{margin:12px 8px 4px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+nav a{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:14px}
+nav a:hover{background:var(--accent-soft)}
+nav a.active{background:var(--accent);color:#fff}
+nav a .dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:11px}
+nav a.done .dot{background:var(--accent);border-color:var(--accent);color:#fff}
+nav a.active .dot{border-color:#fff}
+main{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,36px);min-width:0}
+.kicker{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+h2{font-family:Fraunces,Georgia,serif;font-size:clamp(24px,3vw,32px);margin:4px 0 6px}
+h3{font-family:Fraunces,Georgia,serif;font-size:20px;margin:28px 0 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.target{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:8px;margin:14px 0}
+button{font:inherit;cursor:pointer}
+.zh{font-family:var(--zh)}
+button.zh{font:inherit;font-family:var(--zh);color:var(--accent);background:none;border:0;padding:0 2px;margin:0 -1px;border-bottom:1.5px dotted var(--accent);border-radius:3px;line-height:inherit}
+button.zh:hover{background:var(--accent-soft)}
+button.zh.on{background:var(--accent);color:var(--paper)}
+.rule{background:var(--bg);border-radius:12px;padding:14px 18px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:6px 0}
+td,th{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.word{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.word .c{font-family:var(--zh);font-size:28px;font-weight:500;line-height:1.2}
+.word .p{color:var(--gold);font-weight:600}
+.word .m{font-size:14px;color:var(--muted)}
+.play{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--accent);display:grid;place-items:center}
+.play:hover{background:var(--accent);color:#fff}
+.play svg{width:14px;height:14px}
+.phrase{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.phrase:last-child{border-bottom:0}
+.phrase .t{flex:1}
+.phrase .cn{font-family:var(--zh);font-size:20px}
+.phrase .n{font-size:14px;color:var(--muted)}
+.flash{border:2px solid var(--accent);border-radius:16px;min-height:180px;display:grid;place-items:center;text-align:center;padding:20px;cursor:pointer;user-select:none;background:var(--bg)}
+.flash .fw{font-family:var(--zh);font-size:54px;font-weight:500;line-height:1.2}
+.flash .fm{font-size:18px;margin-top:6px}
+.fnav{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:10px;flex-wrap:wrap}
+.btn{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-weight:500}
+.btn.sm{font-size:13px;padding:6px 12px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.prac{counter-reset:p;padding:0;margin:0;list-style:none}
+.prac li{padding:10px 0;border-bottom:1px dashed var(--line);display:grid;gap:6px}
+.prac li:last-child{border-bottom:0}
+.prac .ans{display:none;background:var(--accent-soft);border-radius:8px;padding:6px 12px;font-family:var(--zh);font-size:18px}
+.prac li.show .ans{display:block}
+.reveal{justify-self:start;font-size:13px;padding:4px 12px;border-radius:99px;border:1px solid var(--line);background:var(--bg);color:var(--muted)}
+.q{padding:12px 0;border-bottom:1px dashed var(--line)}
+.q .s{margin-bottom:8px}
+.q .big{font-family:var(--zh);font-size:30px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{padding:6px 14px;border-radius:99px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.opt.cnopt{font-family:var(--zh);font-size:20px}
+.opt.ok{background:var(--accent);border-color:var(--accent);color:#fff}
+.opt.no{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.score{font-weight:600;margin-top:10px}
+.task{border:2px dashed var(--gold);border-radius:12px;padding:14px 16px}
+.task ul{margin:6px 0 0;padding-left:20px}
+.timer{display:flex;align-items:center;gap:10px;margin-top:10px}
+.timer .clock{font-variant-numeric:tabular-nums;font-weight:600;font-size:20px;min-width:64px}
+.note{font-size:14px;color:var(--muted)}
+.checks label{display:flex;gap:10px;align-items:flex-start;padding:5px 0}
+.check{width:20px;height:20px;accent-color:var(--accent);flex:none;margin-top:3px}
+.story{font-family:var(--zh);font-size:20px;line-height:2;background:var(--bg);border-radius:12px;padding:16px 18px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.routine ol{padding-left:20px;margin:6px 0}
+ul.plain{padding-left:20px}
 </style>
-</head><body>
-
-<header class="bar"><div class="bar-in">
-  <a class="home" href="../" aria-label="All books">← Books</a>
-  <h1><span>汉语</span>My Daily HSK1 Book</h1>
-  <label class="sr" for="jump" hidden>Go to day</label>
-  <select id="jump" aria-label="Go to a day"></select>
-  <div class="seg" role="group" aria-label="Speaking speed">
-    <button type="button" id="spd-n" aria-pressed="true">Normal</button>
-    <button type="button" id="spd-s" aria-pressed="false">Slow</button>
+</head>
+<body>
+<header>
+  <a class="home" href="../">← All books</a>
+  <h1><span class="cn">汉语</span>My Daily HSK1 Book</h1>
+  <p class="sub">5 new words and 1 new idea a day, about 25 minutes. Tap any green Chinese to hear it, then say it out loud.</p>
+  <div class="progress"><div class="bar"><i id="bar"></i></div><span id="ptext" class="note">0 / 42 days</span></div>
+  <div class="settings">
+    <label>Voice speed <input type="range" id="rate" min="0.4" max="1" step="0.05" value="0.8"></label>
+    <span id="rateval">0.80×</span>
+    <label>Voice <select id="voice"></select></label>
   </div>
-</div></header>
-
-<main>
-  <div class="intro"><p><b>Tap any green Chinese word or sentence to hear it.</b> Use <b>Slow</b> when a sound is hard to catch, then repeat it out loud. Tap a task box to tick it off; this device remembers it.</p></div>
-  <div class="warn" id="novoice" hidden><b>No Chinese voice found on this device.</b> On Windows, open Settings, Time &amp; language, Speech, and add Chinese (Simplified). On a Mac, add a Chinese voice under System Settings, Accessibility, Spoken Content. iPhones and Android phones usually have one built in, so this page works best there.</div>
-  <h2 id="how-to-use-this-book">How to use this book</h2>
-<p>Do one day at a time, about 25 minutes a day. Each lesson has only 5 new words and 1 new idea, so you never have to learn too much at once. The book runs for 6 weeks, matching your <a href="https://claude.ai/artifact/Veh6TQVg5PygCmLkGG5zfh">6-week HSK1 study plan</a>: Monday to Saturday are lesson days, Sunday is a review day, and Week 6 is for practice tests.</p>
-<p>Your daily routine:</p>
-<ol>
-<li><strong>Warm up (3 min).</strong> Read yesterday's 5 words out loud.</li>
-<li><strong>Learn the words (7 min).</strong> Read each new word 5 times: say the pinyin, say the meaning, look at the character.</li>
-<li><strong>Learn the idea (5 min).</strong> Read the "How it works" part and the example sentences out loud.</li>
-<li><strong>Practice (7 min).</strong> Answer the practice questions on paper, then check the answers below them.</li>
-<li><strong>Finish (3 min).</strong> Write each new character 3 times and tick the day off.</li>
-</ol>
-<p>Three simple rules make this work:</p>
-<ul>
-<li><strong>Say everything out loud.</strong> Chinese is a spoken language first. Reading silently does not train your tones.</li>
-<li><strong>Don't skip Sunday.</strong> Review days are where words move into long-term memory.</li>
-<li><strong>Missed a day?</strong> Just continue from where you stopped. Do not try to do two days at once.</li>
-</ul>
-<p>You do not need to write characters perfectly for HSK1. The test is listening and reading, so recognising a character is enough.</p>
-<h2 id="before-day-1-the-three-buildin">Before Day 1: the three building blocks</h2>
-<p>Every Chinese word has three parts: a <strong>character</strong> (what you see), <strong>pinyin</strong> (how to say it, in Latin letters) and a <strong>tone</strong> (the shape of your voice). Learn these three ideas once, and every lesson after this gets easier.</p>
-<h3 id="1-pinyin-chinese-written-in-ou">1. Pinyin = Chinese written in our alphabet</h3>
-<p>Pinyin tells you how to pronounce a character. <button type="button" class="zh" data-say="你好">你好</button> is written <strong>nǐ hǎo</strong>. Most letters sound close to English, but a few are different:</p>
-<table>
-<thead>
-<tr>
-<th>Pinyin</th>
-<th>Sounds like</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>x</td>
-<td>"sh" with a big smile</td>
-<td><button type="button" class="zh" data-say="谢谢">谢谢</button> xièxie (thank you)</td>
-</tr>
-<tr>
-<td>q</td>
-<td>"ch" with a big smile</td>
-<td><button type="button" class="zh" data-say="去">去</button> qù (go)</td>
-</tr>
-<tr>
-<td>j</td>
-<td>"j" with a big smile</td>
-<td><button type="button" class="zh" data-say="几">几</button> jǐ (how many)</td>
-</tr>
-<tr>
-<td>zh</td>
-<td>"j" in "jump"</td>
-<td><button type="button" class="zh" data-say="中国">中国</button> Zhōngguó (China)</td>
-</tr>
-<tr>
-<td>c</td>
-<td>"ts" in "cats"</td>
-<td><button type="button" class="zh" data-say="菜">菜</button> cài (dish of food)</td>
-</tr>
-<tr>
-<td>z</td>
-<td>"ds" in "beds"</td>
-<td><button type="button" class="zh" data-say="再见">再见</button> zàijiàn (goodbye)</td>
-</tr>
-<tr>
-<td>r</td>
-<td>between "r" and the "s" in "pleasure"</td>
-<td><button type="button" class="zh" data-say="人">人</button> rén (person)</td>
-</tr>
-<tr>
-<td>ü</td>
-<td>say "ee" with round lips</td>
-<td><button type="button" class="zh" data-say="女">女</button> nǚ (woman)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="2-the-four-tones">2. The four tones</h3>
-<p>The same sound with a different tone is a different word. <strong>mā</strong> (mother) and <strong>mǎ</strong> (horse) are not the same word! The mark above the vowel shows the tone.</p>
-<table>
-<thead>
-<tr>
-<th>Tone</th>
-<th>Mark</th>
-<th>Your voice</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1st</td>
-<td>ā</td>
-<td>High and flat, like singing one long note</td>
-<td><button type="button" class="zh" data-say="妈">妈</button> mā (mum)</td>
-</tr>
-<tr>
-<td>2nd</td>
-<td>á</td>
-<td>Goes up, like asking "What?"</td>
-<td><button type="button" class="zh" data-say="来">来</button> lái (come)</td>
-</tr>
-<tr>
-<td>3rd</td>
-<td>ǎ</td>
-<td>Dips down low, then up a little</td>
-<td><button type="button" class="zh" data-say="我">我</button> wǒ (I)</td>
-</tr>
-<tr>
-<td>4th</td>
-<td>à</td>
-<td>Drops sharply, like saying "No!"</td>
-<td><button type="button" class="zh" data-say="是">是</button> shì (to be)</td>
-</tr>
-<tr>
-<td>Neutral</td>
-<td>a</td>
-<td>Short and light, no mark</td>
-<td><button type="button" class="zh" data-say="吗">吗</button> ma (question word)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Two tone rules you will hear all the time:</strong></p>
-<ul>
-<li>Two 3rd tones in a row: the first one becomes a 2nd tone. <button type="button" class="zh" data-say="你好">你好</button> nǐ hǎo is said <strong>ní hǎo</strong>.</li>
-<li><button type="button" class="zh" data-say="不">不</button> bù (not) becomes <strong>bú</strong> before a 4th tone. <button type="button" class="zh" data-say="不是">不是</button> is said <strong>bú shì</strong>.</li>
-</ul>
-<h3 id="3-characters-are-built-from-pi">3. Characters are built from pieces</h3>
-<p>You don't need to write characters perfectly for HSK1, only recognise them. It helps to notice the pieces. <button type="button" class="zh" data-say="好">好</button> (good) is <button type="button" class="zh" data-say="女">女</button> (woman) + <button type="button" class="zh" data-say="子">子</button> (child). <button type="button" class="zh" data-say="你">你</button> (you) has <button type="button" class="zh" data-say="亻">亻</button> on the left, which means "person". <button type="button" class="zh" data-say="吗">吗</button>, <button type="button" class="zh" data-say="吃">吃</button>, <button type="button" class="zh" data-say="喝">喝</button> and <button type="button" class="zh" data-say="叫">叫</button> all have <button type="button" class="zh" data-say="口">口</button> (mouth) on the left, because they are about the mouth.</p>
-<h3 id="grammar-in-one-sentence">Grammar in one sentence</h3>
-<p>Chinese grammar is friendly: verbs never change (no "I am / he is / they were"), there are no plurals, and the basic word order is the same as English: <strong>Who + does + what</strong>. <button type="button" class="zh" data-say="我">我</button> <button type="button" class="zh" data-say="喝">喝</button> <button type="button" class="zh" data-say="茶">茶</button> = I drink tea.</p>
-<h2 id="week-1">Week 1: Meeting people</h2>
-<p>By Sunday you can say hello, say your name and nationality, count to ten, and talk about your family and friends.</p>
-<h3 id="day-1">Day 1 (Mon): Hello and goodbye</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="你">你</button></td>
-<td>nǐ</td>
-<td>you</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="好">好</button></td>
-<td>hǎo</td>
-<td>good, fine</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="我">我</button></td>
-<td>wǒ</td>
-<td>I, me</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="谢谢">谢谢</button></td>
-<td>xièxie</td>
-<td>thank you</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="再见">再见</button></td>
-<td>zàijiàn</td>
-<td>goodbye</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> <button type="button" class="zh" data-say="你好">你好</button> means "you good", and Chinese people use it as "hello". To answer, say <button type="button" class="zh" data-say="你好">你好</button> back. Remember the tone rule: say it <strong>ní hǎo</strong>.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="你好！">你好！</button> Nǐ hǎo! (Hello!)</li>
-<li><button type="button" class="zh" data-say="谢谢！">谢谢！</button> Xièxie! (Thank you!)</li>
-<li><button type="button" class="zh" data-say="再见！">再见！</button> Zàijiàn! (Goodbye!)</li>
-</ul>
-<p><strong>Practice:</strong> What do you say when (1) you meet a teacher, (2) someone gives you tea, (3) you leave a shop?</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="你好">你好</button> (2) <button type="button" class="zh" data-say="谢谢">谢谢</button> (3) <button type="button" class="zh" data-say="再见">再见</button></p></details>
-<h3 id="day-2">Day 2 (Tue): "I am..." with <button type="button" class="zh" data-say="是">是</button></h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="是">是</button></td>
-<td>shì</td>
-<td>to be (am, is, are)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="不">不</button></td>
-<td>bù</td>
-<td>not, no</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="他">他</button> / <button type="button" class="zh" data-say="她">她</button></td>
-<td>tā</td>
-<td>he / she (same sound!)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="老师">老师</button></td>
-<td>lǎoshī</td>
-<td>teacher</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="学生">学生</button></td>
-<td>xuésheng</td>
-<td>student</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> <button type="button" class="zh" data-say="是">是</button> joins two nouns: <strong>A <button type="button" class="zh" data-say="是">是</button> B</strong> = A is B. To say "not", put <button type="button" class="zh" data-say="不">不</button> before <button type="button" class="zh" data-say="是">是</button>. <button type="button" class="zh" data-say="是">是</button> never changes: <button type="button" class="zh" data-say="我是">我是</button>, <button type="button" class="zh" data-say="你是">你是</button>, <button type="button" class="zh" data-say="他是">他是</button>.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="我是学生。">我是学生。</button> Wǒ shì xuésheng. (I am a student.)</li>
-<li><button type="button" class="zh" data-say="她是老师。">她是老师。</button> Tā shì lǎoshī. (She is a teacher.)</li>
-<li><button type="button" class="zh" data-say="他不是老师。">他不是老师。</button> Tā bú shì lǎoshī. (He is not a teacher.)</li>
-</ul>
-<p><strong>Practice:</strong> Say in Chinese: (1) You are a teacher. (2) I am not a teacher. (3) She is a student.</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="你是老师。">你是老师。</button> (2) <button type="button" class="zh" data-say="我不是老师。">我不是老师。</button> (3) <button type="button" class="zh" data-say="她是学生。">她是学生。</button></p></details>
-<h3 id="day-3">Day 3 (Wed): What's your name? (<button type="button" class="zh" data-say="吗">吗</button> and <button type="button" class="zh" data-say="什么">什么</button>)</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="叫">叫</button></td>
-<td>jiào</td>
-<td>to be called</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="什么">什么</button></td>
-<td>shénme</td>
-<td>what</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="名字">名字</button></td>
-<td>míngzi</td>
-<td>name</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="吗">吗</button></td>
-<td>ma</td>
-<td>turns a sentence into a yes/no question</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="的">的</button></td>
-<td>de</td>
-<td>'s (shows who owns something)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Two easy ways to ask a question. (1) Add <strong><button type="button" class="zh" data-say="吗">吗</button></strong> to the end of any sentence: <button type="button" class="zh" data-say="你是老师">你是老师</button> → <button type="button" class="zh" data-say="你是老师吗">你是老师吗</button>? (Are you a teacher?) (2) Put <strong><button type="button" class="zh" data-say="什么">什么</button></strong> where the answer goes. The word order does not change, unlike English.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="你叫什么名字？">你叫什么名字？</button> Nǐ jiào shénme míngzi? (What's your name?)</li>
-<li><button type="button" class="zh" data-say="我叫">我叫</button> Sumon。 Wǒ jiào Sumon. (My name is Sumon.)</li>
-<li><button type="button" class="zh" data-say="你是学生吗？">你是学生吗？</button> Nǐ shì xuésheng ma? (Are you a student?)</li>
-<li><button type="button" class="zh" data-say="我的老师">我的老师</button> wǒ de lǎoshī (my teacher)</li>
-</ul>
-<p><strong>Practice:</strong> (1) Turn "<button type="button" class="zh" data-say="他是老师">他是老师</button>" into a question. (2) Answer: <button type="button" class="zh" data-say="你叫什么名字？">你叫什么名字？</button> (3) Say "her name".</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="他是老师吗？">他是老师吗？</button> (2) <button type="button" class="zh" data-say="我叫">我叫</button> [your name]。 (3) <button type="button" class="zh" data-say="她的名字">她的名字</button></p></details>
-<h3 id="day-4">Day 4 (Thu): Numbers 1 to 10</h3>
-<table>
-<thead>
-<tr>
-<th><button type="button" class="zh" data-say="一">一</button> yī 1</th>
-<th><button type="button" class="zh" data-say="二">二</button> èr 2</th>
-<th><button type="button" class="zh" data-say="三">三</button> sān 3</th>
-<th><button type="button" class="zh" data-say="四">四</button> sì 4</th>
-<th><button type="button" class="zh" data-say="五">五</button> wǔ 5</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong><button type="button" class="zh" data-say="六">六</button> liù 6</strong></td>
-<td><strong><button type="button" class="zh" data-say="七">七</button> qī 7</strong></td>
-<td><strong><button type="button" class="zh" data-say="八">八</button> bā 8</strong></td>
-<td><strong><button type="button" class="zh" data-say="九">九</button> jiǔ 9</strong></td>
-<td><strong><button type="button" class="zh" data-say="十">十</button> shí 10</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Bigger numbers are like building blocks. 11 = <button type="button" class="zh" data-say="十一">十一</button> (ten-one). 20 = <button type="button" class="zh" data-say="二十">二十</button> (two-ten). 25 = <button type="button" class="zh" data-say="二十五">二十五</button> (two-ten-five). 99 = <button type="button" class="zh" data-say="九十九">九十九</button>. That's all you need up to 99!</p>
-<p><strong>Say it out loud:</strong> <button type="button" class="zh" data-say="十二">十二</button> (12), <button type="button" class="zh" data-say="三十">三十</button> (30), <button type="button" class="zh" data-say="四十七">四十七</button> (47), <button type="button" class="zh" data-say="八十八">八十八</button> (88)</p>
-<p><strong>Practice:</strong> Write these in Chinese: (1) 15 (2) 51 (3) 65 (4) 78</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="十五">十五</button> (2) <button type="button" class="zh" data-say="五十一">五十一</button> (3) <button type="button" class="zh" data-say="六十五">六十五</button> (4) <button type="button" class="zh" data-say="七十八">七十八</button></p></details>
-<h3 id="day-5">Day 5 (Fri): Where are you from?</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="中国">中国</button></td>
-<td>Zhōngguó</td>
-<td>China</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="人">人</button></td>
-<td>rén</td>
-<td>person</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="哪">哪</button></td>
-<td>nǎ</td>
-<td>which</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="国">国</button></td>
-<td>guó</td>
-<td>country</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="美国">美国</button></td>
-<td>Měiguó</td>
-<td>America (USA)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Country + <button type="button" class="zh" data-say="人">人</button> = a person from that country. <button type="button" class="zh" data-say="中国人">中国人</button> = Chinese person. To ask "Where are you from?", ask "you are which-country person?": <button type="button" class="zh" data-say="你是哪国人">你是哪国人</button>?</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="你是哪国人？">你是哪国人？</button> Nǐ shì nǎ guó rén? (Where are you from?)</li>
-<li><button type="button" class="zh" data-say="我是中国人。">我是中国人。</button> Wǒ shì Zhōngguó rén. (I am Chinese.)</li>
-<li><button type="button" class="zh" data-say="她不是美国人。">她不是美国人。</button> Tā bú shì Měiguó rén. (She is not American.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) Ask your friend where they're from. (2) Say "He is American." (3) Say "Are you Chinese?"</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="你是哪国人？">你是哪国人？</button> (2) <button type="button" class="zh" data-say="他是美国人。">他是美国人。</button> (3) <button type="button" class="zh" data-say="你是中国人吗？">你是中国人吗？</button></p></details>
-<h3 id="day-6">Day 6 (Sat): We, you all, they (<button type="button" class="zh" data-say="们">们</button>)</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="们">们</button></td>
-<td>men</td>
-<td>makes people plural</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="朋友">朋友</button></td>
-<td>péngyou</td>
-<td>friend</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="家">家</button></td>
-<td>jiā</td>
-<td>home, family</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="爱">爱</button></td>
-<td>ài</td>
-<td>to love</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="和">和</button></td>
-<td>hé</td>
-<td>and (joins nouns only)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Add <button type="button" class="zh" data-say="们">们</button> to a person word to make it plural: <button type="button" class="zh" data-say="我们">我们</button> (we), <button type="button" class="zh" data-say="你们">你们</button> (you all), <button type="button" class="zh" data-say="他们">他们</button> (they), <button type="button" class="zh" data-say="老师们">老师们</button> (teachers). With family and close friends you can drop <button type="button" class="zh" data-say="的">的</button>: <button type="button" class="zh" data-say="我妈妈">我妈妈</button> is fine, no need for <button type="button" class="zh" data-say="我的妈妈">我的妈妈</button>.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="我们是朋友。">我们是朋友。</button> Wǒmen shì péngyou. (We are friends.)</li>
-<li><button type="button" class="zh" data-say="我爱我家。">我爱我家。</button> Wǒ ài wǒ jiā. (I love my family.)</li>
-<li><button type="button" class="zh" data-say="老师和学生">老师和学生</button> lǎoshī hé xuésheng (teachers and students)</li>
-</ul>
-<p><strong>Practice:</strong> (1) Say "They are students." (2) Say "my friend". (3) What does <button type="button" class="zh" data-say="你们好">你们好</button> mean?</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="他们是学生。">他们是学生。</button> (2) <button type="button" class="zh" data-say="我的朋友">我的朋友</button> or <button type="button" class="zh" data-say="我朋友">我朋友</button> (3) Hello, everyone!</p></details>
-<h3 id="day-7">Day 7 (Sun): Review Week 1</h3>
-<p>No new words today. Do these four things:</p>
-<ul>
-<li class="task"><span class="box"></span>Read all 30 words of this week out loud, covering the meaning column. Mark the ones you forgot.</li>
-<li class="task"><span class="box"></span>Introduce yourself out loud: hello, your name, where you're from, student or not, goodbye.</li>
-<li class="task"><span class="box"></span>Count from 1 to 30 out loud, then say your age.</li>
-<li class="task"><span class="box"></span>Translate: (1) Is she your friend? (2) We are not Chinese. (3) What's your teacher's name?</li>
-</ul>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="她是你的朋友吗？">她是你的朋友吗？</button> (2) <button type="button" class="zh" data-say="我们不是中国人。">我们不是中国人。</button> (3) <button type="button" class="zh" data-say="你的老师叫什么名字？">你的老师叫什么名字？</button></p></details>
-<h2 id="week-2">Week 2: Eating, wanting and places</h2>
-<p>By Sunday you can say what you have, what you eat and drink, what you want, how things are, and where things are.</p>
-<h3 id="day-8">Day 8 (Mon): Having things (<button type="button" class="zh" data-say="有">有</button>, <button type="button" class="zh" data-say="没有">没有</button>, <button type="button" class="zh" data-say="个">个</button>)</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="有">有</button></td>
-<td>yǒu</td>
-<td>to have; there is</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="没">没</button></td>
-<td>méi</td>
-<td>not (only used with <button type="button" class="zh" data-say="有">有</button>)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="个">个</button></td>
-<td>ge</td>
-<td>general "counting word"</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="几">几</button></td>
-<td>jǐ</td>
-<td>how many (small numbers)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="岁">岁</button></td>
-<td>suì</td>
-<td>years old</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Two big rules today.</p>
-<ul>
-<li>The "not" of <button type="button" class="zh" data-say="有">有</button> is always <strong><button type="button" class="zh" data-say="没有">没有</button></strong>, never <button type="button" class="zh" data-say="不有">不有</button>. <button type="button" class="zh" data-say="我不有钱">我不有钱</button> is wrong; <button type="button" class="zh" data-say="我没有钱">我没有钱</button> is right.</li>
-<li>In Chinese you can't say "three apples" directly. You need a <strong>counting word</strong> between the number and the thing: <button type="button" class="zh" data-say="三">三</button><strong><button type="button" class="zh" data-say="个">个</button></strong><button type="button" class="zh" data-say="苹果">苹果</button>. <button type="button" class="zh" data-say="个">个</button> is the one you use most.</li>
-</ul>
-<p>Age is easy: <button type="button" class="zh" data-say="我二十五岁">我二十五岁</button> = I am 25. No <button type="button" class="zh" data-say="是">是</button> needed!</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="我有一个朋友。">我有一个朋友。</button> Wǒ yǒu yí ge péngyou. (I have one friend.)</li>
-<li><button type="button" class="zh" data-say="你有几个老师？">你有几个老师？</button> Nǐ yǒu jǐ ge lǎoshī? (How many teachers do you have?)</li>
-<li><button type="button" class="zh" data-say="你几岁？">你几岁？</button> Nǐ jǐ suì? (How old are you? for a child)</li>
-</ul>
-<p><strong>Practice:</strong> Fix the mistakes: (1) <button type="button" class="zh" data-say="我不有朋友。">我不有朋友。</button> (2) <button type="button" class="zh" data-say="我有三朋友。">我有三朋友。</button> (3) <button type="button" class="zh" data-say="我是二十岁。">我是二十岁。</button></p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="我没有朋友。">我没有朋友。</button> (2) <button type="button" class="zh" data-say="我有三个朋友。">我有三个朋友。</button> (3) <button type="button" class="zh" data-say="我二十岁。">我二十岁。</button></p></details>
-<h3 id="day-9">Day 9 (Tue): Eating and drinking</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="吃">吃</button></td>
-<td>chī</td>
-<td>to eat</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="喝">喝</button></td>
-<td>hē</td>
-<td>to drink</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="水">水</button></td>
-<td>shuǐ</td>
-<td>water</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="茶">茶</button></td>
-<td>chá</td>
-<td>tea</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="米饭">米饭</button></td>
-<td>mǐfàn</td>
-<td>cooked rice</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Same order as English: <strong>who + verb + thing</strong>. <button type="button" class="zh" data-say="我喝茶">我喝茶</button> = I drink tea. To ask "what", just swap the thing for <button type="button" class="zh" data-say="什么">什么</button>: <button type="button" class="zh" data-say="你吃什么？">你吃什么？</button> (You eat what?)</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="你喝什么？">你喝什么？</button> Nǐ hē shénme? (What will you drink?)</li>
-<li><button type="button" class="zh" data-say="我喝水。">我喝水。</button> Wǒ hē shuǐ. (I'll drink water.)</li>
-<li><button type="button" class="zh" data-say="他们不吃米饭。">他们不吃米饭。</button> Tāmen bù chī mǐfàn. (They don't eat rice.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) Ask "Do you drink tea?" (2) Say "I don't drink water." (3) Ask "What does she eat?"</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="你喝茶吗？">你喝茶吗？</button> (2) <button type="button" class="zh" data-say="我不喝水。">我不喝水。</button> (3) <button type="button" class="zh" data-say="她吃什么？">她吃什么？</button></p></details>
-<h3 id="day-10">Day 10 (Wed): Wanting and liking</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="想">想</button></td>
-<td>xiǎng</td>
-<td>to want to, would like to</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="喜欢">喜欢</button></td>
-<td>xǐhuan</td>
-<td>to like</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="菜">菜</button></td>
-<td>cài</td>
-<td>dish, food</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="苹果">苹果</button></td>
-<td>píngguǒ</td>
-<td>apple</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="水果">水果</button></td>
-<td>shuǐguǒ</td>
-<td>fruit</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Put <button type="button" class="zh" data-say="想">想</button> or <button type="button" class="zh" data-say="喜欢">喜欢</button> in front of the verb: <strong><button type="button" class="zh" data-say="我想吃">我想吃</button></strong> = I want to eat. <strong><button type="button" class="zh" data-say="我喜欢喝茶">我喜欢喝茶</button></strong> = I like drinking tea. For "don't want", say <button type="button" class="zh" data-say="不想">不想</button>.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="我想吃中国菜。">我想吃中国菜。</button> Wǒ xiǎng chī Zhōngguó cài. (I want to eat Chinese food.)</li>
-<li><button type="button" class="zh" data-say="你喜欢苹果吗？">你喜欢苹果吗？</button> Nǐ xǐhuan píngguǒ ma? (Do you like apples?)</li>
-<li><button type="button" class="zh" data-say="我不想喝茶。">我不想喝茶。</button> Wǒ bù xiǎng hē chá. (I don't want to drink tea.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "What do you want to eat?" (2) "I like fruit." (3) "She doesn't want to eat apples."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="你想吃什么？">你想吃什么？</button> (2) <button type="button" class="zh" data-say="我喜欢水果。">我喜欢水果。</button> (3) <button type="button" class="zh" data-say="她不想吃苹果。">她不想吃苹果。</button></p></details>
-<h3 id="day-11">Day 11 (Thu): Describing things (<button type="button" class="zh" data-say="很">很</button> + adjective)</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="很">很</button></td>
-<td>hěn</td>
-<td>very (but often just means "is")</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="大">大</button></td>
-<td>dà</td>
-<td>big</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="小">小</button></td>
-<td>xiǎo</td>
-<td>small</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="多">多</button></td>
-<td>duō</td>
-<td>many, much</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="少">少</button></td>
-<td>shǎo</td>
-<td>few, little</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> This is the most common beginner mistake! With describing words, <strong>don't use <button type="button" class="zh" data-say="是">是</button></strong>. Use <button type="button" class="zh" data-say="很">很</button> instead. <button type="button" class="zh" data-say="这个东西是大">这个东西是大</button> is wrong; <button type="button" class="zh" data-say="这个东西">这个东西</button><strong><button type="button" class="zh" data-say="很">很</button></strong><button type="button" class="zh" data-say="大">大</button> is right. Here <button type="button" class="zh" data-say="很">很</button> doesn't really mean "very"; it just links the words. For "not", use <button type="button" class="zh" data-say="不">不</button> without <button type="button" class="zh" data-say="很">很</button>: <button type="button" class="zh" data-say="不大">不大</button> (not big).</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="中国很大。">中国很大。</button> Zhōngguó hěn dà. (China is big.)</li>
-<li><button type="button" class="zh" data-say="我的家很小。">我的家很小。</button> Wǒ de jiā hěn xiǎo. (My home is small.)</li>
-<li><button type="button" class="zh" data-say="学生很多。">学生很多。</button> Xuésheng hěn duō. (There are many students.)</li>
-</ul>
-<p><strong>Practice:</strong> Fix or translate: (1) <button type="button" class="zh" data-say="苹果是大。">苹果是大。</button> (2) "My friends are few." (3) "The teacher is good."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="苹果很大。">苹果很大。</button> (2) <button type="button" class="zh" data-say="我的朋友很少。">我的朋友很少。</button> (3) <button type="button" class="zh" data-say="老师很好。">老师很好。</button></p></details>
-<h3 id="day-12">Day 12 (Fri): This, that and where (<button type="button" class="zh" data-say="在">在</button>)</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="这">这</button></td>
-<td>zhè</td>
-<td>this</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="那">那</button></td>
-<td>nà</td>
-<td>that</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="在">在</button></td>
-<td>zài</td>
-<td>to be at / in</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="哪儿">哪儿</button></td>
-<td>nǎr</td>
-<td>where</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="这儿">这儿</button> / <button type="button" class="zh" data-say="那儿">那儿</button></td>
-<td>zhèr / nàr</td>
-<td>here / there</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> <button type="button" class="zh" data-say="这">这</button> and <button type="button" class="zh" data-say="那">那</button> need a counting word before a thing: <button type="button" class="zh" data-say="这">这</button><strong><button type="button" class="zh" data-say="个">个</button></strong><button type="button" class="zh" data-say="苹果">苹果</button> (this apple). For location, use <strong><button type="button" class="zh" data-say="在">在</button></strong> (not <button type="button" class="zh" data-say="是">是</button>): <button type="button" class="zh" data-say="我在家">我在家</button> = I am at home. Watch the tones: <strong>nǎ</strong> (which) dips, <strong>nà</strong> (that) drops.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="你在哪儿？">你在哪儿？</button> Nǐ zài nǎr? (Where are you?)</li>
-<li><button type="button" class="zh" data-say="我在这儿。">我在这儿。</button> Wǒ zài zhèr. (I'm here.)</li>
-<li><button type="button" class="zh" data-say="那是我的茶。">那是我的茶。</button> Nà shì wǒ de chá. (That is my tea.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "Where is the teacher?" (2) "This person is my friend." (3) "I'm not at home."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="老师在哪儿？">老师在哪儿？</button> (2) <button type="button" class="zh" data-say="这个人是我的朋友。">这个人是我的朋友。</button> (3) <button type="button" class="zh" data-say="我不在家。">我不在家。</button></p></details>
-<h3 id="day-13">Day 13 (Sat): Going and coming</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="去">去</button></td>
-<td>qù</td>
-<td>to go</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="来">来</button></td>
-<td>lái</td>
-<td>to come</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="回">回</button></td>
-<td>huí</td>
-<td>to return (home)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="学校">学校</button></td>
-<td>xuéxiào</td>
-<td>school</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="商店">商店</button></td>
-<td>shāngdiàn</td>
-<td>shop</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> <button type="button" class="zh" data-say="去">去</button> + place = go to a place. No word for "to" is needed. Going home is special: say <strong><button type="button" class="zh" data-say="回家">回家</button></strong> (return home), not <button type="button" class="zh" data-say="去家">去家</button>. So <button type="button" class="zh" data-say="我想去家">我想去家</button> is wrong; <button type="button" class="zh" data-say="我想回家">我想回家</button> is right.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="我去学校。">我去学校。</button> Wǒ qù xuéxiào. (I'm going to school.)</li>
-<li><button type="button" class="zh" data-say="你想去哪儿？">你想去哪儿？</button> Nǐ xiǎng qù nǎr? (Where do you want to go?)</li>
-<li><button type="button" class="zh" data-say="他回家。">他回家。</button> Tā huí jiā. (He's going home.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "I don't want to go to school." (2) "Do you want to come to my home?" (3) "We're going to the shop."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="我不想去学校。">我不想去学校。</button> (2) <button type="button" class="zh" data-say="你想来我家吗？">你想来我家吗？</button> (3) <button type="button" class="zh" data-say="我们去商店。">我们去商店。</button></p></details>
-<h3 id="day-14">Day 14 (Sun): Review Week 2</h3>
-<ul>
-<li class="task"><span class="box"></span>Read all of this week's words out loud, covering the meaning. Re-read any Week 1 words you marked.</li>
-<li class="task"><span class="box"></span>Say 5 sentences about your food: what you like, what you don't eat, what you want now.</li>
-<li class="task"><span class="box"></span>Fix these mistakes: (1) <button type="button" class="zh" data-say="我买了三苹果">我买了三苹果</button> (2) <button type="button" class="zh" data-say="我不有钱">我不有钱</button> (3) <button type="button" class="zh" data-say="我想去家">我想去家</button> (4) <button type="button" class="zh" data-say="这个东西是大">这个东西是大</button> (5) <button type="button" class="zh" data-say="今天热？">今天热？</button></li>
-</ul>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="我买了三">我买了三</button><strong><button type="button" class="zh" data-say="个">个</button></strong><button type="button" class="zh" data-say="苹果">苹果</button> (2) <button type="button" class="zh" data-say="我">我</button><strong><button type="button" class="zh" data-say="没">没</button></strong><button type="button" class="zh" data-say="有钱">有钱</button> (3) <button type="button" class="zh" data-say="我想">我想</button><strong><button type="button" class="zh" data-say="回">回</button></strong><button type="button" class="zh" data-say="家">家</button> (4) <button type="button" class="zh" data-say="这个东西">这个东西</button><strong><button type="button" class="zh" data-say="很">很</button></strong><button type="button" class="zh" data-say="大">大</button> (5) <button type="button" class="zh" data-say="今天热">今天热</button><strong><button type="button" class="zh" data-say="吗">吗</button></strong>？ These are the exact mistakes from your chinese10 worksheet, and now you know why each one is wrong.</p></details>
-<h2 id="week-3">Week 3: Time, money and skills</h2>
-<p>By Sunday you can say dates and times, talk about the past, buy things, and say what you can do.</p>
-<h3 id="day-15">Day 15 (Mon): Today, tomorrow, yesterday</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="今天">今天</button></td>
-<td>jīntiān</td>
-<td>today</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="明天">明天</button></td>
-<td>míngtiān</td>
-<td>tomorrow</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="昨天">昨天</button></td>
-<td>zuótiān</td>
-<td>yesterday</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="月">月</button></td>
-<td>yuè</td>
-<td>month</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="号">号</button></td>
-<td>hào</td>
-<td>day of the month (date)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Months are just numbers: <button type="button" class="zh" data-say="一月">一月</button> = January, <button type="button" class="zh" data-say="八月">八月</button> = August, <button type="button" class="zh" data-say="十二月">十二月</button> = December. A date goes big to small: <strong>month, then day</strong>. 8<button type="button" class="zh" data-say="月">月</button>15<button type="button" class="zh" data-say="号">号</button> = 15 August. Time words go at the start of the sentence or right after the person: <button type="button" class="zh" data-say="我明天去学校">我明天去学校</button>.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="今天几号？">今天几号？</button> Jīntiān jǐ hào? (What's the date today?)</li>
-<li><button type="button" class="zh" data-say="现在几月？">现在几月？</button> Xiànzài jǐ yuè? (Which month is it now?)</li>
-<li><button type="button" class="zh" data-say="我明天去商店。">我明天去商店。</button> Wǒ míngtiān qù shāngdiàn. (I'm going to the shop tomorrow.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "It's August now." (2) Write 3 March in Chinese. (3) "Tomorrow I don't want to go to school."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="现在八月。">现在八月。</button> (2) <button type="button" class="zh" data-say="三月三号">三月三号</button> (3) <button type="button" class="zh" data-say="我明天不想去学校。">我明天不想去学校。</button></p></details>
-<h3 id="day-16">Day 16 (Tue): Days of the week and the clock</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="星期">星期</button></td>
-<td>xīngqī</td>
-<td>week</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="年">年</button></td>
-<td>nián</td>
-<td>year</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="现在">现在</button></td>
-<td>xiànzài</td>
-<td>now</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="点">点</button></td>
-<td>diǎn</td>
-<td>o'clock</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="分钟">分钟</button></td>
-<td>fēnzhōng</td>
-<td>minute</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Weekdays are numbered! <button type="button" class="zh" data-say="星期一">星期一</button> = Monday (week-one), <button type="button" class="zh" data-say="星期二">星期二</button> = Tuesday ... <button type="button" class="zh" data-say="星期六">星期六</button> = Saturday. Sunday is special: <strong><button type="button" class="zh" data-say="星期天">星期天</button></strong> or <button type="button" class="zh" data-say="星期日">星期日</button>. For the clock, say number + <button type="button" class="zh" data-say="点">点</button>: <button type="button" class="zh" data-say="三点">三点</button> = 3 o'clock. Careful: 2 o'clock is <strong><button type="button" class="zh" data-say="两点">两点</button></strong> (liǎng diǎn), not <button type="button" class="zh" data-say="二点">二点</button>.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="今天星期几？">今天星期几？</button> Jīntiān xīngqī jǐ? (What day is it today?)</li>
-<li><button type="button" class="zh" data-say="今天星期一，明天星期二。">今天星期一，明天星期二。</button> (Today is Monday, tomorrow is Tuesday.)</li>
-<li><button type="button" class="zh" data-say="现在几点？">现在几点？</button> Xiànzài jǐ diǎn? (What time is it?)</li>
-</ul>
-<p><strong>Practice:</strong> (1) Say "Friday". (2) "It's 2 o'clock now." (3) "Today is Sunday."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="星期五">星期五</button> (2) <button type="button" class="zh" data-say="现在两点。">现在两点。</button> (3) <button type="button" class="zh" data-say="今天星期天。">今天星期天。</button></p></details>
-<h3 id="day-17">Day 17 (Wed): Morning, noon, afternoon</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="上午">上午</button></td>
-<td>shàngwǔ</td>
-<td>morning</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="中午">中午</button></td>
-<td>zhōngwǔ</td>
-<td>noon</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="下午">下午</button></td>
-<td>xiàwǔ</td>
-<td>afternoon</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="时候">时候</button></td>
-<td>shíhou</td>
-<td>time (a point in time)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="什么时候">什么时候</button></td>
-<td>shénme shíhou</td>
-<td>when</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> <button type="button" class="zh" data-say="上">上</button> means "up/before" and <button type="button" class="zh" data-say="下">下</button> means "down/after", so <button type="button" class="zh" data-say="上午">上午</button> is before noon and <button type="button" class="zh" data-say="下午">下午</button> is after noon. To ask "when", put <button type="button" class="zh" data-say="什么时候">什么时候</button> where the time would go.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="你什么时候回家？">你什么时候回家？</button> Nǐ shénme shíhou huí jiā? (When are you going home?)</li>
-<li><button type="button" class="zh" data-say="我下午三点回家。">我下午三点回家。</button> Wǒ xiàwǔ sān diǎn huí jiā. (I'm going home at 3 pm.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "When do you go to school?" (2) "I eat at noon." (3) "Tomorrow morning I'm going to the shop."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="你什么时候去学校？">你什么时候去学校？</button> (2) <button type="button" class="zh" data-say="我中午吃饭。">我中午吃饭。</button> (3) <button type="button" class="zh" data-say="我明天上午去商店。">我明天上午去商店。</button></p></details>
-<h3 id="day-18">Day 18 (Thu): Shopping and the past (<button type="button" class="zh" data-say="了">了</button>)</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="买">买</button></td>
-<td>mǎi</td>
-<td>to buy</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="东西">东西</button></td>
-<td>dōngxi</td>
-<td>thing, stuff</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="钱">钱</button></td>
-<td>qián</td>
-<td>money</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="块">块</button></td>
-<td>kuài</td>
-<td>yuan (spoken word for money)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="了">了</button></td>
-<td>le</td>
-<td>shows something happened / is done</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Chinese verbs don't change for the past. Instead, put <strong><button type="button" class="zh" data-say="了">了</button></strong> after the verb to show it's done: <button type="button" class="zh" data-say="我买">我买</button><strong><button type="button" class="zh" data-say="了">了</button></strong><button type="button" class="zh" data-say="三个苹果">三个苹果</button> = I bought three apples. For "didn't", use <button type="button" class="zh" data-say="没">没</button> and drop <button type="button" class="zh" data-say="了">了</button>: <button type="button" class="zh" data-say="我没买">我没买</button> = I didn't buy.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="这个多少钱？">这个多少钱？</button> Zhège duōshao qián? (How much is this?)</li>
-<li><button type="button" class="zh" data-say="五块。">五块。</button> Wǔ kuài. (5 yuan.)</li>
-<li><button type="button" class="zh" data-say="我昨天买了很多东西。">我昨天买了很多东西。</button> (I bought lots of things yesterday.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "I bought tea." (2) "I didn't buy apples." (3) Ask the price of that thing.</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="我买了茶。">我买了茶。</button> (2) <button type="button" class="zh" data-say="我没买苹果。">我没买苹果。</button> (3) <button type="button" class="zh" data-say="那个东西多少钱？">那个东西多少钱？</button></p></details>
-<h3 id="day-19">Day 19 (Fri): What you can do (<button type="button" class="zh" data-say="会">会</button>, <button type="button" class="zh" data-say="能">能</button>)</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="会">会</button></td>
-<td>huì</td>
-<td>can (a learned skill)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="能">能</button></td>
-<td>néng</td>
-<td>can (able to, allowed to)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="说">说</button></td>
-<td>shuō</td>
-<td>to speak, say</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="汉语">汉语</button></td>
-<td>Hànyǔ</td>
-<td>Chinese language</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="字">字</button></td>
-<td>zì</td>
-<td>character, written word</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Use <strong><button type="button" class="zh" data-say="会">会</button></strong> for skills you learned: <button type="button" class="zh" data-say="我会说汉语">我会说汉语</button> (I can speak Chinese). Use <strong><button type="button" class="zh" data-say="能">能</button></strong> when something makes it possible or not: <button type="button" class="zh" data-say="我今天不能来">我今天不能来</button> (I can't come today).</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="你会说汉语吗？">你会说汉语吗？</button> Nǐ huì shuō Hànyǔ ma? (Can you speak Chinese?)</li>
-<li><button type="button" class="zh" data-say="我会说一点儿。">我会说一点儿。</button> Wǒ huì shuō yìdiǎnr. (I can speak a little.)</li>
-<li><button type="button" class="zh" data-say="你在说什么？">你在说什么？</button> Nǐ zài shuō shénme? (What are you saying?)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "I can't speak Chinese." (2) "Can you come tomorrow?" (3) "How many characters can you write?"</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="我不会说汉语。">我不会说汉语。</button> (2) <button type="button" class="zh" data-say="你明天能来吗？">你明天能来吗？</button> (3) <button type="button" class="zh" data-say="你会写几个字？">你会写几个字？</button></p></details>
-<h3 id="day-20">Day 20 (Sat): Seeing, hearing, reading, writing</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="看">看</button></td>
-<td>kàn</td>
-<td>to look, watch, read</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="听">听</button></td>
-<td>tīng</td>
-<td>to listen</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="读">读</button></td>
-<td>dú</td>
-<td>to read aloud</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="写">写</button></td>
-<td>xiě</td>
-<td>to write</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="书">书</button></td>
-<td>shū</td>
-<td>book</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Add <strong><button type="button" class="zh" data-say="见">见</button></strong> (jiàn) to <button type="button" class="zh" data-say="看">看</button> or <button type="button" class="zh" data-say="听">听</button> and it means you actually saw or heard it: <button type="button" class="zh" data-say="看见">看见</button> (see), <button type="button" class="zh" data-say="听见">听见</button> (hear). For "can't see / can't hear", put <button type="button" class="zh" data-say="不">不</button> in the middle: <button type="button" class="zh" data-say="看">看</button><strong><button type="button" class="zh" data-say="不">不</button></strong><button type="button" class="zh" data-say="见">见</button>, <button type="button" class="zh" data-say="听">听</button><strong><button type="button" class="zh" data-say="不">不</button></strong><button type="button" class="zh" data-say="见">见</button>.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="我听不见你。">我听不见你。</button> Wǒ tīng bu jiàn nǐ. (I can't hear you.)</li>
-<li><button type="button" class="zh" data-say="我在家看电视。">我在家看电视。</button> Wǒ zài jiā kàn diànshì. (I'm watching TV at home.)</li>
-<li><button type="button" class="zh" data-say="我在学校学汉语。">我在学校学汉语。</button> Wǒ zài xuéxiào xué Hànyǔ. (I learn Chinese at school.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "I see you." (2) "What are you listening to now?" (3) "I don't like watching TV."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="我看见你了。">我看见你了。</button> (2) <button type="button" class="zh" data-say="你现在听什么？">你现在听什么？</button> (3) <button type="button" class="zh" data-say="我不喜欢看电视。">我不喜欢看电视。</button></p></details>
-<h3 id="day-21">Day 21 (Sun): Review Week 3</h3>
-<ul>
-<li class="task"><span class="box"></span>Read all of this week's words out loud, covering the meaning.</li>
-<li class="task"><span class="box"></span>Say today's full date and time: <button type="button" class="zh" data-say="今天是">今天是</button>___<button type="button" class="zh" data-say="月">月</button>___<button type="button" class="zh" data-say="号，星期">号，星期</button>___，<button type="button" class="zh" data-say="现在">现在</button>___<button type="button" class="zh" data-say="点。">点。</button></li>
-<li class="task"><span class="box"></span>Say 3 things you did yesterday using <button type="button" class="zh" data-say="了">了</button>.</li>
-<li class="task"><span class="box"></span>Read this dialogue (from your chinese10 worksheet) out loud and translate it: <button type="button" class="zh" data-say="你想吃什么？">你想吃什么？</button> / <button type="button" class="zh" data-say="你在说什么？我听不见你。">你在说什么？我听不见你。</button> / <button type="button" class="zh" data-say="我说：你想吃什么？">我说：你想吃什么？</button> / <button type="button" class="zh" data-say="我想吃中国菜。">我想吃中国菜。</button> / <button type="button" class="zh" data-say="这里没有中国菜，他们有美国菜。">这里没有中国菜，他们有美国菜。</button> / <button type="button" class="zh" data-say="好的，我们吃美国菜。">好的，我们吃美国菜。</button></li>
-</ul>
-<details class="ans"><summary>Show answers</summary><p> What do you want to eat? / What are you saying? I can't hear you. / I said: what do you want to eat? / I want Chinese food. / There's no Chinese food here; they have American food. / OK, let's eat American food.</p></details>
-<h2 id="week-4">Week 4: Family, work and getting around</h2>
-<p>By Sunday you can talk about your family and jobs, say where things are, how you travel, and what the weather is like.</p>
-<h3 id="day-22">Day 22 (Mon): Family</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="爸爸">爸爸</button></td>
-<td>bàba</td>
-<td>dad</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="妈妈">妈妈</button></td>
-<td>māma</td>
-<td>mum</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="儿子">儿子</button></td>
-<td>érzi</td>
-<td>son</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="女儿">女儿</button></td>
-<td>nǚ'ér</td>
-<td>daughter</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="狗">狗</button> / <button type="button" class="zh" data-say="猫">猫</button></td>
-<td>gǒu / māo</td>
-<td>dog / cat</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Look at the pieces: <button type="button" class="zh" data-say="女儿">女儿</button> = woman + son = daughter. Remember from Day 6, with family you can drop <button type="button" class="zh" data-say="的">的</button>: <button type="button" class="zh" data-say="我妈妈">我妈妈</button> (my mum). Ask about family with <button type="button" class="zh" data-say="有">有</button>: <button type="button" class="zh" data-say="你有儿子吗？">你有儿子吗？</button></p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="你有儿子吗？">你有儿子吗？</button> Nǐ yǒu érzi ma? (Do you have a son?)</li>
-<li><button type="button" class="zh" data-say="我有两个女儿。">我有两个女儿。</button> Wǒ yǒu liǎng ge nǚ'ér. (I have two daughters.)</li>
-<li><button type="button" class="zh" data-say="我爸爸喜欢狗。">我爸爸喜欢狗。</button> Wǒ bàba xǐhuan gǒu. (My dad likes dogs.)</li>
-</ul>
-<p><strong>Note:</strong> "Two of something" is always <strong><button type="button" class="zh" data-say="两">两</button></strong> (liǎng), not <button type="button" class="zh" data-say="二">二</button>: <button type="button" class="zh" data-say="两个人">两个人</button> (two people).</p>
-<p><strong>Practice:</strong> (1) "My mum is a teacher." (2) "I don't have a cat." (3) "How many children do you have?" (use <button type="button" class="zh" data-say="几个">几个</button>)</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="我妈妈是老师。">我妈妈是老师。</button> (2) <button type="button" class="zh" data-say="我没有猫。">我没有猫。</button> (3) <button type="button" class="zh" data-say="你有几个孩子？">你有几个孩子？</button> (<button type="button" class="zh" data-say="孩子">孩子</button> háizi = child)</p></details>
-<h3 id="day-23">Day 23 (Tue): Jobs</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="医生">医生</button></td>
-<td>yīshēng</td>
-<td>doctor</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="医院">医院</button></td>
-<td>yīyuàn</td>
-<td>hospital</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="工作">工作</button></td>
-<td>gōngzuò</td>
-<td>to work; job</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="先生">先生</button></td>
-<td>xiānsheng</td>
-<td>Mr; sir</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="小姐">小姐</button></td>
-<td>xiǎojie</td>
-<td>Miss</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> Names come first, titles after: <strong><button type="button" class="zh" data-say="王先生">王先生</button></strong> = Mr Wang, <strong><button type="button" class="zh" data-say="李小姐">李小姐</button></strong> = Miss Li. To say where someone works, use <button type="button" class="zh" data-say="在">在</button> + place + <button type="button" class="zh" data-say="工作">工作</button>: <button type="button" class="zh" data-say="她在医院工作">她在医院工作</button>.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="你做什么工作？">你做什么工作？</button> Nǐ zuò shénme gōngzuò? (What's your job?)</li>
-<li><button type="button" class="zh" data-say="我是医生。">我是医生。</button> Wǒ shì yīshēng. (I'm a doctor.)</li>
-<li><button type="button" class="zh" data-say="王先生在学校工作。">王先生在学校工作。</button> (Mr Wang works at a school.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "My dad works at a hospital." (2) "Is Miss Li a doctor?" (3) "I don't want to work today."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="我爸爸在医院工作。">我爸爸在医院工作。</button> (2) <button type="button" class="zh" data-say="李小姐是医生吗？">李小姐是医生吗？</button> (3) <button type="button" class="zh" data-say="我今天不想工作。">我今天不想工作。</button></p></details>
-<h3 id="day-24">Day 24 (Wed): Where exactly? (<button type="button" class="zh" data-say="里">里</button>, <button type="button" class="zh" data-say="上">上</button>, <button type="button" class="zh" data-say="下">下</button>)</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="里">里</button></td>
-<td>lǐ</td>
-<td>inside</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="上">上</button></td>
-<td>shàng</td>
-<td>on, above</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="下">下</button></td>
-<td>xià</td>
-<td>under, below</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="前面">前面</button> / <button type="button" class="zh" data-say="后面">后面</button></td>
-<td>qiánmian / hòumian</td>
-<td>in front / behind</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="住">住</button></td>
-<td>zhù</td>
-<td>to live (somewhere)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> In Chinese, the position word comes <strong>after</strong> the thing: "table on" instead of "on the table". So: <button type="button" class="zh" data-say="在">在</button> + thing + position. <button type="button" class="zh" data-say="猫在桌子下">猫在桌子下</button> = The cat is under the table.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="书在桌子上。">书在桌子上。</button> Shū zài zhuōzi shang. (The book is on the table.)</li>
-<li><button type="button" class="zh" data-say="你住在哪儿？">你住在哪儿？</button> Nǐ zhù zài nǎr? (Where do you live?)</li>
-<li><button type="button" class="zh" data-say="我住在北京。">我住在北京。</button> Wǒ zhù zài Běijīng. (I live in Beijing.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "The dog is in the house." (use <button type="button" class="zh" data-say="家里">家里</button>) (2) "The shop is behind the school." (3) "Where does your friend live?"</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="狗在家里。">狗在家里。</button> (2) <button type="button" class="zh" data-say="商店在学校后面。">商店在学校后面。</button> (3) <button type="button" class="zh" data-say="你朋友住在哪儿？">你朋友住在哪儿？</button></p></details>
-<h3 id="day-25">Day 25 (Thu): Travelling</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="坐">坐</button></td>
-<td>zuò</td>
-<td>to sit; to take (a bus, plane)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="开">开</button></td>
-<td>kāi</td>
-<td>to drive; to open</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="出租车">出租车</button></td>
-<td>chūzūchē</td>
-<td>taxi</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="飞机">飞机</button></td>
-<td>fēijī</td>
-<td>plane</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="怎么">怎么</button></td>
-<td>zěnme</td>
-<td>how</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> "How do you get there?" = <button type="button" class="zh" data-say="怎么去？">怎么去？</button> Answer with <button type="button" class="zh" data-say="坐">坐</button> + vehicle + <button type="button" class="zh" data-say="去">去</button>: <button type="button" class="zh" data-say="我坐飞机去">我坐飞机去</button> (I'm going by plane). Note <button type="button" class="zh" data-say="飞机">飞机</button> = fly + machine. <button type="button" class="zh" data-say="开车">开车</button> = drive a car.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="你怎么去北京？">你怎么去北京？</button> Nǐ zěnme qù Běijīng? (How are you getting to Beijing?)</li>
-<li><button type="button" class="zh" data-say="我坐飞机去。">我坐飞机去。</button> Wǒ zuò fēijī qù. (I'm going by plane.)</li>
-<li><button type="button" class="zh" data-say="我们坐出租车回家。">我们坐出租车回家。</button> (We'll take a taxi home.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "How do you go to school?" (2) "I go to the hospital by taxi." (3) "How do you write this character?"</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="你怎么去学校？">你怎么去学校？</button> (2) <button type="button" class="zh" data-say="我坐出租车去医院。">我坐出租车去医院。</button> (3) <button type="button" class="zh" data-say="这个字怎么写？">这个字怎么写？</button></p></details>
-<h3 id="day-26">Day 26 (Fri): Weather</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="天气">天气</button></td>
-<td>tiānqì</td>
-<td>weather</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="怎么样">怎么样</button></td>
-<td>zěnmeyàng</td>
-<td>how is it?</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="热">热</button></td>
-<td>rè</td>
-<td>hot</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="冷">冷</button></td>
-<td>lěng</td>
-<td>cold</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="下雨">下雨</button></td>
-<td>xià yǔ</td>
-<td>to rain ("fall rain")</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> <button type="button" class="zh" data-say="怎么样">怎么样</button> goes at the end and asks "how is it?". Weather words are describing words, so remember Day 11: use <strong><button type="button" class="zh" data-say="很">很</button></strong>, not <button type="button" class="zh" data-say="是">是</button>. <button type="button" class="zh" data-say="今天很热">今天很热</button>.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="今天天气怎么样？">今天天气怎么样？</button> Jīntiān tiānqì zěnmeyàng? (How's the weather today?)</li>
-<li><button type="button" class="zh" data-say="今天很冷。">今天很冷。</button> Jīntiān hěn lěng. (It's cold today.)</li>
-<li><button type="button" class="zh" data-say="明天会下雨。">明天会下雨。</button> Míngtiān huì xià yǔ. (It will rain tomorrow.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "Is it hot today?" (2) "It rained yesterday." (3) "How is your Chinese teacher?"</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="今天热吗？">今天热吗？</button> (2) <button type="button" class="zh" data-say="昨天下雨了。">昨天下雨了。</button> (3) <button type="button" class="zh" data-say="你的汉语老师怎么样？">你的汉语老师怎么样？</button></p></details>
-<h3 id="day-27">Day 27 (Sat): Polite phrases</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="认识">认识</button></td>
-<td>rènshi</td>
-<td>to know (a person)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="高兴">高兴</button></td>
-<td>gāoxìng</td>
-<td>happy, glad</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="请">请</button></td>
-<td>qǐng</td>
-<td>please; to invite</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="对不起">对不起</button></td>
-<td>duìbuqǐ</td>
-<td>sorry</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="没关系">没关系</button></td>
-<td>méi guānxi</td>
-<td>it's OK, no problem</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> These are fixed phrases. Learn them as whole chunks. <button type="button" class="zh" data-say="请">请</button> goes before a verb: <button type="button" class="zh" data-say="请喝茶">请喝茶</button> (please have some tea). <button type="button" class="zh" data-say="不客气">不客气</button> (bú kèqi) is the answer to <button type="button" class="zh" data-say="谢谢">谢谢</button>.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="认识你很高兴。">认识你很高兴。</button> Rènshi nǐ hěn gāoxìng. (Nice to meet you.)</li>
-<li><button type="button" class="zh" data-say="对不起！">对不起！</button> — <button type="button" class="zh" data-say="没关系。">没关系。</button> (Sorry! — It's OK.)</li>
-<li><button type="button" class="zh" data-say="我在中国很高兴。">我在中国很高兴。</button> Wǒ zài Zhōngguó hěn gāoxìng. (I'm happy in China. This is your Lesson 8 video title!)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "Please sit." (2) "Do you know him?" (3) What do you answer when someone says <button type="button" class="zh" data-say="谢谢">谢谢</button>?</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="请坐。">请坐。</button> (2) <button type="button" class="zh" data-say="你认识他吗？">你认识他吗？</button> (3) <button type="button" class="zh" data-say="不客气。">不客气。</button></p></details>
-<h3 id="day-28">Day 28 (Sun): Review Week 4</h3>
-<ul>
-<li class="task"><span class="box"></span>Read all of this week's words out loud, covering the meaning.</li>
-<li class="task"><span class="box"></span>Describe your family out loud: how many people, their jobs, where they live.</li>
-<li class="task"><span class="box"></span>Say how you get to work or school, and what today's weather is like.</li>
-<li class="task"><span class="box"></span>Translate: (1) Do you want to meet him? (2) There are teachers and students at school. (3) Nice to meet you, Mr Wang.</li>
-</ul>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="你想认识他吗？">你想认识他吗？</button> (2) <button type="button" class="zh" data-say="学校里有老师和学生。">学校里有老师和学生。</button> (3) <button type="button" class="zh" data-say="王先生，认识你很高兴。">王先生，认识你很高兴。</button></p></details>
-<h2 id="week-5">Week 5: Everyday things and putting it together</h2>
-<p>By Sunday you know almost every HSK1 word and can read a short story.</p>
-<h3 id="day-29">Day 29 (Mon): Things at home</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="电视">电视</button></td>
-<td>diànshì</td>
-<td>TV</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="电影">电影</button></td>
-<td>diànyǐng</td>
-<td>film, movie</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="电脑">电脑</button></td>
-<td>diànnǎo</td>
-<td>computer</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="衣服">衣服</button></td>
-<td>yīfu</td>
-<td>clothes</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="杯子">杯子</button></td>
-<td>bēizi</td>
-<td>cup, glass</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> <button type="button" class="zh" data-say="电">电</button> means electricity, so many modern words start with it: <button type="button" class="zh" data-say="电视">电视</button> (electric-look = TV), <button type="button" class="zh" data-say="电影">电影</button> (electric-shadow = film), <button type="button" class="zh" data-say="电脑">电脑</button> (electric-brain = computer). Spotting these pieces makes words easy to remember.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="我喜欢看中国电影。">我喜欢看中国电影。</button> (I like watching Chinese films.)</li>
-<li><button type="button" class="zh" data-say="我想买衣服。">我想买衣服。</button> Wǒ xiǎng mǎi yīfu. (I want to buy clothes.)</li>
-<li><button type="button" class="zh" data-say="杯子里有水。">杯子里有水。</button> Bēizi lǐ yǒu shuǐ. (There's water in the cup.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "My computer is on the table." (2) "Do you want to watch a film?" (3) "I bought three cups."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="我的电脑在桌子上。">我的电脑在桌子上。</button> (2) <button type="button" class="zh" data-say="你想看电影吗？">你想看电影吗？</button> (3) <button type="button" class="zh" data-say="我买了三个杯子。">我买了三个杯子。</button></p></details>
-<h3 id="day-30">Day 30 (Tue): Daily actions</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="做">做</button></td>
-<td>zuò</td>
-<td>to do, to make</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="睡觉">睡觉</button></td>
-<td>shuìjiào</td>
-<td>to sleep</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="打电话">打电话</button></td>
-<td>dǎ diànhuà</td>
-<td>to make a phone call</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="桌子">桌子</button></td>
-<td>zhuōzi</td>
-<td>table</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="椅子">椅子</button></td>
-<td>yǐzi</td>
-<td>chair</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> To say someone is doing something <strong>right now</strong>, put <button type="button" class="zh" data-say="在">在</button> before the verb: <button type="button" class="zh" data-say="我">我</button><strong><button type="button" class="zh" data-say="在">在</button></strong><button type="button" class="zh" data-say="睡觉">睡觉</button> = I am sleeping. It's the same <button type="button" class="zh" data-say="在">在</button> as "at", used in a new way. You can add <button type="button" class="zh" data-say="呢">呢</button> at the end too: <button type="button" class="zh" data-say="他在打电话呢">他在打电话呢</button>.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="你在做什么？">你在做什么？</button> Nǐ zài zuò shénme? (What are you doing?)</li>
-<li><button type="button" class="zh" data-say="我在做饭。">我在做饭。</button> Wǒ zài zuò fàn. (I'm cooking.)</li>
-<li><button type="button" class="zh" data-say="妈妈在打电话。">妈妈在打电话。</button> (Mum is on the phone.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "I don't want to cook." (2) "Dad is sleeping." (3) "The cat is under the chair."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="我不想做饭。">我不想做饭。</button> (2) <button type="button" class="zh" data-say="爸爸在睡觉。">爸爸在睡觉。</button> (3) <button type="button" class="zh" data-say="猫在椅子下。">猫在椅子下。</button></p></details>
-<h3 id="day-31">Day 31 (Wed): Joining words (<button type="button" class="zh" data-say="都">都</button>, <button type="button" class="zh" data-say="太了">太...了</button>)</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="都">都</button></td>
-<td>dōu</td>
-<td>all, both</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="太了">太...了</button></td>
-<td>tài ... le</td>
-<td>too ...! / so ...!</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="漂亮">漂亮</button></td>
-<td>piàoliang</td>
-<td>pretty, beautiful</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="喂">喂</button></td>
-<td>wéi</td>
-<td>hello (on the phone only)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="呢">呢</button></td>
-<td>ne</td>
-<td>"and you?" / "what about...?"</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> <button type="button" class="zh" data-say="都">都</button> goes <strong>before the verb</strong>, never at the end: <button type="button" class="zh" data-say="我们都是学生">我们都是学生</button> (We are all students). <button type="button" class="zh" data-say="呢">呢</button> bounces a question back: <button type="button" class="zh" data-say="我很好，你呢？">我很好，你呢？</button> (I'm fine, and you?).</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="喂，你好！">喂，你好！</button> Wéi, nǐ hǎo! (Hello? on the phone)</li>
-<li><button type="button" class="zh" data-say="太好了！">太好了！</button> Tài hǎo le! (Great!)</li>
-<li><button type="button" class="zh" data-say="这个杯子太漂亮了。">这个杯子太漂亮了。</button> (This cup is so pretty.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "They are all doctors." (2) "It's too cold!" (3) "I'm Chinese. And you?"</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="他们都是医生。">他们都是医生。</button> (2) <button type="button" class="zh" data-say="太冷了！">太冷了！</button> (3) <button type="button" class="zh" data-say="我是中国人，你呢？">我是中国人，你呢？</button></p></details>
-<h3 id="day-32">Day 32 (Thu): More question words</h3>
-<table>
-<thead>
-<tr>
-<th>Character</th>
-<th>Pinyin</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><button type="button" class="zh" data-say="谁">谁</button></td>
-<td>shéi</td>
-<td>who</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="多少">多少</button></td>
-<td>duōshao</td>
-<td>how many / how much (any size)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="本">本</button></td>
-<td>běn</td>
-<td>counting word for books</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="些">些</button></td>
-<td>xiē</td>
-<td>some (<button type="button" class="zh" data-say="这些">这些</button> = these, <button type="button" class="zh" data-say="那些">那些</button> = those)</td>
-</tr>
-<tr>
-<td><button type="button" class="zh" data-say="一点儿">一点儿</button></td>
-<td>yìdiǎnr</td>
-<td>a little</td>
-</tr>
-</tbody>
-</table>
-<p><strong>How it works:</strong> All question words follow the same rule: put them where the answer goes, and don't change the order. Use <button type="button" class="zh" data-say="几">几</button> for small numbers (under 10) and <button type="button" class="zh" data-say="多少">多少</button> for bigger ones or prices.</p>
-<p><strong>Say it out loud:</strong></p>
-<ul>
-<li><button type="button" class="zh" data-say="他是谁？">他是谁？</button> Tā shì shéi? (Who is he?)</li>
-<li><button type="button" class="zh" data-say="你们学校有多少学生？">你们学校有多少学生？</button> (How many students does your school have?)</li>
-<li><button type="button" class="zh" data-say="我买了两本书。">我买了两本书。</button> Wǒ mǎi le liǎng běn shū. (I bought two books.)</li>
-</ul>
-<p><strong>Practice:</strong> (1) "Whose book is this?" (2) "How much are these apples?" (3) "I want to drink a little water."</p>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="这是谁的书？">这是谁的书？</button> (2) <button type="button" class="zh" data-say="这些苹果多少钱？">这些苹果多少钱？</button> (3) <button type="button" class="zh" data-say="我想喝一点儿水。">我想喝一点儿水。</button></p></details>
-<h3 id="day-33">Day 33 (Fri): Reading day</h3>
-<p>No new words. Read this story out loud twice, then answer the questions.</p>
-<blockquote>
-<p><button type="button" class="zh" data-say="我叫大卫，我是美国人。我今年二十五岁。我现在住在北京，在一个学校学汉语。我的老师姓王，她很好。昨天是星期天，我和我的朋友去商店买了很多东西。中午我们吃了中国菜。我在中国很高兴。">我叫大卫，我是美国人。我今年二十五岁。我现在住在北京，在一个学校学汉语。我的老师姓王，她很好。昨天是星期天，我和我的朋友去商店买了很多东西。中午我们吃了中国菜。我在中国很高兴。</button></p>
-</blockquote>
-<p>(<button type="button" class="zh" data-say="大卫">大卫</button> Dàwèi = David. <button type="button" class="zh" data-say="姓">姓</button> xìng = family name is.)</p>
-<p><strong>Questions:</strong> (1) Where is David from? (2) How old is he? (3) What did he do yesterday? (4) What did they eat?</p>
-<details class="ans"><summary>Show answers</summary><p> (1) America (2) 25 (3) He went shopping with his friend. (4) Chinese food.</p></details>
-<h3 id="day-34">Day 34 (Sat): Listening day</h3>
-<p>No new words. Use your audio files from the course.</p>
-<ul>
-<li class="task"><span class="box"></span>Play <strong>11.mp3</strong> once without reading. Write down every word you recognise.</li>
-<li class="task"><span class="box"></span>Play <strong>12.mp3</strong> the same way.</li>
-<li class="task"><span class="box"></span>Play both again and repeat each sentence out loud after the speaker.</li>
-<li class="task"><span class="box"></span>Re-watch the <strong>Lesson 8 video</strong> (<button type="button" class="zh" data-say="我在中国很高兴">我在中国很高兴</button>). You should now understand most of it.</li>
-</ul>
-<h3 id="day-35">Day 35 (Sun): Review Week 5</h3>
-<ul>
-<li class="task"><span class="box"></span>Go through the full word list below. Tick each word you know. Re-study the ones you don't.</li>
-<li class="task"><span class="box"></span>Write a short paragraph like David's about yourself (name, age, home, job, what you did yesterday).</li>
-<li class="task"><span class="box"></span>Translate: (1) I'm watching TV at home. (2) How many teachers do you have? (3) We all like Chinese food.</li>
-</ul>
-<details class="ans"><summary>Show answers</summary><p> (1) <button type="button" class="zh" data-say="我在家看电视。">我在家看电视。</button> (2) <button type="button" class="zh" data-say="你有几个老师？">你有几个老师？</button> (3) <button type="button" class="zh" data-say="我们都喜欢中国菜。">我们都喜欢中国菜。</button></p></details>
-<h2 id="week-6">Week 6: Practice tests</h2>
-<p>This week you practise like the real exam. The HSK1 test has two parts, <strong>Listening</strong> and <strong>Reading</strong>, about 40 minutes in total. You need 120 out of 200 points to pass. Your <a href="https://claude.ai/artifact/Veh6TQVg5PygCmLkGG5zfh">6-week study plan</a> lists the mock tests to use each day.</p>
-<table>
-<thead>
-<tr>
-<th>Day</th>
-<th>What to do</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Day 36 (Mon)</td>
-<td>Take one full mock test. Don't check answers yet.</td>
-</tr>
-<tr>
-<td>Day 37 (Tue)</td>
-<td>Mark yesterday's test. Re-study the lesson for every question you got wrong.</td>
-</tr>
-<tr>
-<td>Day 38 (Wed)</td>
-<td>Listening only: play 11.mp3 and 12.mp3, repeat every sentence out loud.</td>
-</tr>
-<tr>
-<td>Day 39 (Thu)</td>
-<td>Take a second mock test and mark it.</td>
-</tr>
-<tr>
-<td>Day 40 (Fri)</td>
-<td>Go through the word list. Re-study only the words you still don't know.</td>
-</tr>
-<tr>
-<td>Day 41 (Sat)</td>
-<td>Self-test below, then rest.</td>
-</tr>
-<tr>
-<td>Day 42 (Sun)</td>
-<td>Light review only. You're ready.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="final-self-test-day-41">Final self-test (Day 41)</h3>
-<p>Translate into Chinese. If you get 8 or more right, you are ready for HSK1.</p>
-<ol>
-<li>Hello, what's your name?</li>
-<li>I am not Chinese, I am American.</li>
-<li>I have two daughters and one son.</li>
-<li>How much is this apple?</li>
-<li>It's very cold today.</li>
-<li>I want to go home.</li>
-<li>Where do you live?</li>
-<li>Yesterday I bought three books.</li>
-<li>Can you speak Chinese?</li>
-<li>What time do you go to school tomorrow?</li>
-</ol>
-<details class="ans"><summary>Show answers</summary><ol>
-<li><button type="button" class="zh" data-say="你好，你叫什么名字？">你好，你叫什么名字？</button></li>
-<li><button type="button" class="zh" data-say="我不是中国人，我是美国人。">我不是中国人，我是美国人。</button></li>
-<li><button type="button" class="zh" data-say="我有两个女儿和一个儿子。">我有两个女儿和一个儿子。</button></li>
-<li><button type="button" class="zh" data-say="这个苹果多少钱？">这个苹果多少钱？</button></li>
-<li><button type="button" class="zh" data-say="今天很冷。">今天很冷。</button></li>
-<li><button type="button" class="zh" data-say="我想回家。">我想回家。</button></li>
-<li><button type="button" class="zh" data-say="你住在哪儿？">你住在哪儿？</button></li>
-<li><button type="button" class="zh" data-say="我昨天买了三本书。">我昨天买了三本书。</button></li>
-<li><button type="button" class="zh" data-say="你会说汉语吗？">你会说汉语吗？</button></li>
-<li><button type="button" class="zh" data-say="你明天几点去学校？">你明天几点去学校？</button></li>
-</ol></details>
-<h3 id="the-6-rules-beginners-get-wron">The 6 rules beginners get wrong</h3>
-<ol>
-<li>Describing words take <strong><button type="button" class="zh" data-say="很">很</button></strong>, not <button type="button" class="zh" data-say="是">是</button>: <button type="button" class="zh" data-say="我很好">我很好</button>.</li>
-<li>The "not" of <button type="button" class="zh" data-say="有">有</button> is <strong><button type="button" class="zh" data-say="没有">没有</button></strong>: <button type="button" class="zh" data-say="我没有钱">我没有钱</button>.</li>
-<li>Number + <strong>counting word</strong> + thing: <button type="button" class="zh" data-say="三个人">三个人</button>.</li>
-<li>Going home is <strong><button type="button" class="zh" data-say="回家">回家</button></strong>.</li>
-<li>Two of something is <strong><button type="button" class="zh" data-say="两">两</button></strong>: <button type="button" class="zh" data-say="两个">两个</button>.</li>
-<li>Time and place come <strong>before</strong> the verb: <button type="button" class="zh" data-say="我明天在家吃饭">我明天在家吃饭</button>.</li>
-</ol>
-<h2 id="all-your-words-in-one-place">All your words in one place</h2>
-<p>Every word from this book, grouped by topic, with the day you learned it. Use this list on review days.</p>
-<table>
-<thead>
-<tr>
-<th>Topic</th>
-<th>Words</th>
-<th>Days</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Greetings and polite words</td>
-<td><button type="button" class="zh" data-say="你好">你好</button> nǐ hǎo, <button type="button" class="zh" data-say="谢谢">谢谢</button> xièxie, <button type="button" class="zh" data-say="不客气">不客气</button> bú kèqi, <button type="button" class="zh" data-say="再见">再见</button> zàijiàn, <button type="button" class="zh" data-say="对不起">对不起</button> duìbuqǐ, <button type="button" class="zh" data-say="没关系">没关系</button> méi guānxi, <button type="button" class="zh" data-say="请">请</button> qǐng, <button type="button" class="zh" data-say="喂">喂</button> wéi, <button type="button" class="zh" data-say="认识">认识</button> rènshi, <button type="button" class="zh" data-say="高兴">高兴</button> gāoxìng</td>
-<td>1, 27, 31</td>
-</tr>
-<tr>
-<td>People</td>
-<td><button type="button" class="zh" data-say="我">我</button> wǒ, <button type="button" class="zh" data-say="你">你</button> nǐ, <button type="button" class="zh" data-say="他">他</button>/<button type="button" class="zh" data-say="她">她</button> tā, <button type="button" class="zh" data-say="们">们</button> men, <button type="button" class="zh" data-say="人">人</button> rén, <button type="button" class="zh" data-say="朋友">朋友</button> péngyou, <button type="button" class="zh" data-say="老师">老师</button> lǎoshī, <button type="button" class="zh" data-say="学生">学生</button> xuésheng, <button type="button" class="zh" data-say="医生">医生</button> yīshēng, <button type="button" class="zh" data-say="先生">先生</button> xiānsheng, <button type="button" class="zh" data-say="小姐">小姐</button> xiǎojie</td>
-<td>1, 2, 5, 6, 23</td>
-</tr>
-<tr>
-<td>Family and pets</td>
-<td><button type="button" class="zh" data-say="爸爸">爸爸</button> bàba, <button type="button" class="zh" data-say="妈妈">妈妈</button> māma, <button type="button" class="zh" data-say="儿子">儿子</button> érzi, <button type="button" class="zh" data-say="女儿">女儿</button> nǚ'ér, <button type="button" class="zh" data-say="家">家</button> jiā, <button type="button" class="zh" data-say="狗">狗</button> gǒu, <button type="button" class="zh" data-say="猫">猫</button> māo</td>
-<td>6, 22</td>
-</tr>
-<tr>
-<td>Countries and language</td>
-<td><button type="button" class="zh" data-say="中国">中国</button> Zhōngguó, <button type="button" class="zh" data-say="美国">美国</button> Měiguó, <button type="button" class="zh" data-say="国">国</button> guó, <button type="button" class="zh" data-say="北京">北京</button> Běijīng, <button type="button" class="zh" data-say="汉语">汉语</button> Hànyǔ, <button type="button" class="zh" data-say="字">字</button> zì</td>
-<td>5, 19, 24</td>
-</tr>
-<tr>
-<td>Numbers and counting</td>
-<td><button type="button" class="zh" data-say="一">一</button> to <button type="button" class="zh" data-say="十">十</button> (1 to 10), <button type="button" class="zh" data-say="两">两</button> liǎng, <button type="button" class="zh" data-say="个">个</button> ge, <button type="button" class="zh" data-say="本">本</button> běn, <button type="button" class="zh" data-say="几">几</button> jǐ, <button type="button" class="zh" data-say="多少">多少</button> duōshao, <button type="button" class="zh" data-say="些">些</button> xiē, <button type="button" class="zh" data-say="岁">岁</button> suì</td>
-<td>4, 8, 22, 32</td>
-</tr>
-<tr>
-<td>Time</td>
-<td><button type="button" class="zh" data-say="今天">今天</button> jīntiān, <button type="button" class="zh" data-say="明天">明天</button> míngtiān, <button type="button" class="zh" data-say="昨天">昨天</button> zuótiān, <button type="button" class="zh" data-say="年">年</button> nián, <button type="button" class="zh" data-say="月">月</button> yuè, <button type="button" class="zh" data-say="号">号</button> hào, <button type="button" class="zh" data-say="星期">星期</button> xīngqī, <button type="button" class="zh" data-say="现在">现在</button> xiànzài, <button type="button" class="zh" data-say="点">点</button> diǎn, <button type="button" class="zh" data-say="分钟">分钟</button> fēnzhōng, <button type="button" class="zh" data-say="上午">上午</button> shàngwǔ, <button type="button" class="zh" data-say="中午">中午</button> zhōngwǔ, <button type="button" class="zh" data-say="下午">下午</button> xiàwǔ, <button type="button" class="zh" data-say="时候">时候</button> shíhou</td>
-<td>15, 16, 17</td>
-</tr>
-<tr>
-<td>Food and drink</td>
-<td><button type="button" class="zh" data-say="吃">吃</button> chī, <button type="button" class="zh" data-say="喝">喝</button> hē, <button type="button" class="zh" data-say="水">水</button> shuǐ, <button type="button" class="zh" data-say="茶">茶</button> chá, <button type="button" class="zh" data-say="米饭">米饭</button> mǐfàn, <button type="button" class="zh" data-say="菜">菜</button> cài, <button type="button" class="zh" data-say="苹果">苹果</button> píngguǒ, <button type="button" class="zh" data-say="水果">水果</button> shuǐguǒ</td>
-<td>9, 10</td>
-</tr>
-<tr>
-<td>Places</td>
-<td><button type="button" class="zh" data-say="学校">学校</button> xuéxiào, <button type="button" class="zh" data-say="商店">商店</button> shāngdiàn, <button type="button" class="zh" data-say="医院">医院</button> yīyuàn, <button type="button" class="zh" data-say="这儿">这儿</button> zhèr, <button type="button" class="zh" data-say="那儿">那儿</button> nàr, <button type="button" class="zh" data-say="哪儿">哪儿</button> nǎr</td>
-<td>12, 13, 23</td>
-</tr>
-<tr>
-<td>Position</td>
-<td><button type="button" class="zh" data-say="在">在</button> zài, <button type="button" class="zh" data-say="里">里</button> lǐ, <button type="button" class="zh" data-say="上">上</button> shàng, <button type="button" class="zh" data-say="下">下</button> xià, <button type="button" class="zh" data-say="前面">前面</button> qiánmian, <button type="button" class="zh" data-say="后面">后面</button> hòumian</td>
-<td>12, 24</td>
-</tr>
-<tr>
-<td>Things</td>
-<td><button type="button" class="zh" data-say="东西">东西</button> dōngxi, <button type="button" class="zh" data-say="钱">钱</button> qián, <button type="button" class="zh" data-say="块">块</button> kuài, <button type="button" class="zh" data-say="书">书</button> shū, <button type="button" class="zh" data-say="电视">电视</button> diànshì, <button type="button" class="zh" data-say="电影">电影</button> diànyǐng, <button type="button" class="zh" data-say="电脑">电脑</button> diànnǎo, <button type="button" class="zh" data-say="衣服">衣服</button> yīfu, <button type="button" class="zh" data-say="杯子">杯子</button> bēizi, <button type="button" class="zh" data-say="桌子">桌子</button> zhuōzi, <button type="button" class="zh" data-say="椅子">椅子</button> yǐzi, <button type="button" class="zh" data-say="出租车">出租车</button> chūzūchē, <button type="button" class="zh" data-say="飞机">飞机</button> fēijī</td>
-<td>18, 20, 25, 29, 30</td>
-</tr>
-<tr>
-<td>Action words</td>
-<td><button type="button" class="zh" data-say="是">是</button> shì, <button type="button" class="zh" data-say="有">有</button> yǒu, <button type="button" class="zh" data-say="叫">叫</button> jiào, <button type="button" class="zh" data-say="爱">爱</button> ài, <button type="button" class="zh" data-say="想">想</button> xiǎng, <button type="button" class="zh" data-say="喜欢">喜欢</button> xǐhuan, <button type="button" class="zh" data-say="去">去</button> qù, <button type="button" class="zh" data-say="来">来</button> lái, <button type="button" class="zh" data-say="回">回</button> huí, <button type="button" class="zh" data-say="买">买</button> mǎi, <button type="button" class="zh" data-say="会">会</button> huì, <button type="button" class="zh" data-say="能">能</button> néng, <button type="button" class="zh" data-say="说">说</button> shuō, <button type="button" class="zh" data-say="看">看</button> kàn, <button type="button" class="zh" data-say="听">听</button> tīng, <button type="button" class="zh" data-say="读">读</button> dú, <button type="button" class="zh" data-say="写">写</button> xiě, <button type="button" class="zh" data-say="住">住</button> zhù, <button type="button" class="zh" data-say="坐">坐</button> zuò, <button type="button" class="zh" data-say="开">开</button> kāi, <button type="button" class="zh" data-say="工作">工作</button> gōngzuò, <button type="button" class="zh" data-say="做">做</button> zuò, <button type="button" class="zh" data-say="睡觉">睡觉</button> shuìjiào, <button type="button" class="zh" data-say="打电话">打电话</button> dǎ diànhuà, <button type="button" class="zh" data-say="下雨">下雨</button> xià yǔ</td>
-<td>2, 3, 6, 8, 10, 13, 18, 19, 20, 24, 25, 30</td>
-</tr>
-<tr>
-<td>Describing words</td>
-<td><button type="button" class="zh" data-say="好">好</button> hǎo, <button type="button" class="zh" data-say="很">很</button> hěn, <button type="button" class="zh" data-say="大">大</button> dà, <button type="button" class="zh" data-say="小">小</button> xiǎo, <button type="button" class="zh" data-say="多">多</button> duō, <button type="button" class="zh" data-say="少">少</button> shǎo, <button type="button" class="zh" data-say="热">热</button> rè, <button type="button" class="zh" data-say="冷">冷</button> lěng, <button type="button" class="zh" data-say="漂亮">漂亮</button> piàoliang, <button type="button" class="zh" data-say="太了">太...了</button> tài...le, <button type="button" class="zh" data-say="一点儿">一点儿</button> yìdiǎnr</td>
-<td>1, 11, 26, 31, 32</td>
-</tr>
-<tr>
-<td>Question words</td>
-<td><button type="button" class="zh" data-say="吗">吗</button> ma, <button type="button" class="zh" data-say="什么">什么</button> shénme, <button type="button" class="zh" data-say="哪">哪</button> nǎ, <button type="button" class="zh" data-say="谁">谁</button> shéi, <button type="button" class="zh" data-say="怎么">怎么</button> zěnme, <button type="button" class="zh" data-say="怎么样">怎么样</button> zěnmeyàng, <button type="button" class="zh" data-say="呢">呢</button> ne</td>
-<td>3, 5, 25, 26, 31, 32</td>
-</tr>
-<tr>
-<td>Small helper words</td>
-<td><button type="button" class="zh" data-say="不">不</button> bù, <button type="button" class="zh" data-say="没">没</button> méi, <button type="button" class="zh" data-say="的">的</button> de, <button type="button" class="zh" data-say="和">和</button> hé, <button type="button" class="zh" data-say="了">了</button> le, <button type="button" class="zh" data-say="都">都</button> dōu, <button type="button" class="zh" data-say="这">这</button> zhè, <button type="button" class="zh" data-say="那">那</button> nà, <button type="button" class="zh" data-say="天气">天气</button> tiānqì</td>
-<td>2, 3, 6, 8, 12, 18, 26, 31</td>
-</tr>
-</tbody>
-</table>
-<p>Word list based on the HSK 2.0 Level 1 syllabus (150 words). If your test centre uses the newer HSK 3.0 exam, a few extra words will be needed; ask and I'll add them.</p>
-</main>
+  <div class="warnbox" id="novoice" hidden><b>No Chinese voice found on this device.</b> On Windows, open Settings → Time &amp; language → Speech and add Chinese (Simplified). On a Mac, add a Chinese voice under System Settings → Accessibility → Spoken Content. iPhones and Android phones usually have one built in.</div>
+</header>
+<div class="layout">
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
 
 <script>
-(function(){
-  var slow=false, voice=null, synth=window.speechSynthesis;
-  function pick(){
+/* ======================= CONTENT ======================= */
+const ROUTINE = [
+  "<b>Warm up (3 min):</b> Read yesterday's 5 words out loud.",
+  "<b>Learn the words (7 min):</b> Tap ▶ and say each word 5 times: the pinyin, the meaning, and look at the character. Then go through the flashcards.",
+  "<b>Learn the idea (5 min):</b> Read “How it works” and say the example sentences out loud.",
+  "<b>Practice (7 min):</b> Answer the practice questions on paper or out loud, then tap “Show answer”. Then take the quiz.",
+  "<b>Finish (3 min):</b> Write each new character 3 times, do the speaking task and mark the day complete."
+];
+
+// words: "汉字|pinyin|meaning" · say: "汉字|pinyin|English" · prac: [question, answer]
+const DAYS = [
+{start:true,w:0,title:"Start here: the three building blocks",
+ html:`
+ <h3>How to use this book</h3>
+ <p>Do one day at a time, about 25 minutes a day. Each lesson has only 5 new words and 1 new idea. The book runs for 6 weeks, matching your <a href="https://claude.ai/artifact/Veh6TQVg5PygCmLkGG5zfh">6-week HSK1 study plan</a>: Monday to Saturday are lesson days, Sunday is a review day, and Week 6 is for practice tests.</p>
+ <p>Three simple rules make this work:</p>
+ <ul class="plain"><li><b>Say everything out loud.</b> Chinese is a spoken language first. Reading silently does not train your tones.</li>
+ <li><b>Don't skip Sunday.</b> Review days are where words move into long-term memory.</li>
+ <li><b>Missed a day?</b> Just continue from where you stopped. Do not try to do two days at once.</li></ul>
+ <p>You do not need to write characters perfectly for HSK1. The test is listening and reading, so recognising a character is enough.</p>
+ <p>Every Chinese word has three parts: a <b>character</b> (what you see), <b>pinyin</b> (how to say it, in Latin letters) and a <b>tone</b> (the shape of your voice).</p>
+ <h3>1 · Pinyin = Chinese written in our alphabet</h3>
+ <p>你好 is written <b>nǐ hǎo</b>. Most letters sound close to English, but a few are different:</p>
+ <div class="tw"><table><tr><th>Pinyin</th><th>Sounds like</th><th>Example</th></tr>
+ <tr><td>x</td><td>"sh" with a big smile</td><td>谢谢 xièxie (thank you)</td></tr>
+ <tr><td>q</td><td>"ch" with a big smile</td><td>去 qù (go)</td></tr>
+ <tr><td>j</td><td>"j" with a big smile</td><td>几 jǐ (how many)</td></tr>
+ <tr><td>zh</td><td>"j" in "jump"</td><td>中国 Zhōngguó (China)</td></tr>
+ <tr><td>c</td><td>"ts" in "cats"</td><td>菜 cài (dish of food)</td></tr>
+ <tr><td>z</td><td>"ds" in "beds"</td><td>再见 zàijiàn (goodbye)</td></tr>
+ <tr><td>r</td><td>between "r" and the "s" in "pleasure"</td><td>人 rén (person)</td></tr>
+ <tr><td>ü</td><td>say "ee" with round lips</td><td>女 nǚ (woman)</td></tr></table></div>
+ <h3>2 · The four tones</h3>
+ <p>The same sound with a different tone is a different word. <b>mā</b> (mother) and <b>mǎ</b> (horse) are not the same word!</p>
+ <div class="tw"><table><tr><th>Tone</th><th>Mark</th><th>Your voice</th><th>Example</th></tr>
+ <tr><td>1st</td><td>ā</td><td>High and flat, like singing one long note</td><td>妈 mā (mum)</td></tr>
+ <tr><td>2nd</td><td>á</td><td>Goes up, like asking "What?"</td><td>来 lái (come)</td></tr>
+ <tr><td>3rd</td><td>ǎ</td><td>Dips down low, then up a little</td><td>我 wǒ (I)</td></tr>
+ <tr><td>4th</td><td>à</td><td>Drops sharply, like saying "No!"</td><td>是 shì (to be)</td></tr>
+ <tr><td>Neutral</td><td>a</td><td>Short and light, no mark</td><td>吗 ma (question word)</td></tr></table></div>
+ <p><b>Two tone rules you will hear all the time:</b></p>
+ <ul class="plain"><li>Two 3rd tones in a row: the first one becomes a 2nd tone. 你好 nǐ hǎo is said <b>ní hǎo</b>.</li>
+ <li>不 bù (not) becomes <b>bú</b> before a 4th tone. 不是 is said <b>bú shì</b>.</li></ul>
+ <h3>3 · Characters are built from pieces</h3>
+ <p>好 (good) is 女 (woman) + 子 (child). 你 (you) has 亻 on the left, which means "person". 吗, 吃, 喝 and 叫 all have 口 (mouth) on the left, because they are about the mouth.</p>
+ <h3>Grammar in one sentence</h3>
+ <p>Chinese grammar is friendly: verbs never change (no "I am / he is / they were"), there are no plurals, and the basic word order is the same as English: <b>Who + does + what</b>. 我喝茶 = I drink tea.</p>
+ <div class="target"><b>Ready?</b> Tap the tone examples above and copy each one 5 times. Then start Day 1.</div>`},
+
+// ---------- WEEK 1 ----------
+{w:1,title:"Hello and goodbye",
+ words:["你|nǐ|you","好|hǎo|good, fine","我|wǒ|I, me","谢谢|xièxie|thank you","再见|zàijiàn|goodbye"],
+ how:`你好 means "you good", and Chinese people use it as "hello". To answer, say 你好 back. Remember the tone rule: say it <b>ní hǎo</b>.`,
+ say:["你好！|Nǐ hǎo!|Hello!","谢谢！|Xièxie!|Thank you!","再见！|Zàijiàn!|Goodbye!"],
+ prac:[["What do you say when you meet a teacher?","你好"],["Someone gives you tea. What do you say?","谢谢"],["You leave a shop. What do you say?","再见"]],
+ speak:"Act out meeting a classmate: say hello, thank them for something, and say goodbye. Repeat 5 times, faster each time."},
+
+{w:1,title:"“I am…” with 是",
+ words:["是|shì|to be (am, is, are)","不|bù|not, no","他 / 她|tā|he / she (same sound!)","老师|lǎoshī|teacher","学生|xuésheng|student"],
+ how:`是 joins two nouns: <b>A 是 B</b> = A is B. To say "not", put 不 before 是. 是 never changes: 我是, 你是, 他是.`,
+ say:["我是学生。|Wǒ shì xuésheng.|I am a student.","她是老师。|Tā shì lǎoshī.|She is a teacher.","他不是老师。|Tā bú shì lǎoshī.|He is not a teacher."],
+ prac:[["Say: You are a teacher.","你是老师。"],["Say: I am not a teacher.","我不是老师。"],["Say: She is a student.","她是学生。"]],
+ speak:"Point at 5 people you know (or imagine them) and say who is a teacher or a student, and who isn't."},
+
+{w:1,title:"What's your name? (吗 and 什么)",
+ words:["叫|jiào|to be called","什么|shénme|what","名字|míngzi|name","吗|ma|turns a sentence into a yes/no question","的|de|'s (shows who owns something)"],
+ how:`Two easy ways to ask a question. (1) Add <b>吗</b> to the end of any sentence: 你是老师 → 你是老师吗? (Are you a teacher?) (2) Put <b>什么</b> where the answer goes. The word order does not change, unlike English.`,
+ say:["你叫什么名字？|Nǐ jiào shénme míngzi?|What's your name?","我叫 Sumon。|Wǒ jiào Sumon.|My name is Sumon.","你是学生吗？|Nǐ shì xuésheng ma?|Are you a student?","我的老师|wǒ de lǎoshī|my teacher"],
+ prac:[["Turn 他是老师 into a question.","他是老师吗？"],["Answer: 你叫什么名字？","我叫 [your name]。"],["Say “her name”.","她的名字"]],
+ speak:"Ask and answer “What's your name?” and “Are you a student?” for yourself and 3 imaginary people."},
+
+{w:1,title:"Numbers 1 to 10",
+ words:["一|yī|1","二|èr|2","三|sān|3","四|sì|4","五|wǔ|5","六|liù|6","七|qī|7","八|bā|8","九|jiǔ|9","十|shí|10"],
+ how:`Bigger numbers are like building blocks. 11 = 十一 (ten-one). 20 = 二十 (two-ten). 25 = 二十五 (two-ten-five). 99 = 九十九. That's all you need up to 99!`,
+ say:["十二|shí'èr|12","三十|sānshí|30","四十七|sìshíqī|47","八十八|bāshíbā|88"],
+ prac:[["Write 15 in Chinese.","十五"],["Write 51 in Chinese.","五十一"],["Write 65 in Chinese.","六十五"],["Write 78 in Chinese.","七十八"]],
+ speak:"Count from 1 to 30 out loud, then say your age, your phone number and your room number in Chinese."},
+
+{w:1,title:"Where are you from?",
+ words:["中国|Zhōngguó|China","人|rén|person","哪|nǎ|which","国|guó|country","美国|Měiguó|America (USA)"],
+ how:`Country + 人 = a person from that country. 中国人 = Chinese person. To ask "Where are you from?", ask "you are which-country person?": 你是哪国人?`,
+ say:["你是哪国人？|Nǐ shì nǎ guó rén?|Where are you from?","我是中国人。|Wǒ shì Zhōngguó rén.|I am Chinese.","她不是美国人。|Tā bú shì Měiguó rén.|She is not American."],
+ prac:[["Ask your friend where they're from.","你是哪国人？"],["Say: He is American.","他是美国人。"],["Say: Are you Chinese?","你是中国人吗？"]],
+ speak:"Ask “Where are you from?” and answer for 5 people of different countries (use 中国人, 美国人, and say “I am not…”)."},
+
+{w:1,title:"We, you all, they (们)",
+ words:["们|men|makes people plural","朋友|péngyou|friend","家|jiā|home, family","爱|ài|to love","和|hé|and (joins nouns only)"],
+ how:`Add 们 to a person word to make it plural: 我们 (we), 你们 (you all), 他们 (they), 老师们 (teachers). With family and close friends you can drop 的: 我妈妈 is fine, no need for 我的妈妈.`,
+ say:["我们是朋友。|Wǒmen shì péngyou.|We are friends.","我爱我家。|Wǒ ài wǒ jiā.|I love my family.","老师和学生|lǎoshī hé xuésheng|teachers and students"],
+ prac:[["Say: They are students.","他们是学生。"],["Say “my friend”.","我的朋友 / 我朋友"],["What does 你们好 mean?","Hello, everyone!"]],
+ speak:"Talk about your friends: “We are friends. They are students. I love my family.” Make 6 sentences."},
+
+{w:1,review:true,title:"Review Week 1",
+ tasks:["Go through this week's flashcards. Mark the ones you forgot and say them 5 more times.","Introduce yourself out loud: hello, your name, where you're from, student or not, goodbye.","Count from 1 to 30 out loud, then say your age.","Translate the three sentences below, then check."],
+ prac:[["Is she your friend?","她是你的朋友吗？"],["We are not Chinese.","我们不是中国人。"],["What's your teacher's name?","你的老师叫什么名字？"]]},
+
+// ---------- WEEK 2 ----------
+{w:2,title:"Having things (有, 没有, 个)",
+ words:["有|yǒu|to have; there is","没|méi|not (only used with 有)","个|ge|general “counting word”","几|jǐ|how many (small numbers)","岁|suì|years old"],
+ how:`Two big rules today.<ul class="plain"><li>The "not" of 有 is always <b>没有</b>, never 不有. 我不有钱 is wrong; 我没有钱 is right.</li><li>In Chinese you can't say "three apples" directly. You need a <b>counting word</b> between the number and the thing: 三个苹果. 个 is the one you use most.</li></ul>Age is easy: 我二十五岁 = I am 25. No 是 needed!`,
+ say:["我有一个朋友。|Wǒ yǒu yí ge péngyou.|I have one friend.","你有几个老师？|Nǐ yǒu jǐ ge lǎoshī?|How many teachers do you have?","你几岁？|Nǐ jǐ suì?|How old are you? (for a child)"],
+ prac:[["Fix the mistake: 我不有朋友。","我没有朋友。"],["Fix the mistake: 我有三朋友。","我有三个朋友。"],["Fix the mistake: 我是二十岁。","我二十岁。"]],
+ speak:"Say what you have and don't have: friends, teachers, brothers… Use 有, 没有 and 个 in 6 sentences. Then say your age."},
+
+{w:2,title:"Eating and drinking",
+ words:["吃|chī|to eat","喝|hē|to drink","水|shuǐ|water","茶|chá|tea","米饭|mǐfàn|cooked rice"],
+ how:`Same order as English: <b>who + verb + thing</b>. 我喝茶 = I drink tea. To ask "what", just swap the thing for 什么: 你吃什么？ (You eat what?)`,
+ say:["你喝什么？|Nǐ hē shénme?|What will you drink?","我喝水。|Wǒ hē shuǐ.|I'll drink water.","他们不吃米饭。|Tāmen bù chī mǐfàn.|They don't eat rice."],
+ prac:[["Ask: Do you drink tea?","你喝茶吗？"],["Say: I don't drink water.","我不喝水。"],["Ask: What does she eat?","她吃什么？"]],
+ speak:"Role-play ordering at a restaurant: ask “What will you drink?”, answer, and say what you do and don't eat."},
+
+{w:2,title:"Wanting and liking",
+ words:["想|xiǎng|to want to, would like to","喜欢|xǐhuan|to like","菜|cài|dish, food","苹果|píngguǒ|apple","水果|shuǐguǒ|fruit"],
+ how:`Put 想 or 喜欢 in front of the verb: <b>我想吃</b> = I want to eat. <b>我喜欢喝茶</b> = I like drinking tea. For "don't want", say 不想.`,
+ say:["我想吃中国菜。|Wǒ xiǎng chī Zhōngguó cài.|I want to eat Chinese food.","你喜欢苹果吗？|Nǐ xǐhuan píngguǒ ma?|Do you like apples?","我不想喝茶。|Wǒ bù xiǎng hē chá.|I don't want to drink tea."],
+ prac:[["Ask: What do you want to eat?","你想吃什么？"],["Say: I like fruit.","我喜欢水果。"],["Say: She doesn't want to eat apples.","她不想吃苹果。"]],
+ speak:"Say 3 foods you like, 2 you don't like, and what you want to eat and drink right now."},
+
+{w:2,title:"Describing things (很 + adjective)",
+ words:["很|hěn|very (but often just means “is”)","大|dà|big","小|xiǎo|small","多|duō|many, much","少|shǎo|few, little"],
+ how:`This is the most common beginner mistake! With describing words, <b>don't use 是</b>. Use 很 instead. 这个东西是大 is wrong; 这个东西很大 is right. Here 很 doesn't really mean "very"; it just links the words. For "not", use 不 without 很: 不大 (not big).`,
+ say:["中国很大。|Zhōngguó hěn dà.|China is big.","我的家很小。|Wǒ de jiā hěn xiǎo.|My home is small.","学生很多。|Xuésheng hěn duō.|There are many students."],
+ prac:[["Fix: 苹果是大。","苹果很大。"],["Say: My friends are few.","我的朋友很少。"],["Say: The teacher is good.","老师很好。"]],
+ speak:"Describe 6 things around you with 很 or 不: your room, your city, your school, the number of students…"},
+
+{w:2,title:"This, that and where (在)",
+ words:["这|zhè|this","那|nà|that","在|zài|to be at / in","哪儿|nǎr|where","这儿 / 那儿|zhèr / nàr|here / there"],
+ how:`这 and 那 need a counting word before a thing: 这个苹果 (this apple). For location, use <b>在</b> (not 是): 我在家 = I am at home. Watch the tones: <b>nǎ</b> (which) dips, <b>nà</b> (that) drops.`,
+ say:["你在哪儿？|Nǐ zài nǎr?|Where are you?","我在这儿。|Wǒ zài zhèr.|I'm here.","那是我的茶。|Nà shì wǒ de chá.|That is my tea."],
+ prac:[["Ask: Where is the teacher?","老师在哪儿？"],["Say: This person is my friend.","这个人是我的朋友。"],["Say: I'm not at home.","我不在家。"]],
+ speak:"Point at things around you and say “This is my…”, “That is…”. Then say where 5 people are right now."},
+
+{w:2,title:"Going and coming",
+ words:["去|qù|to go","来|lái|to come","回|huí|to return (home)","学校|xuéxiào|school","商店|shāngdiàn|shop"],
+ how:`去 + place = go to a place. No word for "to" is needed. Going home is special: say <b>回家</b> (return home), not 去家. So 我想去家 is wrong; 我想回家 is right.`,
+ say:["我去学校。|Wǒ qù xuéxiào.|I'm going to school.","你想去哪儿？|Nǐ xiǎng qù nǎr?|Where do you want to go?","他回家。|Tā huí jiā.|He's going home."],
+ prac:[["Say: I don't want to go to school.","我不想去学校。"],["Ask: Do you want to come to my home?","你想来我家吗？"],["Say: We're going to the shop.","我们去商店。"]],
+ speak:"Describe your day: where you go, where you want to go, and when you go home. Use 去, 来 and 回家."},
+
+{w:2,review:true,title:"Review Week 2",
+ tasks:["Go through this week's flashcards. Re-read any Week 1 words you marked.","Say 5 sentences about your food: what you like, what you don't eat, what you want now.","Fix the 5 mistakes below (from your chinese10 worksheet), then check why each one is wrong."],
+ prac:[["Fix: 我买了三苹果","我买了三个苹果 (needs a counting word)"],["Fix: 我不有钱","我没有钱 (the “not” of 有 is 没)"],["Fix: 我想去家","我想回家 (going home is 回家)"],["Fix: 这个东西是大","这个东西很大 (adjectives take 很)"],["Fix: 今天热？","今天热吗？ (yes/no questions need 吗)"]]},
+
+// ---------- WEEK 3 ----------
+{w:3,title:"Today, tomorrow, yesterday",
+ words:["今天|jīntiān|today","明天|míngtiān|tomorrow","昨天|zuótiān|yesterday","月|yuè|month","号|hào|day of the month (date)"],
+ how:`Months are just numbers: 一月 = January, 八月 = August, 十二月 = December. A date goes big to small: <b>month, then day</b>. 八月十五号 = 15 August. Time words go at the start of the sentence or right after the person: 我明天去学校.`,
+ say:["今天几号？|Jīntiān jǐ hào?|What's the date today?","现在几月？|Xiànzài jǐ yuè?|Which month is it now?","我明天去商店。|Wǒ míngtiān qù shāngdiàn.|I'm going to the shop tomorrow."],
+ prac:[["Say: It's August now.","现在八月。"],["Write 3 March in Chinese.","三月三号"],["Say: Tomorrow I don't want to go to school.","我明天不想去学校。"]],
+ speak:"Say today's date, yesterday's date and tomorrow's date. Then say your birthday and 3 family birthdays."},
+
+{w:3,title:"Days of the week and the clock",
+ words:["星期|xīngqī|week","年|nián|year","现在|xiànzài|now","点|diǎn|o'clock","分钟|fēnzhōng|minute"],
+ how:`Weekdays are numbered! 星期一 = Monday (week-one), 星期二 = Tuesday … 星期六 = Saturday. Sunday is special: <b>星期天</b> or 星期日. For the clock, say number + 点: 三点 = 3 o'clock. Careful: 2 o'clock is <b>两点</b> (liǎng diǎn), not 二点.`,
+ say:["今天星期几？|Jīntiān xīngqī jǐ?|What day is it today?","今天星期一，明天星期二。|Jīntiān xīngqīyī, míngtiān xīngqī'èr.|Today is Monday, tomorrow is Tuesday.","现在几点？|Xiànzài jǐ diǎn?|What time is it?"],
+ prac:[["Say “Friday”.","星期五"],["Say: It's 2 o'clock now.","现在两点。"],["Say: Today is Sunday.","今天星期天。"]],
+ speak:"Say all 7 days of the week. Then say the time every hour from 1 to 12 o'clock (remember 两点!)."},
+
+{w:3,title:"Morning, noon, afternoon",
+ words:["上午|shàngwǔ|morning","中午|zhōngwǔ|noon","下午|xiàwǔ|afternoon","时候|shíhou|time (a point in time)","什么时候|shénme shíhou|when"],
+ how:`上 means "up/before" and 下 means "down/after", so 上午 is before noon and 下午 is after noon. To ask "when", put 什么时候 where the time would go.`,
+ say:["你什么时候回家？|Nǐ shénme shíhou huí jiā?|When are you going home?","我下午三点回家。|Wǒ xiàwǔ sān diǎn huí jiā.|I'm going home at 3 pm."],
+ prac:[["Ask: When do you go to school?","你什么时候去学校？"],["Say: I eat at noon.","我中午吃饭。"],["Say: Tomorrow morning I'm going to the shop.","我明天上午去商店。"]],
+ speak:"Describe your day with times: what you do in the morning, at noon and in the afternoon (e.g. 我上午九点去学校)."},
+
+{w:3,title:"Shopping and the past (了)",
+ words:["买|mǎi|to buy","东西|dōngxi|thing, stuff","钱|qián|money","块|kuài|yuan (spoken word for money)","了|le|shows something happened / is done"],
+ how:`Chinese verbs don't change for the past. Instead, put <b>了</b> after the verb to show it's done: 我买了三个苹果 = I bought three apples. For "didn't", use 没 and drop 了: 我没买 = I didn't buy.`,
+ say:["这个多少钱？|Zhège duōshao qián?|How much is this?","五块。|Wǔ kuài.|5 yuan.","我昨天买了很多东西。|Wǒ zuótiān mǎi le hěn duō dōngxi.|I bought lots of things yesterday."],
+ prac:[["Say: I bought tea.","我买了茶。"],["Say: I didn't buy apples.","我没买苹果。"],["Ask the price of that thing.","那个东西多少钱？"]],
+ speak:"Role-play shopping: ask the price of 4 things and answer with 块. Then say what you bought (了) and didn't buy (没) yesterday."},
+
+{w:3,title:"What you can do (会, 能)",
+ words:["会|huì|can (a learned skill)","能|néng|can (able to, allowed to)","说|shuō|to speak, say","汉语|Hànyǔ|Chinese language","字|zì|character, written word"],
+ how:`Use <b>会</b> for skills you learned: 我会说汉语 (I can speak Chinese). Use <b>能</b> when something makes it possible or not: 我今天不能来 (I can't come today).`,
+ say:["你会说汉语吗？|Nǐ huì shuō Hànyǔ ma?|Can you speak Chinese?","我会说一点儿。|Wǒ huì shuō yìdiǎnr.|I can speak a little.","你在说什么？|Nǐ zài shuō shénme?|What are you saying?"],
+ prac:[["Say: I can't speak Chinese.","我不会说汉语。"],["Ask: Can you come tomorrow?","你明天能来吗？"],["Ask: How many characters can you write?","你会写几个字？"]],
+ speak:"Say 3 skills you have (会) and 3 things you can't do today (不能)."},
+
+{w:3,title:"Seeing, hearing, reading, writing",
+ words:["看|kàn|to look, watch, read","听|tīng|to listen","读|dú|to read aloud","写|xiě|to write","书|shū|book"],
+ how:`Add <b>见</b> (jiàn) to 看 or 听 and it means you actually saw or heard it: 看见 (see), 听见 (hear). For "can't see / can't hear", put 不 in the middle: 看不见, 听不见.`,
+ say:["我听不见你。|Wǒ tīng bu jiàn nǐ.|I can't hear you.","我在家看电视。|Wǒ zài jiā kàn diànshì.|I'm watching TV at home.","我在学校学汉语。|Wǒ zài xuéxiào xué Hànyǔ.|I learn Chinese at school."],
+ prac:[["Say: I see you.","我看见你了。"],["Ask: What are you listening to now?","你现在听什么？"],["Say: I don't like watching TV.","我不喜欢看电视。"]],
+ speak:"Say what you like to watch, listen to, read and write. Then pretend a bad phone call: “I can't hear you!”"},
+
+{w:3,review:true,title:"Review Week 3",
+ tasks:["Go through this week's flashcards.","Say today's full date and time: 今天是___月___号，星期___，现在___点。","Say 3 things you did yesterday using 了.","Read the dialogue below (from your chinese10 worksheet) out loud and translate each line."],
+ prac:[["你想吃什么？","What do you want to eat?"],["你在说什么？我听不见你。","What are you saying? I can't hear you."],["我说：你想吃什么？","I said: what do you want to eat?"],["我想吃中国菜。","I want Chinese food."],["这里没有中国菜，他们有美国菜。","There's no Chinese food here; they have American food."],["好的，我们吃美国菜。","OK, let's eat American food."]]},
+
+// ---------- WEEK 4 ----------
+{w:4,title:"Family",
+ words:["爸爸|bàba|dad","妈妈|māma|mum","儿子|érzi|son","女儿|nǚ'ér|daughter","狗 / 猫|gǒu / māo|dog / cat"],
+ how:`Look at the pieces: 女儿 = woman + son = daughter. Remember from Day 6, with family you can drop 的: 我妈妈 (my mum). Ask about family with 有: 你有儿子吗？<br><b>Note:</b> "Two of something" is always <b>两</b> (liǎng), not 二: 两个人 (two people).`,
+ say:["你有儿子吗？|Nǐ yǒu érzi ma?|Do you have a son?","我有两个女儿。|Wǒ yǒu liǎng ge nǚ'ér.|I have two daughters.","我爸爸喜欢狗。|Wǒ bàba xǐhuan gǒu.|My dad likes dogs."],
+ prac:[["Say: My mum is a teacher.","我妈妈是老师。"],["Say: I don't have a cat.","我没有猫。"],["Ask: How many children do you have? (孩子 háizi = child)","你有几个孩子？"]],
+ speak:"Describe your family: how many people, who they are, and whether you have a dog or cat. Remember 两个!"},
+
+{w:4,title:"Jobs",
+ words:["医生|yīshēng|doctor","医院|yīyuàn|hospital","工作|gōngzuò|to work; job","先生|xiānsheng|Mr; sir","小姐|xiǎojie|Miss"],
+ how:`Names come first, titles after: <b>王先生</b> = Mr Wang, <b>李小姐</b> = Miss Li. To say where someone works, use 在 + place + 工作: 她在医院工作.`,
+ say:["你做什么工作？|Nǐ zuò shénme gōngzuò?|What's your job?","我是医生。|Wǒ shì yīshēng.|I'm a doctor.","王先生在学校工作。|Wáng xiānsheng zài xuéxiào gōngzuò.|Mr Wang works at a school."],
+ prac:[["Say: My dad works at a hospital.","我爸爸在医院工作。"],["Ask: Is Miss Li a doctor?","李小姐是医生吗？"],["Say: I don't want to work today.","我今天不想工作。"]],
+ speak:"Say what job 5 people in your life do and where they work (在 … 工作)."},
+
+{w:4,title:"Where exactly? (里, 上, 下)",
+ words:["里|lǐ|inside","上|shàng|on, above","下|xià|under, below","前面 / 后面|qiánmian / hòumian|in front / behind","住|zhù|to live (somewhere)"],
+ how:`In Chinese, the position word comes <b>after</b> the thing: "table on" instead of "on the table". So: 在 + thing + position. 猫在桌子下 = The cat is under the table.`,
+ say:["书在桌子上。|Shū zài zhuōzi shang.|The book is on the table.","你住在哪儿？|Nǐ zhù zài nǎr?|Where do you live?","我住在北京。|Wǒ zhù zài Běijīng.|I live in Beijing."],
+ prac:[["Say: The dog is in the house. (use 家里)","狗在家里。"],["Say: The shop is behind the school.","商店在学校后面。"],["Ask: Where does your friend live?","你朋友住在哪儿？"]],
+ speak:"Say where you live, then describe where 5 things are in your room (on, under, inside, in front, behind)."},
+
+{w:4,title:"Travelling",
+ words:["坐|zuò|to sit; to take (a bus, plane)","开|kāi|to drive; to open","出租车|chūzūchē|taxi","飞机|fēijī|plane","怎么|zěnme|how"],
+ how:`"How do you get there?" = 怎么去？ Answer with 坐 + vehicle + 去: 我坐飞机去 (I'm going by plane). Note 飞机 = fly + machine. 开车 = drive a car.`,
+ say:["你怎么去北京？|Nǐ zěnme qù Běijīng?|How are you getting to Beijing?","我坐飞机去。|Wǒ zuò fēijī qù.|I'm going by plane.","我们坐出租车回家。|Wǒmen zuò chūzūchē huí jiā.|We'll take a taxi home."],
+ prac:[["Ask: How do you go to school?","你怎么去学校？"],["Say: I go to the hospital by taxi.","我坐出租车去医院。"],["Ask: How do you write this character?","这个字怎么写？"]],
+ speak:"Say how you go to 5 places: school, the shop, the hospital, home, your country (坐 … 去)."},
+
+{w:4,title:"Weather",
+ words:["天气|tiānqì|weather","怎么样|zěnmeyàng|how is it?","热|rè|hot","冷|lěng|cold","下雨|xià yǔ|to rain (“fall rain”)"],
+ how:`怎么样 goes at the end and asks "how is it?". Weather words are describing words, so remember Day 11: use <b>很</b>, not 是. 今天很热.`,
+ say:["今天天气怎么样？|Jīntiān tiānqì zěnmeyàng?|How's the weather today?","今天很冷。|Jīntiān hěn lěng.|It's cold today.","明天会下雨。|Míngtiān huì xià yǔ.|It will rain tomorrow."],
+ prac:[["Ask: Is it hot today?","今天热吗？"],["Say: It rained yesterday.","昨天下雨了。"],["Ask: How is your Chinese teacher?","你的汉语老师怎么样？"]],
+ speak:"Give a weather report for today, yesterday and tomorrow. Then ask “How is…?” about 3 things (怎么样)."},
+
+{w:4,title:"Polite phrases",
+ words:["认识|rènshi|to know (a person)","高兴|gāoxìng|happy, glad","请|qǐng|please; to invite","对不起|duìbuqǐ|sorry","没关系|méi guānxi|it's OK, no problem"],
+ how:`These are fixed phrases. Learn them as whole chunks. 请 goes before a verb: 请喝茶 (please have some tea). 不客气 (bú kèqi) is the answer to 谢谢.`,
+ say:["认识你很高兴。|Rènshi nǐ hěn gāoxìng.|Nice to meet you.","对不起！没关系。|Duìbuqǐ! Méi guānxi.|Sorry! — It's OK.","我在中国很高兴。|Wǒ zài Zhōngguó hěn gāoxìng.|I'm happy in China. (your Lesson 8 video title!)"],
+ prac:[["Say: Please sit.","请坐。"],["Ask: Do you know him?","你认识他吗？"],["What do you answer when someone says 谢谢?","不客气。"]],
+ speak:"Act out meeting someone new: hello, names, “nice to meet you”, offer tea with 请, say sorry for something, and answer 没关系."},
+
+{w:4,review:true,title:"Review Week 4",
+ tasks:["Go through this week's flashcards.","Describe your family out loud: how many people, their jobs, where they live.","Say how you get to work or school, and what today's weather is like.","Translate the sentences below, then check."],
+ prac:[["Do you want to meet him?","你想认识他吗？"],["There are teachers and students at school.","学校里有老师和学生。"],["Nice to meet you, Mr Wang.","王先生，认识你很高兴。"]]},
+
+// ---------- WEEK 5 ----------
+{w:5,title:"Things at home",
+ words:["电视|diànshì|TV","电影|diànyǐng|film, movie","电脑|diànnǎo|computer","衣服|yīfu|clothes","杯子|bēizi|cup, glass"],
+ how:`电 means electricity, so many modern words start with it: 电视 (electric-look = TV), 电影 (electric-shadow = film), 电脑 (electric-brain = computer). Spotting these pieces makes words easy to remember.`,
+ say:["我喜欢看中国电影。|Wǒ xǐhuan kàn Zhōngguó diànyǐng.|I like watching Chinese films.","我想买衣服。|Wǒ xiǎng mǎi yīfu.|I want to buy clothes.","杯子里有水。|Bēizi lǐ yǒu shuǐ.|There's water in the cup."],
+ prac:[["Say: My computer is on the table.","我的电脑在桌子上。"],["Ask: Do you want to watch a film?","你想看电影吗？"],["Say: I bought three cups.","我买了三个杯子。"]],
+ speak:"Describe 6 things in your home and where they are. Say which ones you want to buy."},
+
+{w:5,title:"Daily actions",
+ words:["做|zuò|to do, to make","睡觉|shuìjiào|to sleep","打电话|dǎ diànhuà|to make a phone call","桌子|zhuōzi|table","椅子|yǐzi|chair"],
+ how:`To say someone is doing something <b>right now</b>, put 在 before the verb: 我在睡觉 = I am sleeping. It's the same 在 as "at", used in a new way. You can add 呢 at the end too: 他在打电话呢.`,
+ say:["你在做什么？|Nǐ zài zuò shénme?|What are you doing?","我在做饭。|Wǒ zài zuò fàn.|I'm cooking.","妈妈在打电话。|Māma zài dǎ diànhuà.|Mum is on the phone."],
+ prac:[["Say: I don't want to cook.","我不想做饭。"],["Say: Dad is sleeping.","爸爸在睡觉。"],["Say: The cat is under the chair.","猫在椅子下。"]],
+ speak:"Imagine your family right now. Say what each person is doing (在 + verb). Then ask “你在做什么？” and answer."},
+
+{w:5,title:"Joining words (都, 太…了)",
+ words:["都|dōu|all, both","太…了|tài … le|too …! / so …!","漂亮|piàoliang|pretty, beautiful","喂|wéi|hello (on the phone only)","呢|ne|“and you?” / “what about…?”"],
+ how:`都 goes <b>before the verb</b>, never at the end: 我们都是学生 (We are all students). 呢 bounces a question back: 我很好，你呢？ (I'm fine, and you?).`,
+ say:["喂，你好！|Wéi, nǐ hǎo!|Hello? (on the phone)","太好了！|Tài hǎo le!|Great!","这个杯子太漂亮了。|Zhège bēizi tài piàoliang le.|This cup is so pretty."],
+ prac:[["Say: They are all doctors.","他们都是医生。"],["Say: It's too cold!","太冷了！"],["Say: I'm Chinese. And you?","我是中国人，你呢？"]],
+ speak:"Act out a phone call: start with 喂, ask how they are, answer and bounce back with 呢, and react with 太…了!"},
+
+{w:5,title:"More question words",
+ words:["谁|shéi|who","多少|duōshao|how many / how much (any size)","本|běn|counting word for books","些|xiē|some (这些 = these, 那些 = those)","一点儿|yìdiǎnr|a little"],
+ how:`All question words follow the same rule: put them where the answer goes, and don't change the order. Use 几 for small numbers (under 10) and 多少 for bigger ones or prices.`,
+ say:["他是谁？|Tā shì shéi?|Who is he?","你们学校有多少学生？|Nǐmen xuéxiào yǒu duōshao xuésheng?|How many students does your school have?","我买了两本书。|Wǒ mǎi le liǎng běn shū.|I bought two books."],
+ prac:[["Ask: Whose book is this?","这是谁的书？"],["Ask: How much are these apples?","这些苹果多少钱？"],["Say: I want to drink a little water.","我想喝一点儿水。"]],
+ speak:"Ask 8 questions using 谁, 什么, 哪儿, 几, 多少, 什么时候, 怎么 and 怎么样. Answer each one."},
+
+{w:5,review:true,reading:true,title:"Reading day",
+ story:"我叫大卫，我是美国人。我今年二十五岁。我现在住在北京，在一个学校学汉语。我的老师姓王，她很好。昨天是星期天，我和我的朋友去商店买了很多东西。中午我们吃了中国菜。我在中国很高兴。",
+ storyNote:"(大卫 Dàwèi = David. 姓 xìng = family name is.)",
+ tasks:["Read the story out loud twice. Tap it to hear it, then read along.","Answer the questions below, then check."],
+ prac:[["Where is David from?","America"],["How old is he?","25"],["What did he do yesterday?","He went shopping with his friend."],["What did they eat?","Chinese food"]]},
+
+{w:5,review:true,title:"Listening day",
+ tasks:["Play 11.mp3 (from your course) once without reading. Write down every word you recognise.","Play 12.mp3 the same way.","Play both again and repeat each sentence out loud after the speaker.","Re-watch the Lesson 8 video (我在中国很高兴). You should now understand most of it."]},
+
+{w:5,review:true,title:"Review Week 5",
+ tasks:["Go through this week's flashcards, then take the quiz. Re-study any words you miss.","Write a short paragraph like David's about yourself (name, age, home, job, what you did yesterday). Read it out loud.","Translate the sentences below, then check."],
+ prac:[["I'm watching TV at home.","我在家看电视。"],["How many teachers do you have?","你有几个老师？"],["We all like Chinese food.","我们都喜欢中国菜。"]]},
+
+// ---------- WEEK 6 ----------
+{w:6,review:true,test:true,title:"Mock test 1",
+ tasks:["Take one full mock test (Listening + Reading, about 40 minutes). Don't check the answers yet.","The HSK1 test has two parts, Listening and Reading. You need 120 out of 200 points to pass. Your 6-week study plan lists the mock tests to use."]},
+{w:6,review:true,test:true,title:"Mark your test",
+ tasks:["Mark yesterday's test.","For every question you got wrong, find the day in this book that teaches it and re-study that day.","Take the whole-book quiz below."]},
+{w:6,review:true,test:true,title:"Listening practice",
+ tasks:["Play 11.mp3 and 12.mp3.","Repeat every sentence out loud after the speaker.","Take the quiz below and tap each answer to hear it."]},
+{w:6,review:true,test:true,title:"Mock test 2",
+ tasks:["Take a second mock test.","Mark it and compare your score with Mock test 1."]},
+{w:6,review:true,test:true,title:"Word review",
+ tasks:["Go through the flashcards for the whole book (all words). Shuffle them.","Re-study only the words you still don't know.","Take the whole-book quiz twice."]},
+{w:6,review:true,test:true,title:"Final self-test",
+ tasks:["Translate the 10 sentences below into Chinese. If you get 8 or more right, you are ready for HSK1.","Then rest!"],
+ prac:[["Hello, what's your name?","你好，你叫什么名字？"],["I am not Chinese, I am American.","我不是中国人，我是美国人。"],["I have two daughters and one son.","我有两个女儿和一个儿子。"],["How much is this apple?","这个苹果多少钱？"],["It's very cold today.","今天很冷。"],["I want to go home.","我想回家。"],["Where do you live?","你住在哪儿？"],["Yesterday I bought three books.","我昨天买了三本书。"],["Can you speak Chinese?","你会说汉语吗？"],["What time do you go to school tomorrow?","你明天几点去学校？"]]},
+{w:6,review:true,test:true,final:true,title:"Light review: you're ready",
+ tasks:["Read the 6 rules beginners get wrong (below) out loud.","Do one relaxed run of the whole-book quiz.","Sleep early. 加油! (jiāyóu = you can do it!)"],
+ rules:`<ol><li>Describing words take <b>很</b>, not 是: 我很好.</li><li>The "not" of 有 is <b>没有</b>: 我没有钱.</li><li>Number + <b>counting word</b> + thing: 三个人.</li><li>Going home is <b>回家</b>.</li><li>Two of something is <b>两</b>: 两个.</li><li>Time and place come <b>before</b> the verb: 我明天在家吃饭.</li></ol>`},
+];
+
+const WEEKS = {0:"Before you start",1:"Week 1 · Meeting people",2:"Week 2 · Eating, wanting & places",3:"Week 3 · Time, money & skills",4:"Week 4 · Family, work & getting around",5:"Week 5 · Putting it together",6:"Week 6 · Practice tests"};
+const DOW = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+// parse
+DAYS.forEach(d=>{ if(d.words) d.W=d.words.map(s=>{const [c,p,m]=s.split('|');return {c,p,m};}); if(d.say) d.S=d.say.map(s=>{const [c,p,e]=s.split('|');return {c,p,e};}); });
+// number lesson days 1..42
+let num=0; DAYS.forEach(d=>{ if(!d.start){ num++; d.n=num; } });
+// word pools
+function wordsUpTo(d){ return DAYS.filter(x=>x.W && x.n<=d.n).flatMap(x=>x.W); }
+function poolFor(d){
+  if(d.W) return d.W;
+  if(d.test) return DAYS.filter(x=>x.W).flatMap(x=>x.W);
+  return DAYS.filter(x=>x.W && x.w===d.w).flatMap(x=>x.W);
+}
+
+/* ======================= STATE ======================= */
+const KEY="hsk1book_done";
+let done={}; try{ done=JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(done)); }catch(e){} }
+
+/* ======================= SPEECH ======================= */
+let voices=[], rate=0.8; const synth=window.speechSynthesis;
+const vSel=document.getElementById('voice');
+function loadVoices(){
+  if(!synth) return;
+  const all=synth.getVoices();
+  let zh=all.filter(v=>/^zh[-_](CN|Hans)/i.test(v.lang)||/^cmn/i.test(v.lang));
+  if(!zh.length) zh=all.filter(v=>/^zh/i.test(v.lang));
+  voices=zh;
+  const prev=vSel.value;
+  vSel.innerHTML = zh.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('') || '<option>Default</option>';
+  const pref=zh.findIndex(v=>/google|tingting|xiaoxiao|yunxi|huihui|natural/i.test(v.name));
+  vSel.value = prev || (pref>=0?pref:0);
+  if(all.length) document.getElementById('novoice').hidden = zh.length>0;
+}
+if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; setTimeout(()=>{loadVoices(); if(!synth.getVoices().length) document.getElementById('novoice').hidden=false;},2000); }
+else document.getElementById('novoice').hidden=false;
+document.getElementById('rate').oninput=e=>{rate=+e.target.value;document.getElementById('rateval').textContent=rate.toFixed(2)+'×';};
+let cur=null;
+function speak(text, btn, queue){
+  try{
     if(!synth) return;
-    var vs=synth.getVoices();
-    var zh=vs.filter(function(v){return /^zh[-_](CN|Hans)/i.test(v.lang)||/^cmn/i.test(v.lang)});
-    if(!zh.length) zh=vs.filter(function(v){return /^zh/i.test(v.lang)});
-    voice=zh.find(function(v){return /google|tingting|xiaoxiao|yunxi|huihui|natural/i.test(v.name)})||zh[0]||null;
-    if(vs.length) document.getElementById('novoice').hidden=!!voice;
-  }
-  if(synth){pick(); synth.onvoiceschanged=pick; setTimeout(function(){pick(); if(!synth.getVoices().length) document.getElementById('novoice').hidden=false;},2000);}
-  else document.getElementById('novoice').hidden=false;
-
-  var current=null;
-  document.addEventListener('click',function(e){
-    var b=e.target.closest('button.zh'); if(!b||!synth) return;
-    synth.cancel();
-    var u=new SpeechSynthesisUtterance(b.dataset.say);
-    u.lang='zh-CN'; if(voice) u.voice=voice; u.rate=slow?0.55:0.85;
-    if(current) current.classList.remove('on');
-    current=b; b.classList.add('on');
-    u.onend=u.onerror=function(){b.classList.remove('on')};
+    if(!queue) synth.cancel();
+    const u=new SpeechSynthesisUtterance(text.replace(/[A-Za-z\[\]]+/g,' '));
+    u.lang='zh-CN'; u.rate=rate; const v=voices[+vSel.value]; if(v) u.voice=v;
+    if(btn){ if(cur) cur.classList.remove('on'); cur=btn; btn.classList.add('on'); u.onend=u.onerror=()=>btn.classList.remove('on'); }
     synth.speak(u);
+  }catch(e){}
+}
+function playList(list){ try{synth.cancel();}catch(e){} list.forEach(t=>speak(t,null,true)); }
+document.addEventListener('click',e=>{ const b=e.target.closest('button.zh'); if(b) speak(b.dataset.say,b); });
+
+/* ======================= HELPERS ======================= */
+const PLAY='<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>';
+const esc=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+const CJK=/[㐀-鿿][㐀-鿿　-〿！-｠…]*/g;
+// turn every Chinese run in a text/HTML string (outside tags) into a tap-to-hear button
+function zh(html){ return html.split(/(<[^>]+>)/).map(p=>p.startsWith('<')?p:p.replace(CJK,m=>`<button type="button" class="zh" data-say="${esc(m)}">${m}</button>`)).join(''); }
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const tables=h=>h.replace(/<table/g,'<div class="tw"><table').replace(/<\/table>/g,'</table></div>');
+
+function makeQuiz(pool, distract, n){
+  return shuffle(pool).slice(0,n).map((x,k)=>{
+    const others=shuffle(distract.filter(y=>y.c!==x.c && y.m!==x.m)).slice(0,3);
+    if(k%2===0) return {type:'c2m', x, opts:shuffle([x,...others]).map(y=>y.m), ans:x.m};
+    return {type:'m2c', x, opts:shuffle([x,...others]).map(y=>y.c), ans:x.c};
   });
-  var n=document.getElementById('spd-n'), s=document.getElementById('spd-s');
-  function setSpd(v){slow=v; n.setAttribute('aria-pressed',!v); s.setAttribute('aria-pressed',v);}
-  n.onclick=function(){setSpd(false)}; s.onclick=function(){setSpd(true)};
+}
 
-  // wrap tables for horizontal scroll
-  document.querySelectorAll('main table').forEach(function(t){var w=document.createElement('div');w.className='tw';t.parentNode.insertBefore(w,t);w.appendChild(t);});
-
-  // day picker
-  var sel=document.getElementById('jump');
-  var o=document.createElement('option'); o.textContent='Go to a day…'; o.value=''; sel.appendChild(o);
-  document.querySelectorAll('main h2[id], main h3[id^="day-"]').forEach(function(h){
-    var op=document.createElement('option'); op.value=h.id;
-    op.textContent=(h.tagName==='H3'?'  ':'')+h.textContent.replace(/\s+/g,' ').slice(0,48);
-    sel.appendChild(op);
+/* ======================= RENDER ======================= */
+function renderNav(ci){
+  let h='', lastW=-1;
+  DAYS.forEach((d,i)=>{
+    if(d.w!==lastW){ h+=`<h4>${WEEKS[d.w]}</h4>`; lastW=d.w; }
+    const lab = d.start ? d.title.split(':')[0] : `Day ${d.n} · ${d.title}`;
+    h+=`<a href="#${d.start?'start':'day-'+d.n}" class="${i===ci?'active':''} ${done[d.n]?'done':''}"><span class="dot">${done[d.n]?'✓':''}</span><span class="zhnav">${lab}</span></a>`;
   });
-  sel.onchange=function(){ if(sel.value){ location.hash=sel.value; } };
-  function go(){ var id=location.hash.slice(1); var el=id&&document.getElementById(id); if(el){ el.scrollIntoView(); sel.value=id; } }
-  window.addEventListener('hashchange',go); setTimeout(go,50);
+  document.getElementById('nav').innerHTML=h;
+  const c=Object.values(done).filter(Boolean).length;
+  document.getElementById('bar').style.width=(c/42*100)+'%';
+  document.getElementById('ptext').textContent=`${c} / 42 days`;
+}
 
-  // tasks remembered per device
-  var key='hsk1-tasks', done={};
-  try{ done=JSON.parse(localStorage.getItem(key)||'{}'); }catch(e){}
-  document.querySelectorAll('li.task').forEach(function(li,i){
-    if(done[i]) li.classList.add('done');
-    li.addEventListener('click',function(e){
-      if(e.target.closest('button.zh')) return;
-      li.classList.toggle('done'); done[i]=li.classList.contains('done');
-      try{ localStorage.setItem(key,JSON.stringify(done)); }catch(e){}
+let tInt=null;
+function setupTimer(m){
+  clearInterval(tInt); const b=document.getElementById('tbtn'); if(!b) return;
+  let left=m*60, running=false; const c=document.getElementById('clock');
+  const draw=()=>c.textContent=`${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;
+  b.onclick=()=>{
+    if(running){clearInterval(tInt);running=false;b.textContent='Resume';return;}
+    if(left<=0) left=m*60;
+    running=true;b.textContent='Pause';
+    tInt=setInterval(()=>{left--;draw();if(left<=0){clearInterval(tInt);running=false;b.textContent='Again';c.textContent='Done! 🎉';}},1000);
+  };
+}
+
+function renderDay(i){
+  const d=DAYS[i];
+  let s=1; const H=(t,extra='')=>`<h3>${s++} · ${t}${extra}</h3>`;
+  let h='';
+  if(d.start){
+    h=`<div class="kicker">${WEEKS[0]}</div><h2>${d.title}</h2>${zh(d.html)}
+      <div class="row"><span></span><button class="btn primary" id="next">Start Day 1 →</button></div>`;
+    document.getElementById('main').innerHTML=h;
+    document.getElementById('next').onclick=()=>go(1);
+    renderNav(i); window.scrollTo({top:0,behavior:'smooth'}); return;
+  }
+  const dow=DOW[(d.n-1)%7];
+  h+=`<div class="kicker">Day ${d.n} (${dow}) · ${WEEKS[d.w]}</div><h2>${zh(d.title)}</h2>`;
+  if(!d.review){
+    h+=`<div class="target"><b>🎯 Today:</b> learn ${d.W.length} new words and one new idea, and say every sentence out loud.</div>
+      <details class="routine"><summary class="note" style="cursor:pointer">Your daily routine (about 25 minutes)</summary><ol>${ROUTINE.map(r=>`<li>${r}</li>`).join('')}</ol></details>
+      ${H("Today's words",` <button class="btn sm" id="playAll" style="margin-left:auto">▶ Play all</button>`)}
+      <div class="words">${d.W.map(x=>`<div class="word"><button class="play" data-sayw="${esc(x.c)}" aria-label="Listen">${PLAY}</button><div><div class="c">${x.c}</div><div class="p">${x.p}</div><div class="m">${x.m}</div></div></div>`).join('')}</div>
+      ${H('How it works')}<div class="rule">${zh(d.how)}</div>
+      ${H('Say it out loud',` <button class="btn sm" id="playSay" style="margin-left:auto">▶ Play all</button>`)}
+      ${d.S.map(x=>`<div class="phrase"><button class="play" data-sayw="${esc(x.c)}" aria-label="Listen">${PLAY}</button><div class="t"><div class="cn">${zh(x.c)}</div><div class="n">${x.p} · ${x.e}</div></div></div>`).join('')}`;
+  } else {
+    h+=`<div class="target"><b>🎯 Today:</b> ${d.test?'practise like the real exam.':d.reading?'read a whole story in Chinese.':'no new words. Review and lock in what you learned.'}</div>`;
+    if(d.rules) h+=`${H('The 6 rules beginners get wrong')}<div class="rule">${zh(d.rules)}</div>`;
+    if(d.story) h+=`${H('The story',` <button class="btn sm" id="playStory" style="margin-left:auto">▶ Play</button>`)}<div class="story">${zh(d.story)}</div><p class="note">${zh(d.storyNote)}</p>`;
+    h+=`${H("Today's tasks")}<div class="checks">${d.tasks.map(t=>`<label><input type="checkbox" class="check">${zh(t)}</label>`).join('')}</div>`;
+  }
+  if(d.prac) h+=`${H(d.review?'Check yourself':'Practice')}<p class="note">Answer out loud or on paper first, then tap “Show answer”.</p>
+    <ol class="prac">${d.prac.map((p,k)=>`<li><div>${k+1}. ${zh(p[0])}</div><button class="reveal">Show answer</button><div class="ans">${zh(p[1])}</div></li>`).join('')}</ol>
+    <button class="btn sm" id="showAll">Show all answers</button>`;
+
+  const pool=poolFor(d);
+  const showCards = !d.reading && !(d.review && d.test && /Mock test/.test(d.title));
+  if(pool.length && showCards){
+    h+=`${H('Flashcards')}<p class="note">${d.W?'':`${pool.length} words from ${d.test?'the whole book':'this week'}. `}Look at the character, say the pinyin and meaning, then tap the card to check.</p>
+      <div class="flash" id="flash"></div>
+      <div class="fnav"><button class="btn" id="fprev">←</button><span class="note" id="fcount"></span><button class="btn" id="fnext">→</button><button class="btn" id="fshuf">Shuffle</button><button class="btn" id="fsay">▶ Hear</button></div>`;
+    const qn = d.final||d.test ? 15 : d.review ? 10 : 5;
+    const quiz = makeQuiz(pool, d.W ? wordsUpTo(d) : pool, Math.min(qn,pool.length));
+    d._quiz=quiz;
+    h+=`${H(d.W?'Quick quiz':`Quiz (${quiz.length} questions)`)}<p class="note">Choose the right answer. You'll hear the word when you get it right. New questions every time you try again.</p>
+      <div id="quiz">${quiz.map((q,k)=>`<div class="q" data-k="${k}"><div class="s">${k+1}. ${q.type==='c2m'?`What does <span class="big">${q.x.c}</span> mean?`:`Which one means “<b>${q.x.m}</b>”?`}</div><div class="opts">${q.opts.map(o=>`<button class="opt ${q.type==='m2c'?'cnopt':''}">${o}</button>`).join('')}</div></div>`).join('')}</div>
+      <div class="score" id="score"></div>`;
+  }
+  if(!d.review){
+    h+=`${H('Speak on your own')}<div class="task"><ul><li>${zh(d.speak)}</li></ul>
+      <div class="timer"><button class="btn primary" id="tbtn">Start 2-min timer</button><span class="clock" id="clock">02:00</span></div>
+      <p class="note" style="margin:8px 0 0">Tip: record yourself on your phone and compare your tones with the ▶ voice.</p></div>
+      ${H("Today's checklist")}<div class="checks">${["I said each new word 5 times out loud","I went through the flashcards twice","I said every example sentence out loud","I did the practice and scored 5/5 on the quiz","I wrote each new character 3 times"].map(c=>`<label><input type="checkbox" class="check">${c}</label>`).join('')}</div>`;
+  }
+  h+=`<div class="row">
+      <button class="btn" id="prev">← ${d.n===1?'Start here':'Day '+(d.n-1)}</button>
+      <button class="btn primary" id="mark">${done[d.n]?'✓ Completed — undo':'Mark Day '+d.n+' complete'}</button>
+      <button class="btn" id="next" ${d.n===42?'disabled':''}>Day ${d.n<42?d.n+1:''} →</button></div>`;
+  document.getElementById('main').innerHTML=tables(h);
+
+  // wire up
+  document.querySelectorAll('[data-sayw]').forEach(b=>b.onclick=()=>speak(b.dataset.sayw));
+  const pa=document.getElementById('playAll'); if(pa) pa.onclick=()=>playList(d.W.map(x=>x.c));
+  const ps=document.getElementById('playSay'); if(ps) ps.onclick=()=>playList(d.S.map(x=>x.c));
+  const pst=document.getElementById('playStory'); if(pst) pst.onclick=()=>speak(d.story);
+  document.querySelectorAll('.prac li').forEach(li=>li.querySelector('.reveal').onclick=()=>{li.classList.toggle('show'); li.querySelector('.reveal').textContent=li.classList.contains('show')?'Hide answer':'Show answer';});
+  const sa=document.getElementById('showAll'); if(sa) sa.onclick=()=>document.querySelectorAll('.prac li').forEach(li=>{li.classList.add('show');li.querySelector('.reveal').textContent='Hide answer';});
+
+  const fc=document.getElementById('flash');
+  if(fc){
+    let deck=pool.slice(), fi=0, flipped=false;
+    const drawF=()=>{ const x=deck[fi]; fc.innerHTML = flipped ? `<div><div class="fw">${x.c}</div><div class="fm" style="color:var(--gold);font-weight:600">${x.p}</div><div class="fm">${x.m}</div></div>` : `<div><div class="fw">${x.c}</div><div class="note">tap to see pinyin and meaning</div></div>`; document.getElementById('fcount').textContent=`${fi+1} / ${deck.length}`; };
+    fc.onclick=()=>{flipped=!flipped;drawF(); if(flipped) speak(deck[fi].c);};
+    document.getElementById('fnext').onclick=()=>{fi=(fi+1)%deck.length;flipped=false;drawF();};
+    document.getElementById('fprev').onclick=()=>{fi=(fi-1+deck.length)%deck.length;flipped=false;drawF();};
+    document.getElementById('fshuf').onclick=()=>{deck=shuffle(deck);fi=0;flipped=false;drawF();};
+    document.getElementById('fsay').onclick=()=>speak(deck[fi].c);
+    drawF();
+  }
+  if(d._quiz){
+    const quiz=d._quiz, first={};
+    document.querySelectorAll('.q').forEach(qe=>{
+      const k=+qe.dataset.k, q=quiz[k];
+      qe.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+        if(qe.dataset.solved) return;
+        const right=b.textContent===q.ans;
+        if(!(k in first)) first[k]=right;
+        if(right){
+          b.classList.add('ok'); qe.dataset.solved=1;
+          qe.querySelector('.s').innerHTML+=` <span class="note">→ <span class="zh">${q.x.c}</span> ${q.x.p} = ${q.x.m}</span>`;
+          speak(q.x.c);
+          if(document.querySelectorAll('.q[data-solved]').length===quiz.length){
+            const sc=Object.values(first).filter(Boolean).length;
+            document.getElementById('score').innerHTML=`Score: ${sc} / ${quiz.length} on the first try. ${sc===quiz.length?'太好了! 🎉':'Go through the flashcards again, then'} <a href="#" id="retry">${sc===quiz.length?'Try a new quiz':'try a new quiz'}</a>.`;
+            document.getElementById('retry').onclick=e=>{e.preventDefault();renderDay(i);};
+          }
+        } else b.classList.add('no');
+      });
     });
-  });
-})();
-</script>
+  }
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('mark').onclick=()=>{done[d.n]=!done[d.n];save();renderNav(i);renderDay(i);};
+  setupTimer(2);
+  renderNav(i);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
+function go(i){ if(i<0||i>=DAYS.length) return; location.hash = DAYS[i].start?'start':'day-'+DAYS[i].n; }
+function route(){
+  const m=location.hash.match(/day-(\d+)/);
+  let i;
+  if(m) i=Math.min(42,Math.max(1,+m[1]));
+  else if(location.hash==='#start') i=0;
+  else { i=0; for(let k=1;k<=42;k++){ if(!done[k]){ i = Object.keys(done).length? k : 0; break; } } }
+  renderDay(i);
+}
+window.addEventListener('hashchange',route);
+route();
+</script>
 <p style="max-width:1100px;margin:24px auto 32px;padding:0 20px;font:13px/1.5 system-ui,sans-serif;color:#6b6f76;text-align:center">© 2026 Md. Sumon Hossain. All rights reserved. Do not copy, download or reuse this content without permission.</p>
 <script>/* © Md. Sumon Hossain. All rights reserved. */
 document.addEventListener('contextmenu',function(e){e.preventDefault();});
 document.addEventListener('dragstart',function(e){if(e.target.tagName==='IMG')e.preventDefault();});
 document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u'||k==='p'))e.preventDefault();if((e.ctrlKey||e.metaKey)&&e.shiftKey&&(k==='i'||k==='j'||k==='c'))e.preventDefault();if(k==='f12')e.preventDefault();});
 </script>
-</body></html>
+</body>
+</html>
